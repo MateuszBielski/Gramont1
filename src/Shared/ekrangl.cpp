@@ -32,7 +32,7 @@ bool EkranGL::KonfiguracjaGL()
 }
 bool EkranGL::on_configure_event(GdkEventConfigure* e)
 {
-//    cout<<"\nEkranGL::on_configure_event"<<endl;
+    cout<<"\nEkranGL::on_configure_event"<<endl;
 //    GL::DrawingArea::on_configure_event(e);
     szerokosc = get_width(), wysokosc = get_height();
 	auto gldrawable = get_gl_drawable();
@@ -41,8 +41,7 @@ bool EkranGL::on_configure_event(GdkEventConfigure* e)
     return false;
     UstawienieSceny();
     UstawienieOswietlenia();
-    PrzypiszFunkcjeGLdoWskaznikow();
-    RejestrujListeGL();
+    
         if (gldrawable->is_double_buffered())
     {
 //      gldrawable->swap_buffers();
@@ -60,12 +59,12 @@ bool EkranGL::on_configure_event(GdkEventConfigure* e)
 bool EkranGL::on_expose_event(GdkEventExpose* event)
 {
     cout<<"\nEkranGL::on_expose_event"<<endl;
-    GL::DrawingArea::on_expose_event(event);
+//    GL::DrawingArea::on_expose_event(event);
     auto gldrawable = get_gl_drawable();
     if (!gldrawable->gl_begin(get_gl_context()))
       return false;
 
-	RysujScene();
+//	RysujScene();
     
 	if (gldrawable->is_double_buffered())
       gldrawable->swap_buffers();
@@ -122,44 +121,3 @@ void EkranGL::UstawienieOswietlenia()
 
 
 
-void EkranGL::RysujScene()
-{
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    glLoadIdentity();
-    cout<<"\nwywołanie listy o id "<<listid;
-    glCallList(listid);
-    cout<<"glGetError "<<glGetError();
-    /*
-    glTranslatef(0.0,0.0,-10.0);
-    glBegin(GL_TRIANGLES);
-    glVertex3f(-1.0,0.0,0.0);
-    glVertex3f(1.0,0.0,0.0);
-    glVertex3f(0.0,1.0,0.0);
-    */
-    
-}
-void EkranGL::PrzypiszFunkcjeGLdoWskaznikow()
-{
-	p_glTranslatef = &glTranslatef;
-    p_glVertex3f = &glVertex3f;
-}
-void EkranGL::RejestrujListeGL()
-{
-    listid = glGenLists( 1 );
-    glNewList( listid, GL_COMPILE );
-        p_glTranslatef(0.0,0.0,-10.0);
-        glBegin(GL_TRIANGLES);
-        p_glVertex3f(-1.0,0.0,0.0);
-        p_glVertex3f(1.0,0.0,0.0);
-        p_glVertex3f(0.0,1.0,0.0);
-    /*
-        glTranslatef(0.0,0.0,-10.0);
-        glBegin(GL_TRIANGLES);
-        glVertex3f(-1.0,0.0,0.0);
-        glVertex3f(1.0,0.0,0.0);
-        glVertex3f(0.0,1.0,0.0);
-     */
-        glEnd();
-    glEndList();
-    cout<<"\nzarejestrowano listę o id "<<listid;
-}

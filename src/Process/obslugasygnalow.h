@@ -5,6 +5,7 @@
 #include <iostream>
 #include <memory>
 #include "../Shared/ekrangl.h"
+#include "renderowanie.h"
 
 using namespace std;
 using namespace Gtk;
@@ -16,11 +17,14 @@ class ObslugaSygnalow
     ObslugaSygnalow();
     virtual ~ObslugaSygnalow();
     void ObslugujEkran(spEkranGL );
+    void UstawRenderowanie(spRenderowanie);
+    void WlaczPolaczenia();
 	
 protected:
 
 private:
-    spEkranGL ekranGL;
+    spEkranGL ekranGL = nullptr;
+    spRenderowanie renderowanie = nullptr;
     
         
 };

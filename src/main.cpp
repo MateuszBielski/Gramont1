@@ -4,6 +4,7 @@
 #include "Shared/oknogtk.h"
 #include "Shared/ekrangl.h"
 #include "Process/obslugasygnalow.h"
+#include "Process/renderowanie.h"
 
 using namespace std;
 
@@ -17,11 +18,14 @@ int main(int argc, char **argv)
     spEkranGL ekran = make_shared<EkranGL>();
     
     spObslugaSygnalow obslugaSygnalow = make_shared<ObslugaSygnalow>();
+    spRenderowanie renderowanie = make_shared<Renderowanie>();
     
     okno->ZamontujEkran(ekran);
 	obslugaSygnalow->ObslugujEkran(ekran);
+    obslugaSygnalow->UstawRenderowanie(renderowanie);
+    renderowanie->UstawEkran(ekran);
     
-   
+    obslugaSygnalow->WlaczPolaczenia();
     app.run(*okno);
     
     return 0;

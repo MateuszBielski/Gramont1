@@ -10,7 +10,7 @@ using namespace Gtk;
 
 using ptrConf = Glib::RefPtr<Gdk::GL::Config>;
 
-using ptr_vfff = void(*)(float,float,float);
+
 
 class EkranGL : public  GL::DrawingArea
 {
@@ -21,26 +21,52 @@ class EkranGL : public  GL::DrawingArea
     virtual bool on_expose_event(GdkEventExpose* event) override;
     void UstawienieSceny();
     void UstawienieOswietlenia();
-    void RysujScene();
+    
+    template<typename T>
+    bool WykonajWkontekscieGL(void (T::*Func)(),T& );
+//    template<typename T>
+//    bool WykonajWkontekscieGL(void (T::*Func)(),T& );
+    
 	
+    GLuint* listid;
 protected:
 
 private:
     bool KonfiguracjaGL();
-    void PrzypiszFunkcjeGLdoWskaznikow();
-    void RejestrujListeGL();
+    
     
     
     ptrConf glconfig;
     int szerokosc = 1, wysokosc = 1;
     float planBliski = 5.0, planDaleki = 60.0;
     
-    ptr_vfff p_glTranslatef = nullptr, p_glVertex3f = nullptr;
-    GLuint listid;
         
 };
 using spEkranGL = shared_ptr<EkranGL>;
 using upEkranGL = unique_ptr<EkranGL>;
 
-
+template<typename T>
+bool EkranGL::WykonajWkontekscieGL(void (T::*Func)(),T& obj_ref)
+{
+    auto gldrawable = get_gl_drawable();
+    if(!gldrawable)return false;
+	if (!gldrawable->gl_begin(get_gl_context()))
+    return false;
+    
+    (obj_ref.*Func)();
+    
+    if (gldrawable->is_double_buffered())
+    {
+      gldrawable->swap_buffers();
+//      cout<<"\nswap_buffers()";
+    }
+    else
+    {
+      glFlush();
+//      cout<<"\nglFlush()";
+    }
+    gldrawable->gl_end();
+    cout<<"\nWykonajWkontekscieGL koniec"<<endl;
+	return true;
+}
 #endif // EkranGL_H
