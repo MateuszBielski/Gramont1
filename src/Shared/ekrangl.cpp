@@ -1,5 +1,7 @@
 #include "ekrangl.h"
 
+
+
 EkranGL::EkranGL()
 {
     KonfiguracjaGL();
@@ -25,6 +27,7 @@ bool EkranGL::KonfiguracjaGL()
       }
     }
     set_gl_capability(glconfig);
+    
     return true;
 }
 bool EkranGL::on_configure_event(GdkEventConfigure* e)
@@ -38,6 +41,8 @@ bool EkranGL::on_configure_event(GdkEventConfigure* e)
     return false;
     UstawienieSceny();
     UstawienieOswietlenia();
+    PrzypiszFunkcjeGLdoWskaznikow();
+    RejestrujListeGL();
         if (gldrawable->is_double_buffered())
     {
 //      gldrawable->swap_buffers();
@@ -114,14 +119,47 @@ void EkranGL::UstawienieOswietlenia()
     glLightfv(GL_LIGHT1,GL_DIFFUSE,kolorZrodla);
     glEnable(GL_LIGHT1);
 }
+
+
+
 void EkranGL::RysujScene()
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glLoadIdentity();
+    cout<<"\nwywołanie listy o id "<<listid;
+    glCallList(listid);
+    cout<<"glGetError "<<glGetError();
+    /*
     glTranslatef(0.0,0.0,-10.0);
     glBegin(GL_TRIANGLES);
     glVertex3f(-1.0,0.0,0.0);
     glVertex3f(1.0,0.0,0.0);
     glVertex3f(0.0,1.0,0.0);
-    glEnd();
+    */
+    
+}
+void EkranGL::PrzypiszFunkcjeGLdoWskaznikow()
+{
+	p_glTranslatef = &glTranslatef;
+    p_glVertex3f = &glVertex3f;
+}
+void EkranGL::RejestrujListeGL()
+{
+    listid = glGenLists( 1 );
+    glNewList( listid, GL_COMPILE );
+        p_glTranslatef(0.0,0.0,-10.0);
+        glBegin(GL_TRIANGLES);
+        p_glVertex3f(-1.0,0.0,0.0);
+        p_glVertex3f(1.0,0.0,0.0);
+        p_glVertex3f(0.0,1.0,0.0);
+    /*
+        glTranslatef(0.0,0.0,-10.0);
+        glBegin(GL_TRIANGLES);
+        glVertex3f(-1.0,0.0,0.0);
+        glVertex3f(1.0,0.0,0.0);
+        glVertex3f(0.0,1.0,0.0);
+     */
+        glEnd();
+    glEndList();
+    cout<<"\nzarejestrowano listę o id "<<listid;
 }

@@ -10,6 +10,8 @@ using namespace Gtk;
 
 using ptrConf = Glib::RefPtr<Gdk::GL::Config>;
 
+using ptr_vfff = void(*)(float,float,float);
+
 class EkranGL : public  GL::DrawingArea
 {
   public:
@@ -25,13 +27,20 @@ protected:
 
 private:
     bool KonfiguracjaGL();
+    void PrzypiszFunkcjeGLdoWskaznikow();
+    void RejestrujListeGL();
     
     
     ptrConf glconfig;
     int szerokosc = 1, wysokosc = 1;
     float planBliski = 5.0, planDaleki = 60.0;
+    
+    ptr_vfff p_glTranslatef = nullptr, p_glVertex3f = nullptr;
+    GLuint listid;
         
 };
 using spEkranGL = shared_ptr<EkranGL>;
 using upEkranGL = unique_ptr<EkranGL>;
+
+
 #endif // EkranGL_H
