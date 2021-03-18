@@ -3,7 +3,7 @@
 Renderowanie::Renderowanie():x{-1.0,0.0,0.0},y{1.0,0.0,0.0},z{0.0,1.0,0.0}
 {
     PrzypiszFunkcjeGLdoWskaznikow();
-    
+    RejestrujListeGL();
 }
 
 Renderowanie::~Renderowanie()
@@ -43,6 +43,11 @@ void Renderowanie::UstawEkran(spEkranGL e)
 {	
 	ekranGL = e;
     e->listid = &listid;
+//    e->
+    e->RysujScene = [this](){
+        RejestrujListeGLJednorazowo();
+        RysujScene();
+        };
 }
 bool Renderowanie::ZarejestrujListeIprzerysujEkran(GdkEventButton* event)
 {

@@ -5,6 +5,7 @@
 EkranGL::EkranGL()
 {
     KonfiguracjaGL();
+    RysujScene = [](){};
 }
 
 EkranGL::~EkranGL()
@@ -64,7 +65,7 @@ bool EkranGL::on_expose_event(GdkEventExpose* event)
     if (!gldrawable->gl_begin(get_gl_context()))
       return false;
 
-//	RysujScene();
+	RysujScene();
     
 	if (gldrawable->is_double_buffered())
       gldrawable->swap_buffers();
@@ -118,6 +119,7 @@ void EkranGL::UstawienieOswietlenia()
     glLightfv(GL_LIGHT1,GL_DIFFUSE,kolorZrodla);
     glEnable(GL_LIGHT1);
 }
-
-
-
+//void EkranGL::PrzypiszRysujScene(function<void()> fun)
+//{
+//	RysujScene = fun;
+//}

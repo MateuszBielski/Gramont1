@@ -4,6 +4,7 @@
 #include <gtkglmm.h>
 #include <iostream>
 #include <memory>
+#include <functional>
 
 using namespace std;
 using namespace Gtk;
@@ -26,13 +27,15 @@ class EkranGL : public  GL::DrawingArea
     bool WykonajWkontekscieGL(void (T::*Func)(),T& );
 //    template<typename T>
 //    bool WykonajWkontekscieGL(void (T::*Func)(),T& );
-    
+//    void PrzypiszRysujScene(function<void()> );
+    function<void()> RysujScene;
 	
     GLuint* listid;
 protected:
 
 private:
     bool KonfiguracjaGL();
+//    void(*RysujScene)();
     
     
     
@@ -69,4 +72,5 @@ bool EkranGL::WykonajWkontekscieGL(void (T::*Func)(),T& obj_ref)
     cout<<"\nWykonajWkontekscieGL koniec"<<endl;
 	return true;
 }
+
 #endif // EkranGL_H
