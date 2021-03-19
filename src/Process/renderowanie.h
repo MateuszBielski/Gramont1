@@ -17,9 +17,7 @@ class Renderowanie
     Renderowanie();
     virtual ~Renderowanie();
     void UstawEkran(spEkranGL);
-    bool ZarejestrujListeIprzerysujEkran(GdkEventButton* );
-//	bool ZarejestrujListeIrysujScene(GdkEventButton* );
-    bool ZarejestrujBezKontekstuRysujWlasnaWkontekscie(GdkEventButton* );
+    void ZarejestrujBezKontekstuRysujWlasnaWkontekscie();
 protected:
 
 private:

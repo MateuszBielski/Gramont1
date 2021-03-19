@@ -27,6 +27,10 @@
       <File Name="src/Shared/donarysowania.cpp"/>
       <File Name="src/Shared/ekrangl.h"/>
       <File Name="src/Shared/ekrangl.cpp"/>
+      <File Name="src/Shared/obracanie.h"/>
+      <File Name="src/Shared/obracanie.cpp"/>
+      <File Name="src/Shared/trackball.cpp"/>
+      <File Name="src/Shared/trackball.h"/>
     </VirtualDirectory>
     <VirtualDirectory Name="Process">
       <File Name="src/Process/obslugasygnalow.h"/>
@@ -128,4 +132,5 @@
       </Completion>
     </Configuration>
   </Settings>
+  <VirtualDirectory Name="lib"/>
 </CodeLite_Project>

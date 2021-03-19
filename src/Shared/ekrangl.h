@@ -25,9 +25,6 @@ class EkranGL : public  GL::DrawingArea
     
     template<typename T>
     bool WykonajWkontekscieGL(void (T::*Func)(),T& );
-//    template<typename T>
-//    bool WykonajWkontekscieGL(void (T::*Func)(),T& );
-//    void PrzypiszRysujScene(function<void()> );
     function<void()> RysujScene;
 	
     GLuint* listid;
@@ -35,14 +32,10 @@ protected:
 
 private:
     bool KonfiguracjaGL();
-//    void(*RysujScene)();
-    
-    
     
     ptrConf glconfig;
     int szerokosc = 1, wysokosc = 1;
     float planBliski = 5.0, planDaleki = 60.0;
-    
         
 };
 using spEkranGL = shared_ptr<EkranGL>;

@@ -49,16 +49,8 @@ void Renderowanie::UstawEkran(spEkranGL e)
         RysujScene();
         };
 }
-bool Renderowanie::ZarejestrujListeIprzerysujEkran(GdkEventButton* event)
-{
-	ekranGL->WykonajWkontekscieGL(&Renderowanie::RejestrujListeGL,*this);
-    ekranGL->get_window()->invalidate_rect(ekranGL->get_allocation(),false);
-    return false;
-}
 
-
-
-bool Renderowanie::ZarejestrujBezKontekstuRysujWlasnaWkontekscie(GdkEventButton*)
+void Renderowanie::ZarejestrujBezKontekstuRysujWlasnaWkontekscie()
 {
 //	cout<<"\nRenderowanie::ZarejestrujBezKontekstuRysujWlasnaWkontekscie";
 //    RejestrujListeGLJednorazowo();
@@ -67,13 +59,14 @@ bool Renderowanie::ZarejestrujBezKontekstuRysujWlasnaWkontekscie(GdkEventButton*
     x[1] += 0.1;
     for(int i = 0 ;i < 3 ;i++) cout<<x[i]<<" ";
 }
+ 
 void Renderowanie::RysujScene()
 {
-	cout<<"\nRenderowanie::RysujScene";
+//	cout<<"\nRenderowanie::RysujScene";
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glLoadIdentity();
-    cout<<"\nwywołanie listy o id "<<listid;
+//    cout<<"\nwywołanie listy o id "<<listid;
     glCallList(listid);
-    cout<<"glGetError "<<glGetError();
+//    cout<<"glGetError "<<glGetError();
 }
 

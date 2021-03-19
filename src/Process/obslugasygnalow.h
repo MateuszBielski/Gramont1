@@ -5,6 +5,7 @@
 #include <iostream>
 #include <memory>
 #include "../Shared/ekrangl.h"
+#include "../Shared/obracanie.h"
 #include "renderowanie.h"
 
 using namespace std;
@@ -23,8 +24,13 @@ class ObslugaSygnalow
 protected:
 
 private:
+    bool signal_button_press_event(GdkEventButton* );
+    bool on_motion_notify_event(GdkEventMotion* );
     spEkranGL ekranGL = nullptr;
     spRenderowanie renderowanie = nullptr;
+    
+    Obracanie obracanie;
+    
     
         
 };

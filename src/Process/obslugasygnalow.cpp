@@ -29,6 +29,18 @@ void ObslugaSygnalow::WlaczPolaczenia()
     {
 //        ekranGL->signal_button_press_event().connect(sigc::mem_fun(*renderowanie,&Renderowanie::ZarejestrujListeIprzerysujEkran));
 //        ekranGL->signal_button_press_event().connect(sigc::mem_fun(*renderowanie,&Renderowanie::ZarejestrujListeIrysujScene));
-        ekranGL->signal_button_press_event().connect(sigc::mem_fun(*renderowanie,&Renderowanie::ZarejestrujBezKontekstuRysujWlasnaWkontekscie));
+        ekranGL->signal_button_press_event().connect(sigc::mem_fun(*this,&ObslugaSygnalow::signal_button_press_event));
+        ekranGL->signal_motion_notify_event().connect(sigc::mem_fun(*this,&ObslugaSygnalow::on_motion_notify_event));
     }
+}
+bool ObslugaSygnalow::signal_button_press_event(GdkEventButton* e)
+{
+	renderowanie->ZarejestrujBezKontekstuRysujWlasnaWkontekscie();
+    obracanie.PobierzPierwotnePolozenie(e->x,e->y);
+    obracanie.PobierzWymiaryEkranu(ekranGL->get_width(),ekranGL->get_height());
+}
+bool ObslugaSygnalow::on_motion_notify_event(GdkEventMotion* e)
+{
+    obracanie.PobierzPolozenieAktualne(e->x,e->y);
+    obracanie.ObliczWektorPrzesuniecia();
 }
