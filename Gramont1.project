@@ -33,6 +33,8 @@
       <File Name="src/Shared/kursor2d.cpp"/>
       <File Name="src/Shared/transformacjaItfc.cpp"/>
       <File Name="src/Shared/transformacjaItfc.h"/>
+      <File Name="src/Shared/ruchnaeranie.h"/>
+      <File Name="src/Shared/ruchnaeranie.cpp"/>
     </VirtualDirectory>
     <VirtualDirectory Name="Process">
       <File Name="src/Process/obslugasygnalow.h"/>

@@ -19,8 +19,11 @@
   <VirtualDirectory Name="src">
     <File Name="main.cpp" ExcludeProjConfig=""/>
     <File Name="FunkcjeTest.cpp" ExcludeProjConfig=""/>
+    <File Name="kursor2dTest.cpp"/>
   </VirtualDirectory>
-  <VirtualDirectory Name="testedClasses"/>
+  <VirtualDirectory Name="testedClasses">
+    <File Name="../src/Shared/kursor2d.cpp"/>
+  </VirtualDirectory>
   <VirtualDirectory Name="helperClass"/>
   <Settings Type="Executable">
     <GlobalSettings>

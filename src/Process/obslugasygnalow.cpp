@@ -41,5 +41,5 @@ bool ObslugaSygnalow::signal_button_press_event(GdkEventButton* e)
 }
 bool ObslugaSygnalow::on_motion_notify_event(GdkEventMotion* e)
 {
-    kursor2D.ObliczRuch(e->x,e->y);
+    auto ruch = kursor2D.ObliczRuch(e->x,e->y);
 }

@@ -1,5 +1,6 @@
 #ifndef Kursor2D_H
 #define Kursor2D_H
+#include "ruchnaeranie.h"
 
 using namespace std;
 //using namespace Gtk;
@@ -13,7 +14,7 @@ class Kursor2D
     public:
     void PobierzPierwotnePolozenie(int,int);
     void PobierzWymiaryEkranu(int,int);
-    void ObliczRuch(int,int);
+    RuchNaEranie ObliczRuch(int,int);
    
     protected:
 
