@@ -36,11 +36,10 @@ void ObslugaSygnalow::WlaczPolaczenia()
 bool ObslugaSygnalow::signal_button_press_event(GdkEventButton* e)
 {
 	renderowanie->ZarejestrujBezKontekstuRysujWlasnaWkontekscie();
-    obracanie.PobierzPierwotnePolozenie(e->x,e->y);
-    obracanie.PobierzWymiaryEkranu(ekranGL->get_width(),ekranGL->get_height());
+    kursor2D.PobierzPierwotnePolozenie(e->x,e->y);
+    kursor2D.PobierzWymiaryEkranu(ekranGL->get_width(),ekranGL->get_height());
 }
 bool ObslugaSygnalow::on_motion_notify_event(GdkEventMotion* e)
 {
-    obracanie.PobierzPolozenieAktualne(e->x,e->y);
-    obracanie.ObliczWektorPrzesuniecia();
+    kursor2D.ObliczRuch(e->x,e->y);
 }

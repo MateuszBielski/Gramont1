@@ -3,6 +3,7 @@
 #include <GL/glu.h>
 #include "Shared/oknogtk.h"
 #include "Shared/ekrangl.h"
+#include "Shared/transformacjaItfc.h"
 #include "Process/obslugasygnalow.h"
 #include "Process/renderowanie.h"
 
@@ -16,6 +17,7 @@ int main(int argc, char **argv)
 //    które z tych jest częściej używane przez inne moduły?
     spOknoGtk okno = make_shared<OknoGtk>(800,600);
     spEkranGL ekran = make_shared<EkranGL>();
+    spTransformacja transformacja = make_shared<
     
     spObslugaSygnalow obslugaSygnalow = make_shared<ObslugaSygnalow>();
     spRenderowanie renderowanie = make_shared<Renderowanie>();
@@ -23,6 +25,7 @@ int main(int argc, char **argv)
     okno->ZamontujEkran(ekran);
 	obslugaSygnalow->ObslugujEkran(ekran);
     obslugaSygnalow->UstawRenderowanie(renderowanie);
+    obslugaSygnalow->UstawTransformacje()
     renderowanie->UstawEkran(ekran);
     
     obslugaSygnalow->WlaczPolaczenia();

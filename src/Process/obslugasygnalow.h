@@ -5,7 +5,7 @@
 #include <iostream>
 #include <memory>
 #include "../Shared/ekrangl.h"
-#include "../Shared/obracanie.h"
+#include "../Shared/kursor2d.h"
 #include "renderowanie.h"
 
 using namespace std;
@@ -14,6 +14,10 @@ using namespace Gtk;
 
 class ObslugaSygnalow
 {
+    spEkranGL ekranGL = nullptr;
+    spRenderowanie renderowanie = nullptr;
+    Kursor2D kursor2D;
+  
   public:
     ObslugaSygnalow();
     virtual ~ObslugaSygnalow();
@@ -21,15 +25,13 @@ class ObslugaSygnalow
     void UstawRenderowanie(spRenderowanie);
     void WlaczPolaczenia();
 	
-protected:
+  protected:
 
-private:
+  private:
     bool signal_button_press_event(GdkEventButton* );
     bool on_motion_notify_event(GdkEventMotion* );
-    spEkranGL ekranGL = nullptr;
-    spRenderowanie renderowanie = nullptr;
     
-    Obracanie obracanie;
+    
     
     
         
