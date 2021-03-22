@@ -1,4 +1,4 @@
-#include "transformacja.h"
+#include "transformacjaItfc.h"
 
 TransformacjaItfc::TransformacjaItfc()
 {

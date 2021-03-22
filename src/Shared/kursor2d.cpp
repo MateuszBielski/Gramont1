@@ -12,9 +12,9 @@ void Kursor2D::PobierzWymiaryEkranu(int ew, int eh)
     w = ew; h = eh;
 }
 
-RuchNaEranie Kursor2D::ObliczRuch(int x, int y)
+RuchNaEkranie Kursor2D::ObliczRuch(int x, int y)
 {
-    RuchNaEranie ruch;
+    RuchNaEkranie ruch;
     ruch.x = x - prev_x;
 	ruch.y = y - prev_y;
     

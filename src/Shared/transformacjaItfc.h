@@ -1,12 +1,13 @@
 #ifndef Transformacja_H
 #define Transformacja_H
-#include <gtkmm.h>
-#include <gtkglmm.h>
+//#include <gtkmm.h>
+//#include <gtkglmm.h>
 #include <iostream>
 #include <memory>
+#include "ruchnaeranie.h"
 
 using namespace std;
-using namespace Gtk;
+//using namespace Gtk;
 
 
 class TransformacjaItfc
@@ -14,7 +15,7 @@ class TransformacjaItfc
   public:
     TransformacjaItfc();
     virtual ~TransformacjaItfc();
-    void Obracaj(RuchNaEkranie&& );
+    virtual void Obracaj(RuchNaEkranie&& ){};
 	
 protected:
 

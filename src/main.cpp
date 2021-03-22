@@ -17,7 +17,7 @@ int main(int argc, char **argv)
 //    które z tych jest częściej używane przez inne moduły?
     spOknoGtk okno = make_shared<OknoGtk>(800,600);
     spEkranGL ekran = make_shared<EkranGL>();
-    spTransformacja transformacja = make_shared<
+    spTransformacjaItfc transformacja = make_shared<TransformacjaItfc>();
     
     spObslugaSygnalow obslugaSygnalow = make_shared<ObslugaSygnalow>();
     spRenderowanie renderowanie = make_shared<Renderowanie>();
@@ -25,7 +25,7 @@ int main(int argc, char **argv)
     okno->ZamontujEkran(ekran);
 	obslugaSygnalow->ObslugujEkran(ekran);
     obslugaSygnalow->UstawRenderowanie(renderowanie);
-    obslugaSygnalow->UstawTransformacje()
+    obslugaSygnalow->UstawTransformacje(transformacja);
     renderowanie->UstawEkran(ekran);
     
     obslugaSygnalow->WlaczPolaczenia();

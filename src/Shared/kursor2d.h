@@ -14,7 +14,7 @@ class Kursor2D
     public:
     void PobierzPierwotnePolozenie(int,int);
     void PobierzWymiaryEkranu(int,int);
-    RuchNaEranie ObliczRuch(int,int);
+    RuchNaEkranie ObliczRuch(int,int);
    
     protected:
 

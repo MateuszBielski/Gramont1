@@ -6,6 +6,7 @@
 #include <memory>
 #include "../Shared/ekrangl.h"
 #include "../Shared/kursor2d.h"
+#include "../Shared/transformacjaItfc.h"
 #include "renderowanie.h"
 
 using namespace std;
@@ -17,13 +18,13 @@ class ObslugaSygnalow
     spEkranGL ekranGL = nullptr;
     spRenderowanie renderowanie = nullptr;
     Kursor2D kursor2D;
+    spTransformacjaItfc transformacja = nullptr;
   
   public:
-    ObslugaSygnalow();
-    virtual ~ObslugaSygnalow();
     void ObslugujEkran(spEkranGL );
     void UstawRenderowanie(spRenderowanie);
     void WlaczPolaczenia();
+    void UstawTransformacje(spTransformacjaItfc );
 	
   protected:
 

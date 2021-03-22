@@ -5,7 +5,7 @@ using namespace std;
 //using namespace Gtk;
 
 
-struct RuchNaEranie 
+struct RuchNaEkranie 
 {
     public:
     int x = 0,y = 0;
