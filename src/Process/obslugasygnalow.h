@@ -23,8 +23,8 @@ class ObslugaSygnalow
   public:
     void ObslugujEkran(spEkranGL );
     void UstawRenderowanie(spRenderowanie);
-    void WlaczPolaczenia();
     void UstawTransformacje(spTransformacjaItfc );
+    void WlaczPolaczenia();
 	
   protected:
 

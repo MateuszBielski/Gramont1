@@ -8,17 +8,19 @@ void ObslugaSygnalow::UstawRenderowanie(spRenderowanie r)
 {
 	renderowanie = r;
 }
+void ObslugaSygnalow::UstawTransformacje(spTransformacjaItfc tr)
+{
+    transformacja = tr;
+}
 void ObslugaSygnalow::WlaczPolaczenia()
 {
     if(ekranGL)
     {
         ekranGL->set_events(Gdk::BUTTON1_MOTION_MASK|Gdk::BUTTON_PRESS_MASK|Gdk::SCROLL_MASK|Gdk::BUTTON2_MOTION_MASK|Gdk::BUTTON3_MOTION_MASK);//lub add_events
-    }
-    if(renderowanie && ekranGL)
-    {
         ekranGL->signal_button_press_event().connect(sigc::mem_fun(*this,&ObslugaSygnalow::signal_button_press_event));
         ekranGL->signal_motion_notify_event().connect(sigc::mem_fun(*this,&ObslugaSygnalow::on_motion_notify_event));
     }
+    
 }
 bool ObslugaSygnalow::signal_button_press_event(GdkEventButton* e)
 {
@@ -30,7 +32,4 @@ bool ObslugaSygnalow::on_motion_notify_event(GdkEventMotion* e)
 {
     auto ruch = kursor2D.ObliczRuch(e->x,e->y);
 }
-void ObslugaSygnalow::UstawTransformacje(spTransformacjaItfc tr)
-{
-    transformacja = tr;
-}
+

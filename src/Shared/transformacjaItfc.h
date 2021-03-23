@@ -4,7 +4,8 @@
 //#include <gtkglmm.h>
 #include <iostream>
 #include <memory>
-#include "ruchnaeranie.h"
+#include "ruchnaekranie.h"
+#include "transformowalne.h"
 
 using namespace std;
 //using namespace Gtk;
@@ -12,10 +13,12 @@ using namespace std;
 
 class TransformacjaItfc
 {
+    spTransformowalne transformowalne;
   public:
     TransformacjaItfc();
     virtual ~TransformacjaItfc();
-    virtual void Obracaj(RuchNaEkranie&& ){};
+    virtual void Obracaj(RuchNaEkranie&& );
+    void Transformowalne(spTransformowalne );
 	
 protected:
 

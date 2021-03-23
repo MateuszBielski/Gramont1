@@ -20,11 +20,17 @@
     <File Name="main.cpp" ExcludeProjConfig=""/>
     <File Name="FunkcjeTest.cpp" ExcludeProjConfig=""/>
     <File Name="kursor2dTest.cpp"/>
+    <File Name="transformacjaTest.cpp"/>
+    <File Name="transformowalneTest.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="testedClasses">
     <File Name="../src/Shared/kursor2d.cpp"/>
+    <File Name="../src/Shared/transformacjaItfc.cpp"/>
+    <File Name="../src/Shared/transformowalne.cpp"/>
   </VirtualDirectory>
-  <VirtualDirectory Name="helperClass"/>
+  <VirtualDirectory Name="helperClass">
+    <File Name="../src/Shared/trackball.cpp"/>
+  </VirtualDirectory>
   <Settings Type="Executable">
     <GlobalSettings>
       <Compiler Options="" C_Options="" Assembler="">
