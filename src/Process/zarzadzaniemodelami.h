@@ -1,15 +1,16 @@
 #ifndef ZarzadzanieModelami_H
 #define ZarzadzanieModelami_H
-#include <gtkmm.h>
-#include <gtkglmm.h>
+//#include <gtkmm.h>
+//#include <gtkglmm.h>
 #include <iostream>
 #include <memory>
+#include "../Polecenie/obslugapolecen.h"
 
 using namespace std;
-using namespace Gtk;
+//using namespace Gtk;
 
 
-class ZarzadzanieModelami
+class ZarzadzanieModelami : public ObslugaPolecen
 {
   public:
     ZarzadzanieModelami();

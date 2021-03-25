@@ -22,11 +22,17 @@
     <File Name="kursor2dTest.cpp"/>
     <File Name="transformacjaTest.cpp"/>
     <File Name="transformowalneTest.cpp"/>
+    <File Name="polecenieTest.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="testedClasses">
     <File Name="../src/Shared/kursor2d.cpp"/>
     <File Name="../src/Shared/transformacjaItfc.cpp"/>
     <File Name="../src/Shared/transformowalne.cpp"/>
+    <File Name="../src/Polecenie/polecenie.cpp"/>
+    <File Name="../src/Polecenie/transformacja.cpp"/>
+    <File Name="../src/Process/zarzadzaniemodelami.cpp"/>
+    <File Name="../src/Polecenie/kolejkapolecen.cpp"/>
+    <File Name="../src/Polecenie/obslugapolecen.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="helperClass">
     <File Name="../src/Shared/trackball.cpp"/>

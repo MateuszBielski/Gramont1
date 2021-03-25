@@ -49,6 +49,16 @@
       <File Name="src/Process/zarzadzaniemodelami.h"/>
     </VirtualDirectory>
     <File Name="src/main.cpp"/>
+    <VirtualDirectory Name="Polecenie">
+      <File Name="src/Polecenie/polecenie.h"/>
+      <File Name="src/Polecenie/polecenie.cpp"/>
+      <File Name="src/Polecenie/transformacja.h"/>
+      <File Name="src/Polecenie/transformacja.cpp"/>
+      <File Name="src/Polecenie/kolejkapolecen.h"/>
+      <File Name="src/Polecenie/kolejkapolecen.cpp"/>
+      <File Name="src/Polecenie/obslugapolecen.h"/>
+      <File Name="src/Polecenie/obslugapolecen.cpp"/>
+    </VirtualDirectory>
   </VirtualDirectory>
   <Settings Type="Executable">
     <GlobalSettings>
