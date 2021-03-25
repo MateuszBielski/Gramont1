@@ -1,30 +1,25 @@
 #include <gtest/gtest.h>
 #include <GL/gl.h>
-#include "../src/Polecenie/transformacja.h"
-#include "../src/Polecenie/kolejkapolecen.h"
-#include "../src/Process/zarzadzaniemodelami.h"
+#include "../src/Polecenie/obrot.h"
+//#include "../src/Polecenie/kolejkapolecen.h"
+//#include "../src/Process/zarzadzaniemodelami.h"
+#include "zarzadzaniemodelamimock.h"
 //#include "../../gtk_GL_interfaces_tdd/funkcje/FunkcjePomocnicze.h"
 
-TEST(PolecenieTest,DziedziczeniePobierzDane)
+TEST(PolecenieTest,UtworzenieObrotZParametremObslugujacy)
 {
-    upPolecenie polecenie = make_unique<Transformacja>();
+    spZarzadzanieModelami zarzadzanie= make_shared<ZarzadzanieModelami>();
     
-    //    ASSERT_EQ(expect,macierzString);
-    
-}
-TEST(KolejkaPolecen,Wlasciciel)
-{
-    spObslugaPolecen zarzadzanie= make_shared<ZarzadzanieModelami>();
-    auto kolejka = make_unique<KolejkaPolecen<ObslugaPolecen>>(zarzadzanie);
-    ASSERT_EQ(zarzadzanie,kolejka->getWlasciciel());
-}
-TEST(ObslugaPolecen,Kolejka)
-{
-    spObslugaPolecen zarzadzanie= make_shared<ZarzadzanieModelami>();
-    auto kolejka = zarzadzanie->KolejkaRef();
+    spPolecenie  polecenie = make_shared<Obrot<ZarzadzanieModelami>>(zarzadzanie);
+//    polecenie->Wykonaj();
+        ASSERT_NE(nullptr,polecenie);
     
 }
-TEST(Polecenie,WstawDoKolejki)
+TEST(PolecenieTest,obrotWykonajWywolujeDoTransformacji)
 {
+    spZarzadzanieModelami zarzadzanie= make_shared<ZarzadzanieModelamiMock>();
+    spPolecenie  polecenie = make_shared<Obrot<ZarzadzanieModelami>>(zarzadzanie);
     
+    polecenie->Wykonaj();
+    ASSERT_TRUE(zarzadzanie->doTransformacjiUsed);
 }

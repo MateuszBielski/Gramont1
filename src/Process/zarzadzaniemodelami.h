@@ -4,18 +4,20 @@
 //#include <gtkglmm.h>
 #include <iostream>
 #include <memory>
-#include "../Polecenie/obslugapolecen.h"
+#include "../Shared/transformowalne.h"
 
 using namespace std;
 //using namespace Gtk;
 
 
-class ZarzadzanieModelami : public ObslugaPolecen
+class ZarzadzanieModelami //: public ObslugaPolecen
 {
   public:
     ZarzadzanieModelami();
     virtual ~ZarzadzanieModelami();
-	
+	virtual Transformowalne DoTransformacji(){};
+    
+    bool doTransformacjiUsed = false;
 protected:
 
 private:

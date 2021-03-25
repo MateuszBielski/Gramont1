@@ -28,14 +28,12 @@
     <File Name="../src/Shared/kursor2d.cpp"/>
     <File Name="../src/Shared/transformacjaItfc.cpp"/>
     <File Name="../src/Shared/transformowalne.cpp"/>
-    <File Name="../src/Polecenie/polecenie.cpp"/>
-    <File Name="../src/Polecenie/transformacja.cpp"/>
     <File Name="../src/Process/zarzadzaniemodelami.cpp"/>
-    <File Name="../src/Polecenie/kolejkapolecen.cpp"/>
-    <File Name="../src/Polecenie/obslugapolecen.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="helperClass">
     <File Name="../src/Shared/trackball.cpp"/>
+    <File Name="zarzadzaniemodelamimock.h"/>
+    <File Name="zarzadzaniemodelamimock.cpp"/>
   </VirtualDirectory>
   <Settings Type="Executable">
     <GlobalSettings>

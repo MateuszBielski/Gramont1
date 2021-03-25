@@ -10,7 +10,8 @@ using namespace std;
 //using namespace Gtk;
 
 
-class Transformacja : public Polecenie
+template<typename T>
+class Transformacja : public TemplatePolecenie<T>
 {
 public:
     Transformacja();
@@ -23,6 +24,6 @@ protected:
 private:
 
 };
-using spTransformacja = shared_ptr<Transformacja>;
-using upTransformacja = unique_ptr<Transformacja>;
+//using spTransformacja = shared_ptr<Transformacja>;
+//using upTransformacja = unique_ptr<Transformacja>;
 #endif // Transformacja_H
