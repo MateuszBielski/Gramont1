@@ -1,5 +1,5 @@
-#ifndef Transformacja_H
-#define Transformacja_H
+#ifndef TransformacjaItfc_H
+#define TransformacjaItfc_H
 //#include <gtkmm.h>
 //#include <gtkglmm.h>
 #include <iostream>

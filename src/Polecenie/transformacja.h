@@ -10,14 +10,13 @@ using namespace std;
 //using namespace Gtk;
 
 
-template<typename T>
-class Transformacja : public TemplatePolecenie<T>
+class Transformacja : public Polecenie
 {
 public:
-    Transformacja();
-    virtual ~Transformacja();
-    
-    
+    virtual
+    void WykonajW(ObslugaPolecen& ) override{};
+
+
 
 protected:
 
@@ -25,5 +24,5 @@ private:
 
 };
 //using spTransformacja = shared_ptr<Transformacja>;
-//using upTransformacja = unique_ptr<Transformacja>;
+using upTransformacja = unique_ptr<Transformacja>;
 #endif // Transformacja_H

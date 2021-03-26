@@ -5,10 +5,12 @@
 
 using namespace std;
 
+class ObslugaPolecen;
+
 class Polecenie
 {
 public:
-    virtual void Wykonaj() = 0;
+    virtual void WykonajW(ObslugaPolecen& ) = 0;//
     
 };
 
@@ -24,5 +26,6 @@ public:
         };
 protected:
     shared_ptr<T> obslugujacy = nullptr;
+    
 };
 #endif // Polecenie_H

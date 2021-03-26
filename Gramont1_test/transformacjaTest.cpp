@@ -2,6 +2,9 @@
 #include <GL/gl.h>
 #include "../src/Shared/transformacjaItfc.h"
 #include "../src/Shared/transformowalne.h"
+#include "../src/Polecenie/obrot.h"
+#include "zarzadzaniemodelamimock.h"
+//#include "../src/Polecenie.h"
 
 TEST(TransformacjaTest,Obracaj_macierzObrotu)
 {
@@ -30,5 +33,28 @@ TEST(TransformacjaTest,Obracaj_macierzObrotu)
         EXPECT_FLOAT_EQ(expected[i],m);
     }
 }
+TEST(TransformacjaTest,ObrotWykonaj_DostarczenieTransformowanego)
+{
+    ZarzadzanieModelamiMock zarzadzanie;//= make_shared<ZarzadzanieModelamiMock>();
+//    spPolecenie  polecenie = make_shared<ObrotTemplate<ZarzadzanieModelami>>(zarzadzanie);
+    upTransformacja polecenie = make_unique<Obrot>();
+    polecenie->WykonajW(zarzadzanie);
+    ASSERT_TRUE(zarzadzanie.doTransformacjiUsed);
+}
+/*
+TEST(TransformacjaTest,ObrotWykonaj_PrzekazanieRuchu)
+{
+    RuchNaEkranie r;
+//    r.p1x = 0.0;
+//    r.p1y = 0.0;
+//    r.p2x = 0.02;
+//    r.p2y = 0.03;
+    upTransformacja polecenie = make_unique<Obrot>(move(r));
+    ASSERT_EQ(nullptr,)
+//    ZarzadzanieModelamiMock zarz;
+//    polecenie->Wykonaj(zarz);//ObslugaPolecen
+}
+ */
+
 
 

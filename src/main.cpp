@@ -24,8 +24,8 @@ int main(int argc, char **argv)
     
     okno->ZamontujEkran(ekran);
 	obslugaSygnalow->ObslugujEkran(ekran);
-    obslugaSygnalow->UstawRenderowanie(renderowanie);
-    obslugaSygnalow->UstawTransformacje(transformacja);
+    obslugaSygnalow->UstawRenderowanie(renderowanie);//może nie będzie potrzebne po uruchomieniu kolejek
+    obslugaSygnalow->UstawTransformacje(transformacja);//może nie będzie potrzebne po uruchomieniu kolejek
     renderowanie->UstawEkran(ekran);
     
     obslugaSygnalow->WlaczPolaczenia();

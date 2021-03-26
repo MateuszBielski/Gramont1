@@ -1,4 +1,7 @@
 #include "obslugasygnalow.h"
+#include "../Polecenie/transformacja.h"
+#include "../Polecenie/obrot.h"
+//#include "../src/Polecenie/transformacja.h"
 
 void ObslugaSygnalow::ObslugujEkran(spEkranGL ekran)
 {
@@ -8,10 +11,11 @@ void ObslugaSygnalow::UstawRenderowanie(spRenderowanie r)
 {
 	renderowanie = r;
 }
+/*
 void ObslugaSygnalow::UstawTransformacje(spTransformacjaItfc tr)
 {
     transformacja = tr;
-}
+}*/
 void ObslugaSygnalow::WlaczPolaczenia()
 {
     if(ekranGL)
@@ -30,6 +34,14 @@ bool ObslugaSygnalow::signal_button_press_event(GdkEventButton* e)
 }
 bool ObslugaSygnalow::on_motion_notify_event(GdkEventMotion* e)
 {
+    upTransformacja transformacja;
+    
     auto ruch = kursor2D.ObliczRuch(e->x,e->y);
+    transformacja= make_unique<Obrot>();
+    
+    nadawanieDoZarzadzaniaObiektami->push(move(transformacja));
 }
-
+void ObslugaSygnalow::NadawanieDoZarzadzaniaObiektami(spKolejkaPolecen kolejka)
+{
+	nadawanieDoZarzadzaniaObiektami = kolejka;
+}

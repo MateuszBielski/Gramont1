@@ -11,3 +11,7 @@ Obrot::~Obrot()
 }
 
 */
+void Obrot::WykonajW(ObslugaPolecen&)
+{
+
+}

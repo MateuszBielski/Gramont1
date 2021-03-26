@@ -4,7 +4,7 @@
 //#include <gtkglmm.h>
 #include <iostream>
 #include <memory>
-#include "kolejkapolecen.h"
+//#include "kolejkapolecen.h"
 
 using namespace std;
 //using namespace Gtk;
@@ -13,11 +13,11 @@ using namespace std;
 class ObslugaPolecen
 {
 //    using Kolejka = KolejkaPolecen<ObslugaPolecen>;
-    KolejkaPolecen<ObslugaPolecen> kolejka;
-    public:
-    ObslugaPolecen();
-    virtual ~ObslugaPolecen();
-    KolejkaPolecen<ObslugaPolecen>& KolejkaRef(){};//return kolejka;
+//    KolejkaPolecen<ObslugaPolecen> kolejka;
+//    public:
+//    ObslugaPolecen();
+//    virtual ~ObslugaPolecen();
+//    KolejkaPolecen<ObslugaPolecen>& KolejkaRef(){};//return kolejka;
     
 	
 protected:

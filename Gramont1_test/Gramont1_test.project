@@ -28,7 +28,11 @@
     <File Name="../src/Shared/kursor2d.cpp"/>
     <File Name="../src/Shared/transformacjaItfc.cpp"/>
     <File Name="../src/Shared/transformowalne.cpp"/>
-    <File Name="../src/Process/zarzadzaniemodelami.cpp"/>
+    <File Name="../src/Process/obslugasygnalow.cpp"/>
+    <File Name="../src/Process/renderowanie.cpp"/>
+    <File Name="../src/Polecenie/kolejkapolecen.cpp"/>
+    <File Name="../src/Polecenie/transformacja.cpp"/>
+    <File Name="../src/Polecenie/obrot.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="helperClass">
     <File Name="../src/Shared/trackball.cpp"/>

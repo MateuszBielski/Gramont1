@@ -1,25 +1,35 @@
 #ifndef Obrot_H
 #define Obrot_H
-//#include <gtkmm.h>
-//#include <gtkglmm.h>
 #include <iostream>
 #include <memory>
-//#include "transformacja.h"
-#include "polecenie.h"
+//#include "polecenie.h"
+#include "transformacja.h"
 
 using namespace std;
-//using namespace Gtk;
+
+class Obrot : public Transformacja
+{
+public:
+   Obrot(){};
+    virtual
+    void WykonajW(ObslugaPolecen& ) override;
+
+
+
+protected:
+
+private: 
+};
 
 template<typename T>
-class Obrot : public TemplatePolecenie<T>//public Transformacja
+class ObrotTemplate : public TemplatePolecenie<T>
 {
-//    sTransformowalne doTransformacji
     public:
-    explicit Obrot(shared_ptr<T> obslugujacy):TemplatePolecenie<T>::TemplatePolecenie(obslugujacy)
+    explicit ObrotTemplate(shared_ptr<T> obslugujacy):TemplatePolecenie<T>::TemplatePolecenie(obslugujacy)
     {
         
         };
-    virtual ~Obrot(){};
+    virtual ~ObrotTemplate(){};
     virtual void Wykonaj()
     {
         TemplatePolecenie<T>::obslugujacy->DoTransformacji();
@@ -30,6 +40,4 @@ protected:
 private:
         
 };
-//using spObrot = shared_ptr<Obrot>;
-//using upObrot = unique_ptr<Obrot>;
 #endif // Obrot_H

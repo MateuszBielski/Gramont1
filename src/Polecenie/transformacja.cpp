@@ -1,12 +1,7 @@
 #include "transformacja.h"
 
-Transformacja::Transformacja()
-{
 
-}
 
-Transformacja::~Transformacja()
-{
-
-}
-
+//void Transformacja::WykonajW()
+//{
+//}
