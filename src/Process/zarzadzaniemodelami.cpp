@@ -10,3 +10,7 @@
 //
 //}
 
+void ZarzadzanieModelami::DoTransformacji(spTransformowalne tr)
+{
+	doTrasformacji = tr;
+}

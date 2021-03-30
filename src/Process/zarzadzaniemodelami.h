@@ -15,12 +15,15 @@ using namespace std;
 
 class ZarzadzanieModelami : public ObslugaPolecen
 {
-  public:
+    spTransformowalne doTrasformacji = nullptr;
+    public:
     ZarzadzanieModelami(){};
     virtual ~ZarzadzanieModelami(){};
-	virtual Transformowalne DoTransformacji(){};
+	virtual spTransformowalne DoTransformacji() override {return doTrasformacji;};
     
-    bool doTransformacjiUsed = false;
+    void DoTransformacji(spTransformowalne );
+    
+    
 protected:
 
 private:

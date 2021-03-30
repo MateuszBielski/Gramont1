@@ -12,10 +12,11 @@ using namespace std;
 
 class ZarzadzanieModelamiMock : public ZarzadzanieModelami
 {
-  public:
+  
+    public:
     ZarzadzanieModelamiMock();
     virtual ~ZarzadzanieModelamiMock();
-    virtual Transformowalne DoTransformacji() override;
+    virtual spTransformowalne DoTransformacji() override;
 	
 protected:
 

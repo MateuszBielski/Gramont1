@@ -4,6 +4,7 @@
 //#include <gtkglmm.h>
 #include <iostream>
 #include <memory>
+#include "../Shared/transformowalne.h"
 //#include "kolejkapolecen.h"
 
 using namespace std;
@@ -18,7 +19,10 @@ class ObslugaPolecen
 //    ObslugaPolecen();
 //    virtual ~ObslugaPolecen();
 //    KolejkaPolecen<ObslugaPolecen>& KolejkaRef(){};//return kolejka;
+public:
+    virtual spTransformowalne DoTransformacji() = 0;
     
+    bool doTransformacjiUsed = false;
 	
 protected:
 

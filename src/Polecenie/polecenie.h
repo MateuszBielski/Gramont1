@@ -17,6 +17,14 @@ public:
 using spPolecenie = shared_ptr<Polecenie>;
 using upPolecenie = unique_ptr<Polecenie>;
 
+class PoleceniePuste : public Polecenie
+{
+public:
+    PoleceniePuste(int _id):id(_id){};
+    virtual void WykonajW(ObslugaPolecen& ) override {};
+    int id = 0;
+};
+/*
 template<typename T>
 class TemplatePolecenie : public Polecenie
 {
@@ -28,4 +36,5 @@ protected:
     shared_ptr<T> obslugujacy = nullptr;
     
 };
+ */
 #endif // Polecenie_H

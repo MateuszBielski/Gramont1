@@ -9,7 +9,8 @@ ZarzadzanieModelamiMock::~ZarzadzanieModelamiMock()
 {
 
 }
-Transformowalne ZarzadzanieModelamiMock::DoTransformacji()
+spTransformowalne ZarzadzanieModelamiMock::DoTransformacji()
 {
     doTransformacjiUsed = true;
+    return nullptr;
 }

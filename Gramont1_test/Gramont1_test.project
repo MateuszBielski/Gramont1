@@ -33,6 +33,7 @@
     <File Name="../src/Polecenie/kolejkapolecen.cpp"/>
     <File Name="../src/Polecenie/transformacja.cpp"/>
     <File Name="../src/Polecenie/obrot.cpp"/>
+    <File Name="../src/Process/zarzadzaniemodelami.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="helperClass">
     <File Name="../src/Shared/trackball.cpp"/>

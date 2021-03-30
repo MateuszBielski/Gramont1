@@ -8,14 +8,12 @@
 
 TEST(TransformacjaTest,Obracaj_macierzObrotu)
 {
-//    ASSERT_EQ(expect,macierzString);
     RuchNaEkranie r;
     r.p1x = 0.0;
     r.p1y = 0.0;
     r.p2x = 0.02;
     r.p2y = 0.03;
     
-//    Transformowalne model;
     auto model = make_shared<Transformowalne>();
     
     TransformacjaItfc tr;
@@ -41,20 +39,34 @@ TEST(TransformacjaTest,ObrotWykonaj_DostarczenieTransformowanego)
     polecenie->WykonajW(zarzadzanie);
     ASSERT_TRUE(zarzadzanie.doTransformacjiUsed);
 }
-/*
-TEST(TransformacjaTest,ObrotWykonaj_PrzekazanieRuchu)
+
+TEST(TransformacjaTest,ObrotWykonaj_PrzekazanyRuchWplywaNaMacierzObrotu)
 {
-    RuchNaEkranie r;
-//    r.p1x = 0.0;
-//    r.p1y = 0.0;
-//    r.p2x = 0.02;
-//    r.p2y = 0.03;
-    upTransformacja polecenie = make_unique<Obrot>(move(r));
-    ASSERT_EQ(nullptr,)
-//    ZarzadzanieModelamiMock zarz;
+    
+//    upTransformacja polecenie = make_unique<Obrot>(move(r));
+    
+    auto model = make_shared<Transformowalne>();
+    ZarzadzanieModelami zarzadzanie;
+    zarzadzanie.DoTransformacji(model);
+    RuchNaEkranie ruch;
+    ruch.p1x = 0.0;
+    ruch.p1y = 0.0;
+    ruch.p2x = 0.02;
+    ruch.p2y = 0.03;
+    
+    Obrot obrot(move(ruch));
+    obrot.WykonajW(zarzadzanie);
+    float expected[] = {0.99968731, -0.0004689882, -0.025, 0,
+                        -0.0004689882, 0.99929655, -0.0375, 0,
+                        0.025, 0.0375, 0.99898386, 0, 
+                        0, 0, 0, 1};
+    for(short i = 0 ; i < 16 ; i++){
+        auto m = model->MacierzObrotu()[i];
+//        cout<<m<<", ";
+        EXPECT_FLOAT_EQ(expected[i],m);
+    }
+    int x = 0;
+//    ASSERT_EQ()
+//    ZarzadzanieModelami zarz;
 //    polecenie->Wykonaj(zarz);//ObslugaPolecen
 }
- */
-
-
-

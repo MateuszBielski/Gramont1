@@ -1,22 +1,31 @@
 #ifndef KolejkaPolecen_H
 #define KolejkaPolecen_H
 #include <memory>
-#include <deque>
+#include <queue>
+#include <mutex>
+#include <condition_variable>
 #include "polecenie.h"
 
 
 using namespace std;
 //using namespace Gtk;
-class KolejkaPolecen : public deque<upPolecenie>
+class KolejkaPolecen
 {
-    deque<upPolecenie> queue;
+    queue<upPolecenie> data_queue;
+    
+    mutable std::mutex mut;
+    condition_variable data_cond;
+    
     public:
-    void push(upPolecenie&& );
+    void push(upPolecenie); 
+    upPolecenie wait_and_pop();
     size_t size();
+    bool empty();
 };
 
 using upKolejkaPolecen = unique_ptr<KolejkaPolecen>;
 using spKolejkaPolecen = shared_ptr<KolejkaPolecen>;
+/*
 template<typename Wlasciciel>
 class KolejkaPolecenTemplate
 {
@@ -32,6 +41,6 @@ public:
     private:
         
 };
-
+*/
 
 #endif // KolejkaPolecen_H
