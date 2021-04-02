@@ -66,7 +66,4 @@ TEST(TransformacjaTest,ObrotWykonaj_PrzekazanyRuchWplywaNaMacierzObrotu)
         EXPECT_FLOAT_EQ(expected[i],m);
     }
     int x = 0;
-//    ASSERT_EQ()
-//    ZarzadzanieModelami zarz;
-//    polecenie->Wykonaj(zarz);//ObslugaPolecen
 }

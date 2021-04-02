@@ -28,7 +28,10 @@ void ObslugaSygnalow::WlaczPolaczenia()
 }
 bool ObslugaSygnalow::signal_button_press_event(GdkEventButton* e)
 {
-	renderowanie->ZarejestrujBezKontekstuRysujWlasnaWkontekscie();
+	if(renderowanie != nullptr)
+    {
+        renderowanie->ZarejestrujBezKontekstuRysujWlasnaWkontekscie();
+    }
     kursor2D.PobierzPierwotnePolozenie(e->x,e->y);
     kursor2D.PobierzWymiaryEkranu(ekranGL->get_width(),ekranGL->get_height());
 }

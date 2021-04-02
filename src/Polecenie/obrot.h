@@ -5,13 +5,13 @@
 //#include "polecenie.h"
 #include "transformacja.h"
 #include "obslugapolecen.h"
-#include "../Shared/ruchnaekranie.h"
+
 
 using namespace std;
 
 class Obrot : public Transformacja
 {
-    RuchNaEkranie ruch;
+    
 public:
    Obrot(){};
    Obrot(RuchNaEkranie&& );
