@@ -14,7 +14,7 @@ class EkranGLMock : public EkranGL
     virtual ~EkranGLMock();
     int get_width(){return w;};
     int get_height(){return h;};
-    int w = 1,h = 1;
+    int w = 2,h = 2;
 	
 protected:
 
