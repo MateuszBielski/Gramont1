@@ -38,15 +38,12 @@ TEST(ObslugaSygnalow,RuchMyszyDajePolecenieZparmetramiRuchu)
     e2.y = 110;
     sygnaly.signal_button_press_event(&e1);
     sygnaly.on_motion_notify_event(&e2);
-    
-//    Polecenie* polecenie = kolejka->wait_and_pop().get();
-//    Transformacja* transformacja = static_cast<Transformacja*>(polecenie);
-    Transformacja transformacja = kolejka->wait_and_pop<Transformacja>();
+
+    Transformacja transformacja;
+    transformacja = kolejka->wait_and_pop<Transformacja>();
     
     auto ruch = transformacja.Ruch();
-    bool pusta = kolejka->empty();
-//    
-//    
-//    sygnaly.on_motion_notify_event(&event);
+    ASSERT_NE(ruch.p1x,ruch.p2x);
+    ASSERT_NE(ruch.p1y,ruch.p2y);
 }
 //czy po wykonaniu obsluga sygnałów::on_notify_event w kolejce jest polecenie zawierające ruch
