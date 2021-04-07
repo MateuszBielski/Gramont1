@@ -1,7 +1,7 @@
 #ifndef Polecenie_H
 #define Polecenie_H
 //#include <iostream>
-//#include <memory>
+#include <memory>
 
 using namespace std;
 
@@ -23,6 +23,11 @@ public:
     PoleceniePuste(int _id):id(_id){};
     virtual void WykonajW(ObslugaPolecen& ) override {};
     int id = 0;
+};
+class PolecenieKoniec : public Polecenie
+{
+    public:
+    virtual void WykonajW(ObslugaPolecen& ) override;
 };
 /*
 template<typename T>

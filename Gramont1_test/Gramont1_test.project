@@ -24,6 +24,7 @@
     <File Name="transformowalneTest.cpp"/>
     <File Name="polecenieTest.cpp"/>
     <File Name="obslugaSygnalowTest.cpp"/>
+    <File Name="zarzadzaniemodelamiTest.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="testedClasses">
     <File Name="../src/Shared/kursor2d.cpp"/>
@@ -36,6 +37,8 @@
     <File Name="../src/Polecenie/obrot.cpp"/>
     <File Name="../src/Process/zarzadzaniemodelami.cpp"/>
     <File Name="../src/Shared/ekrangl.cpp"/>
+    <File Name="../src/Polecenie/obslugapolecen.cpp"/>
+    <File Name="../src/Polecenie/polecenie.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="helperClass">
     <File Name="../src/Shared/trackball.cpp"/>
@@ -43,6 +46,8 @@
     <File Name="zarzadzaniemodelamimock.cpp"/>
     <File Name="ekranglmock.h"/>
     <File Name="ekranglmock.cpp"/>
+    <File Name="obslugapolecenmock.h"/>
+    <File Name="obslugapolecenmock.cpp"/>
   </VirtualDirectory>
   <Settings Type="Executable">
     <GlobalSettings>

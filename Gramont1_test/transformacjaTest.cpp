@@ -67,3 +67,13 @@ TEST(TransformacjaTest,ObrotWykonaj_PrzekazanyRuchWplywaNaMacierzObrotu)
     }
     int x = 0;
 }
+TEST(TransformacjaTest,ObrotInformujeOzakonczeniuTransformacji)
+{
+    ZarzadzanieModelamiMock zarzadzanie;
+//    auto model = make_shared<Transformowalne>();
+//    zarzadzanie.DoTransformacji(model);
+    Obrot obrot;
+    obrot.WykonajW(zarzadzanie);
+    ASSERT_TRUE(zarzadzanie.powiadomionyOzakonczeniuTransformacji);
+}
+    //zrobić kolejkę wewnętrzną - bufor zmian do realizacji.

@@ -17,7 +17,8 @@ class ZarzadzanieModelamiMock : public ZarzadzanieModelami
     ZarzadzanieModelamiMock();
     virtual ~ZarzadzanieModelamiMock();
     virtual spTransformowalne DoTransformacji() override;
-	
+    virtual void PowiadomionyOzakonczeniuTransformacji() override;
+	bool powiadomionyOzakonczeniuTransformacji = false;
 protected:
 
 private:

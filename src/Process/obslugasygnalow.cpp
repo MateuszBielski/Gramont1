@@ -33,7 +33,8 @@ bool ObslugaSygnalow::signal_button_press_event(GdkEventButton* e)
         renderowanie->ZarejestrujBezKontekstuRysujWlasnaWkontekscie();
     }
     kursor2D.PobierzPierwotnePolozenie(e->x,e->y);
-    cout<<"\nXXXsignal_button_press_event "<<ekranGL->get_width()<<" "<<ekranGL->get_height();
+//    cout<<"\nXXXsignal_button_press_event "<<ekranGL->get_width()<<" "<<ekranGL->get_height();
+
     kursor2D.PobierzWymiaryEkranu(ekranGL->get_width(),ekranGL->get_height());
 }
 bool ObslugaSygnalow::on_motion_notify_event(GdkEventMotion* e)

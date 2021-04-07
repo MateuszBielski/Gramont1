@@ -9,6 +9,7 @@
 #include "../src/Polecenie/obrot.h"
 //#include "../src/Process/zarzadzaniemodelami.h"
 #include "zarzadzaniemodelamimock.h"
+#include "obslugapolecenmock.h"
 
 
 
@@ -109,3 +110,27 @@ TEST(KolejkaPolecen,DodanieIzabraniePoleceniaWjednymCzasieKonwersjaTypu)
         throw;
     }
 }
+
+TEST(KolejkaPolecen,PolecenieKoniecZatrzymujeRun)
+{
+    ObslugaPolecenMock obslPolecen;
+    
+    auto kolejka = obslPolecen.getKolejkaPolecen();
+    thread t(&ObslugaPolecen::Run,&obslPolecen);
+    kolejka->push(make_unique<PolecenieKoniec>());
+    t.join();
+    ASSERT_EQ(1,obslPolecen.licznikRun);
+}
+
+TEST(KolejkaPolecen,WykonanieKilkuPolecen)
+{
+    ObslugaPolecenMock obslPolecen;
+    
+    auto kolejka = obslPolecen.getKolejkaPolecen();
+    thread t(&ObslugaPolecen::Run,&obslPolecen);
+    for(short i = 0; i < 4 ; i++)kolejka->push(make_unique<PoleceniePuste>(i));
+    kolejka->push(make_unique<PolecenieKoniec>());
+    t.join();
+    ASSERT_EQ(5,obslPolecen.licznikRun);
+}
+//TEST(KolejkaPolecen,)

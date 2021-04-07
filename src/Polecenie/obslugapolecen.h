@@ -5,7 +5,7 @@
 #include <iostream>
 #include <memory>
 #include "../Shared/transformowalne.h"
-//#include "kolejkapolecen.h"
+#include "kolejkapolecen.h"
 
 using namespace std;
 //using namespace Gtk;
@@ -13,19 +13,21 @@ using namespace std;
 
 class ObslugaPolecen
 {
-//    using Kolejka = KolejkaPolecen<ObslugaPolecen>;
-//    KolejkaPolecen<ObslugaPolecen> kolejka;
-//    public:
-//    ObslugaPolecen();
-//    virtual ~ObslugaPolecen();
-//    KolejkaPolecen<ObslugaPolecen>& KolejkaRef(){};//return kolejka;
+    bool run = true;
 public:
+    ObslugaPolecen();
+    virtual ~ObslugaPolecen(){};
     virtual spTransformowalne DoTransformacji() = 0;
+    virtual void PowiadomionyOzakonczeniuTransformacji() = 0;
+    spKolejkaPolecen getKolejkaPolecen() {return kolejka;};
+    void Run();
+    void StopRun();
     
     bool doTransformacjiUsed = false;
 	
 protected:
-
+    spKolejkaPolecen kolejka;
+    int protLicznikRun = 0;
 private:
         
 };

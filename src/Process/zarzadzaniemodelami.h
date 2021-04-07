@@ -20,6 +20,7 @@ class ZarzadzanieModelami : public ObslugaPolecen
     ZarzadzanieModelami(){};
     virtual ~ZarzadzanieModelami(){};
 	virtual spTransformowalne DoTransformacji() override {return doTrasformacji;};
+    virtual void PowiadomionyOzakonczeniuTransformacji() override {};
     
     void DoTransformacji(spTransformowalne );
     

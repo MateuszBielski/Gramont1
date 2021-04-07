@@ -12,5 +12,9 @@ ZarzadzanieModelamiMock::~ZarzadzanieModelamiMock()
 spTransformowalne ZarzadzanieModelamiMock::DoTransformacji()
 {
     doTransformacjiUsed = true;
-    return nullptr;
+    return make_shared<Transformowalne>();
+}
+void ZarzadzanieModelamiMock::PowiadomionyOzakonczeniuTransformacji()
+{
+	powiadomionyOzakonczeniuTransformacji = true;
 }
