@@ -16,11 +16,17 @@ using namespace std;
 class ZarzadzanieModelami : public ObslugaPolecen
 {
     spTransformowalne doTrasformacji = nullptr;
-    public:
+    int licznikTransformacjiDoPrzerysowania = 0;
+    spKolejkaPolecen kolejkaRenderowania = nullptr;
+    int przerysujPoTyluTransformacjach = 1;
+  public:
     ZarzadzanieModelami(){};
     virtual ~ZarzadzanieModelami(){};
 	virtual spTransformowalne DoTransformacji() override {return doTrasformacji;};
-    virtual void PowiadomionyOzakonczeniuTransformacji() override {};
+    virtual void PowiadomionyOzakonczeniuTransformacji() override;
+    int LicznikTransformacjiDoPrzerysowania();
+    void NadawanieDoRenderowania(spKolejkaPolecen);
+    void PrzerysujPoTyluTransformacjach(int);
     
     void DoTransformacji(spTransformowalne );
     
