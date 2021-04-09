@@ -133,4 +133,7 @@ TEST(KolejkaPolecen,WykonanieKilkuPolecen)
     t.join();
     ASSERT_EQ(5,obslPolecen.licznikRun);
 }
-//TEST(KolejkaPolecen,)
+TEST(KolejkaPolecen,PoleceniePrzerysuj)
+{
+    
+}

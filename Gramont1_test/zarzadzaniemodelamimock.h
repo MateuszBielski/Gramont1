@@ -18,6 +18,7 @@ class ZarzadzanieModelamiMock : public ZarzadzanieModelami
     virtual ~ZarzadzanieModelamiMock();
     virtual spTransformowalne DoTransformacji() override;
     virtual void PowiadomionyOzakonczeniuTransformacji() override;
+    virtual void WyslijPoleceniePrzerysuj() override {};
 	bool powiadomionyOzakonczeniuTransformacji = false;
 protected:
 

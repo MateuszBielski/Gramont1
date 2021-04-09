@@ -60,6 +60,8 @@
       <File Name="src/Polecenie/obrot.h"/>
       <File Name="src/Polecenie/obrot.cpp"/>
       <File Name="src/Polecenie/polecenie.cpp"/>
+      <File Name="src/Polecenie/przerysuj.h"/>
+      <File Name="src/Polecenie/przerysuj.cpp"/>
     </VirtualDirectory>
   </VirtualDirectory>
   <Settings Type="Executable">

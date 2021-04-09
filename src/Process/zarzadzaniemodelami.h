@@ -27,6 +27,7 @@ class ZarzadzanieModelami : public ObslugaPolecen
     int LicznikTransformacjiDoPrzerysowania();
     void NadawanieDoRenderowania(spKolejkaPolecen);
     void PrzerysujPoTyluTransformacjach(int);
+    virtual void WyslijPoleceniePrzerysuj() override ;
     
     void DoTransformacji(spTransformowalne );
     

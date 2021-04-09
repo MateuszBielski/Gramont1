@@ -18,6 +18,7 @@ Obrot::Obrot(RuchNaEkranie&& r)
 }
 void Obrot::WykonajW(ObslugaPolecen& obs)
 {
+    
     auto transformowalne = obs.DoTransformacji();
     if (!transformowalne)return;
     Trackball::trackball(transformowalne->QuatDiff(),
@@ -33,4 +34,5 @@ void Obrot::WykonajW(ObslugaPolecen& obs)
 //    float macierz[4][4];
     Trackball::build_rotmatrix(transformowalne->ppMacierzObrotu(), transformowalne->Quat());
     obs.PowiadomionyOzakonczeniuTransformacji();
+    obs.WyslijPoleceniePrzerysuj();
 }

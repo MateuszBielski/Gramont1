@@ -25,6 +25,7 @@
     <File Name="polecenieTest.cpp"/>
     <File Name="obslugaSygnalowTest.cpp"/>
     <File Name="zarzadzaniemodelamiTest.cpp"/>
+    <File Name="renderowanieTest.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="testedClasses">
     <File Name="../src/Shared/kursor2d.cpp"/>
@@ -39,6 +40,7 @@
     <File Name="../src/Shared/ekrangl.cpp"/>
     <File Name="../src/Polecenie/obslugapolecen.cpp"/>
     <File Name="../src/Polecenie/polecenie.cpp"/>
+    <File Name="../src/Polecenie/przerysuj.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="helperClass">
     <File Name="../src/Shared/trackball.cpp"/>

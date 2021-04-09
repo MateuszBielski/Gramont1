@@ -19,6 +19,7 @@ public:
     virtual ~ObslugaPolecen(){};
     virtual spTransformowalne DoTransformacji() = 0;
     virtual void PowiadomionyOzakonczeniuTransformacji() = 0;
+    virtual void WyslijPoleceniePrzerysuj() {};
     spKolejkaPolecen getKolejkaPolecen() {return kolejka;};
     void Run();
     void StopRun();

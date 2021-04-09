@@ -48,6 +48,7 @@ TEST(TransformacjaTest,ObrotWykonaj_PrzekazanyRuchWplywaNaMacierzObrotu)
     auto model = make_shared<Transformowalne>();
     ZarzadzanieModelami zarzadzanie;
     zarzadzanie.DoTransformacji(model);
+//    zarzadzanie.DoTransformacji(make_unique<Transformowalne>());
     RuchNaEkranie ruch;
     ruch.p1x = 0.0;
     ruch.p1y = 0.0;

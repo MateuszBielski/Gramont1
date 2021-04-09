@@ -13,9 +13,9 @@ void ObslugaPolecen::Run()
         ++protLicznikRun;
     }
 }
-ObslugaPolecen::ObslugaPolecen()
+ObslugaPolecen::ObslugaPolecen():kolejka(make_shared<KolejkaPolecen>())
 {
-	kolejka = make_shared<KolejkaPolecen>();
+//	 = ;
 }
 void ObslugaPolecen::StopRun()
 {
