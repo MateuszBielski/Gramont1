@@ -24,9 +24,9 @@ class ZarzadzanieModelami : public ObslugaPolecen
     virtual ~ZarzadzanieModelami(){};
 	virtual spTransformowalne DoTransformacji() override {return doTrasformacji;};
     virtual void PowiadomionyOzakonczeniuTransformacji() override;
-    int LicznikTransformacjiDoPrzerysowania();
+    int LicznikTransformacjiAkumulowanych();
     void NadawanieDoRenderowania(spKolejkaPolecen);
-    void PrzerysujPoTyluTransformacjach(int);
+    void LiczbaTransformacjiDoAkumulowania(int);
     virtual void WyslijPoleceniePrzerysuj() override ;
     
     void DoTransformacji(spTransformowalne );

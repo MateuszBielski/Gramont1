@@ -6,7 +6,7 @@ void ZarzadzanieModelami::DoTransformacji(spTransformowalne tr)
 {
 	doTrasformacji = tr;
 }
-int ZarzadzanieModelami::LicznikTransformacjiDoPrzerysowania()
+int ZarzadzanieModelami::LicznikTransformacjiAkumulowanych()
 {
 	return licznikTransformacjiDoPrzerysowania;
 }
@@ -20,7 +20,7 @@ void ZarzadzanieModelami::NadawanieDoRenderowania(spKolejkaPolecen k)
 {
 	kolejkaRenderowania = k;
 }
-void ZarzadzanieModelami::PrzerysujPoTyluTransformacjach(int k)
+void ZarzadzanieModelami::LiczbaTransformacjiDoAkumulowania(int k)
 {
 	przerysujPoTyluTransformacjach = k;
 }

@@ -5,13 +5,14 @@
 //#include <iostream>
 //#include <memory>
 #include "../Shared/ekrangl.h"
+#include "../Polecenie/obslugapolecen.h"
 using namespace std;
 using namespace Gtk;
 
 using ptr_vfff = void(*)(float,float,float);
 using ptr_vfp = void(*)(const float*);
 
-class Renderowanie
+class Renderowanie : public ObslugaPolecen
 {
   public:
     Renderowanie();

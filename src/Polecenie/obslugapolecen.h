@@ -5,27 +5,39 @@
 #include <iostream>
 #include <memory>
 #include "../Shared/transformowalne.h"
+#include "../Shared/donarysowania.h"
 #include "kolejkapolecen.h"
 
 using namespace std;
 //using namespace Gtk;
 
+class ZarzadzanieItfc
+{
+public:
+    virtual void WyslijPoleceniePrzerysuj() {};
+    virtual spTransformowalne DoTransformacji() {};
+    virtual void PowiadomionyOzakonczeniuTransformacji(){};
+    bool doTransformacjiUsed = false;
+};
 
-class ObslugaPolecen
+class RenderowanieItfc
+{
+public:
+    virtual void FunPrzerysuj(spDoNarysowania ){};
+    bool przerysujDostaloDoNarysowania = false;
+};
+
+
+
+class ObslugaPolecen : public ZarzadzanieItfc, public RenderowanieItfc
 {
     bool run = true;
 public:
     ObslugaPolecen();
     virtual ~ObslugaPolecen(){};
-    virtual spTransformowalne DoTransformacji() = 0;
-    virtual void PowiadomionyOzakonczeniuTransformacji() = 0;
-    virtual void WyslijPoleceniePrzerysuj() {};
     spKolejkaPolecen getKolejkaPolecen() {return kolejka;};
     void Run();
     void StopRun();
-    
-    bool doTransformacjiUsed = false;
-	
 protected:
     spKolejkaPolecen kolejka;
     int protLicznikRun = 0;

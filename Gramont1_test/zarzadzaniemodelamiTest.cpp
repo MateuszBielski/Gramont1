@@ -5,39 +5,40 @@
 #include "../src/Polecenie/obrot.h"
 
 
-TEST(ZarzadzanieModelami,LicznikTransformacjiDoPrzerysowania)
+TEST(ZarzadzanieModelami,LicznikTransformacjiDoAkumulowania)
 {
     ZarzadzanieModelami zarzadzanie;
-    zarzadzanie.PrzerysujPoTyluTransformacjach(11);
+    zarzadzanie.LiczbaTransformacjiDoAkumulowania(11);
     for(short i = 0 ; i < 10 ; ++i)zarzadzanie.PowiadomionyOzakonczeniuTransformacji();
-    ASSERT_EQ(10,zarzadzanie.LicznikTransformacjiDoPrzerysowania());
+    ASSERT_EQ(10,zarzadzanie.LicznikTransformacjiAkumulowanych());
 }
-
-TEST(ZarzadzanieModelami,PoleceniePrzerysujDomyslniePoJednejTransformacji)
+/*poniższe nie znajdują uzasadnienia przed dopracowaniem wyzwalacza renderowania
+TEST(ZarzadzanieModelami,AkumulujeDomyslnieJednaTransformacje)
 {
     ZarzadzanieModelami zarzadzanie;
-    auto kolejka(make_shared<KolejkaPolecen>());
-    zarzadzanie.NadawanieDoRenderowania(kolejka);
+//    auto kolejka(make_shared<KolejkaPolecen>());
+//    zarzadzanie.NadawanieDoRenderowania(kolejka);
     zarzadzanie.PowiadomionyOzakonczeniuTransformacji();
     ASSERT_EQ(1,kolejka->size());
 }
 
-TEST(ZarzadzanieModelami,PoleceniePrzerysujPoOkreslonejLiczbieTransformacji)
+TEST(ZarzadzanieModelami,PowiadomienieOzakumulowaniuTransformacji)
 {
     ZarzadzanieModelami zarzadzanie;
     auto kolejka(make_shared<KolejkaPolecen>());
     zarzadzanie.NadawanieDoRenderowania(kolejka);
-    zarzadzanie.PrzerysujPoTyluTransformacjach(6);
+    zarzadzanie.LiczbaTransformacjiDoAkumulowania(6);
     for(short i = 0 ; i < 10 ; ++i)zarzadzanie.PowiadomionyOzakonczeniuTransformacji();
     ASSERT_EQ(1,kolejka->size());
 }
+ * */
 
 TEST(ZarzadzanieModelami,ZerowanieLicznikaTransformacjiDoPrzerysowania)
 {
     ZarzadzanieModelami zarzadzanie;
-    zarzadzanie.PrzerysujPoTyluTransformacjach(6);
+    zarzadzanie.LiczbaTransformacjiDoAkumulowania(6);
     for(short i = 0 ; i < 9 ; ++i)zarzadzanie.PowiadomionyOzakonczeniuTransformacji();
-    ASSERT_EQ(3,zarzadzanie.LicznikTransformacjiDoPrzerysowania());
+    ASSERT_EQ(3,zarzadzanie.LicznikTransformacjiAkumulowanych());
 }
 TEST(ZarzadzanieModelami,WyslijPoleceniePrzerysuj_DodajeDoKolejki)
 {
@@ -72,7 +73,7 @@ TEST(ZarzadzanieModelami,PoWykonaniuObrotWstawiaPoleceniePrzerysuj)
     ASSERT_EQ(expect,result);
     
 }
-TEST(ZarzadzanieModelami,WstawiaPoleceniePrzerysujZawierajaceRysowalne)
+TEST(ZarzadzanieModelami,PoleceniePrzerysujZawierajaceRysowalne)
 {
     //Wstaw
 }

@@ -7,9 +7,11 @@
 #include "../src/Polecenie/kolejkapolecen.h"
 #include "../src/Process/obslugasygnalow.h"
 #include "../src/Polecenie/obrot.h"
+#include "../src/Polecenie/przerysuj.h"
 //#include "../src/Process/zarzadzaniemodelami.h"
 #include "zarzadzaniemodelamimock.h"
 #include "obslugapolecenmock.h"
+#include "renderowaniemock.h"
 
 
 
@@ -133,7 +135,11 @@ TEST(KolejkaPolecen,WykonanieKilkuPolecen)
     t.join();
     ASSERT_EQ(5,obslPolecen.licznikRun);
 }
-TEST(KolejkaPolecen,PoleceniePrzerysuj)
+TEST(KolejkaPolecen,PrzerysujUzywaRenderowanieFunPrzerysuj)
 {
-    
+    RenderowanieMock renderowanie;
+    Przerysuj przerysuj;
+    przerysuj.WykonajW(renderowanie);
+    ASSERT_TRUE(renderowanie.przerysujDostaloDoNarysowania);
 }
+

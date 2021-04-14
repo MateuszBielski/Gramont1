@@ -1,17 +1,7 @@
 #include "obrot.h"
 #include "../Shared/trackball.h"
-/*
-Obrot::Obrot()
-{
 
-}
 
-Obrot::~Obrot()
-{
-
-}
-
-*/
 Obrot::Obrot(RuchNaEkranie&& r)
 {
     ruch = move(r);

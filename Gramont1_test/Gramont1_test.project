@@ -26,6 +26,7 @@
     <File Name="obslugaSygnalowTest.cpp"/>
     <File Name="zarzadzaniemodelamiTest.cpp"/>
     <File Name="renderowanieTest.cpp"/>
+    <File Name="../src/Shared/donarysowania.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="testedClasses">
     <File Name="../src/Shared/kursor2d.cpp"/>
@@ -50,6 +51,8 @@
     <File Name="ekranglmock.cpp"/>
     <File Name="obslugapolecenmock.h"/>
     <File Name="obslugapolecenmock.cpp"/>
+    <File Name="renderowaniemock.h"/>
+    <File Name="renderowaniemock.cpp"/>
   </VirtualDirectory>
   <Settings Type="Executable">
     <GlobalSettings>

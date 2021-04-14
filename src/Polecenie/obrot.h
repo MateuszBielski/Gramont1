@@ -15,8 +15,7 @@ class Obrot : public Transformacja
 public:
    Obrot(){};
    Obrot(RuchNaEkranie&& );
-    virtual
-    void WykonajW(ObslugaPolecen& ) override;
+   virtual void WykonajW(ObslugaPolecen& ) override;
 
 
 
