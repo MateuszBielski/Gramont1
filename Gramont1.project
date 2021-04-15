@@ -45,7 +45,6 @@
       <File Name="src/Process/renderowanie.cpp"/>
       <File Name="src/Process/watki.h"/>
       <File Name="src/Process/watki.cpp"/>
-      <File Name="src/Process/zarzadzaniemodelami.cpp"/>
       <File Name="src/Process/zarzadzaniemodelami.h"/>
     </VirtualDirectory>
     <File Name="src/main.cpp"/>
@@ -152,5 +151,9 @@
       </Completion>
     </Configuration>
   </Settings>
-  <VirtualDirectory Name="lib"/>
+  <VirtualDirectory Name="lib">
+    <File Name="lib/path.txt"/>
+  </VirtualDirectory>
+  <Dependencies Name="Debug"/>
+  <Dependencies Name="Release"/>
 </CodeLite_Project>

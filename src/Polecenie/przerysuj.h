@@ -16,8 +16,10 @@ using namespace std;
 
 class Przerysuj : public Polecenie
 {
-  public:
+    spDoNarysowania doNarysowania = nullptr;
+public:
     Przerysuj(){};
+    Przerysuj(spDoNarysowania rys):doNarysowania(rys){};
     virtual ~Przerysuj();
     virtual void WykonajW(ObslugaPolecen& ) override ;
 	

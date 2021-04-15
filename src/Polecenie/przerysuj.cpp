@@ -10,5 +10,5 @@ Przerysuj::~Przerysuj()
 void Przerysuj::WykonajW(ObslugaPolecen& obs)
 {	
 	
-    obs.FunPrzerysuj(make_shared<DoNarysowania>());
+    obs.FunPrzerysuj(doNarysowania);
 }

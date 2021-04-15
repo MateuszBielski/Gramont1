@@ -34,7 +34,7 @@ class ObslugaSygnalow
     bool on_motion_notify_event(GdkEventMotion* );
 	
   protected:
-
+    
   private:
     
     

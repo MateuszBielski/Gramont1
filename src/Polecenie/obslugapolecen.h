@@ -41,6 +41,9 @@ public:
 protected:
     spKolejkaPolecen kolejka;
     int protLicznikRun = 0;
+    virtual void WykonajStan() {};
+    virtual void UstawStanNic() {};
+    
 private:
         
 };

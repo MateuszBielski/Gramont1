@@ -10,9 +10,11 @@ class RenderowanieMock : public Renderowanie
 {
 public:
     virtual void FunPrzerysuj(spDoNarysowania ) override;
+    spDoNarysowania DoNarysowania(){return doNarysowania;};
     protected:
 
-    private:
+private:
+    spDoNarysowania doNarysowania = nullptr;
         
 };
 

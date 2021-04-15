@@ -26,7 +26,6 @@
     <File Name="obslugaSygnalowTest.cpp"/>
     <File Name="zarzadzaniemodelamiTest.cpp"/>
     <File Name="renderowanieTest.cpp"/>
-    <File Name="../src/Shared/donarysowania.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="testedClasses">
     <File Name="../src/Shared/kursor2d.cpp"/>
@@ -42,6 +41,7 @@
     <File Name="../src/Polecenie/obslugapolecen.cpp"/>
     <File Name="../src/Polecenie/polecenie.cpp"/>
     <File Name="../src/Polecenie/przerysuj.cpp"/>
+    <File Name="../src/Shared/donarysowania.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="helperClass">
     <File Name="../src/Shared/trackball.cpp"/>
@@ -53,6 +53,8 @@
     <File Name="obslugapolecenmock.cpp"/>
     <File Name="renderowaniemock.h"/>
     <File Name="renderowaniemock.cpp"/>
+    <File Name="donarysowaniamock.h"/>
+    <File Name="donarysowaniamock.cpp"/>
   </VirtualDirectory>
   <Settings Type="Executable">
     <GlobalSettings>

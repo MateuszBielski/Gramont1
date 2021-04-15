@@ -1,7 +1,9 @@
 #include "renderowaniemock.h"
 
 
-void RenderowanieMock::FunPrzerysuj(spDoNarysowania doNarysowania)
+void RenderowanieMock::FunPrzerysuj(spDoNarysowania rys)
 {
-	if(doNarysowania)przerysujDostaloDoNarysowania = true;
+	if(!rys)return;
+    przerysujDostaloDoNarysowania = true;
+    doNarysowania = rys;
 }

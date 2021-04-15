@@ -1,7 +1,11 @@
 #include "zarzadzaniemodelami.h"
 #include "../Polecenie/przerysuj.h"
+#include <functional>
 
-
+ZarzadzanieModelami::ZarzadzanieModelami()
+{
+    Stan = &ZarzadzanieModelami::Nic;
+}
 void ZarzadzanieModelami::DoTransformacji(spTransformowalne tr)
 {
 	doTrasformacji = tr;
@@ -26,5 +30,17 @@ void ZarzadzanieModelami::LiczbaTransformacjiDoAkumulowania(int k)
 }
 void ZarzadzanieModelami::WyslijPoleceniePrzerysuj()
 {
-    if(kolejkaRenderowania)kolejkaRenderowania->push(make_unique<Przerysuj>());
+    if(kolejkaRenderowania)kolejkaRenderowania->push(make_unique<Przerysuj>(doNarysowania));
+}
+void ZarzadzanieModelami::DoNarysowania(spDoNarysowania rys)
+{
+	doNarysowania = rys;
+}
+void ZarzadzanieModelami::WysylaniePrzerysujPoTransformacji()
+{
+    Stan = &ZarzadzanieModelami::WyslijPoleceniePrzerysuj;
+}
+void ZarzadzanieModelami::UstawStanNic()
+{
+	Stan = &ZarzadzanieModelami::Nic;
 }

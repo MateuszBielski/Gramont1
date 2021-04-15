@@ -18,26 +18,3 @@ int main(int argc, char **argv)
 
 
 
-
-
-
-
-
-
-/*
-TEST(Transformacja,ZmianaNaKlaseRysowalnePoTransformacji)
-{
-    spRysowalne trojkat = make_shared<ProstyTrojkat>();
-       
-    Transformacja transformacja;
-    transformacja.UstawDoTransformacji(trojkat);
-    transformacja.UsunZtransformacji();
-    
-    ASSERT_EQ("rysowalne",trojkat->NazwaKlasyDlaTestu());
-}
-
- * */
-//ierzchołków
-
-
-

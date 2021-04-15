@@ -18,7 +18,7 @@
 //https://github.com/anthonywilliams/ccia_code_samples/blob/main/listings/listing_6.2.cpp - threadsafe_queue
 //https://github.com/anthonywilliams/ccia_code_samples/blob/main/listings/listing_11.1.cpp testowanie jak wyżej
 
-TEST(KolejkaPolecen,DodanieIzabraniePoleceniaWjednymCzasie)
+TEST(PolecenieTest,DodanieIzabraniePoleceniaWjednymCzasie)
 {
     KolejkaPolecen q;
 
@@ -65,7 +65,7 @@ TEST(KolejkaPolecen,DodanieIzabraniePoleceniaWjednymCzasie)
         throw;
     }
 }
-TEST(KolejkaPolecen,DodanieIzabraniePoleceniaWjednymCzasieKonwersjaTypu)
+TEST(PolecenieTest,DodanieIzabraniePoleceniaWjednymCzasieKonwersjaTypu)
 {
     KolejkaPolecen q;
 
@@ -113,7 +113,7 @@ TEST(KolejkaPolecen,DodanieIzabraniePoleceniaWjednymCzasieKonwersjaTypu)
     }
 }
 
-TEST(KolejkaPolecen,PolecenieKoniecZatrzymujeRun)
+TEST(PolecenieTest,PolecenieKoniecZatrzymujeRun)
 {
     ObslugaPolecenMock obslPolecen;
     
@@ -124,7 +124,7 @@ TEST(KolejkaPolecen,PolecenieKoniecZatrzymujeRun)
     ASSERT_EQ(1,obslPolecen.licznikRun);
 }
 
-TEST(KolejkaPolecen,WykonanieKilkuPolecen)
+TEST(PolecenieTest,WykonanieKilkuPolecen)
 {
     ObslugaPolecenMock obslPolecen;
     
@@ -135,10 +135,10 @@ TEST(KolejkaPolecen,WykonanieKilkuPolecen)
     t.join();
     ASSERT_EQ(5,obslPolecen.licznikRun);
 }
-TEST(KolejkaPolecen,PrzerysujUzywaRenderowanieFunPrzerysuj)
+TEST(PolecenieTest,PrzerysujUzywaRenderowanieFunPrzerysuj)
 {
     RenderowanieMock renderowanie;
-    Przerysuj przerysuj;
+    Przerysuj przerysuj(make_shared<DoNarysowania>());
     przerysuj.WykonajW(renderowanie);
     ASSERT_TRUE(renderowanie.przerysujDostaloDoNarysowania);
 }
