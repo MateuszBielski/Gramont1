@@ -4,7 +4,8 @@
 
 ZarzadzanieModelami::ZarzadzanieModelami()
 {
-    Stan = &ZarzadzanieModelami::Nic;
+//    Stan = &ZarzadzanieModelami::Nic;
+    Stan = &ObslugaPolecen::Nic;
 }
 void ZarzadzanieModelami::DoTransformacji(spTransformowalne tr)
 {
@@ -42,5 +43,5 @@ void ZarzadzanieModelami::WysylaniePrzerysujPoTransformacji()
 }
 void ZarzadzanieModelami::UstawStanNic()
 {
-	Stan = &ZarzadzanieModelami::Nic;
+	Stan = &ObslugaPolecen::Nic;
 }

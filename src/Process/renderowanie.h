@@ -19,6 +19,7 @@ class Renderowanie : public ObslugaPolecen
     virtual ~Renderowanie();
     void UstawEkran(spEkranGL);
     void ZarejestrujBezKontekstuRysujWlasnaWkontekscie();
+    virtual void FunPrzerysuj(spDoNarysowania ) override;
 protected:
 
 private:

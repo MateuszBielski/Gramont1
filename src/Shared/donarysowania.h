@@ -1,19 +1,21 @@
 #ifndef DoNarysowania_H
 #define DoNarysowania_H
-#include <gtkmm.h>
-#include <gtkglmm.h>
+//#include <gtkmm.h>
+//#include <gtkglmm.h>
 #include <iostream>
 #include <memory>
+#include "transformowalne.h"
 
 using namespace std;
-using namespace Gtk;
+//using namespace Gtk;
 
 
-class DoNarysowania
+class DoNarysowania : public Transformowalne
 {
   public:
     DoNarysowania();
     virtual ~DoNarysowania();
+    
 	
 protected:
 

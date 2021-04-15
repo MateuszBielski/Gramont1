@@ -11,8 +11,9 @@ class DoNarysowaniaMock : public DoNarysowania
 public:
     DoNarysowaniaMock() = default;
     DoNarysowaniaMock(int i):id(i){};
-//    virtual ~DoNarysowaniaMock(){};
+    virtual float* MacierzObrotu() override;
     int id = 0;
+    bool macierzObrotuIsUsed = false;
    
     protected:
 

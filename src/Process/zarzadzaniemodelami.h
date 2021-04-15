@@ -17,20 +17,21 @@ class ZarzadzanieModelami : public ObslugaPolecen
 {
     spTransformowalne doTrasformacji = nullptr;
     spDoNarysowania doNarysowania = nullptr;
-    int licznikTransformacjiDoPrzerysowania = 0;
     spKolejkaPolecen kolejkaRenderowania = nullptr;
+    int licznikTransformacjiDoPrzerysowania = 0;
     int przerysujPoTyluTransformacjach = 1;
   public:
     ZarzadzanieModelami();
     virtual ~ZarzadzanieModelami(){};
 	virtual spTransformowalne DoTransformacji() override {return doTrasformacji;};
     virtual void PowiadomionyOzakonczeniuTransformacji() override;
+    virtual void WyslijPoleceniePrzerysuj() override ;
+    virtual void UstawStanNic() override;
+    
     int LicznikTransformacjiAkumulowanych();
     void NadawanieDoRenderowania(spKolejkaPolecen);
     void LiczbaTransformacjiDoAkumulowania(int);
-    virtual void WyslijPoleceniePrzerysuj() override ;
     void WysylaniePrzerysujPoTransformacji();
-    virtual void UstawStanNic() override;
     
     void DoTransformacji(spTransformowalne );
     void DoNarysowania(spDoNarysowania);
@@ -40,7 +41,6 @@ protected:
     virtual void WykonajStan() override {(this->*Stan)();};
 private:
     void (ZarzadzanieModelami::*Stan)();
-    void Nic(){};
         
 };
 using spZarzadzanieModelami = shared_ptr<ZarzadzanieModelami>;

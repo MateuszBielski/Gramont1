@@ -38,6 +38,7 @@ public:
     spKolejkaPolecen getKolejkaPolecen() {return kolejka;};
     void Run();
     void StopRun();
+    void Nic(){};
 protected:
     spKolejkaPolecen kolejka;
     int protLicznikRun = 0;

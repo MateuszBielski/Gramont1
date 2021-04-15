@@ -23,7 +23,7 @@ class Transformowalne
     void QuatDiff(float* );
     float* Quat();
     void    Quat(float* );
-    float* MacierzObrotu();
+    virtual float* MacierzObrotu();
     pf4 ppMacierzObrotu();
     
     void MacierzObrotu(float*);

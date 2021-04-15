@@ -69,4 +69,7 @@ void Renderowanie::RysujScene()
     glCallList(listid);
 //    cout<<"glGetError "<<glGetError();
 }
-
+void Renderowanie::FunPrzerysuj(spDoNarysowania rys)
+{	
+	rys->MacierzObrotu();
+}
