@@ -71,5 +71,16 @@ void Renderowanie::RysujScene()
 }
 void Renderowanie::FunPrzerysuj(spDoNarysowania rys)
 {	
-	rys->MacierzObrotu();
+    listid = glGenLists( 1 ); 
+    glNewList( listid, GL_COMPILE );
+    p_glTranslatef(0.0,0.0,-10.0);
+    glMultMatrixf(rys->MacierzObrotu());
+    glBegin(GL_TRIANGLES);
+    p_glVertex3fv(x);
+    p_glVertex3fv(y);
+    p_glVertex3fv(z);
+
+    glEnd();
+    glEndList();
+    if(ekranGL)ekranGL->WykonajWkontekscieGL(&Renderowanie::RysujScene,*this);
 }

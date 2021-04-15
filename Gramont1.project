@@ -46,6 +46,7 @@
       <File Name="src/Process/watki.h"/>
       <File Name="src/Process/watki.cpp"/>
       <File Name="src/Process/zarzadzaniemodelami.h"/>
+      <File Name="src/Process/zarzadzaniemodelami.cpp"/>
     </VirtualDirectory>
     <File Name="src/main.cpp"/>
     <VirtualDirectory Name="Polecenie">

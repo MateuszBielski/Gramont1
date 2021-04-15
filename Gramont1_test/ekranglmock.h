@@ -9,7 +9,8 @@ using namespace std;
 
 class EkranGLMock : public EkranGL
 {
-  public:
+public:
+    EkranGLMock() = default;
     EkranGLMock(int _w, int _h):w(_w),h(_h){};
     virtual ~EkranGLMock();
     int get_width(){return w;};

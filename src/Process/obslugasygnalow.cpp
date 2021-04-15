@@ -30,7 +30,7 @@ bool ObslugaSygnalow::signal_button_press_event(GdkEventButton* e)
 {
 	if(renderowanie != nullptr)
     {
-        renderowanie->ZarejestrujBezKontekstuRysujWlasnaWkontekscie();
+//        renderowanie->ZarejestrujBezKontekstuRysujWlasnaWkontekscie();
     }
     kursor2D.PobierzPierwotnePolozenie(e->x,e->y);
 //    cout<<"\nXXXsignal_button_press_event "<<ekranGL->get_width()<<" "<<ekranGL->get_height();
