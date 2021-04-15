@@ -23,6 +23,9 @@ void ObslugaSygnalow::WlaczPolaczenia()
         ekranGL->set_events(Gdk::BUTTON1_MOTION_MASK|Gdk::BUTTON_PRESS_MASK|Gdk::SCROLL_MASK|Gdk::BUTTON2_MOTION_MASK|Gdk::BUTTON3_MOTION_MASK);//lub add_events
         ekranGL->signal_button_press_event().connect(sigc::mem_fun(*this,&ObslugaSygnalow::signal_button_press_event));
         ekranGL->signal_motion_notify_event().connect(sigc::mem_fun(*this,&ObslugaSygnalow::on_motion_notify_event));
+        auto okno = ekranGL->get_parent()->get_parent();
+        okno->signal_delete_event().connect(sigc::mem_fun(*this,&ObslugaSygnalow::on_delete_event));
+//        auto okno = *ekranGL->get_parent());
     }
     
 }
@@ -49,4 +52,10 @@ bool ObslugaSygnalow::on_motion_notify_event(GdkEventMotion* e)
 void ObslugaSygnalow::NadawanieDoZarzadzaniaObiektami(spKolejkaPolecen kolejka)
 {
 	nadawanieDoZarzadzaniaObiektami = kolejka;
+}
+bool ObslugaSygnalow::on_delete_event(GdkEventAny* any_event)
+{
+//    cout<<"\nzamykanie okna";
+    nadawanieDoZarzadzaniaObiektami->push(make_unique<PolecenieKoniec>());
+    return false;
 }

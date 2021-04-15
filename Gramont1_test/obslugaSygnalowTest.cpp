@@ -46,4 +46,19 @@ TEST(ObslugaSygnalow,RuchMyszyDajePolecenieZparmetramiRuchu)
     ASSERT_NE(ruch.p1x,ruch.p2x);
     ASSERT_NE(ruch.p1y,ruch.p2y);
 }
+TEST(ObslugaSygnalow,zamkniecieOknaWysylaPolecenieKoniec)
+{
+    ObslugaSygnalow sygnaly;
+    auto kolejka = make_shared<KolejkaPolecen>();
+    sygnaly.NadawanieDoZarzadzaniaObiektami(kolejka);
+    
+    GdkEventAny* event;
+    sygnaly.on_delete_event(event);
+    auto polecenie = kolejka->wait_and_pop();
+
+    string expect("15PolecenieKoniec");
+    string result(typeid(*polecenie).name());
+    
+    ASSERT_EQ(expect,result);
+}
 //czy po wykonaniu obsluga sygnałów::on_notify_event w kolejce jest polecenie zawierające ruch

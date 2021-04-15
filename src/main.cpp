@@ -31,12 +31,12 @@ int main(int argc, char **argv)
     obslugaSygnalow->NadawanieDoZarzadzaniaObiektami(zarzadzanie->getKolejkaPolecen());
     zarzadzanie->NadawanieDoRenderowania(renderowanie->getKolejkaPolecen());
     
-    thread t_zarzadzanie(&ZarzadzanieModelami::Run,zarzadzanie);
-    thread t_renderowanie(&Renderowanie::Run,renderowanie);
+//    thread t_zarzadzanie(&ZarzadzanieModelami::Run,zarzadzanie);
+//    thread t_renderowanie(&Renderowanie::Run,renderowanie);
     
     obslugaSygnalow->WlaczPolaczenia();
     app.run(*okno);
-    t_zarzadzanie.join();
-    t_renderowanie.join();
+//    t_zarzadzanie.join();
+//    t_renderowanie.join();
     return 0;
 }
