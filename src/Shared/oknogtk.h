@@ -10,7 +10,7 @@ using namespace std;
 using namespace Gtk;
 
 
-class OknoGtk : public Window
+class OknoGtk : public Gtk::Window
 {
   public:
     OknoGtk();

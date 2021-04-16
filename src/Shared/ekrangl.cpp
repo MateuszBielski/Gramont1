@@ -33,7 +33,7 @@ bool EkranGL::KonfiguracjaGL()
 }
 bool EkranGL::on_configure_event(GdkEventConfigure* e)
 {
-    cout<<"\nEkranGL::on_configure_event"<<endl;
+//    cout<<"\nEkranGL::on_configure_event"<<endl;
 //    GL::DrawingArea::on_configure_event(e);
     szerokosc = get_width(), wysokosc = get_height();
 	auto gldrawable = get_gl_drawable();
@@ -59,7 +59,7 @@ bool EkranGL::on_configure_event(GdkEventConfigure* e)
 }
 bool EkranGL::on_expose_event(GdkEventExpose* event)
 {
-    cout<<"\nEkranGL::on_expose_event"<<endl;
+//    cout<<"\nEkranGL::on_expose_event"<<endl;
 //    GL::DrawingArea::on_expose_event(event);
     auto gldrawable = get_gl_drawable();
     if (!gldrawable->gl_begin(get_gl_context()))
@@ -105,7 +105,7 @@ void EkranGL::UstawienieSceny()
 
     glMatrixMode(GL_MODELVIEW);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    cout<<"\nRenderGL::UstawienieSceny() koniec"<<endl;
+//    cout<<"\nRenderGL::UstawienieSceny() koniec"<<endl;
 }
 void EkranGL::UstawienieOswietlenia()
 {

@@ -62,7 +62,7 @@ bool EkranGL::WykonajWkontekscieGL(void (T::*Func)(),T& obj_ref)
 //      cout<<"\nglFlush()";
     }
     gldrawable->gl_end();
-    cout<<"\nWykonajWkontekscieGL koniec"<<endl;
+//    cout<<"\nWykonajWkontekscieGL koniec"<<endl;
 	return true;
 }
 
