@@ -19,7 +19,7 @@ int main(int argc, char **argv)
     Gtk::Main app(argc,argv);
     GL::init(argc, argv);
 
-//    które z tych jest częściej używane przez inne moduły?
+//    które z tych jest częściej używane przez inne moduły? ekran
     OknoGtk okno(800,600);
     spEkranGL ekran = make_shared<EkranGL>();
     
@@ -30,18 +30,23 @@ int main(int argc, char **argv)
     okno.ZamontujEkran(ekran);
 	obslugaSygnalow.ObslugujEkran(ekran);
     renderowanie.UstawEkran(ekran);
+    
     obslugaSygnalow.NadawanieDoZarzadzaniaObiektami(zarzadzanie.getKolejkaPolecen());
     obslugaSygnalow.NadawanieDoRenderowania(renderowanie.getKolejkaPolecen());
+    
     zarzadzanie.NadawanieDoRenderowania(renderowanie.getKolejkaPolecen());
     zarzadzanie.WysylaniePrzerysujPoTransformacji();
     zarzadzanie.DoNarysowaniaItransformacji(make_shared<DoNarysowania>());
+    
     obslugaSygnalow.WlaczPolaczenia();
     
-    thread t_zarzadzanie(&ZarzadzanieModelami::Run,&zarzadzanie);
-    thread t_renderowanie(&Renderowanie::Run,&renderowanie);
+    thread t_zarzadzanie(&ZarzadzanieModelami::Run,zarzadzanie);
+    thread t_renderowanie(&Renderowanie::Run,renderowanie);
+    thread t_app([&](){app.run(okno);});
     
-    app.run(okno);
+    
     t_zarzadzanie.join();
     t_renderowanie.join();
+    t_app.join();
     return 0;
 }
