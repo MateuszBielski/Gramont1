@@ -42,6 +42,7 @@ bool ObslugaSygnalow::signal_button_press_event(GdkEventButton* e)
 }
 bool ObslugaSygnalow::on_motion_notify_event(GdkEventMotion* e)
 {
+//    cout<<"\nObslugaSygnalow::on_motion_notify_event";
     upTransformacja transformacja;
     
     auto ruch = kursor2D.ObliczRuch(e->x,e->y);
@@ -53,9 +54,15 @@ void ObslugaSygnalow::NadawanieDoZarzadzaniaObiektami(spKolejkaPolecen kolejka)
 {
 	nadawanieDoZarzadzaniaObiektami = kolejka;
 }
+void ObslugaSygnalow::NadawanieDoRenderowania(spKolejkaPolecen k)
+{
+	nadawanieDoRenderowania = k;
+}
 bool ObslugaSygnalow::on_delete_event(GdkEventAny* any_event)
 {
 //    cout<<"\nzamykanie okna";
-    nadawanieDoZarzadzaniaObiektami->push(make_unique<PolecenieKoniec>());
+    if(nadawanieDoZarzadzaniaObiektami)nadawanieDoZarzadzaniaObiektami->push(make_unique<PolecenieKoniec>());
+    if(nadawanieDoRenderowania)nadawanieDoRenderowania->push(make_unique<PolecenieKoniec>());
     return false;
 }
+

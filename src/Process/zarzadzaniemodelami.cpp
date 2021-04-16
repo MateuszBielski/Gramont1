@@ -31,6 +31,7 @@ void ZarzadzanieModelami::LiczbaTransformacjiDoAkumulowania(int k)
 }
 void ZarzadzanieModelami::WyslijPoleceniePrzerysuj()
 {
+//    cout<<"\nZarzadzanieModelami::WyslijPoleceniePrzerysuj";
     if(kolejkaRenderowania)kolejkaRenderowania->push(make_unique<Przerysuj>(doNarysowania));
 }
 void ZarzadzanieModelami::DoNarysowania(spDoNarysowania rys)

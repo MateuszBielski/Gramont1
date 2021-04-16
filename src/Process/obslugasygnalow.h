@@ -21,6 +21,7 @@ class ObslugaSygnalow
     Kursor2D kursor2D;
 //    spTransformacjaItfc transformacja = nullptr;
     spKolejkaPolecen nadawanieDoZarzadzaniaObiektami = nullptr;
+    spKolejkaPolecen nadawanieDoRenderowania = nullptr;
   
   public:
     void ObslugujEkran(spEkranGL );
@@ -28,6 +29,7 @@ class ObslugaSygnalow
 //    void UstawTransformacje(spTransformacjaItfc );?
     void WlaczPolaczenia();
     void NadawanieDoZarzadzaniaObiektami(spKolejkaPolecen);
+    void NadawanieDoRenderowania(spKolejkaPolecen);
     
     
     bool signal_button_press_event(GdkEventButton* );

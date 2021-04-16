@@ -49,16 +49,21 @@ TEST(ObslugaSygnalow,RuchMyszyDajePolecenieZparmetramiRuchu)
 TEST(ObslugaSygnalow,zamkniecieOknaWysylaPolecenieKoniec)
 {
     ObslugaSygnalow sygnaly;
-    auto kolejka = make_shared<KolejkaPolecen>();
-    sygnaly.NadawanieDoZarzadzaniaObiektami(kolejka);
+    auto kolejkaZ = make_shared<KolejkaPolecen>();
+    auto kolejkaR = make_shared<KolejkaPolecen>();
+    sygnaly.NadawanieDoZarzadzaniaObiektami(kolejkaZ);
+    sygnaly.NadawanieDoRenderowania(kolejkaR);
     
     GdkEventAny* event;
     sygnaly.on_delete_event(event);
-    auto polecenie = kolejka->wait_and_pop();
+    auto polecenieZ = kolejkaZ->wait_and_pop();
+    auto polecenieR = kolejkaR->wait_and_pop();
 
     string expect("15PolecenieKoniec");
-    string result(typeid(*polecenie).name());
+    string resultZ(typeid(*polecenieZ).name());
+    string resultR(typeid(*polecenieR).name());
     
-    ASSERT_EQ(expect,result);
+    ASSERT_EQ(expect,resultZ);
+    ASSERT_EQ(expect,resultR);
 }
 //czy po wykonaniu obsluga sygnałów::on_notify_event w kolejce jest polecenie zawierające ruch

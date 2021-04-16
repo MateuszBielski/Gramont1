@@ -31,7 +31,7 @@ void Renderowanie::RejestrujListeGL()
     
         glEnd();
     glEndList();
-    cout<<"\nzarejestrowano listę o id "<<listid;
+//    cout<<"\nzarejestrowano listę o id "<<listid;
 }
 void Renderowanie::RejestrujListeGLJednorazowo()
 {

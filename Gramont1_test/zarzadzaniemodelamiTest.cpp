@@ -1,8 +1,12 @@
 #include <gtest/gtest.h>
 #include <GL/gl.h>
+#include <thread>
 #include "../src/Process/zarzadzaniemodelami.h"
+#include "../src/Process/obslugasygnalow.h"
 #include "../src/Polecenie/przerysuj.h"
 #include "../src/Polecenie/obrot.h"
+#include "../src/Shared/oknogtk.h"
+#include "../src/Shared/ruchnaekranie.h"
 #include "donarysowaniamock.h"
 #include "renderowaniemock.h"
 
@@ -120,7 +124,52 @@ TEST(ZarzadzanieModelami,StanWysylaniePrzeresujPoTransformacji)
     zarzadzanie.Run();
     ASSERT_EQ(1,kolejkaRenderowanie->size());
 }
-TEST(ZarzadzanieModelami,CoJestDoRysowaniaAcoDoTransformacji)
-{
+TEST(ZarzadzanieModelami,WdrugimWatkuOdbieraPoleceniaZobslugiSyganlow)
+{   
+    OknoGtk okno(200,200);
+    spEkranGL ekran = make_shared<EkranGL>();
     
+    ObslugaSygnalow sygnaly;
+    ZarzadzanieModelami zarzadzanie;
+    okno.ZamontujEkran(ekran);
+	sygnaly.ObslugujEkran(ekran);
+    auto kolejka = zarzadzanie.getKolejkaPolecen();
+    sygnaly.NadawanieDoZarzadzaniaObiektami(kolejka);
+    GdkEventButton event1;
+    event1.x = 100;event1.y = 100;
+    GdkEventMotion event2;
+    event2.x = 101;event2.y = 98;
+    GdkEventAny event3;
+    sygnaly.signal_button_press_event(&event1);
+    sygnaly.on_motion_notify_event(&event2);
+    sygnaly.on_delete_event(&event3);
+    ASSERT_EQ(2,kolejka->size());
+    thread t_zarzadzanie(&ZarzadzanieModelami::Run,&zarzadzanie);
+    
+    t_zarzadzanie.join();
+    ASSERT_EQ(0,kolejka->size());
+}
+TEST(ZarzadzanieModelami,WyslaneDoNarysowaniaNieJestPuste)
+{
+//    OknoGtk okno(200,200);
+//    spEkranGL ekran = make_shared<EkranGL>();
+    
+//    ObslugaSygnalow sygnaly;
+    ZarzadzanieModelami zarzadzanie;
+//    okno.ZamontujEkran(ekran);
+//	sygnaly.ObslugujEkran(ekran);
+    auto kolejkaZarz = zarzadzanie.getKolejkaPolecen();
+    RuchNaEkranie ruch;
+    ruch.p1x = 0;
+    ruch.p1y = 0;
+    ruch.p2x = 0.33;
+    ruch.p2y = -0.1;
+    kolejkaZarz->push(make_unique<Obrot>(move(ruch)));
+    kolejkaZarz->push(make_unique<PolecenieKoniec>());
+    
+    thread t_zarzadzanie(&ZarzadzanieModelami::Run,&zarzadzanie);
+//    thread t_renderowanie();
+    
+    t_zarzadzanie.join();
+    ASSERT_EQ(0,kolejkaZarz->size());
 }

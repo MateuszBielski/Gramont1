@@ -42,6 +42,7 @@
     <File Name="../src/Polecenie/polecenie.cpp"/>
     <File Name="../src/Polecenie/przerysuj.cpp"/>
     <File Name="../src/Shared/donarysowania.cpp"/>
+    <File Name="../src/Shared/oknogtk.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="helperClass">
     <File Name="../src/Shared/trackball.cpp"/>

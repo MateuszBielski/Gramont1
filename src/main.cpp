@@ -17,26 +17,27 @@ int main(int argc, char **argv)
     GL::init(argc, argv);
 
 //    które z tych jest częściej używane przez inne moduły?
-    spOknoGtk okno = make_shared<OknoGtk>(800,600);
+    OknoGtk okno(800,600);
     spEkranGL ekran = make_shared<EkranGL>();
 //    spTransformacjaItfc transformacja = make_shared<TransformacjaItfc>();
     
-    spObslugaSygnalow obslugaSygnalow = make_shared<ObslugaSygnalow>();
-    spRenderowanie renderowanie = make_shared<Renderowanie>();
-    spZarzadzanieModelami zarzadzanie = make_shared<ZarzadzanieModelami>(); 
+    ObslugaSygnalow obslugaSygnalow;
+    Renderowanie renderowanie;
+    ZarzadzanieModelami zarzadzanie; 
     
-    okno->ZamontujEkran(ekran);
-	obslugaSygnalow->ObslugujEkran(ekran);
-    renderowanie->UstawEkran(ekran);
-    obslugaSygnalow->NadawanieDoZarzadzaniaObiektami(zarzadzanie->getKolejkaPolecen());
-    zarzadzanie->NadawanieDoRenderowania(renderowanie->getKolejkaPolecen());
+    okno.ZamontujEkran(ekran);
+	obslugaSygnalow.ObslugujEkran(ekran);
+    renderowanie.UstawEkran(ekran);
+    obslugaSygnalow.NadawanieDoZarzadzaniaObiektami(zarzadzanie.getKolejkaPolecen());
+    zarzadzanie.NadawanieDoRenderowania(renderowanie.getKolejkaPolecen());
+    zarzadzanie.WysylaniePrzerysujPoTransformacji();
     
-//    thread t_zarzadzanie(&ZarzadzanieModelami::Run,zarzadzanie);
-//    thread t_renderowanie(&Renderowanie::Run,renderowanie);
+    thread t_zarzadzanie(&ZarzadzanieModelami::Run,&zarzadzanie);
+    thread t_renderowanie(&Renderowanie::Run,&renderowanie);
     
-    obslugaSygnalow->WlaczPolaczenia();
-    app.run(*okno);
-//    t_zarzadzanie.join();
-//    t_renderowanie.join();
+    obslugaSygnalow.WlaczPolaczenia();
+    app.run(okno);
+    t_zarzadzanie.join();
+    t_renderowanie.join();
     return 0;
 }
