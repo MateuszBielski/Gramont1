@@ -38,6 +38,11 @@ void ZarzadzanieModelami::DoNarysowania(spDoNarysowania rys)
 {
 	doNarysowania = rys;
 }
+void ZarzadzanieModelami::DoNarysowaniaItransformacji(spDoNarysowania r)
+{
+    doNarysowania = r;
+    doTrasformacji = r;
+}
 void ZarzadzanieModelami::WysylaniePrzerysujPoTransformacji()
 {
     Stan = &ZarzadzanieModelami::WyslijPoleceniePrzerysuj;
@@ -46,3 +51,4 @@ void ZarzadzanieModelami::UstawStanNic()
 {
 	Stan = &ObslugaPolecen::Nic;
 }
+

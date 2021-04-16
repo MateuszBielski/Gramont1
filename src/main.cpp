@@ -29,6 +29,7 @@ int main(int argc, char **argv)
 	obslugaSygnalow.ObslugujEkran(ekran);
     renderowanie.UstawEkran(ekran);
     obslugaSygnalow.NadawanieDoZarzadzaniaObiektami(zarzadzanie.getKolejkaPolecen());
+    obslugaSygnalow.NadawanieDoRenderowania(renderowanie.getKolejkaPolecen());
     zarzadzanie.NadawanieDoRenderowania(renderowanie.getKolejkaPolecen());
     zarzadzanie.WysylaniePrzerysujPoTransformacji();
     

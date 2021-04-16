@@ -35,6 +35,7 @@ class ZarzadzanieModelami : public ObslugaPolecen
     
     void DoTransformacji(spTransformowalne );
     void DoNarysowania(spDoNarysowania);
+    void DoNarysowaniaItransformacji(spDoNarysowania);
     
     
 protected:

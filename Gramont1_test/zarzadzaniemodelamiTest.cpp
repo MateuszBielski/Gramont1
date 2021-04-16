@@ -149,27 +149,42 @@ TEST(ZarzadzanieModelami,WdrugimWatkuOdbieraPoleceniaZobslugiSyganlow)
     t_zarzadzanie.join();
     ASSERT_EQ(0,kolejka->size());
 }
+TEST(ZarzadzanieModelami,DoNarysowaniaItransformacji)
+{
+    ZarzadzanieModelami zarzadzanie;
+    auto doNarysowania = make_shared<DoNarysowania>();
+    zarzadzanie.DoNarysowaniaItransformacji(doNarysowania);
+//    ASSERT_EQ(doNarysowania.get(),zarzadzanie.DoNarysowania().get());
+    ASSERT_EQ(doNarysowania.get(),zarzadzanie.DoTransformacji().get());
+}
 TEST(ZarzadzanieModelami,WyslaneDoNarysowaniaNieJestPuste)
 {
-//    OknoGtk okno(200,200);
-//    spEkranGL ekran = make_shared<EkranGL>();
-    
-//    ObslugaSygnalow sygnaly;
     ZarzadzanieModelami zarzadzanie;
-//    okno.ZamontujEkran(ekran);
-//	sygnaly.ObslugujEkran(ekran);
+    RenderowanieMock renderowanie;
+    zarzadzanie.DoNarysowaniaItransformacji(make_shared<DoNarysowania>());
+    zarzadzanie.WysylaniePrzerysujPoTransformacji();
+    
     auto kolejkaZarz = zarzadzanie.getKolejkaPolecen();
+    auto kolejkaRend = renderowanie.getKolejkaPolecen();
+    zarzadzanie.NadawanieDoRenderowania(kolejkaRend);
+    
+    thread t_zarzadzanie(&ZarzadzanieModelami::Run,&zarzadzanie);
+    thread t_renderowanie(&Renderowanie::Run,&renderowanie);
+    
     RuchNaEkranie ruch;
     ruch.p1x = 0;
     ruch.p1y = 0;
     ruch.p2x = 0.33;
     ruch.p2y = -0.1;
     kolejkaZarz->push(make_unique<Obrot>(move(ruch)));
+    
+    
     kolejkaZarz->push(make_unique<PolecenieKoniec>());
-    
-    thread t_zarzadzanie(&ZarzadzanieModelami::Run,&zarzadzanie);
-//    thread t_renderowanie();
-    
     t_zarzadzanie.join();
-    ASSERT_EQ(0,kolejkaZarz->size());
+    
+    //Najpierw musi pierwszy wątek się skończyć, bo drugi zakończy się za nim zdąży od niego odebrać polecenia przerysuj. 
+    kolejkaRend->push(make_unique<PolecenieKoniec>());
+    t_renderowanie.join();
+    
+    ASSERT_TRUE(renderowanie.przerysujDostaloDoNarysowania);
 }
