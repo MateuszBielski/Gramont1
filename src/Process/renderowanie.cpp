@@ -43,14 +43,16 @@ void Renderowanie::UstawEkran(spEkranGL e)
 }
 void Renderowanie::RysujScene()
 {
+    float a[] = {1.0,1.5,0.5};
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glLoadIdentity(); 
     p_glTranslatef(0.0,0.0,-10.0);
     glMultMatrixf(doNarysowania->MacierzObrotu());
-    glBegin(GL_TRIANGLES);
+    glBegin(GL_TRIANGLE_STRIP);
     p_glVertex3fv(x);
     p_glVertex3fv(y);
     p_glVertex3fv(z);
+    p_glVertex3fv(a);
 
     glEnd();
 //    glCallList(listid);

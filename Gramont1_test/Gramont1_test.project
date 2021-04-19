@@ -26,6 +26,7 @@
     <File Name="obslugaSygnalowTest.cpp"/>
     <File Name="zarzadzaniemodelamiTest.cpp"/>
     <File Name="renderowanieTest.cpp"/>
+    <File Name="donarysowaniatest.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="testedClasses">
     <File Name="../src/Shared/kursor2d.cpp"/>
@@ -43,6 +44,8 @@
     <File Name="../src/Polecenie/przerysuj.cpp"/>
     <File Name="../src/Shared/donarysowania.cpp"/>
     <File Name="../src/Shared/oknogtk.cpp"/>
+    <File Name="../src/Shared/szescian.cpp"/>
+    <File Name="../src/Shared/prostytrojkat.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="helperClass">
     <File Name="../src/Shared/trackball.cpp"/>
