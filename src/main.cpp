@@ -40,8 +40,8 @@ int main(int argc, char **argv)
     
     obslugaSygnalow.WlaczPolaczenia();
     
-    thread t_zarzadzanie(&ZarzadzanieModelami::Run,zarzadzanie);
-    thread t_renderowanie(&Renderowanie::Run,renderowanie);
+    thread t_zarzadzanie(&ZarzadzanieModelami::Run,&zarzadzanie);
+    thread t_renderowanie(&Renderowanie::Run,&renderowanie);//musi być adres, bo inaczej następuje kopiowanie i każdy wątek operuje na innym obiekcie renderowanie
     thread t_app([&](){app.run(okno);});
     
     

@@ -1,9 +1,6 @@
 #ifndef Renderowanie_H
 #define Renderowanie_H
-//#include <gtkmm.h>
 #include <gtkglmm.h>
-//#include <iostream>
-//#include <memory>
 #include "../Shared/ekrangl.h"
 #include "../Polecenie/obslugapolecen.h"
 using namespace std;
@@ -14,27 +11,27 @@ using ptr_vfp = void(*)(const float*);
 
 class Renderowanie : public ObslugaPolecen
 {
-  public:
+    spEkranGL ekranGL = nullptr;
+    spDoNarysowania doNarysowania;
+public:
     Renderowanie();
     virtual ~Renderowanie();
     void UstawEkran(spEkranGL);
-    void ZarejestrujBezKontekstuRysujWlasnaWkontekscie();
     virtual void FunPrzerysuj(spDoNarysowania ) override;
+    void RysujScene();
+    void ustawDoNarysowania(spDoNarysowania);
 protected:
 
 private:
     void PrzypiszFunkcjeGLdoWskaznikow();
     void RejestrujListeGL();
-    void RejestrujListeGLJednorazowo();
-    void RysujScene();
     
     
-    spEkranGL ekranGL = nullptr;
+    
     ptr_vfff p_glTranslatef = nullptr, p_glVertex3f = nullptr;
     ptr_vfp p_glVertex3fv = nullptr;
     GLuint listid;
     float x[3], y[3], z[3];
-    bool listaZarejestrowana = false;
     
         
 };

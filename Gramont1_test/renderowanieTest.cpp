@@ -4,13 +4,15 @@
 #include "../src/Process/renderowanie.h"
 #include "../src/Process/obslugasygnalow.h"
 #include "donarysowaniamock.h"
+#include "ekranglmock.h"
 
-TEST(RenderowanieTest,FunPrzerysujUzywaMacierzObrotu)
+TEST(RenderowanieTest,FunRysujSceneUzywaMacierzObrotu)
 {
     Renderowanie rend;
     
     auto rys(make_shared<DoNarysowaniaMock>());
-    rend.FunPrzerysuj(rys);
+    rend.ustawDoNarysowania(rys);
+    rend.RysujScene();
     ASSERT_TRUE(rys->macierzObrotuIsUsed);
 }
 

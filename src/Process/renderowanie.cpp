@@ -1,9 +1,8 @@
 #include "renderowanie.h"
 
-Renderowanie::Renderowanie():x{-1.0,0.0,0.0},y{1.0,0.0,0.0},z{0.0,1.0,0.0}
+Renderowanie::Renderowanie():doNarysowania(make_shared<DoNarysowania>()),x{-1.0,0.0,0.0},y{1.0,0.0,0.0},z{0.0,1.0,0.0}
 {
     PrzypiszFunkcjeGLdoWskaznikow();
-    RejestrujListeGL();
 }
 
 Renderowanie::~Renderowanie()
@@ -33,54 +32,36 @@ void Renderowanie::RejestrujListeGL()
     glEndList();
 //    cout<<"\nzarejestrowano listę o id "<<listid;
 }
-void Renderowanie::RejestrujListeGLJednorazowo()
-{
-	if(listaZarejestrowana)return;
-    RejestrujListeGL();
-    listaZarejestrowana = true;
-}
+
 void Renderowanie::UstawEkran(spEkranGL e)
 {	
 	ekranGL = e;
     e->listid = &listid;
-//    e->
     e->RysujScene = [this](){
-        RejestrujListeGLJednorazowo();
         RysujScene();
         };
 }
-
-void Renderowanie::ZarejestrujBezKontekstuRysujWlasnaWkontekscie()
-{
-//	cout<<"\nRenderowanie::ZarejestrujBezKontekstuRysujWlasnaWkontekscie";
-//    RejestrujListeGLJednorazowo();
-    RejestrujListeGL();
-    ekranGL->WykonajWkontekscieGL(&Renderowanie::RysujScene,*this);
-    x[1] += 0.1;
-    for(int i = 0 ;i < 3 ;i++) cout<<x[i]<<" ";
-}
- 
 void Renderowanie::RysujScene()
 {
-//	cout<<"\nRenderowanie::RysujScene";
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    glLoadIdentity();
-//    cout<<"\nwywołanie listy o id "<<listid;
-    glCallList(listid);
-//    cout<<"glGetError "<<glGetError();
-}
-void Renderowanie::FunPrzerysuj(spDoNarysowania rys)
-{	
-    listid = glGenLists( 1 ); 
-    glNewList( listid, GL_COMPILE );
+    glLoadIdentity(); 
     p_glTranslatef(0.0,0.0,-10.0);
-    glMultMatrixf(rys->MacierzObrotu());
+    glMultMatrixf(doNarysowania->MacierzObrotu());
     glBegin(GL_TRIANGLES);
     p_glVertex3fv(x);
     p_glVertex3fv(y);
     p_glVertex3fv(z);
 
     glEnd();
-    glEndList();
+//    glCallList(listid);
+}
+
+void Renderowanie::FunPrzerysuj(spDoNarysowania rys)
+{	
+    doNarysowania = rys;
     if(ekranGL)ekranGL->WykonajWkontekscieGL(&Renderowanie::RysujScene,*this);
+}
+void Renderowanie::ustawDoNarysowania(spDoNarysowania rys)
+{
+	doNarysowania = rys;
 }
