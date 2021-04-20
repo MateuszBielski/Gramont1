@@ -1,6 +1,6 @@
 #include "renderowanie.h"
 
-Renderowanie::Renderowanie():doNarysowania(make_shared<DoNarysowania>()),x{-1.0,0.0,0.0},y{1.0,0.0,0.0},z{0.0,1.0,0.0}
+Renderowanie::Renderowanie():doNarysowania(make_shared<DoNarysowania>()),x{-1.0,0.0,0.0},y{0.5,0.0,0.0},z{0.0,1.0,0.0}
 {
     PrzypiszFunkcjeGLdoWskaznikow();
 }
@@ -48,12 +48,9 @@ void Renderowanie::RysujScene()
     glLoadIdentity(); 
     p_glTranslatef(0.0,0.0,-10.0);
     glMultMatrixf(doNarysowania->MacierzObrotu());
+    
     glBegin(GL_TRIANGLE_STRIP);
-    p_glVertex3fv(x);
-    p_glVertex3fv(y);
-    p_glVertex3fv(z);
-    p_glVertex3fv(a);
-
+        for(short i = 0 ; i < doNarysowania->ileVertexow; i++)p_glVertex3fv(&doNarysowania->wspolrzedneVrtx[doNarysowania->indeksyVertexow[i]*3]);
     glEnd();
 //    glCallList(listid);
 }

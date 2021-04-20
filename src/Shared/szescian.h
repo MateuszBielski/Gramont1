@@ -18,6 +18,7 @@ protected:
 private:
     unsigned short m_indeksyVertexow[16];
     float m_wspolrzedneVrtx[8*3];
+    float m_normalne[6*3];
         
 };
 //using spSzescian = shared_ptr<Szescian>;

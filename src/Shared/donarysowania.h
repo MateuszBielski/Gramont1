@@ -18,7 +18,9 @@ class DoNarysowania : public Transformowalne
     
     unsigned short* indeksyVertexow = nullptr;
     float * wspolrzedneVrtx = nullptr;
+    float * normalne = nullptr;
     unsigned short ileVertexow = 0;
+    unsigned short ileNormalnych = 0;
 	
 protected:
 

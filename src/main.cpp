@@ -3,13 +3,16 @@
 #include <GL/gl.h>
 #include <GL/glu.h>
 #include <X11/Xlib.h>
+#include <thread>
 #include "Shared/oknogtk.h"
 #include "Shared/ekrangl.h"
 //#include "Shared/transformacjaItfc.h"
 #include "Process/obslugasygnalow.h"
 #include "Process/renderowanie.h"
 #include "Process/zarzadzaniemodelami.h"
-#include <thread>
+#include "Shared/prostytrojkat.h"
+#include "Shared/szescian.h"
+
 
 using namespace std;
 
@@ -36,7 +39,8 @@ int main(int argc, char **argv)
     
     zarzadzanie.NadawanieDoRenderowania(renderowanie.getKolejkaPolecen());
     zarzadzanie.WysylaniePrzerysujPoTransformacji();
-    zarzadzanie.DoNarysowaniaItransformacji(make_shared<DoNarysowania>());
+//    zarzadzanie.DoNarysowaniaItransformacji(make_shared<DoNarysowania>());
+    zarzadzanie.DoNarysowaniaItransformacji(make_shared<Szescian>());
     
     obslugaSygnalow.WlaczPolaczenia();
     

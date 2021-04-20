@@ -13,24 +13,35 @@ TEST(DoNarysowania,SzescianIndeksyVertexow)
         
 }
 
-auto lambda_gl_vertex3fv = [](float * v,float f0,float f1,float f2){
-        ASSERT_EQ(v[0],f0);
-        ASSERT_EQ(v[1],f1);
-        ASSERT_EQ(v[2],f2);
-        };
+void assert_gl_3fv(float * v,float f0,float f1,float f2)
+{
+//    cout<<"\n"<<v[0]<<" "<<v[1]<<" "<<v[2];
+    ASSERT_EQ(v[0],f0);
+    ASSERT_EQ(v[1],f1);
+    ASSERT_EQ(v[2],f2);
+};
 TEST(DoNarysowania,WspolrzedneTrojkata)
 {
     
     spDoNarysowania trojkat(make_shared<ProstyTrojkat>());
-    lambda_gl_vertex3fv(&trojkat->wspolrzedneVrtx[trojkat->indeksyVertexow[0]*3],-1,0,0);
-    lambda_gl_vertex3fv(&trojkat->wspolrzedneVrtx[trojkat->indeksyVertexow[1]*3],1,0,0);
-    lambda_gl_vertex3fv(&trojkat->wspolrzedneVrtx[trojkat->indeksyVertexow[2]*3],0,1,0);
+    assert_gl_3fv(&trojkat->wspolrzedneVrtx[trojkat->indeksyVertexow[0]*3],-1,0,0);
+    assert_gl_3fv(&trojkat->wspolrzedneVrtx[trojkat->indeksyVertexow[1]*3],1,0,0);
+    assert_gl_3fv(&trojkat->wspolrzedneVrtx[trojkat->indeksyVertexow[2]*3],0,1,0);
 }
 TEST(DoNarysowaniaTest,SzescianWspolrzedneVertexow)
 {
     spDoNarysowania szescian(make_shared<Szescian>());
 //    float wspolrzedne3f[] = {0,0,-1,};
-    lambda_gl_vertex3fv(&szescian->wspolrzedneVrtx[szescian->indeksyVertexow[5]*3],1,1,1);
+    assert_gl_3fv(&szescian->wspolrzedneVrtx[szescian->indeksyVertexow[5]*3],1,1,1);
+}
+TEST(DoNarysowania,SzescianNormalne)
+{
+    spDoNarysowania szescian(make_shared<Szescian>());
+    ASSERT_EQ(6,szescian->ileNormalnych);
+    assert_gl_3fv(&szescian->normalne[0*3],0,-1,0);
+    assert_gl_3fv(&szescian->normalne[1*3],0,0,1);
+    assert_gl_3fv(&szescian->normalne[2*3],0,1,0);
+  
 }
 
 
