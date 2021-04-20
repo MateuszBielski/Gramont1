@@ -18,7 +18,7 @@ public:
     virtual ~Renderowanie();
     void UstawEkran(spEkranGL);
     virtual void FunPrzerysuj(spDoNarysowania ) override;
-    void RysujScene();
+    virtual void RysujScene();
     void ustawDoNarysowania(spDoNarysowania);
 protected:
 

@@ -16,9 +16,9 @@ class DoNarysowania : public Transformowalne
     DoNarysowania();
     virtual ~DoNarysowania();
     
-    unsigned short* indeksyNaroznikow = nullptr;
-    float * wspolrzedne = nullptr;
-    unsigned short ileNaroznikow = 0;
+    unsigned short* indeksyVertexow = nullptr;
+    float * wspolrzedneVrtx = nullptr;
+    unsigned short ileVertexow = 0;
 	
 protected:
 

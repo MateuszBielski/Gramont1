@@ -16,7 +16,8 @@ public:
 protected:
 
 private:
-   unsigned short m_indeksyNaroznikow[16];
+    unsigned short m_indeksyVertexow[16];
+    float m_wspolrzedneVrtx[8*3];
         
 };
 //using spSzescian = shared_ptr<Szescian>;

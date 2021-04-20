@@ -14,8 +14,8 @@ class ProstyTrojkat : public DoNarysowania
 protected:
 
 private:
-   unsigned short m_indeksyNaroznikow[3];
-    float m_wspolrzedne[9];
+   unsigned short m_indeksyVertexow[3];
+    float m_wspolrzedneVrtx[9];
 };
 //using spProstyTrojkat = shared_ptr<ProstyTrojkat>;
 //using upProstyTrojkat = unique_ptr<ProstyTrojkat>;

@@ -7,3 +7,7 @@ void RenderowanieMock::FunPrzerysuj(spDoNarysowania rys)
     przerysujDostaloDoNarysowania = true;
     doNarysowania = rys;
 }
+void RenderowanieMock::RysujScene()
+{	
+//	for()/
+}
