@@ -11,6 +11,7 @@ using ptr_vfp = void(*)(const float*);
 
 class Renderowanie : public ObslugaPolecen
 {
+    friend class TestRenderKlas;
     spEkranGL ekranGL = nullptr;
     spDoNarysowania doNarysowania;
 public:
@@ -29,7 +30,7 @@ private:
     
     
     ptr_vfff p_glTranslatef = nullptr, p_glVertex3f = nullptr;
-    ptr_vfp p_glVertex3fv = nullptr;
+    ptr_vfp p_glVertex3fv = nullptr, p_glNormal3fv = nullptr;
     GLuint listid;
     float x[3], y[3], z[3];
     

@@ -59,6 +59,8 @@
     <File Name="renderowaniemock.cpp"/>
     <File Name="donarysowaniamock.h"/>
     <File Name="donarysowaniamock.cpp"/>
+    <File Name="testrenderklas.h"/>
+    <File Name="testrenderklas.cpp"/>
   </VirtualDirectory>
   <Settings Type="Executable">
     <GlobalSettings>

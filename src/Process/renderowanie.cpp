@@ -43,14 +43,28 @@ void Renderowanie::UstawEkran(spEkranGL e)
 }
 void Renderowanie::RysujScene()
 {
-    float a[] = {1.0,1.5,0.5};
+//    float a[] = {1.0,1.5,0.5};
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glLoadIdentity(); 
     p_glTranslatef(0.0,0.0,-10.0);
     glMultMatrixf(doNarysowania->MacierzObrotu());
     
+    unsigned short vertexyNaNormalne = (!doNarysowania->ileNormalnych)? 1 : doNarysowania->ileVertexow /doNarysowania->ileNormalnych;
+    if(!doNarysowania->ileNormalnych)return;
     glBegin(GL_TRIANGLE_STRIP);
-        for(short i = 0 ; i < doNarysowania->ileVertexow; i++)p_glVertex3fv(&doNarysowania->wspolrzedneVrtx[doNarysowania->indeksyVertexow[i]*3]);
+        
+        glNormal3fv(&doNarysowania->normalne[0]);
+        p_glVertex3fv(&doNarysowania->wspolrzedneVrtx[0*3]);
+        p_glVertex3fv(&doNarysowania->wspolrzedneVrtx[1*3]);
+        for(unsigned short n = 0 ; n < doNarysowania->ileNormalnych ; n++)
+        {
+            glNormal3fv(&doNarysowania->normalne[n*3]);
+            for(unsigned short v = 0 ; v < vertexyNaNormalne ; v++)
+                p_glVertex3fv(&doNarysowania->wspolrzedneVrtx[doNarysowania->indeksyVertexow[n * vertexyNaNormalne + v]*3+6]);
+                
+//                cout<<
+        }
+//        for(short i = 0 ; i < doNarysowania->ileVertexow; i++)p_glVertex3fv(&doNarysowania->wspolrzedneVrtx[doNarysowania->indeksyVertexow[i]*3]);
     glEnd();
 //    glCallList(listid);
 }
