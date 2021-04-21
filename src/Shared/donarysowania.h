@@ -17,6 +17,7 @@ class DoNarysowania : public Transformowalne
     virtual ~DoNarysowania();
     
     unsigned short* indeksyVertexow = nullptr;
+    unsigned short* schematNormalnych = nullptr;
     float * wspolrzedneVrtx = nullptr;
     float * normalne = nullptr;
     unsigned short ileVertexow = 0;

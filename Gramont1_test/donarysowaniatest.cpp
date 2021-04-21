@@ -43,5 +43,18 @@ TEST(DoNarysowania,SzescianNormalne)
     assert_gl_3fv(&szescian->normalne[2*3],0,1,0);
   
 }
+TEST(DoNarysowania,TrojkatSchematNormalnych)
+{
+    spDoNarysowania trojkat(make_shared<ProstyTrojkat>());
+    unsigned short schemat[] = {3};
+    ASSERT_EQ(schemat[0],trojkat->schematNormalnych[0]);
+}
+TEST(DoNarysowania,SzescianSchematNormalnych)
+{
+    spDoNarysowania szescian(make_shared<Szescian>());
+    unsigned short schemat[] = {4,2,2,4,2,2};
+    
+    for(int i = 0 ; i < szescian->ileNormalnych ; i++)ASSERT_EQ(schemat[i],szescian->schematNormalnych[i]);
+}
 
 

@@ -14,6 +14,7 @@ void Renderowanie::PrzypiszFunkcjeGLdoWskaznikow()
 	p_glTranslatef = &glTranslatef;
     p_glVertex3f = &glVertex3f;
     p_glVertex3fv = &glVertex3fv;
+    p_glNormal3fv = &glNormal3fv;
 }
 void Renderowanie::RejestrujListeGL()
 {
@@ -49,24 +50,16 @@ void Renderowanie::RysujScene()
     p_glTranslatef(0.0,0.0,-10.0);
     glMultMatrixf(doNarysowania->MacierzObrotu());
     
-    unsigned short vertexyNaNormalne = (!doNarysowania->ileNormalnych)? 1 : doNarysowania->ileVertexow /doNarysowania->ileNormalnych;
     if(!doNarysowania->ileNormalnych)return;
     glBegin(GL_TRIANGLE_STRIP);
-        
-        glNormal3fv(&doNarysowania->normalne[0]);
-        p_glVertex3fv(&doNarysowania->wspolrzedneVrtx[0*3]);
-        p_glVertex3fv(&doNarysowania->wspolrzedneVrtx[1*3]);
+        unsigned short v = 0;
         for(unsigned short n = 0 ; n < doNarysowania->ileNormalnych ; n++)
         {
-            glNormal3fv(&doNarysowania->normalne[n*3]);
-            for(unsigned short v = 0 ; v < vertexyNaNormalne ; v++)
-                p_glVertex3fv(&doNarysowania->wspolrzedneVrtx[doNarysowania->indeksyVertexow[n * vertexyNaNormalne + v]*3+6]);
-                
-//                cout<<
+            p_glNormal3fv(&doNarysowania->normalne[n*3]);
+            for(unsigned short s = 0 ; s < doNarysowania->schematNormalnych[n] ; s++)
+            p_glVertex3fv(&doNarysowania->wspolrzedneVrtx[doNarysowania->indeksyVertexow[v++]*3]);
         }
-//        for(short i = 0 ; i < doNarysowania->ileVertexow; i++)p_glVertex3fv(&doNarysowania->wspolrzedneVrtx[doNarysowania->indeksyVertexow[i]*3]);
-    glEnd();
-//    glCallList(listid);
+        glEnd();
 }
 
 void Renderowanie::FunPrzerysuj(spDoNarysowania rys)

@@ -3,6 +3,8 @@
 #include <thread>
 #include "../src/Process/renderowanie.h"
 #include "../src/Process/obslugasygnalow.h"
+#include "../src/Shared/prostytrojkat.h"
+#include "../src/Shared/szescian.h"
 #include "donarysowaniamock.h"
 #include "ekranglmock.h"
 #include "testrenderklas.h"
@@ -42,5 +44,34 @@ TEST(TestRenderKlasTest,UstawZastepczeFunkcje)
     TestRenderKlas renderTest;
     Renderowanie rend;
     ASSERT_TRUE(renderTest.UstawZastepczeOpenGlDla(rend));
-    
 }
+TEST(RenderowanieTest,funkcjeGlDlaTrojkata)
+{
+    TestRenderKlas renderTest;
+    Renderowanie rend;
+    renderTest.UstawZastepczeOpenGlDla(rend);
+    rend.ustawDoNarysowania(make_unique<ProstyTrojkat>());
+    rend.RysujScene();
+    string expect("n0.0,0.0,1.0,v-1.0,0.0,0.0,v1.0,0.0,0.0,v0.0,1.0,0.0,");
+    string result = renderTest.CiagWywolanOpenGl();
+    ASSERT_EQ(expect,result);
+}
+TEST(RenderowanieTest,funkcjeGlDlaSzescianu)
+{
+    TestRenderKlas renderTest;
+    Renderowanie rend;
+    renderTest.UstawZastepczeOpenGlDla(rend);
+    rend.ustawDoNarysowania(make_unique<Szescian>());
+    rend.RysujScene();
+    string expect("n0.0,-1.0,0.0,v0.0,0.0,0.0,v1.0,0.0,0.0,v0.0,0.0,1.0,v1.0,0.0,1.0,");
+    expect += "n0.0,0.0,1.0,v0.0,1.0,1.0,v1.0,1.0,1.0,";
+    expect += "n0.0,1.0,0.0,v0.0,1.0,0.0,v1.0,1.0,0.0,";
+    expect += "n1.0,0.0,0.0,v1.0,1.0,1.0,v1.0,0.0,1.0,v1.0,1.0,0.0,v1.0,0.0,0.0,";
+    expect += "n0.0,0.0,-1.0,v0.0,1.0,0.0,v0.0,0.0,0.0,";
+    expect += "n-1.0,0.0,0.0,v0.0,1.0,1.0,v0.0,0.0,1.0,";
+//    string expect();
+    string result = renderTest.CiagWywolanOpenGl();
+    ASSERT_EQ(expect,result);
+}
+//n0.0,-1.0,0.0,v0.0,0.0,0.0,v1.0,0.0,0.0,v0.0,0.0,1.0,v1.0,0.0,1.0,n0.0,0.0,1.0,v0.0,1.0,1.0,v1.0,1.0,1.0,n0.0,1.0,0.0,v0.0,1.0,0.0,v1.0,1.0,0.0,n1.0,0.0,0.0,v1.0,1.0,1.0,v1.0,0.0,1.0,v1.0,1.0,0.0,v1.0,0.0,0.0,n0.0,0.0,-1.0,v0.0,1.0,0.0,v0.0,0.0,0.0,n-1.0,0.0,0.0,v0.0,1.0,1.0,v0.0,0.0,1.0,
+//n0.0,-1.0,0.0,v0.0,0.0,0.0,v1.0,0.0,0.0,v0.0,0.0,1.0,v1.0,0.0,1.0,n-1.0,0.0,0.0,v0.0,1.0,1.0,v1.0,1.0,1.0,n0.0,0.0,0.0,v0.0,1.0,0.0,v1.0,1.0,0.0,n0.0,0.0,1.0,v1.0,1.0,1.0,v1.0,0.0,1.0,v1.0,1.0,0.0,v1.0,0.0,0.0,n0.0,1.0,0.0,v0.0,1.0,0.0,v0.0,0.0,0.0,n1.0,0.0,1.0,v0.0,1.0,1.0,v0.0,0.0,1.0,
