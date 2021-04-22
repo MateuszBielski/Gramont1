@@ -17,6 +17,7 @@ public:
     TestRenderKlas();
     string CiagWywolanOpenGl();
     bool UstawZastepczeOpenGlDla(Renderowanie&);
+    bool CzyMaTenSamDoNarysowania(Renderowanie&, spDoNarysowania);
 };
 
 #endif // TestRenderKlas_H

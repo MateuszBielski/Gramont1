@@ -1,5 +1,6 @@
 #include "zarzadzaniemodelami.h"
 #include "../Polecenie/przerysuj.h"
+#include "../Polecenie/ustawdonarysowania.h"
 #include <functional>
 
 ZarzadzanieModelami::ZarzadzanieModelami()
@@ -21,9 +22,10 @@ void ZarzadzanieModelami::PowiadomionyOzakonczeniuTransformacji()
 //    if(granica && kolejkaRenderowania)kolejkaRenderowania->push(make_unique<PoleceniePuste>(0));
     if(granica)licznikTransformacjiDoPrzerysowania = 0;
 }
-void ZarzadzanieModelami::NadawanieDoRenderowania(spKolejkaPolecen k)
+void ZarzadzanieModelami::NadawanieDoRenderowania(spKolejkaPolecen k,bool ustawicDoNarysowania)
 {
 	kolejkaRenderowania = k;
+    if(ustawicDoNarysowania)k->push(make_unique<UstawDoNarysowania>(doNarysowania));
 }
 void ZarzadzanieModelami::LiczbaTransformacjiDoAkumulowania(int k)
 {

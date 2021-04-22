@@ -37,10 +37,10 @@ int main(int argc, char **argv)
     obslugaSygnalow.NadawanieDoZarzadzaniaObiektami(zarzadzanie.getKolejkaPolecen());
     obslugaSygnalow.NadawanieDoRenderowania(renderowanie.getKolejkaPolecen());
     
-    zarzadzanie.NadawanieDoRenderowania(renderowanie.getKolejkaPolecen());
+    zarzadzanie.DoNarysowaniaItransformacji(make_shared<Szescian>());
+    zarzadzanie.NadawanieDoRenderowania(renderowanie.getKolejkaPolecen(),PRZEKAZ_DO_NARYSOWANIA);//
     zarzadzanie.WysylaniePrzerysujPoTransformacji();
 //    zarzadzanie.DoNarysowaniaItransformacji(make_shared<DoNarysowania>());
-    zarzadzanie.DoNarysowaniaItransformacji(make_shared<Szescian>());
     
     obslugaSygnalow.WlaczPolaczenia();
     

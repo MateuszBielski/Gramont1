@@ -24,6 +24,7 @@ class RenderowanieItfc
 {
 public:
     virtual void FunPrzerysuj(spDoNarysowania ){};
+    virtual void ustawDoNarysowania(spDoNarysowania ){};
     bool przerysujDostaloDoNarysowania = false;
 };
 

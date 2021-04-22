@@ -8,6 +8,8 @@
 #include "../Shared/transformowalne.h"
 #include "../Polecenie/obslugapolecen.h"
 
+#define PRZEKAZ_DO_NARYSOWANIA true
+
 
 using namespace std;
 //using namespace Gtk;
@@ -29,7 +31,7 @@ class ZarzadzanieModelami : public ObslugaPolecen
     virtual void UstawStanNic() override;
     
     int LicznikTransformacjiAkumulowanych();
-    void NadawanieDoRenderowania(spKolejkaPolecen);
+    void NadawanieDoRenderowania(spKolejkaPolecen,bool ustawicDoNarysowania = false);
     void LiczbaTransformacjiDoAkumulowania(int);
     void WysylaniePrzerysujPoTransformacji();
     

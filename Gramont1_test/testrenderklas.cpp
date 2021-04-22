@@ -39,3 +39,7 @@ string TestRenderKlas::CiagWywolanOpenGl()
 	string result = st_ciagWywolanOpenGl;
     return result;
 }
+bool TestRenderKlas::CzyMaTenSamDoNarysowania(Renderowanie& rend, spDoNarysowania rys)
+{
+	return rend.doNarysowania == rys;
+}

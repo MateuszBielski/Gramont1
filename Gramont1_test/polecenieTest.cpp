@@ -8,10 +8,12 @@
 #include "../src/Process/obslugasygnalow.h"
 #include "../src/Polecenie/obrot.h"
 #include "../src/Polecenie/przerysuj.h"
+#include "../src/Polecenie/ustawdonarysowania.h"
 //#include "../src/Process/zarzadzaniemodelami.h"
 #include "zarzadzaniemodelamimock.h"
 #include "obslugapolecenmock.h"
 #include "renderowaniemock.h"
+#include "testrenderklas.h"
 
 
 
@@ -143,3 +145,16 @@ TEST(PolecenieTest,PrzerysujUzywaRenderowanieFunPrzerysuj)
     ASSERT_TRUE(renderowanie.przerysujDostaloDoNarysowania);
 }
 
+TEST(PolecenieTest,UstawDoNarysowania)
+{
+    Renderowanie rend;
+    
+    spDoNarysowania rys(make_shared<DoNarysowania>());
+    auto kolejka = rend.getKolejkaPolecen();
+    kolejka->push(make_unique<UstawDoNarysowania>(rys));
+    kolejka->push(make_unique<PolecenieKoniec>());
+    rend.Run();
+    
+    TestRenderKlas testRend;
+    ASSERT_TRUE(testRend.CzyMaTenSamDoNarysowania(rend,rys));
+}

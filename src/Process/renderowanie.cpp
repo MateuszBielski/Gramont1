@@ -1,4 +1,5 @@
 #include "renderowanie.h"
+#include <stdexcept>
 
 Renderowanie::Renderowanie():doNarysowania(make_shared<DoNarysowania>()),x{-1.0,0.0,0.0},y{0.5,0.0,0.0},z{0.0,1.0,0.0}
 {
@@ -44,7 +45,7 @@ void Renderowanie::UstawEkran(spEkranGL e)
 }
 void Renderowanie::RysujScene()
 {
-//    float a[] = {1.0,1.5,0.5};
+    if(!doNarysowania)throw invalid_argument("RysujScene() Brak doNarysowania");
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glLoadIdentity(); 
     p_glTranslatef(0.0,0.0,-10.0);

@@ -9,6 +9,7 @@
 #include "../src/Shared/ruchnaekranie.h"
 #include "donarysowaniamock.h"
 #include "renderowaniemock.h"
+#include "testrenderklas.h"
 
 
 TEST(ZarzadzanieModelami,LicznikTransformacjiDoAkumulowania)
@@ -187,4 +188,20 @@ TEST(ZarzadzanieModelami,WyslaneDoNarysowaniaNieJestPuste)
     t_renderowanie.join();
     
     ASSERT_TRUE(renderowanie.przerysujDostaloDoNarysowania);
+}
+TEST(ZarzadzanieModelami,PobranieKolejkiRenderowaniaDajeJejDoNarysowania)
+{
+    ZarzadzanieModelami zarzadzanie;
+    spDoNarysowania rys(make_shared<DoNarysowania>());
+    zarzadzanie.DoNarysowania(rys);
+    
+    Renderowanie rend;
+    auto kolejka = rend.getKolejkaPolecen();
+    zarzadzanie.NadawanieDoRenderowania(kolejka,PRZEKAZ_DO_NARYSOWANIA);
+    kolejka->push(make_unique<PolecenieKoniec>());
+    rend.Run();
+    
+    TestRenderKlas testRend;
+    
+    ASSERT_TRUE(testRend.CzyMaTenSamDoNarysowania(rend,rys));
 }

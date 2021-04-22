@@ -58,3 +58,4 @@ TEST(DoNarysowania,SzescianSchematNormalnych)
 }
 
 
+

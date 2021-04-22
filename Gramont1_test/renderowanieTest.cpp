@@ -73,5 +73,13 @@ TEST(RenderowanieTest,funkcjeGlDlaSzescianu)
     string result = renderTest.CiagWywolanOpenGl();
     ASSERT_EQ(expect,result);
 }
-//n0.0,-1.0,0.0,v0.0,0.0,0.0,v1.0,0.0,0.0,v0.0,0.0,1.0,v1.0,0.0,1.0,n0.0,0.0,1.0,v0.0,1.0,1.0,v1.0,1.0,1.0,n0.0,1.0,0.0,v0.0,1.0,0.0,v1.0,1.0,0.0,n1.0,0.0,0.0,v1.0,1.0,1.0,v1.0,0.0,1.0,v1.0,1.0,0.0,v1.0,0.0,0.0,n0.0,0.0,-1.0,v0.0,1.0,0.0,v0.0,0.0,0.0,n-1.0,0.0,0.0,v0.0,1.0,1.0,v0.0,0.0,1.0,
-//n0.0,-1.0,0.0,v0.0,0.0,0.0,v1.0,0.0,0.0,v0.0,0.0,1.0,v1.0,0.0,1.0,n-1.0,0.0,0.0,v0.0,1.0,1.0,v1.0,1.0,1.0,n0.0,0.0,0.0,v0.0,1.0,0.0,v1.0,1.0,0.0,n0.0,0.0,1.0,v1.0,1.0,1.0,v1.0,0.0,1.0,v1.0,1.0,0.0,v1.0,0.0,0.0,n0.0,1.0,0.0,v0.0,1.0,0.0,v0.0,0.0,0.0,n1.0,0.0,1.0,v0.0,1.0,1.0,v0.0,0.0,1.0,
+TEST(RenderowanieTest,RysujSceneZglaszaWyjatekPrzyBrakuDoNarysowania)
+{
+    Renderowanie rend;
+    rend.ustawDoNarysowania(nullptr);
+    try{
+        rend.RysujScene();
+    }catch(invalid_argument const & err) {
+        EXPECT_EQ(err.what(),string("RysujScene() Brak doNarysowania"));
+    }
+}
