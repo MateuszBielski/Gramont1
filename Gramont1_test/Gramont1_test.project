@@ -47,6 +47,7 @@
     <File Name="../src/Shared/szescian.cpp"/>
     <File Name="../src/Shared/prostytrojkat.cpp"/>
     <File Name="../src/Polecenie/ustawdonarysowania.cpp"/>
+    <File Name="../src/Shared/grupowalne.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="helperClass">
     <File Name="../src/Shared/trackball.cpp"/>

@@ -56,6 +56,28 @@ TEST(DoNarysowania,SzescianSchematNormalnych)
     
     for(int i = 0 ; i < szescian->ileNormalnych ; i++)ASSERT_EQ(schemat[i],szescian->schematNormalnych[i]);
 }
-
+TEST(DoNarysowania,DodanieDziecka)
+{
+    spDoNarysowania grupa(make_shared<DoNarysowania>());
+    spDoNarysowania dziecko(make_shared<DoNarysowania>());
+    grupa->DodajDziecko(dziecko);
+    ASSERT_EQ(1,grupa->IleDzieci());
+}
+TEST(DoNarysowania,UsuniecieDziecka)
+{
+    spDoNarysowania grupa(make_shared<DoNarysowania>());
+    spDoNarysowania dziecko1(make_shared<DoNarysowania>());
+    spDoNarysowania dziecko2(make_shared<DoNarysowania>());
+    spDoNarysowania dziecko3(make_shared<DoNarysowania>());
+    spDoNarysowania dziecko4(make_shared<DoNarysowania>());
+    grupa->DodajDziecko(dziecko1);
+    grupa->DodajDziecko(dziecko2);
+    grupa->DodajDziecko(dziecko3);
+    grupa->DodajDziecko(dziecko4);
+    ASSERT_EQ(4,grupa->IleDzieci());
+    ASSERT_TRUE(grupa->UsunDziecko(dziecko2));
+    ASSERT_EQ(3,grupa->IleDzieci());
+    
+}
 
 

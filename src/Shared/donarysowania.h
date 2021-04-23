@@ -5,16 +5,19 @@
 #include <iostream>
 #include <memory>
 #include "transformowalne.h"
+#include "grupowalne.h"
 
 using namespace std;
 //using namespace Gtk;
 
 
-class DoNarysowania : public Transformowalne
+class DoNarysowania : public Transformowalne, public Grupowalne
 {
-  public:
+
+public:
     DoNarysowania();
     virtual ~DoNarysowania();
+    
     
     unsigned short* indeksyVertexow = nullptr;
     unsigned short* schematNormalnych = nullptr;
@@ -24,9 +27,9 @@ class DoNarysowania : public Transformowalne
     unsigned short ileNormalnych = 0;
 	
 protected:
-
+    
 private:
-        
+    
 };
 using spDoNarysowania = shared_ptr<DoNarysowania>;
 using upDoNarysowania = unique_ptr<DoNarysowania>;
