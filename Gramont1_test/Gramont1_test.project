@@ -27,6 +27,7 @@
     <File Name="zarzadzaniemodelamiTest.cpp"/>
     <File Name="renderowanieTest.cpp"/>
     <File Name="donarysowaniatest.cpp"/>
+    <File Name="grupowanietest.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="testedClasses">
     <File Name="../src/Shared/kursor2d.cpp"/>

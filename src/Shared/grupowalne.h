@@ -1,7 +1,7 @@
 #ifndef Grupowalne_H
 #define Grupowalne_H
 #include <memory>
-#include <vector>
+#include <list>
 #include <iterator>
 
 using namespace std;
@@ -14,12 +14,14 @@ public:
     using spGrupowalne = shared_ptr<Grupowalne>;
     int IleDzieci();
     void DodajDziecko(spGrupowalne );
-    bool UsunDziecko(spGrupowalne);
+    bool OdejmijDziecko(spGrupowalne);
+    bool CzyJestMoimDzieckiem(spGrupowalne);
 protected:
-    vector<spGrupowalne> dzieci;
-    iterator<random_access_iterator_tag,double> pozycja;//=dzieci.end();
+    list<spGrupowalne> dzieci;
+//    iterator<random_access_iterator_tag,double> pozycja;=dzieci.end();
+    list<spGrupowalne>::iterator pozycja;
 private:
         
 };
-
+using spGrupowalne = shared_ptr<Grupowalne>;
 #endif // Grupowalne_H

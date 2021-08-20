@@ -8,16 +8,24 @@ int Grupowalne::IleDzieci()
 void Grupowalne::DodajDziecko(spGrupowalne dz)
 {
     dzieci.push_back(dz);
-//    dz->pozycja = --dzieci.end();
+    dz->pozycja = --dzieci.end();
 }
-bool Grupowalne::UsunDziecko(spGrupowalne dz)
+bool Grupowalne::OdejmijDziecko(spGrupowalne dz)
 {
-	try{
-//       dzieci.erase(dz->pozycja);
-       return true;
-    }catch(exception & e)
+    if(CzyJestMoimDzieckiem(dz))
     {
-        return false;
-        
+        dzieci.erase(dz->pozycja);
+        return true;
     }
+    return false;
+}
+bool Grupowalne::CzyJestMoimDzieckiem(spGrupowalne doSprawdzenia)
+{
+    auto iter = dzieci.begin();
+    
+    while(iter != dzieci.end())
+    {
+        if(doSprawdzenia->pozycja == iter++)return true;
+    }
+    return false;
 }
