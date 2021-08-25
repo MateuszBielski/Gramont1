@@ -52,5 +52,66 @@ TEST (Grupowanie,OdjecieDzieckaNieDodanego)
     grupa->DodajDziecko(dziecko4);
     ASSERT_FALSE(grupa->OdejmijDziecko(dziecko3));
 }
-
-
+TEST (Grupowanie,ListaObiektowZzachowanaStruktura_liczbaObiektow)
+{
+    spGrupowalne w1(make_shared<Grupowalne>());
+    spGrupowalne w1_1(make_shared<Grupowalne>());
+    spGrupowalne w1_2(make_shared<Grupowalne>());
+    spGrupowalne w1_3(make_shared<Grupowalne>());
+    spGrupowalne w1_2_1(make_shared<Grupowalne>());
+    spGrupowalne w1_2_2(make_shared<Grupowalne>());
+    
+    w1_2->DodajDziecko(w1_2_1);
+    w1_2->DodajDziecko(w1_2_2);
+    
+    w1->DodajDziecko(w1_1);
+    w1->DodajDziecko(w1_2);
+    w1->DodajDziecko(w1_3);
+    
+    ASSERT_EQ(6,w1->StrukturaJakoLista_dlugosc());
+}
+TEST (Grupowanie,ListaObiektowZzachowanaStruktura_liczbaObiektowPoOdjeciu)
+{
+    spGrupowalne w1(make_shared<Grupowalne>());
+    spGrupowalne w1_1(make_shared<Grupowalne>());
+    spGrupowalne w1_2(make_shared<Grupowalne>());
+    
+    spGrupowalne w1_2_1(make_shared<Grupowalne>());
+    spGrupowalne w1_2_2(make_shared<Grupowalne>());
+     
+    w1->DodajDziecko(w1_1);
+    w1->DodajDziecko(w1_2);
+    
+    w1_2->DodajDziecko(w1_2_1);
+    w1_2->DodajDziecko(w1_2_2);
+    
+    ASSERT_EQ(5,w1->StrukturaJakoLista_dlugosc());
+    w1->OdejmijDziecko(w1_2);
+    ASSERT_EQ(2,w1->StrukturaJakoLista_dlugosc());
+}
+TEST (Grupowalne,NieMoznaDoDacDoSiebie)
+{
+    spGrupowalne g(make_shared<Grupowalne>());
+    g->DodajDziecko(g);
+    ASSERT_EQ(0,g->IleDzieci());
+}
+TEST(Grupowalne,PoOdjeciuNieMaRodzica)
+{
+    spGrupowalne g1(make_shared<Grupowalne>());
+    spGrupowalne g2(make_shared<Grupowalne>());
+    g1->DodajDziecko(g2);
+    g1->OdejmijDziecko(g2);
+    ASSERT_EQ(nullptr,g2->Rodzic());
+}
+TEST(Grupowanie,DoKogoNaleze_PoDodaniu)
+{
+    spGrupowalne w1(make_shared<Grupowalne>());
+    spGrupowalne w2(make_shared<Grupowalne>());
+    
+    w1->DodajDziecko(w2);
+    
+    ASSERT_TRUE(w1.get() == w2->Rodzic().get());
+}
+//dodanie aktualizuje liczbe
+//usuwanie też
+//dodanie dodanego przenosi, czyli usuwa z poprzedniego miejsca
