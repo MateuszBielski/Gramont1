@@ -43,6 +43,7 @@
       <File Name="src/Shared/prostytrojkat.cpp"/>
       <File Name="src/Shared/grupowalne.h"/>
       <File Name="src/Shared/grupowalne.cpp"/>
+      <File Name="src/Shared/wpisstrukturyjakolisty.h"/>
     </VirtualDirectory>
     <VirtualDirectory Name="Process">
       <File Name="src/Process/obslugasygnalow.h"/>

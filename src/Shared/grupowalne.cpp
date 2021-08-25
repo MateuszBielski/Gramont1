@@ -9,6 +9,8 @@ int Grupowalne::IleDzieci()
 void Grupowalne::DodajDziecko(spGrupowalne dz)
 {
     if(dz.get() == this)return;
+    auto poprzedniRodzic = dz->Rodzic();
+    if(poprzedniRodzic)poprzedniRodzic->OdejmijDziecko(dz);
     dzieci.push_back(dz);
     dz->pozycja = --dzieci.end();
 //    auto wsk = 
@@ -33,6 +35,10 @@ bool Grupowalne::CzyJestMoimDzieckiem(spGrupowalne doSprawdzenia)
         if(doSprawdzenia->pozycja == iter++)return true;
     }
     return false;
+}
+spGrupowalne Grupowalne::Rodzic()
+{
+	return rodzic;
 }
 size_t Grupowalne::StrukturaJakoLista_dlugosc()
 {
@@ -63,11 +69,18 @@ size_t Grupowalne::StrukturaJakoLista_dlugosc()
     for(auto& dziecko :  dzieci)mojaDlugosc += dziecko->StrukturaJakoLista_dlugosc();
     return mojaDlugosc;
 }
-spGrupowalne Grupowalne::Rodzic()
+const list<WpisStrukturyJakoListy<spGrupowalne>>& Grupowalne::StrukturaJakoLista()
 {
-	return rodzic;
+    return strukturaJakoLista;
 }
-void Grupowalne::Rodzic(spGrupowalne pRodzic)
-{   
-    rodzic = pRodzic;
+void Grupowalne::GenerujStruktureJakoListe(listaWpisySpGrupowalne& calaLista)
+{
+   
+    WpisStrukturyJakoListy<spGrupowalne> wpis{RodzajAkcji::wejscie,shared_from_this()};
+    calaLista.emplace_back(wpis);
+        
+    for(auto& dziecko :  dzieci)
+    {
+        dziecko->GenerujStruktureJakoListe(calaLista);
+    }
 }
