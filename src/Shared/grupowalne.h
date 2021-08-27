@@ -3,10 +3,11 @@
 #include <memory>
 #include <list>
 #include <iterator>
-#include "wpisstrukturyjakolisty.h"
+//#include "wpisstrukturyjakolisty.h"
 
 using namespace std;
 
+enum class RodzajAkcji: int;//{wejscie,wezel,powrot};
 
 class Grupowalne : public enable_shared_from_this<Grupowalne>
 {
@@ -19,16 +20,19 @@ public:
     bool OdejmijDziecko(spGrupowalne);
     bool CzyJestMoimDzieckiem(spGrupowalne);
     spGrupowalne Rodzic();
-    size_t StrukturaJakoLista_dlugosc();
-    using listaWpisySpGrupowalne = list<WpisStrukturyJakoListy<spGrupowalne>>;
-    const listaWpisySpGrupowalne& StrukturaJakoLista();
-    void GenerujStruktureJakoListe(listaWpisySpGrupowalne& );
+    size_t StrukturaJakoLista_Wezly_dlugosc();
+//    using listaWpisySpGrupowalne = list<WpisStrukturyJakoListy<spGrupowalne>>;
+    const list<spGrupowalne>& StrukturaJakoLista_Wezly();
+    const list<RodzajAkcji>& StrukturaJakoLista_RodzajAkcji();
 protected:
     list<spGrupowalne> dzieci;
     list<spGrupowalne>::iterator pozycja;
+    list<spGrupowalne>::iterator pozycjaWliscie;
 private:
     spGrupowalne rodzic = nullptr;
-    listaWpisySpGrupowalne strukturaJakoLista;
+    list<spGrupowalne> strukturaJakoLista_Wezly;
+    list<RodzajAkcji> strukturaJakoLista_RodzajAkcji;
+    void GenerujStruktureJakoListe_Wezly(list<spGrupowalne>& );
 };
 using spGrupowalne = shared_ptr<Grupowalne>;
 #endif // Grupowalne_H

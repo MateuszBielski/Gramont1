@@ -1,16 +1,16 @@
 #include <gtest/gtest.h>
-//#include <GL/gl.h>
 #include "../src/Shared/grupowalne.h"
 //#include "../src/Shared/prostytrojkat.h"
+#include "../src/Shared/rodzajakcji.cpp"
 
-TEST(Grupowanie,DodanieDziecka)
+TEST(Grupowalne,DodanieDziecka)
 {
     spGrupowalne grupa(make_shared<Grupowalne>());
     spGrupowalne dziecko(make_shared<Grupowalne>());
     grupa->DodajDziecko(dziecko);
     ASSERT_EQ(1,grupa->IleDzieci());
 }
-TEST(Grupowanie,OdjecieDziecka)
+TEST(Grupowalne,OdjecieDziecka)
 {
     spGrupowalne grupa(make_shared<Grupowalne>());
     spGrupowalne dziecko1(make_shared<Grupowalne>());
@@ -25,14 +25,14 @@ TEST(Grupowanie,OdjecieDziecka)
     ASSERT_TRUE(grupa->OdejmijDziecko(dziecko2));
     ASSERT_EQ(3,grupa->IleDzieci());
 }
-TEST(Grupowanie,CzyNieJestDzieckiem)
+TEST(Grupowalne,CzyNieJestDzieckiem)
 {
     spGrupowalne grupa(make_shared<Grupowalne>());
     spGrupowalne dziecko1(make_shared<Grupowalne>());
     
     ASSERT_FALSE(grupa->CzyJestMoimDzieckiem(dziecko1));
 }
-TEST(Grupowanie,CzyJestDzieckiem)
+TEST(Grupowalne,CzyJestDzieckiem)
 {
     spGrupowalne grupa(make_shared<Grupowalne>());
     spGrupowalne dziecko(make_shared<Grupowalne>());
@@ -40,7 +40,7 @@ TEST(Grupowanie,CzyJestDzieckiem)
     ASSERT_TRUE(grupa->CzyJestMoimDzieckiem(dziecko));
 }
 
-TEST (Grupowanie,OdjecieDzieckaNieDodanego)
+TEST (Grupowalne,OdjecieDzieckaNieDodanego)
 {
     spGrupowalne grupa(make_shared<Grupowalne>());
     spGrupowalne dziecko1(make_shared<Grupowalne>());
@@ -67,7 +67,7 @@ TEST(Grupowalne,PoOdjeciuNieMaRodzica)
     g1->OdejmijDziecko(g2);
     ASSERT_EQ(nullptr,g2->Rodzic());
 }
-TEST(Grupowanie,DoKogoNaleze_PoDodaniu)
+TEST(Grupowalne,DoKogoNaleze_PoDodaniu)
 {
     spGrupowalne w1(make_shared<Grupowalne>());
     spGrupowalne w2(make_shared<Grupowalne>());
@@ -76,7 +76,7 @@ TEST(Grupowanie,DoKogoNaleze_PoDodaniu)
     
     ASSERT_TRUE(w1.get() == w2->Rodzic().get());
 }
-TEST(Grupowanie,PrzeniesienieDoInnegoWezla)
+TEST(Grupowalne,PrzeniesienieDoInnegoWezla)
 {
     spGrupowalne w1(make_shared<Grupowalne>());
     spGrupowalne w2(make_shared<Grupowalne>());
@@ -87,7 +87,7 @@ TEST(Grupowanie,PrzeniesienieDoInnegoWezla)
     ASSERT_EQ(0,w1->IleDzieci());
     ASSERT_TRUE(w2.get() == w3->Rodzic().get());
 }
-TEST (Grupowanie,ListaObiektowZzachowanaStruktura_liczbaObiektow)
+TEST (Grupowalne,StrukturaJakoLista_liczbaObiektow)
 {
     spGrupowalne w1(make_shared<Grupowalne>());
     spGrupowalne w1_1(make_shared<Grupowalne>());
@@ -103,9 +103,9 @@ TEST (Grupowanie,ListaObiektowZzachowanaStruktura_liczbaObiektow)
     w1->DodajDziecko(w1_2);
     w1->DodajDziecko(w1_3);
     
-    ASSERT_EQ(6,w1->StrukturaJakoLista_dlugosc());
+    ASSERT_EQ(6,w1->StrukturaJakoLista_Wezly_dlugosc());
 }
-TEST (Grupowanie,ListaObiektowZzachowanaStruktura_liczbaObiektowPoOdjeciu)
+TEST (Grupowalne,StrukturaJakoLista_liczbaObiektowPoOdjeciu)
 {
     spGrupowalne w1(make_shared<Grupowalne>());
     spGrupowalne w1_1(make_shared<Grupowalne>());
@@ -120,32 +120,29 @@ TEST (Grupowanie,ListaObiektowZzachowanaStruktura_liczbaObiektowPoOdjeciu)
     w1_2->DodajDziecko(w1_2_1);
     w1_2->DodajDziecko(w1_2_2);
     
-    ASSERT_EQ(5,w1->StrukturaJakoLista_dlugosc());
+    ASSERT_EQ(5,w1->StrukturaJakoLista_Wezly_dlugosc());
     w1->OdejmijDziecko(w1_2);
-    ASSERT_EQ(2,w1->StrukturaJakoLista_dlugosc());
+    ASSERT_EQ(2,w1->StrukturaJakoLista_Wezly_dlugosc());
 }
-TEST (Grupowanie,ListaObiektowZzachowanaStruktura_kolejnoscObiektow_1)
+TEST (Grupowalne,StrukturaJakoLista_1wezel)
 {
     spGrupowalne w1(make_shared<Grupowalne>());
+    auto iter = w1->StrukturaJakoLista_Wezly().begin();
     
-    auto obiektyKolejno = w1->StrukturaJakoLista();
-    w1->GenerujStruktureJakoListe(obiektyKolejno);
-    auto iter = obiektyKolejno.begin();
-    ASSERT_TRUE(w1.get() == (*iter).wezel.get());
+    ASSERT_TRUE(w1.get() == (*iter).get());
 }
-TEST (Grupowanie,ListaObiektowZzachowanaStruktura_kolejnoscObiektow_2)
+TEST (Grupowalne,StrukturaJakoLista_kolejnoscObiektow_2)
 {
     spGrupowalne w1(make_shared<Grupowalne>());
     spGrupowalne w1_1(make_shared<Grupowalne>());
     w1->DodajDziecko(w1_1);
+    auto iter = w1->StrukturaJakoLista_Wezly().begin();
     
-    auto obiektyKolejno = w1->StrukturaJakoLista();
-    w1->GenerujStruktureJakoListe(obiektyKolejno);
-    auto iter = obiektyKolejno.begin();
-    ASSERT_TRUE(w1.get() == (*iter++).wezel.get());
-    ASSERT_TRUE(w1_1.get() == (*iter).wezel.get());
+    ASSERT_TRUE(w1.get() == (*iter++).get());
+    ASSERT_TRUE(w1_1.get() == (*iter).get());
 }
-TEST (Grupowanie,ListaObiektowZzachowanaStruktura_kolejnoscObiektow_6)
+
+TEST (Grupowalne,StrukturaJakoLista_kolejnoscObiektow_6)
 {
     spGrupowalne w1(make_shared<Grupowalne>());
     spGrupowalne w1_1(make_shared<Grupowalne>());
@@ -161,44 +158,84 @@ TEST (Grupowanie,ListaObiektowZzachowanaStruktura_kolejnoscObiektow_6)
     w1->DodajDziecko(w1_2);
     w1->DodajDziecko(w1_3);
     
-    auto obiektyKolejno = w1->StrukturaJakoLista();
-    w1->GenerujStruktureJakoListe(obiektyKolejno);//ta logika do zmiany
-    auto iter = obiektyKolejno.begin();
+    auto iter = w1->StrukturaJakoLista_Wezly().begin();
     
-    ASSERT_TRUE(w1.get() == (*iter++).wezel.get());
-    ASSERT_TRUE(w1_1.get() == (*iter++).wezel.get());
-    ASSERT_TRUE(w1_2.get() == (*iter++).wezel.get());
-    ASSERT_TRUE(w1_2_1.get() == (*iter++).wezel.get());
-    ASSERT_TRUE(w1_2_2.get() == (*iter++).wezel.get());
-    ASSERT_TRUE(w1_3.get() == (*iter++).wezel.get());
+    ASSERT_TRUE(w1.get() == (*iter++).get());
+    ASSERT_TRUE(w1_1.get() == (*iter++).get());
+    ASSERT_TRUE(w1_2.get() == (*iter++).get());
+    ASSERT_TRUE(w1_2_1.get() == (*iter++).get());
+    ASSERT_TRUE(w1_2_2.get() == (*iter++).get());
+    ASSERT_TRUE(w1_3.get() == (*iter++).get());
     
 }
-TEST (Grupowanie,ListaObiektowZzachowanaStruktura_kolejnoscAkcji)
+TEST(Grupowalne,StrukturaJakoLista_rodzajAkcji_1wezel)
+{
+    spGrupowalne w1(make_shared<Grupowalne>());
+    auto iter = w1->StrukturaJakoLista_RodzajAkcji().begin();
+    ASSERT_EQ(RodzajAkcji::wezel,*iter);
+}
+/*
+TEST(Grupowalne,StrukturaJakoLista_rodzajAkcji_2obiekty)
+{
+    spGrupowalne w1(make_shared<Grupowalne>());
+    spGrupowalne w1_1(make_shared<Grupowalne>());
+    w1->DodajDziecko(w1_1);
+    
+    auto iter = w1->StrukturaJakoLista_RodzajAkcji().begin();
+    
+    ASSERT_EQ(RodzajAkcji::wezel,*iter++);
+    ASSERT_EQ(RodzajAkcji::wejscie,*iter++);
+    ASSERT_EQ(RodzajAkcji::wezel,*iter++);
+    ASSERT_EQ(RodzajAkcji::powrot,*iter++);
+}
+/*
+TEST(Grupowalne,StrukturaJakoLista_wejscie_obok_wyjscie)
 {
     spGrupowalne w1(make_shared<Grupowalne>());
     spGrupowalne w1_1(make_shared<Grupowalne>());
     spGrupowalne w1_2(make_shared<Grupowalne>());
-    spGrupowalne w1_3(make_shared<Grupowalne>());
-    spGrupowalne w1_2_1(make_shared<Grupowalne>());
-    spGrupowalne w1_2_2(make_shared<Grupowalne>());
-    
-    w1_2->DodajDziecko(w1_2_1);
-    w1_2->DodajDziecko(w1_2_2);
-    
     w1->DodajDziecko(w1_1);
     w1->DodajDziecko(w1_2);
-    w1->DodajDziecko(w1_3);
     
-    auto obiektyKolejno = w1->StrukturaJakoLista();
-    w1->GenerujStruktureJakoListe(obiektyKolejno);//ta logika do zmiany
-    auto iter = obiektyKolejno.begin();
+    auto iter = w1->StrukturaJakoLista_Wezly().begin();
     
     ASSERT_EQ(RodzajAkcji::wejscie,(*iter++).akcjaPo);
     ASSERT_EQ(RodzajAkcji::obok,(*iter++).akcjaPo);
-//    ASSERT_TRUE(w1_1.get() == (*iter++).wezel.get());
-//    ASSERT_TRUE(w1_2.get() == (*iter++).wezel.get());
-//    ASSERT_TRUE(w1_2_1.get() == (*iter++).wezel.get());
-//    ASSERT_TRUE(w1_2_2.get() == (*iter++).wezel.get());
-//    ASSERT_TRUE(w1_3.get() == (*iter++).wezel.get());
+    ASSERT_EQ(RodzajAkcji::powrot,(*iter++).akcjaPo);
+}
+TEST(Grupowalne,StrukturaJakoLista_tylkoPowrot)
+{
+    spGrupowalne w1(make_shared<Grupowalne>());
+    
+    auto iter = w1->StrukturaJakoLista_Wezly().begin();
+    
+    ASSERT_EQ(RodzajAkcji::powrot,(*iter++).akcjaPo);
+}
+TEST (Grupowalne,StrukturaJakoLista_kolejnoscAkcji_6)
+{
+    spGrupowalne w1(make_shared<Grupowalne>());
+    spGrupowalne w1_1(make_shared<Grupowalne>());
+    spGrupowalne w1_2(make_shared<Grupowalne>());
+    spGrupowalne w1_3(make_shared<Grupowalne>());
+    spGrupowalne w1_2_1(make_shared<Grupowalne>());
+    spGrupowalne w1_2_2(make_shared<Grupowalne>());
+    
+    w1_2->DodajDziecko(w1_2_1);
+    w1_2->DodajDziecko(w1_2_2);
+    
+    w1->DodajDziecko(w1_1);
+    w1->DodajDziecko(w1_2);
+    w1->DodajDziecko(w1_3);
+    
+    auto iter = w1->StrukturaJakoLista_Wezly().begin();
+    
+    ASSERT_EQ(RodzajAkcji::wejscie,(*iter++).akcjaPo);
+    ASSERT_EQ(RodzajAkcji::obok,(*iter++).akcjaPo);
+    ASSERT_EQ(RodzajAkcji::wejscie,(*iter++).akcjaPo);
+    ASSERT_EQ(RodzajAkcji::obok,(*iter++).akcjaPo);
+    ASSERT_EQ(RodzajAkcji::powrot,(*iter++).akcjaPo);
+    ASSERT_EQ(RodzajAkcji::obok,(*iter++).akcjaPo);
+    ASSERT_EQ(RodzajAkcji::powrot,(*iter++).akcjaPo);
     
 }
+*/

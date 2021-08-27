@@ -1,5 +1,6 @@
 #include "grupowalne.h"
 #include <exception>
+#include "rodzajakcji.cpp"
 //#include <stack>
 
 int Grupowalne::IleDzieci()
@@ -40,47 +41,57 @@ spGrupowalne Grupowalne::Rodzic()
 {
 	return rodzic;
 }
-size_t Grupowalne::StrukturaJakoLista_dlugosc()
+size_t Grupowalne::StrukturaJakoLista_Wezly_dlugosc()
 {
-    /*
-    spGrupowalne aktualnyWezel = this;
-	stack<int> galazLiczbaDzieci; 
-    stack<spGrupowalne> wezlyGalezi;
-
-    galazLiczbaDzieci.push(aktualnyWezel->IleDzieci());
-    wezlyGalezi.push(aktualnyWezel);
-    
-    int wysokoscStosu = 1;
-    bool koniec = false;
-    
-    while(!koniec)
-    {
-        //Akcje Wprowadzajace
-        int& pozostalaLiczbaDzieciNaTymPoziomie = galazLiczbaDzieci.top();
-        if(pozostalaLiczbaDzieciNaTymPoziomie){
-            
-        }
-        aktualnyWezel->IleDzieci()
-        //Akcje Wyprowadzajace
-    }
-    */
     size_t mojaDlugosc = 1;
     if(!IleDzieci())return mojaDlugosc;
-    for(auto& dziecko :  dzieci)mojaDlugosc += dziecko->StrukturaJakoLista_dlugosc();
+    for(auto& dziecko :  dzieci)mojaDlugosc += dziecko->StrukturaJakoLista_Wezly_dlugosc();
     return mojaDlugosc;
 }
-const list<WpisStrukturyJakoListy<spGrupowalne>>& Grupowalne::StrukturaJakoLista()
+const list<spGrupowalne>& Grupowalne::StrukturaJakoLista_Wezly()
 {
-    return strukturaJakoLista;
+    GenerujStruktureJakoListe_Wezly(strukturaJakoLista_Wezly);
+    return strukturaJakoLista_Wezly;
 }
+
+void Grupowalne::GenerujStruktureJakoListe_Wezly(list<spGrupowalne>& calaLista)
+{
+    calaLista.push_back(shared_from_this());
+     for(auto& dziecko :  dzieci)
+    {
+        dziecko->GenerujStruktureJakoListe_Wezly(calaLista);
+    }
+}
+const list<RodzajAkcji>& Grupowalne::StrukturaJakoLista_RodzajAkcji()
+{
+    GenerujStruktureJakoListe_RodzajAkcji(strukturaJakoLista_RodzajAkcji);
+    return strukturaJakoLista_RodzajAkcji;
+}
+/*
 void Grupowalne::GenerujStruktureJakoListe(listaWpisySpGrupowalne& calaLista)
 {
    
     WpisStrukturyJakoListy<spGrupowalne> wpis{RodzajAkcji::wejscie,shared_from_this()};
     calaLista.emplace_back(wpis);
-        
-    for(auto& dziecko :  dzieci)
+    pozycjaWliscie = --calaLista.end();
+    if(!IleDzieci())
     {
-        dziecko->GenerujStruktureJakoListe(calaLista);
+        (*pozycjaWliscie).akcjaPo = RodzajAkcji::powrot;
+        return;
     }
+    alistaWpisySpGrupowalneuto iter = dzieci.begin();
+    auto aktualny = iter;
+//    auto 
+    for(auto& dziecko :  dzieci)
+    {   
+        aktualny = iter++;
+        dziecko->GenerujStruktureJakoListe(calaLista);
+        auto aktuPozycjaWliscie = (*aktualny)->pozycjaWliscie;
+        (*aktuPozycjaWliscie).akcjaPo = RodzajAkcji::obok;
+//        calaLista.emplace_back(WpisStrukturyJakoListy<spGrupowalne>{RodzajAkcji::powrot,nullptr});
+    }
+    //czyli ostatni
+    auto aktuPozycjaWliscie = (*aktualny)->pozycjaWliscie;
+    (*aktuPozycjaWliscie).akcjaPo = RodzajAkcji::powrot;
 }
+*/

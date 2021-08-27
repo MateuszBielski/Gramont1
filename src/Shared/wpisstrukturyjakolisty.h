@@ -3,11 +3,12 @@
 //#include <iostream>
 //#include <memory>
 
-enum class RodzajAkcji: int{wejscie,obok,powrot};
+enum class RodzajAkcji;
 
 template<typename T>
 struct WpisStrukturyJakoListy
 {
+    RodzajAkcji akcjaPrzed;
     RodzajAkcji akcjaPo;
     T wezel;    
 };
