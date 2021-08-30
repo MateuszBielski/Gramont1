@@ -33,6 +33,7 @@ private:
     list<spGrupowalne> strukturaJakoLista_Wezly;
     list<RodzajAkcji> strukturaJakoLista_RodzajAkcji;
     void GenerujStruktureJakoListe_Wezly(list<spGrupowalne>& );
+    void GenerujStruktureJakoListe_RodzajAkcji(list<RodzajAkcji>&);
 };
 using spGrupowalne = shared_ptr<Grupowalne>;
 #endif // Grupowalne_H

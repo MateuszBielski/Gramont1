@@ -56,3 +56,10 @@ TEST(DoNarysowania,SzescianSchematNormalnych)
     
     for(int i = 0 ; i < szescian->ileNormalnych ; i++)ASSERT_EQ(schemat[i],szescian->schematNormalnych[i]);
 }
+TEST(DoNarysowania,DziedziczyZGrupowalne)
+{
+    unique_ptr<Grupowalne> grupowalne;
+    grupowalne= make_unique<DoNarysowania>();
+    ASSERT_TRUE(grupowalne.get());
+    
+}

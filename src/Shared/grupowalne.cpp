@@ -67,6 +67,18 @@ const list<RodzajAkcji>& Grupowalne::StrukturaJakoLista_RodzajAkcji()
     GenerujStruktureJakoListe_RodzajAkcji(strukturaJakoLista_RodzajAkcji);
     return strukturaJakoLista_RodzajAkcji;
 }
+void Grupowalne::GenerujStruktureJakoListe_RodzajAkcji(list<RodzajAkcji>& calaLista)
+{
+    calaLista.push_back(RodzajAkcji::wezel); 
+    if(!IleDzieci())return;
+    calaLista.push_back(RodzajAkcji::wejscie);
+    for(auto& dziecko :  dzieci)
+    {
+        dziecko->GenerujStruktureJakoListe_RodzajAkcji(calaLista);
+    }
+    calaLista.push_back(RodzajAkcji::powrot);
+}
+
 /*
 void Grupowalne::GenerujStruktureJakoListe(listaWpisySpGrupowalne& calaLista)
 {

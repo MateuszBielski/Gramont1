@@ -174,8 +174,7 @@ TEST(Grupowalne,StrukturaJakoLista_rodzajAkcji_1wezel)
     auto iter = w1->StrukturaJakoLista_RodzajAkcji().begin();
     ASSERT_EQ(RodzajAkcji::wezel,*iter);
 }
-/*
-TEST(Grupowalne,StrukturaJakoLista_rodzajAkcji_2obiekty)
+TEST(Grupowalne,StrukturaJakoLista_rodzajAkcji_rodzic_dziecko)
 {
     spGrupowalne w1(make_shared<Grupowalne>());
     spGrupowalne w1_1(make_shared<Grupowalne>());
@@ -188,8 +187,8 @@ TEST(Grupowalne,StrukturaJakoLista_rodzajAkcji_2obiekty)
     ASSERT_EQ(RodzajAkcji::wezel,*iter++);
     ASSERT_EQ(RodzajAkcji::powrot,*iter++);
 }
-/*
-TEST(Grupowalne,StrukturaJakoLista_wejscie_obok_wyjscie)
+
+TEST(Grupowalne,StrukturaJakoLista_rodzic_2dzieci)
 {
     spGrupowalne w1(make_shared<Grupowalne>());
     spGrupowalne w1_1(make_shared<Grupowalne>());
@@ -197,20 +196,15 @@ TEST(Grupowalne,StrukturaJakoLista_wejscie_obok_wyjscie)
     w1->DodajDziecko(w1_1);
     w1->DodajDziecko(w1_2);
     
-    auto iter = w1->StrukturaJakoLista_Wezly().begin();
+    auto iter = w1->StrukturaJakoLista_RodzajAkcji().begin();
     
-    ASSERT_EQ(RodzajAkcji::wejscie,(*iter++).akcjaPo);
-    ASSERT_EQ(RodzajAkcji::obok,(*iter++).akcjaPo);
-    ASSERT_EQ(RodzajAkcji::powrot,(*iter++).akcjaPo);
+    ASSERT_EQ(RodzajAkcji::wezel,*iter++);
+    ASSERT_EQ(RodzajAkcji::wejscie,*iter++);
+    ASSERT_EQ(RodzajAkcji::wezel,*iter++);
+    ASSERT_EQ(RodzajAkcji::wezel,*iter++);
+    ASSERT_EQ(RodzajAkcji::powrot,*iter++);
 }
-TEST(Grupowalne,StrukturaJakoLista_tylkoPowrot)
-{
-    spGrupowalne w1(make_shared<Grupowalne>());
-    
-    auto iter = w1->StrukturaJakoLista_Wezly().begin();
-    
-    ASSERT_EQ(RodzajAkcji::powrot,(*iter++).akcjaPo);
-}
+
 TEST (Grupowalne,StrukturaJakoLista_kolejnoscAkcji_6)
 {
     spGrupowalne w1(make_shared<Grupowalne>());
@@ -227,15 +221,16 @@ TEST (Grupowalne,StrukturaJakoLista_kolejnoscAkcji_6)
     w1->DodajDziecko(w1_2);
     w1->DodajDziecko(w1_3);
     
-    auto iter = w1->StrukturaJakoLista_Wezly().begin();
+    auto iter = w1->StrukturaJakoLista_RodzajAkcji().begin();
     
-    ASSERT_EQ(RodzajAkcji::wejscie,(*iter++).akcjaPo);
-    ASSERT_EQ(RodzajAkcji::obok,(*iter++).akcjaPo);
-    ASSERT_EQ(RodzajAkcji::wejscie,(*iter++).akcjaPo);
-    ASSERT_EQ(RodzajAkcji::obok,(*iter++).akcjaPo);
-    ASSERT_EQ(RodzajAkcji::powrot,(*iter++).akcjaPo);
-    ASSERT_EQ(RodzajAkcji::obok,(*iter++).akcjaPo);
-    ASSERT_EQ(RodzajAkcji::powrot,(*iter++).akcjaPo);
-    
+    ASSERT_EQ(RodzajAkcji::wezel,*iter++);
+    ASSERT_EQ(RodzajAkcji::wejscie,*iter++);
+    ASSERT_EQ(RodzajAkcji::wezel,*iter++);
+    ASSERT_EQ(RodzajAkcji::wezel,*iter++);
+    ASSERT_EQ(RodzajAkcji::wejscie,*iter++);
+    ASSERT_EQ(RodzajAkcji::wezel,*iter++);
+    ASSERT_EQ(RodzajAkcji::wezel,*iter++);
+    ASSERT_EQ(RodzajAkcji::powrot,*iter++);
+    ASSERT_EQ(RodzajAkcji::wezel,*iter++);
+    ASSERT_EQ(RodzajAkcji::powrot,*iter++);
 }
-*/
