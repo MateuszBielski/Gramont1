@@ -1,29 +1,30 @@
 #ifndef DoNarysowaniaJakoPolecenia_H
 #define DoNarysowaniaJakoPolecenia_H
-//#include <gtkmm.h>
-//#include <gtkglmm.h>
-//#include <iostream>
 #include <list>
-#include <memory>
-#include "donarysowania.h"
 #include "../Polecenie/poleceniarenderowania.h"
+#include "../Process/renderowanie.h"
 
 using namespace std;
-//using namespace Gtk;
 
-//using PtrMemRend = void(PoleceniaRenderowania::*)();
-
+template<typename T>
 class DoNarysowaniaJakoPolecenia
 {
-    using PtrMemRend_doNarys = void(PoleceniaRenderowania::*)(spDoNarysowania);
+    using PtrMemRend_T = void(PoleceniaRenderowania::*)(T);
     
-    spDoNarysowania doNarysowania;
-    list<PtrMemRend_doNarys> mojePolecenia;
+//    spDoNarysowania doNarysowania;
+    list<PtrMemRend_T> mojePolecenia;
 public:
-    DoNarysowaniaJakoPolecenia();
-    virtual ~DoNarysowaniaJakoPolecenia();
-    void PoleceniaWybierzIwstawWdobrejKolejnosci(spDoNarysowania);
-    list<PtrMemRend_doNarys> Polecenia();
+    DoNarysowaniaJakoPolecenia(){};
+    virtual ~DoNarysowaniaJakoPolecenia(){};
+    void PoleceniaWybierzIwstawWdobrejKolejnosci(T)
+    {
+        mojePolecenia.push_back(&Renderowanie::PrzedGeometria);
+        mojePolecenia.push_back(&Renderowanie::RysujGeometrie);
+        mojePolecenia.push_back(&Renderowanie::PoGeometrii);
+    }
+    list<PtrMemRend_T> Polecenia(){
+        return mojePolecenia;
+    }
     
 	
 protected:
@@ -31,6 +32,7 @@ protected:
 private:
         
 };
-using spDoNarysowaniaJakoPolecenia = shared_ptr<DoNarysowaniaJakoPolecenia>;
-using upDoNarysowaniaJakoPolecenia = unique_ptr<DoNarysowaniaJakoPolecenia>;
+
+
+//#include "donarysowaniajakopolecenia.cpp"
 #endif // DoNarysowaniaJakoPolecenia_H

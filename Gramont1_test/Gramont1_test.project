@@ -50,8 +50,8 @@
     <File Name="../src/Shared/prostytrojkat.cpp"/>
     <File Name="../src/Polecenie/ustawdonarysowania.cpp"/>
     <File Name="../src/Shared/grupowalne.cpp"/>
-    <File Name="../src/Shared/donarysowaniajakopolecenia.cpp"/>
     <File Name="../src/Polecenie/poleceniarenderowania.cpp"/>
+    <File Name="../src/Shared/donarysowaniajakopolecenia.cpp" ExcludeProjConfig="Debug"/>
   </VirtualDirectory>
   <VirtualDirectory Name="helperClass">
     <File Name="../src/Shared/trackball.cpp"/>
