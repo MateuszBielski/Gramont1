@@ -83,3 +83,23 @@ TEST(RenderowanieTest,RysujSceneZglaszaWyjatekPrzyBrakuDoNarysowania)
         EXPECT_EQ(err.what(),string("RysujScene() Brak doNarysowania"));
     }
 }
+TEST(Renderowanie,WywolujePoKoleiWezlyDoNarysowania)
+{
+    upDoNarysowania doNarysowania = make_unique<DoNarysowania>();
+    
+    Renderowanie rend;
+    rend.RysujScene();
+    //
+}
+TEST(Renderowanie,WywolujeWlasneFunkcje_xx_doNarysowania)
+{
+    //obiekt doNarysowania posiada listę funkcji do zrealizowania 
+    //to mogą być funkcje bardziej ogólne, jak : przed,rysGeom,po
+    //lub bardziej specjalizowane:
+    //pushNames, popNames,
+    //pushMatrix, popMatrix,
+    //transformacjePrzedRysowaniem,
+    //kolory
+    //widoczne
+    //lista tych funkcji powinna być dostępna jako wskaźniki w klasie przed renderowaniem, 
+}

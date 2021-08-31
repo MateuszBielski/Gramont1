@@ -28,6 +28,7 @@
     <File Name="renderowanieTest.cpp"/>
     <File Name="donarysowaniatest.cpp"/>
     <File Name="grupowanietest.cpp"/>
+    <File Name="poleceniarenderowaniatest.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="testedClasses">
     <File Name="../src/Shared/kursor2d.cpp"/>
@@ -49,6 +50,8 @@
     <File Name="../src/Shared/prostytrojkat.cpp"/>
     <File Name="../src/Polecenie/ustawdonarysowania.cpp"/>
     <File Name="../src/Shared/grupowalne.cpp"/>
+    <File Name="../src/Shared/donarysowaniajakopolecenia.cpp"/>
+    <File Name="../src/Polecenie/poleceniarenderowania.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="helperClass">
     <File Name="../src/Shared/trackball.cpp"/>

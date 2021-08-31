@@ -44,6 +44,8 @@
       <File Name="src/Shared/grupowalne.h"/>
       <File Name="src/Shared/grupowalne.cpp"/>
       <File Name="src/Shared/wpisstrukturyjakolisty.h"/>
+      <File Name="src/Shared/donarysowaniajakopolecenia.h"/>
+      <File Name="src/Shared/donarysowaniajakopolecenia.cpp"/>
     </VirtualDirectory>
     <VirtualDirectory Name="Process">
       <File Name="src/Process/obslugasygnalow.h"/>
@@ -54,6 +56,8 @@
       <File Name="src/Process/watki.cpp"/>
       <File Name="src/Process/zarzadzaniemodelami.h"/>
       <File Name="src/Process/zarzadzaniemodelami.cpp"/>
+      <File Name="src/Polecenie/poleceniarenderowania.h"/>
+      <File Name="src/Polecenie/poleceniarenderowania.cpp"/>
     </VirtualDirectory>
     <File Name="src/main.cpp"/>
     <VirtualDirectory Name="Polecenie">

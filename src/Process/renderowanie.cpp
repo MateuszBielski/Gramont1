@@ -62,7 +62,41 @@ void Renderowanie::RysujScene()
         }
         glEnd();
 }
+/****************************
+void Renderowanie::RysujScene_projektFunkcji()
+{
+    for(auto poleceniaRysujace :doNarysowania->kolejnePoleceniaRenderowania())
+    {
+        this->polecenieRysujace;
+    }
+    //
+        
+}
+void Renderowanie::PrzedGeometriaModelu(spDoNarysowania rys)
+{
+    //np wejście na następny poziom w hierarchii czyli
+    //glPushName()
+    //glPushMatrix()
+    //transformacje dla danego modelu i jego grupy
+}
+void Renderowanie::RysujGeometrieModelu(spDoNarysowania rys)
+{
+    //rozumiane jako petle po wierzcholkach i normalnych
+}
+void Renderowanie::RysujGeometrieModeluNiestandardowo(spDoNarysowania rys)
+{
+    //funkcja po funkcji
+}
+void Renderowanie::PoGeometriiModelu(spDoNarysowania rys)
+{
+    //wyjście z poziomów, odpowiednią ilość razy np:
+    //glPopName();
+    //glPopMatrix();
+    
+}
 
+
+****************************/
 void Renderowanie::FunPrzerysuj(spDoNarysowania rys)
 {	
     doNarysowania = rys;

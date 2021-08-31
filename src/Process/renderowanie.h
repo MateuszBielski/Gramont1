@@ -3,13 +3,14 @@
 #include <gtkglmm.h>
 #include "../Shared/ekrangl.h"
 #include "../Polecenie/obslugapolecen.h"
+#include "../Polecenie/poleceniarenderowania.h"
 using namespace std;
 using namespace Gtk;
 
 using ptr_vfff = void(*)(float,float,float);
 using ptr_vfp = void(*)(const float*);
 
-class Renderowanie : public ObslugaPolecen
+class Renderowanie : public ObslugaPolecen, public PoleceniaRenderowania
 {
     friend class TestRenderKlas;
     spEkranGL ekranGL = nullptr;
@@ -21,6 +22,7 @@ public:
     virtual void FunPrzerysuj(spDoNarysowania ) override;
     virtual void ustawDoNarysowania(spDoNarysowania) override;
     virtual void RysujScene();
+    
 protected:
 
 private:
