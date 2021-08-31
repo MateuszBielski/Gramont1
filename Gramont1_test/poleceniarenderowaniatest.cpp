@@ -8,7 +8,7 @@
 TEST(PoleceniaRenderowania,WstawieniePolecenDoZbioru)
 {
     spDoNarysowania trojkat = make_shared<ProstyTrojkat>();
-    DoNarysowaniaJakoPolecenia<spDoNarysowania> polRys;
+    DoNarysowaniaJakoPolecenia<spDoNarysowania,Renderowanie> polRys;
     polRys.PoleceniaWybierzIwstawWdobrejKolejnosci(trojkat);
     auto polecenia =  polRys.Polecenia();
     

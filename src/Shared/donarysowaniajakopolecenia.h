@@ -1,26 +1,23 @@
 #ifndef DoNarysowaniaJakoPolecenia_H
 #define DoNarysowaniaJakoPolecenia_H
 #include <list>
-#include "../Polecenie/poleceniarenderowania.h"
-#include "../Process/renderowanie.h"
 
 using namespace std;
 
-template<typename T>
+template<typename T,typename Rend>
 class DoNarysowaniaJakoPolecenia
 {
-    using PtrMemRend_T = void(PoleceniaRenderowania::*)(T);
+    using PtrMemRend_T = void(Rend::*)(T);
     
-//    spDoNarysowania doNarysowania;
     list<PtrMemRend_T> mojePolecenia;
 public:
     DoNarysowaniaJakoPolecenia(){};
     virtual ~DoNarysowaniaJakoPolecenia(){};
     void PoleceniaWybierzIwstawWdobrejKolejnosci(T)
     {
-        mojePolecenia.push_back(&Renderowanie::PrzedGeometria);
-        mojePolecenia.push_back(&Renderowanie::RysujGeometrie);
-        mojePolecenia.push_back(&Renderowanie::PoGeometrii);
+        mojePolecenia.push_back(&Rend::PrzedGeometria);
+        mojePolecenia.push_back(&Rend::RysujGeometrie);
+        mojePolecenia.push_back(&Rend::PoGeometrii);
     }
     list<PtrMemRend_T> Polecenia(){
         return mojePolecenia;
