@@ -44,7 +44,6 @@
     <File Name="../src/Polecenie/obslugapolecen.cpp"/>
     <File Name="../src/Polecenie/polecenie.cpp"/>
     <File Name="../src/Polecenie/przerysuj.cpp"/>
-    <File Name="../src/Shared/donarysowania.cpp"/>
     <File Name="../src/Shared/oknogtk.cpp"/>
     <File Name="../src/Shared/szescian.cpp"/>
     <File Name="../src/Shared/prostytrojkat.cpp"/>
@@ -52,6 +51,8 @@
     <File Name="../src/Shared/grupowalne.cpp"/>
     <File Name="../src/Polecenie/poleceniarenderowania.cpp"/>
     <File Name="../src/Shared/donarysowaniajakopolecenia.cpp" ExcludeProjConfig="Debug"/>
+    <File Name="../src/Shared/geometriamodelu.cpp"/>
+    <File Name="../src/Shared/donarysowania.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="helperClass">
     <File Name="../src/Shared/trackball.cpp"/>

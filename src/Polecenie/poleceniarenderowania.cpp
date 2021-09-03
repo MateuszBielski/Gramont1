@@ -1,5 +1,10 @@
 #include "poleceniarenderowania.h"
 
+void PustaFunkcja()
+{
+    
+}
+
 PoleceniaRenderowania::PoleceniaRenderowania()
 {
 
@@ -10,18 +15,21 @@ PoleceniaRenderowania::~PoleceniaRenderowania()
 
 }
 
-void PoleceniaRenderowania::PrzedGeometria(spDoNarysowania)
+void PoleceniaRenderowania::PrzedGeometria(spGeometriaModelu)
 {
     cout<<"PoleceniaRenderowania::PrzedGeometria"<<endl;
+//    (*ptrPrzedGeometriaTest)();
 }
 
-void PoleceniaRenderowania::RysujGeometrie(spDoNarysowania rys)
+void PoleceniaRenderowania::RysujGeometrie(spGeometriaModelu rys)
 {
     cout<<"PoleceniaRenderowania::RysujGeometrie"<<endl;
     cout<<"IleVertexow"<<rys->ileVertexow<<endl;
+//    (*ptrRysujGeometrieTest)();
 }
 
-void PoleceniaRenderowania::PoGeometrii(spDoNarysowania)
+void PoleceniaRenderowania::PoGeometrii(spGeometriaModelu)
 {
     cout<<"PoleceniaRenderowania::PoGeometrii"<<endl;
+//    (*ptrPoGeometriiTest)();
 }

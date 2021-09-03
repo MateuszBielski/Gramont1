@@ -2,11 +2,12 @@
 #define PoleceniaRenderowania_H
 #include <iostream>
 #include <memory>
-#include "../Shared/donarysowania.h"
+#include "../Shared/geometriamodelu.h"
 
 using namespace std;
-//using namespace Gtk;
 
+using ptr_vv = void(*)();
+void PustaFunkcja();
 
 class PoleceniaRenderowania
 {
@@ -14,13 +15,26 @@ class PoleceniaRenderowania
     PoleceniaRenderowania();
     virtual ~PoleceniaRenderowania();
         
-    void PrzedGeometria(spDoNarysowania);
-    void RysujGeometrie(spDoNarysowania);
-    void PoGeometrii(spDoNarysowania);
+    void PrzedGeometria(spGeometriaModelu);
+    void RysujGeometrie(spGeometriaModelu);
+    void PoGeometrii(spGeometriaModelu);
+    template<typename T>
+    void WywolajPoleceniaZ(T& obiektZpoleceniami){
+        for(auto& pol : obiektZpoleceniami->Polecenia())
+        {
+            (this->*pol)(obiektZpoleceniami);
+        }
+    }
+    
 	
 protected:
+//   typedef void(*ptr_vv)() ptrPrzedGeometriaTest = nullptr;
+//   ptr_vv ptrRysujGeometrieTest = nullptr;
+//   ptr_vv ptrPoGeometriiTest = nullptr;
+//    ptr_vv ptrPrzedGeometriaTest = &PustaFunkcja;
 
 private:
+//    int liczba;
         
 };
 using spPoleceniaRenderowania = shared_ptr<PoleceniaRenderowania>;

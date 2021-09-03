@@ -1,6 +1,7 @@
 #ifndef Renderowanie_H
 #define Renderowanie_H
 #include <gtkglmm.h>
+
 #include "../Shared/ekrangl.h"
 #include "../Polecenie/obslugapolecen.h"
 #include "../Polecenie/poleceniarenderowania.h"
@@ -33,6 +34,7 @@ private:
     
     ptr_vfff p_glTranslatef = nullptr, p_glVertex3f = nullptr;
     ptr_vfp p_glVertex3fv = nullptr, p_glNormal3fv = nullptr;
+    
     GLuint listid;
     float x[3], y[3], z[3];
     

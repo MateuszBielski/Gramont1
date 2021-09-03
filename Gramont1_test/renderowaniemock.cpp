@@ -11,3 +11,7 @@ void RenderowanieMock::RysujScene()
 {	
 //	for()/
 }
+void RenderowanieMock::InnePolecenie(spGeometriaModelu)
+{
+	cout<<"RenderowanieMock::InnePolecenie"<<endl;
+}

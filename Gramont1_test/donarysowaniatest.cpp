@@ -63,3 +63,5 @@ TEST(DoNarysowania,DziedziczyZGrupowalne)
     ASSERT_TRUE(grupowalne.get());
     
 }
+//mechanizm powiadomiania o wprowadzeniu zmiany, 
+//powiadamianie o zmianie wymusza przebudowanie listy polecen renderowania
