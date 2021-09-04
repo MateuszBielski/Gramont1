@@ -22,19 +22,63 @@ TEST(PoleceniaRenderowania,Wstawienie3Polecen_sprawdzenieSkladni_TrescDoZmiany)
 }
 TEST(PoleceniaRenderowania,ustawiaFunkcjeMonitorujaca)
 {
-    
+    Renderowanie rend;
+    TestRenderKlas trk;
+    trk.UstawMonitorujaceFunkcjeDla(rend);
+    rend.PrzedGeometria(make_unique<DoNarysowania>());
+    rend.PrzedGeometria(make_unique<DoNarysowania>());
+    rend.PoGeometrii(make_unique<DoNarysowania>());
+    rend.PoGeometrii(make_unique<DoNarysowania>());
+    rend.PoGeometrii(make_unique<DoNarysowania>());
+    ASSERT_EQ(2,trk.uzyteFunkcje["PrzedGeometria"]);
+    ASSERT_EQ(3,trk.uzyteFunkcje["PoGeometrii"]);
 }
 
 TEST(PoleceniaRenderowania,RenderowaniePotrafiWywolacPoleceniaZlisty)
 {
     spDoNarysowania rys = make_shared<ProstyTrojkat>();
-    rys->WstawPolecenie(&PoleceniaRenderowania::RysujGeometrie);
+    rys->WstawPolecenieNaKoncu(&PoleceniaRenderowania::RysujGeometrie);
     Renderowanie rend;
-    TestRenderKlas testRenderKlas;
-//    testRenderKlas.UstawMonitorujaceFunkcjeDla(rend);
-    rend.WywolajPoleceniaZ(rys);
-//    rend.
+    TestRenderKlas trk;
+    trk.UstawMonitorujaceFunkcjeDla(rend);
+    rend.WywolajPoleceniaZ(rys); 
+    ASSERT_EQ(1,trk.uzyteFunkcje["RysujGeometrie"]);
 }
+TEST(PoleceniaRenderowania,WywolanieDlaGrupowanych)
+{
+    spDoNarysowania rys1 = make_shared<DoNarysowania>();
+    rys1->WstawPolecenieNaKoncu(&PoleceniaRenderowania::RysujGeometrie);
+    spDoNarysowania rys2 = make_shared<DoNarysowania>();
+    rys2->WstawPolecenieNaKoncu(&PoleceniaRenderowania::RysujGeometrie);
+    spDoNarysowania rys3 = make_shared<DoNarysowania>();
+    rys3->WstawPolecenieNaKoncu(&PoleceniaRenderowania::RysujGeometrie);
+    
+    rys1->DodajDziecko(rys2);
+    rys1->DodajDziecko(rys3);
+    
+    Renderowanie rend;
+    TestRenderKlas trk;
+    trk.UstawMonitorujaceFunkcjeDla(rend);
+    rend.WywolajPoleceniaZ(rys1); 
+    ASSERT_EQ(3,trk.uzyteFunkcje["RysujGeometrie"]);
+}
+TEST(PoleceniaRenderowania,WywolanieDlaGrupowanych_DuzaLiczba)
+{
+    spDoNarysowania rys1 = make_shared<DoNarysowania>();
+    rys1->WstawPolecenieNaKoncu(&PoleceniaRenderowania::RysujGeometrie);
+    for(int i = 0; i < 2000 ;i++)
+    {
+        spDoNarysowania rys2 = make_shared<DoNarysowania>();
+        rys2->WstawPolecenieNaKoncu(&PoleceniaRenderowania::RysujGeometrie);
+        rys1->DodajDziecko(rys2);
+    }
+    Renderowanie rend;
+    TestRenderKlas trk;
+    trk.UstawMonitorujaceFunkcjeDla(rend);
+    rend.WywolajPoleceniaZ(rys1); 
+    ASSERT_EQ(2001,trk.uzyteFunkcje["RysujGeometrie"]);
+}
+
 TEST(PoleceniaRenderowania,RenderowanieWywolujePoleceniaZwiazaneZdoNarysowania)
 {
     spDoNarysowania trojkat = make_shared<ProstyTrojkat>();

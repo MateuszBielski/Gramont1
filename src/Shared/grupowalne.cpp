@@ -1,13 +1,15 @@
 #include "grupowalne.h"
 #include <exception>
 #include "rodzajakcji.cpp"
-//#include <stack>
+#include "donarysowania.h"//na potrzeby linkera - na końcu pliku
 
-int Grupowalne::IleDzieci()
+template<class T>
+int Grupowalne_T<T>::IleDzieci()
 {
 	return dzieci.size();
 }
-void Grupowalne::DodajDziecko(spGrupowalne dz)
+template<class T>
+void Grupowalne_T<T>::DodajDziecko(spGrupowalne_T dz)
 {
     if(dz.get() == this)return;
     auto poprzedniRodzic = dz->Rodzic();
@@ -15,9 +17,10 @@ void Grupowalne::DodajDziecko(spGrupowalne dz)
     dzieci.push_back(dz);
     dz->pozycja = --dzieci.end();
 //    auto wsk = 
-    dz->rodzic = shared_from_this();
+    dz->rodzic = static_pointer_cast<T>(shared_from_this());
 }
-bool Grupowalne::OdejmijDziecko(spGrupowalne dz)
+template<class T>
+bool Grupowalne_T<T>::OdejmijDziecko(spGrupowalne_T dz)
 {
     if(CzyJestMoimDzieckiem(dz))
     {
@@ -27,7 +30,8 @@ bool Grupowalne::OdejmijDziecko(spGrupowalne dz)
     }
     return false;
 }
-bool Grupowalne::CzyJestMoimDzieckiem(spGrupowalne doSprawdzenia)
+template<class T>
+bool Grupowalne_T<T>::CzyJestMoimDzieckiem(spGrupowalne_T doSprawdzenia)
 {
     auto iter = dzieci.begin();
     
@@ -37,37 +41,43 @@ bool Grupowalne::CzyJestMoimDzieckiem(spGrupowalne doSprawdzenia)
     }
     return false;
 }
-spGrupowalne Grupowalne::Rodzic()
+template<class T>
+shared_ptr<T> Grupowalne_T<T>::Rodzic()
 {
 	return rodzic;
 }
-size_t Grupowalne::StrukturaJakoLista_Wezly_dlugosc()
+template<class T>
+size_t Grupowalne_T<T>::StrukturaJakoLista_Wezly_dlugosc()
 {
     size_t mojaDlugosc = 1;
     if(!IleDzieci())return mojaDlugosc;
     for(auto& dziecko :  dzieci)mojaDlugosc += dziecko->StrukturaJakoLista_Wezly_dlugosc();
     return mojaDlugosc;
 }
-const list<spGrupowalne>& Grupowalne::StrukturaJakoLista_Wezly()
+template<class T>
+const list<shared_ptr<T>>& Grupowalne_T<T>::StrukturaJakoLista_Wezly()
 {
     GenerujStruktureJakoListe_Wezly(strukturaJakoLista_Wezly);
     return strukturaJakoLista_Wezly;
 }
 
-void Grupowalne::GenerujStruktureJakoListe_Wezly(list<spGrupowalne>& calaLista)
+template<class T>
+void Grupowalne_T<T>::GenerujStruktureJakoListe_Wezly(list<spGrupowalne_T>& calaLista)
 {
-    calaLista.push_back(shared_from_this());
+    calaLista.push_back(static_pointer_cast<T>(shared_from_this()));
      for(auto& dziecko :  dzieci)
     {
         dziecko->GenerujStruktureJakoListe_Wezly(calaLista);
     }
 }
-const list<RodzajAkcji>& Grupowalne::StrukturaJakoLista_RodzajAkcji()
+template<class T>
+const list<RodzajAkcji>& Grupowalne_T<T>::StrukturaJakoLista_RodzajAkcji()
 {
     GenerujStruktureJakoListe_RodzajAkcji(strukturaJakoLista_RodzajAkcji);
     return strukturaJakoLista_RodzajAkcji;
 }
-void Grupowalne::GenerujStruktureJakoListe_RodzajAkcji(list<RodzajAkcji>& calaLista)
+template<class T>
+void Grupowalne_T<T>::GenerujStruktureJakoListe_RodzajAkcji(list<RodzajAkcji>& calaLista)
 {
     calaLista.push_back(RodzajAkcji::wezel); 
     if(!IleDzieci())return;
@@ -79,6 +89,9 @@ void Grupowalne::GenerujStruktureJakoListe_RodzajAkcji(list<RodzajAkcji>& calaLi
     calaLista.push_back(RodzajAkcji::powrot);
 }
 
+//na potrzeby linkera
+template class Grupowalne_T<Grupowalne>;
+template class Grupowalne_T<DoNarysowania>;
 /*
 void Grupowalne::GenerujStruktureJakoListe(listaWpisySpGrupowalne& calaLista)
 {

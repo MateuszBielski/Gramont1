@@ -6,8 +6,8 @@
 
 using namespace std;
 
-using ptr_vv = void(*)();
-void PustaFunkcja();
+using ptr_vc = void(*)(const char *);
+void PustaFunkcja(const char *);
 
 class PoleceniaRenderowania
 {
@@ -20,26 +20,11 @@ class PoleceniaRenderowania
     void PoGeometrii(spGeometriaModelu);
     
     template<typename T>
-    void WywolajPoleceniaZ(T obiektZpoleceniami){
-        for(auto& pol : obiektZpoleceniami->Polecenia())
-        {
-            (this->*pol)(obiektZpoleceniami);
-        }
-    }
-    
+    void WywolajPoleceniaZ(T obiektZwezlami);
 	
 protected:
-//   typedef void(*ptr_vv)() ptrPrzedGeometriaTest = nullptr;
-   ptr_vv ptrRysujGeometrieTest = &PustaFunkcja;
-   ptr_vv ptrPoGeometriiTest = &PustaFunkcja;
-    ptr_vv ptrPrzedGeometriaTest = &PustaFunkcja;
-//   ptr_vv ptrRysujGeometrieTest = nullptr;
-//   ptr_vv ptrPoGeometriiTest = nullptr;
-//    ptr_vv ptrPrzedGeometriaTest = nullptr;
-    int jeden, dwa, trzy;
-    double dewwe, dqwsdzcs, dwqqweqwddd, dqwqwdqwdnj, bjahsbhjdhbad;
+    ptr_vc ptrFunkcjaMonitorujaca = &PustaFunkcja;
 private:
-//    int liczba;
         
 };
 using spPoleceniaRenderowania = shared_ptr<PoleceniaRenderowania>;

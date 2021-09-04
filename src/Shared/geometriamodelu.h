@@ -11,7 +11,7 @@
 using namespace std;
 //using namespace Gtk;
 
-class GeometriaModelu : public Transformowalne, public Grupowalne
+class GeometriaModelu : public Transformowalne
 {
 
 public:

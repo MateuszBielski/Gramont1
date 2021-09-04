@@ -13,7 +13,7 @@ l_PtrMemRend_Geom DoNarysowania::Polecenia()
 {
     return mojePolecenia;
 }
-void DoNarysowania::WstawPolecenie(PtrMemRend_Geom polecenie)
+void DoNarysowania::WstawPolecenieNaKoncu(PtrMemRend_Geom polecenie)
 {
     mojePolecenia.push_back(polecenie);
 }

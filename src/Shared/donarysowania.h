@@ -9,14 +9,14 @@ using namespace std;
 using PtrMemRend_Geom = void(PoleceniaRenderowania::*)(spGeometriaModelu);
 using l_PtrMemRend_Geom = list<PtrMemRend_Geom>;
 
-class DoNarysowania : public GeometriaModelu
+class DoNarysowania : public GeometriaModelu, public Grupowalne_T<DoNarysowania>
 {
     
     l_PtrMemRend_Geom mojePolecenia;
 public:
     void PoleceniaWybierzIwstawWdobrejKolejnosci();
     l_PtrMemRend_Geom Polecenia();
-    void WstawPolecenie(PtrMemRend_Geom);
+    void WstawPolecenieNaKoncu(PtrMemRend_Geom);
 };
 
 using spDoNarysowania = shared_ptr<DoNarysowania>;

@@ -41,6 +41,11 @@ bool TestRenderKlas::UstawZastepczeOpenGlDla(Renderowanie& rend)
 	rend.p_glNormal3fv =&test_glNormal3fv;
     return rend.p_glVertex3fv && rend.p_glNormal3fv;
 }
+void TestRenderKlas::UstawMonitorujaceFunkcjeDla(Renderowanie& rend)
+{
+	rend.ptrFunkcjaMonitorujaca = &testUzytaFunkcja;
+}
+
 string TestRenderKlas::CiagWywolanOpenGl()
 {
 	string result = st_ciagWywolanOpenGl;

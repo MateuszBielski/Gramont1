@@ -21,6 +21,7 @@ public:
     string CiagWywolanOpenGl();
     bool UstawZastepczeOpenGlDla(Renderowanie&);
     bool CzyMaTenSamDoNarysowania(Renderowanie&, spDoNarysowania);
+    void UstawMonitorujaceFunkcjeDla(Renderowanie&);
     static map<string,unsigned> uzyteFunkcje;
 };
 
