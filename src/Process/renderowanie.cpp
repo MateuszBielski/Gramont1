@@ -102,6 +102,10 @@ void Renderowanie::FunPrzerysuj(spDoNarysowania rys)
     doNarysowania = rys;
     if(ekranGL)ekranGL->WykonajWkontekscieGL(&Renderowanie::RysujScene,*this);
 }
+//void Renderowanie::WywolajPoleceniaZ(spDoNarysowania rys)
+//{
+//	
+//}
 void Renderowanie::ustawDoNarysowania(spDoNarysowania rys)
 {
 	doNarysowania = rys;

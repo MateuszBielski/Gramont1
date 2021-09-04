@@ -10,7 +10,7 @@ class RenderowanieMock : public Renderowanie
 {
 public:
     virtual void FunPrzerysuj(spDoNarysowania ) override;
-    virtual void RysujScene();
+    virtual void RysujScene() override;
     spDoNarysowania DoNarysowania(){return doNarysowania;};
     void InnePolecenie(spGeometriaModelu);
     protected:

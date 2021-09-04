@@ -2,29 +2,38 @@
 #include "../src/Shared/grupowalne.h"
 #include "../src/Shared/prostytrojkat.h"
 #include "../src/Process/renderowanie.h"
-#include "renderowaniemock.h"
+#include "renderowaniemock.h"//?
+#include "testrenderklas.h"
+
 
 TEST(PoleceniaRenderowania,Wstawienie3Polecen_sprawdzenieSkladni_TrescDoZmiany)
 {
     spDoNarysowania trojkat = make_shared<ProstyTrojkat>();
-//    DoNarysowaniaJakoPolecenia<spDoNarysowania,Renderowanie> polRys;
     trojkat->PoleceniaWybierzIwstawWdobrejKolejnosci();
     auto polecenia =  trojkat->Polecenia();
 //    
     ASSERT_EQ(3,polecenia.size());
 //    
-    Renderowanie rend;
+    PoleceniaRenderowania rend;
     for(auto& pol : polecenia)
     {
         (rend.*pol)(trojkat);
     }
 }
+TEST(PoleceniaRenderowania,ustawiaFunkcjeMonitorujaca)
+{
+    
+}
+
 TEST(PoleceniaRenderowania,RenderowaniePotrafiWywolacPoleceniaZlisty)
 {
     spDoNarysowania rys = make_shared<ProstyTrojkat>();
-    rys->WstawPolecenie(&Renderowanie::RysujGeometrie);
+    rys->WstawPolecenie(&PoleceniaRenderowania::RysujGeometrie);
     Renderowanie rend;
+    TestRenderKlas testRenderKlas;
+//    testRenderKlas.UstawMonitorujaceFunkcjeDla(rend);
     rend.WywolajPoleceniaZ(rys);
+//    rend.
 }
 TEST(PoleceniaRenderowania,RenderowanieWywolujePoleceniaZwiazaneZdoNarysowania)
 {

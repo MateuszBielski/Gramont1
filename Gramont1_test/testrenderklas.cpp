@@ -22,10 +22,17 @@ void test_glNormal3fv(const float* n)
 	st_ciagWywolanOpenGl += "n";
     for(short i = 0; i < 3; i++)st_ciagWywolanOpenGl += ToString(n[i],1)+",";
 }
+void testUzytaFunkcja(const char* nazwaFunkcji)
+{
+	TestRenderKlas::uzyteFunkcje[nazwaFunkcji] += 1;
+}
+
+map<string,unsigned> TestRenderKlas::uzyteFunkcje = {};//{"x",10}
 
 TestRenderKlas::TestRenderKlas()
 {
     st_ciagWywolanOpenGl = "";
+    uzyteFunkcje.clear();
 }
 
 bool TestRenderKlas::UstawZastepczeOpenGlDla(Renderowanie& rend)

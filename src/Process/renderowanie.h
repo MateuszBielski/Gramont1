@@ -11,11 +11,24 @@ using namespace Gtk;
 using ptr_vfff = void(*)(float,float,float);
 using ptr_vfp = void(*)(const float*);
 
+struct DuzaStruktura
+{
+    int jeden, dwa, trzy, cztery, adhja, adiaoida, adhaius;
+    ptr_vfff jakisWskaznik;
+    ptr_vv ptrRysujGeometrieTest = nullptr;
+   ptr_vv ptrPoGeometriiTest = nullptr;
+    ptr_vv ptrPrzedGeometriaTest = nullptr;
+    double dewwe, dqwsdzcs, dwqqweqwddd, dqwqwdqwdnj, bjahsbhjdhbad;
+};
+
 class Renderowanie : public ObslugaPolecen, public PoleceniaRenderowania
 {
     friend class TestRenderKlas;
     spEkranGL ekranGL = nullptr;
     spDoNarysowania doNarysowania;
+//    DuzaStruktura stru;
+//    PoleceniaRenderowania polecenia;
+    
 public:
     Renderowanie();
     virtual ~Renderowanie();
@@ -23,6 +36,7 @@ public:
     virtual void FunPrzerysuj(spDoNarysowania ) override;
     virtual void ustawDoNarysowania(spDoNarysowania) override;
     virtual void RysujScene();
+//    void WywolajPoleceniaZ(spDoNarysowania){};
     
 protected:
 
