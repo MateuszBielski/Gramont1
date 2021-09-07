@@ -1,25 +1,25 @@
 #include <gtest/gtest.h>
 #include "testrenderklas.h"
 
-TEST(Funkcje,TestRenderKlas_Monitorowanie_brakUzycia)
+TEST(TestRenderKlas,Monitorowanie_brakUzycia)
 {
     TestRenderKlas trk;
     ASSERT_TRUE(trk.uzyteFunkcje.empty());
 }
-TEST(Funkcje,TestRenderKlas_FunkcjaMonitorujaca_jednoUzycie)
+TEST(TestRenderKlas,FunkcjaMonitorujaca_jednoUzycie)
 {
     TestRenderKlas trk;
     testUzytaFunkcja("funkcja");
     ASSERT_EQ(1,trk.uzyteFunkcje["funkcja"]);
 }
-TEST(Funkcje,TestRenderKlas_FunkcjaMonitorujaca_dwaUzycia)
+TEST(TestRenderKlas,FunkcjaMonitorujaca_dwaUzycia)
 {
     TestRenderKlas trk;
     testUzytaFunkcja("funkcjaX");
     testUzytaFunkcja("funkcjaX");
     ASSERT_EQ(2,trk.uzyteFunkcje["funkcjaX"]);
 }
-TEST(Funkcje,TestRenderKlas_FunkcjaMonitorujaca_zliczaUzyteTylkoTeraz)
+TEST(TestRenderKlas,FunkcjaMonitorujaca_zliczaUzyteTylkoTeraz)
 {
     TestRenderKlas trk;
     testUzytaFunkcja("funkcjaX");
@@ -29,7 +29,7 @@ TEST(Funkcje,TestRenderKlas_FunkcjaMonitorujaca_zliczaUzyteTylkoTeraz)
     ASSERT_EQ(0,trk.uzyteFunkcje["funkcja"]);
 }
 
-TEST(Funkcje,TestRenderKlas_Monitorowanie_zerujePrzyUruchomieniu)
+TEST(TestRenderKlas,Monitorowanie_zerujePrzyUruchomieniu)
 {
     TestRenderKlas trk;
     testUzytaFunkcja("funkcjaX");
@@ -37,4 +37,17 @@ TEST(Funkcje,TestRenderKlas_Monitorowanie_zerujePrzyUruchomieniu)
     testUzytaFunkcja("funkcjaX");
     TestRenderKlas trk2;
     ASSERT_EQ(0,trk2.uzyteFunkcje.size());
+}
+TEST(TestRenderKlas,MonitorujeKolejnoscFunkcji)
+{
+    TestRenderKlas trk;
+    testUzytaFunkcja("f_x");
+    testUzytaFunkcja("f_y");
+    testUzytaFunkcja("f_z");
+    testUzytaFunkcja("f_y");
+    auto iter = trk.funkcjeWkolejnosci.begin();
+    ASSERT_EQ("f_x",*iter++);
+    ASSERT_EQ("f_y",*iter++);
+    ASSERT_EQ("f_z",*iter++);
+    ASSERT_EQ("f_y",*iter++);
 }

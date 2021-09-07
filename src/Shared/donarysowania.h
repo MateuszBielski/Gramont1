@@ -13,10 +13,14 @@ class DoNarysowania : public GeometriaModelu, public Grupowalne_T<DoNarysowania>
 {
     
     l_PtrMemRend_Geom mojePolecenia;
+    bool nieWidoczny = false;
 public:
+//    template<typename T>
     void PoleceniaWybierzIwstawWdobrejKolejnosci();
     l_PtrMemRend_Geom Polecenia();
     void WstawPolecenieNaKoncu(PtrMemRend_Geom);
+    
+    void NieWidoczny(bool);
 };
 
 using spDoNarysowania = shared_ptr<DoNarysowania>;

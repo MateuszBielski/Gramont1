@@ -18,6 +18,9 @@ Transformowalne::Transformowalne()
 	m_macierzObrotu[1][1] = 1.0;
 	m_macierzObrotu[2][2] = 1.0;
 	m_macierzObrotu[3][3] = 1.0;
+    m_pozycja[0] = 0;
+    m_pozycja[1] = 0;
+    m_pozycja[2] = 0;
 }
 
 Transformowalne::~Transformowalne()
@@ -60,4 +63,12 @@ void Transformowalne::MacierzObrotu(float* m)
 float* Transformowalne::MacierzObrotu()
 {	
 	return m_macierzObrotu[0];
+}
+float* Transformowalne::Pozycja()
+{
+	return m_pozycja;
+}
+void Transformowalne::UstawPozycje(float* poz)
+{
+	for(short i = 0; i < 3; i++) m_pozycja[i] = poz[i];
 }

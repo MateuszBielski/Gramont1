@@ -15,6 +15,7 @@ class Transformowalne
     float m_quatDiff[4];
     float m_quat[4];
     float m_macierzObrotu[4][4];
+    float m_pozycja[3];
     
     public:
     Transformowalne();
@@ -27,6 +28,8 @@ class Transformowalne
     pf4 ppMacierzObrotu();
     
     void MacierzObrotu(float*);
+    float* Pozycja();
+    void UstawPozycje(float* );
 	
 protected:
 

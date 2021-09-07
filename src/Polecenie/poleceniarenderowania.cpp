@@ -33,6 +33,24 @@ void PoleceniaRenderowania::PoGeometrii(spGeometriaModelu)
 //    cout<<"PoleceniaRenderowania::PoGeometrii"<<endl;
     (*ptrFunkcjaMonitorujaca)("PoGeometrii");
 }
+void PoleceniaRenderowania::RysujGeometriePowierzchnie(spGeometriaModelu)
+{
+    (*ptrFunkcjaMonitorujaca)("RysujGeometriePowierzchnie");
+}
+
+void PoleceniaRenderowania::RysujGeometrieKrawedzie(spGeometriaModelu)
+{
+    (*ptrFunkcjaMonitorujaca)("RysujGeometrieKrawedzie");
+}
+
+void PoleceniaRenderowania::RysujGeometriePunkty(spGeometriaModelu)
+{
+    (*ptrFunkcjaMonitorujaca)("RysujGeometriePunkty");
+}
+void PoleceniaRenderowania::PrzesuniecieNaPozycje(spGeometriaModelu)
+{
+	(*ptrFunkcjaMonitorujaca)("PrzesuniecieNaPozycje");
+}
 
 //dla linkera
 template void PoleceniaRenderowania::WywolajPoleceniaZ(shared_ptr<DoNarysowania> );

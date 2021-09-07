@@ -79,15 +79,9 @@ TEST(PoleceniaRenderowania,WywolanieDlaGrupowanych_DuzaLiczba)
     ASSERT_EQ(2001,trk.uzyteFunkcje["RysujGeometrie"]);
 }
 
-TEST(PoleceniaRenderowania,RenderowanieWywolujePoleceniaZwiazaneZdoNarysowania)
-{
-    spDoNarysowania trojkat = make_shared<ProstyTrojkat>();
-//    DoNarysowaniaJakoPolecenia polecenia;
-    Renderowanie rend;
-//    rend.WywolajPolecenia(trojkat.PoleceniaRenderowania());
-    //tu powinno być możliwy dostęp do odpowiedniego obiektu DoNarysowaniaJakoPolecenia
-    //miejsce w którym następuje wygenerowanie listy poleceń: Renderowanie, jako właściciel tych poleceń, ale jest sprzeczność, 
-    //bo powinno tobyć zrobione w innym wątku
-}
+//TEST(PoleceniaRenderowania,RenderowanieWywolujePoleceniaZwiazaneZdoNarysowania)
+//{
+//   
+//}
 //renderowanie dostaje do kolejki polecenie w którym jest obiekt DoNarysowaniaJakoPolecenia, 
 //wykonanie z użyciem funkcji szablonwej, bez pytania o typ 

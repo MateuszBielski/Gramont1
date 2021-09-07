@@ -56,6 +56,66 @@ TEST(DoNarysowania,SzescianSchematNormalnych)
     
     for(int i = 0 ; i < szescian->ileNormalnych ; i++)ASSERT_EQ(schemat[i],szescian->schematNormalnych[i]);
 }
+template<typename AdrFun, typename Polecenia>
+bool CzyZawiera(AdrFun adr,Polecenia polecenia)
+{
+    bool result = false;
+    for(auto& polecenie : polecenia)
+    {
+        if (polecenie == adr)
+        {
+            result = true;
+            break;
+        }
+    }
+    return result;
+}
+TEST(DoNarysowania,wKolejnosciWstaw_NieWidoczny)
+{
+    spDoNarysowania szescian(make_shared<Szescian>());
+    szescian->NieWidoczny(true);
+    szescian->PoleceniaWybierzIwstawWdobrejKolejnosci();
+    ASSERT_FALSE(CzyZawiera(&PoleceniaRenderowania::RysujGeometriePowierzchnie,szescian->Polecenia()));
+    ASSERT_FALSE(CzyZawiera(&PoleceniaRenderowania::RysujGeometrieKrawedzie,szescian->Polecenia()));
+    ASSERT_FALSE(CzyZawiera(&PoleceniaRenderowania::RysujGeometriePunkty,szescian->Polecenia()));
+}
+TEST(DoNarysowania,wKolejnosciWstaw_RysujGeometriePowierzchnie)
+{
+    spDoNarysowania szescian(make_shared<Szescian>());
+    szescian->PoleceniaWybierzIwstawWdobrejKolejnosci();
+    ASSERT_TRUE(CzyZawiera(&PoleceniaRenderowania::RysujGeometriePowierzchnie,szescian->Polecenia()));
+}
+TEST(DoNarysowania,wKolejnosciWstaw_PrzesuniecieNaPozycje_nieWstawia)
+{
+    spDoNarysowania szescian(make_shared<Szescian>());
+    //domyślnie powinien być na 0,0,0
+    szescian->PoleceniaWybierzIwstawWdobrejKolejnosci();
+    
+    ASSERT_FALSE(CzyZawiera(&PoleceniaRenderowania::PrzesuniecieNaPozycje,szescian->Polecenia()));
+}
+TEST(DoNarysowania,wKolejnosciWstaw_PrzesuniecieNaPozycje)
+{
+    spDoNarysowania szescian(make_shared<Szescian>());
+    //domyślnie powinien być na 0,0,0
+    float poz[] = {1,0,0};
+    szescian->UstawPozycje(poz);
+    szescian->PoleceniaWybierzIwstawWdobrejKolejnosci();
+    
+    ASSERT_TRUE(CzyZawiera(&PoleceniaRenderowania::PrzesuniecieNaPozycje,szescian->Polecenia()));
+}
 
+
+//PushName
+//PushMatrix
+//PrzesuniecieNaPozycje
+//KorektaOsiObrotu
+//ObrocWgPunktu
+//LoadName
+//+GeometriaPowierzchnie
+//GeometriaKrawedzie
+//GeometriaPunkty
+//+NieRysujGeometrii
+//PopName
+//PopMatrix
 //mechanizm powiadomiania o wprowadzeniu zmiany, 
 //powiadamianie o zmianie wymusza przebudowanie listy polecen renderowania

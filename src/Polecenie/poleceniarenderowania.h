@@ -18,6 +18,10 @@ class PoleceniaRenderowania
     void PrzedGeometria(spGeometriaModelu);
     void RysujGeometrie(spGeometriaModelu);
     void PoGeometrii(spGeometriaModelu);
+    void RysujGeometriePowierzchnie(spGeometriaModelu);
+    void RysujGeometrieKrawedzie(spGeometriaModelu);
+    void RysujGeometriePunkty(spGeometriaModelu);
+    void PrzesuniecieNaPozycje(spGeometriaModelu);
     
     template<typename T>
     void WywolajPoleceniaZ(T obiektZwezlami);

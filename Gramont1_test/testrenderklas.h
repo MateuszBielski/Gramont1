@@ -2,6 +2,7 @@
 #define TestRenderKlas_H
 #include <string>
 #include <map>
+#include <list>
 #include "../src/Process/renderowanie.h"
 
 
@@ -23,6 +24,7 @@ public:
     bool CzyMaTenSamDoNarysowania(Renderowanie&, spDoNarysowania);
     void UstawMonitorujaceFunkcjeDla(Renderowanie&);
     static map<string,unsigned> uzyteFunkcje;
+    static list<string> funkcjeWkolejnosci;
 };
 
 #endif // TestRenderKlas_H

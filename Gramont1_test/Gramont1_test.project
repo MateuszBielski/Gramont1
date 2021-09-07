@@ -18,7 +18,6 @@
   <Dependencies/>
   <VirtualDirectory Name="src">
     <File Name="main.cpp" ExcludeProjConfig=""/>
-    <File Name="FunkcjeTest.cpp" ExcludeProjConfig=""/>
     <File Name="kursor2dTest.cpp"/>
     <File Name="transformacjaTest.cpp"/>
     <File Name="transformowalneTest.cpp"/>
@@ -29,6 +28,7 @@
     <File Name="donarysowaniatest.cpp"/>
     <File Name="grupowanietest.cpp"/>
     <File Name="poleceniarenderowaniatest.cpp"/>
+    <File Name="TestRenderKlasTest.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="testedClasses">
     <File Name="../src/Shared/kursor2d.cpp"/>

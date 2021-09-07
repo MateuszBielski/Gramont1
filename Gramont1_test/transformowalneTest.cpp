@@ -41,5 +41,15 @@ TEST(TransformowalneTest,ReferencjaMacierzy)
     model.ppMacierzObrotu()[2][1] = 32.1;
     EXPECT_FLOAT_EQ(32.1,model.ppMacierzObrotu()[2][1]);
 }
+TEST(TransformowalneTest,UstawPozycje_kopiuje)
+{
+    float poz[] = {1,2,3.3};
+    Transformowalne model;
+    model.UstawPozycje(poz);
+    poz[1] = 4;
+    ASSERT_EQ(1,model.Pozycja()[0]);
+    ASSERT_EQ(2,model.Pozycja()[1]);
+    ASSERT_FLOAT_EQ(3.3,model.Pozycja()[2]);
+}
 
 
