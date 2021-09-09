@@ -30,6 +30,7 @@ class Transformowalne
     void MacierzObrotu(float*);
     float* Pozycja();
     void UstawPozycje(float* );
+    bool jestTransformacja ;
 	
 protected:
 

@@ -83,6 +83,7 @@ TEST(RenderowanieTest,RysujSceneZglaszaWyjatekPrzyBrakuDoNarysowania)
         EXPECT_EQ(err.what(),string("RysujScene() Brak doNarysowania"));
     }
 }
+//TEST(Renderowanie,)
 TEST(Renderowanie,WywolujePoKoleiWezlyDoNarysowania)
 {
     upDoNarysowania doNarysowania = make_unique<DoNarysowania>();

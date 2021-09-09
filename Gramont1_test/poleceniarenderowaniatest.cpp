@@ -1,6 +1,7 @@
 #include <gtest/gtest.h>
 #include "../src/Shared/grupowalne.h"
 #include "../src/Shared/prostytrojkat.h"
+#include "../src/Shared/szescian.h"
 #include "../src/Process/renderowanie.h"
 #include "renderowaniemock.h"//?
 #include "testrenderklas.h"
@@ -15,9 +16,9 @@ TEST(PoleceniaRenderowania,Wstawienie3Polecen_sprawdzenieSkladni_TrescDoZmiany)
     ASSERT_EQ(3,polecenia.size());
 //    
     PoleceniaRenderowania rend;
-    for(auto& pol : polecenia)
+    for(auto& polIgeom : polecenia)
     {
-        (rend.*pol)(trojkat);
+        (rend.*polIgeom.polecenie)(trojkat);
     }
 }
 TEST(PoleceniaRenderowania,ustawiaFunkcjeMonitorujaca)
@@ -78,7 +79,23 @@ TEST(PoleceniaRenderowania,WywolanieDlaGrupowanych_DuzaLiczba)
     rend.WywolajPoleceniaZ(rys1); 
     ASSERT_EQ(2001,trk.uzyteFunkcje["RysujGeometrie"]);
 }
-
+TEST(PoleceniaRenderowania,RysujGeometriePowierzchnie_uzywaVertexeInormalne)
+{
+    TestRenderKlas renderTest;
+    Renderowanie rend;
+    renderTest.UstawZastepczeOpenGlDla(rend);
+//    rend.ustawDoNarysowania();
+    rend.RysujGeometriePowierzchnie(make_unique<Szescian>());
+    string expect("n0.0,-1.0,0.0,v0.0,0.0,0.0,v1.0,0.0,0.0,v0.0,0.0,1.0,v1.0,0.0,1.0,");
+    expect += "n0.0,0.0,1.0,v0.0,1.0,1.0,v1.0,1.0,1.0,";
+    expect += "n0.0,1.0,0.0,v0.0,1.0,0.0,v1.0,1.0,0.0,";
+    expect += "n1.0,0.0,0.0,v1.0,1.0,1.0,v1.0,0.0,1.0,v1.0,1.0,0.0,v1.0,0.0,0.0,";
+    expect += "n0.0,0.0,-1.0,v0.0,1.0,0.0,v0.0,0.0,0.0,";
+    expect += "n-1.0,0.0,0.0,v0.0,1.0,1.0,v0.0,0.0,1.0,";
+//    string expect();
+    string result = renderTest.CiagWywolanOpenGl();
+    ASSERT_EQ(expect,result);
+}
 //TEST(PoleceniaRenderowania,RenderowanieWywolujePoleceniaZwiazaneZdoNarysowania)
 //{
 //   

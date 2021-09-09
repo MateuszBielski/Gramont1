@@ -60,7 +60,11 @@ const list<shared_ptr<T>>& Grupowalne_T<T>::StrukturaJakoLista_Wezly()
     GenerujStruktureJakoListe_Wezly(strukturaJakoLista_Wezly);
     return strukturaJakoLista_Wezly;
 }
-
+template<class T>
+shared_ptr<T> Grupowalne_T<T>::WskaznikNaMnie()
+{
+    return static_pointer_cast<T>(shared_from_this());
+}
 template<class T>
 void Grupowalne_T<T>::GenerujStruktureJakoListe_Wezly(list<spGrupowalne_T>& calaLista)
 {

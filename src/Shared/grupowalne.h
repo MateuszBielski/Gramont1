@@ -29,6 +29,7 @@ protected:
     list<spGrupowalne_T> dzieci;
     typename list<shared_ptr<T>>::iterator pozycja;
     typename list<shared_ptr<T>>::iterator pozycjaWliscie;
+    shared_ptr<T> WskaznikNaMnie();
 private:
     spGrupowalne_T rodzic = nullptr;
     list<spGrupowalne_T> strukturaJakoLista_Wezly;

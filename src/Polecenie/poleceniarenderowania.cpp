@@ -11,7 +11,7 @@ void PoleceniaRenderowania::WywolajPoleceniaZ(T obiektZwezlami){
     {
         for(auto& pol : obiektZpoleceniami->Polecenia())
         {
-            (this->*pol)(obiektZpoleceniami);
+            (this->*pol.polecenie)(obiektZpoleceniami);
         }
     }
 }
@@ -33,9 +33,19 @@ void PoleceniaRenderowania::PoGeometrii(spGeometriaModelu)
 //    cout<<"PoleceniaRenderowania::PoGeometrii"<<endl;
     (*ptrFunkcjaMonitorujaca)("PoGeometrii");
 }
-void PoleceniaRenderowania::RysujGeometriePowierzchnie(spGeometriaModelu)
+void PoleceniaRenderowania::RysujGeometriePowierzchnie(spGeometriaModelu geom)
 {
     (*ptrFunkcjaMonitorujaca)("RysujGeometriePowierzchnie");
+    if(!geom->ileNormalnych)return;
+    glBegin(GL_TRIANGLE_STRIP);
+        unsigned short v = 0;
+        for(unsigned short n = 0 ; n < geom->ileNormalnych ; n++)
+        {
+            p_glNormal3fv(&geom->normalne[n*3]);
+            for(unsigned short s = 0 ; s < geom->schematNormalnych[n] ; s++)
+            p_glVertex3fv(&geom->wspolrzedneVrtx[geom->indeksyVertexow[v++]*3]);
+        }
+        glEnd();
 }
 
 void PoleceniaRenderowania::RysujGeometrieKrawedzie(spGeometriaModelu)

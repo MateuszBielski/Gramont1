@@ -51,52 +51,19 @@ void Renderowanie::RysujScene()
     p_glTranslatef(0.0,0.0,-10.0);
     glMultMatrixf(doNarysowania->MacierzObrotu());
     
-    if(!doNarysowania->ileNormalnych)return;
-    glBegin(GL_TRIANGLE_STRIP);
-        unsigned short v = 0;
-        for(unsigned short n = 0 ; n < doNarysowania->ileNormalnych ; n++)
-        {
-            p_glNormal3fv(&doNarysowania->normalne[n*3]);
-            for(unsigned short s = 0 ; s < doNarysowania->schematNormalnych[n] ; s++)
-            p_glVertex3fv(&doNarysowania->wspolrzedneVrtx[doNarysowania->indeksyVertexow[v++]*3]);
-        }
-        glEnd();
-}
-/****************************
-void Renderowanie::RysujScene_projektFunkcji()
-{
-    for(auto poleceniaRysujace :doNarysowania->kolejnePoleceniaRenderowania())
-    {
-        this->polecenieRysujace;
-    }
-    //
-        
-}
-void Renderowanie::PrzedGeometriaModelu(spDoNarysowania rys)
-{
-    //np wejście na następny poziom w hierarchii czyli
-    //glPushName()
-    //glPushMatrix()
-    //transformacje dla danego modelu i jego grupy
-}
-void Renderowanie::RysujGeometrieModelu(spDoNarysowania rys)
-{
-    //rozumiane jako petle po wierzcholkach i normalnych
-}
-void Renderowanie::RysujGeometrieModeluNiestandardowo(spDoNarysowania rys)
-{
-    //funkcja po funkcji
-}
-void Renderowanie::PoGeometriiModelu(spDoNarysowania rys)
-{
-    //wyjście z poziomów, odpowiednią ilość razy np:
-    //glPopName();
-    //glPopMatrix();
+//    if(!doNarysowania->ileNormalnych)return;
+//    glBegin(GL_TRIANGLE_STRIP);
+//        unsigned short v = 0;
+//        for(unsigned short n = 0 ; n < doNarysowania->ileNormalnych ; n++)
+//        {
+//            p_glNormal3fv(&doNarysowania->normalne[n*3]);
+//            for(unsigned short s = 0 ; s < doNarysowania->schematNormalnych[n] ; s++)
+//            p_glVertex3fv(&doNarysowania->wspolrzedneVrtx[doNarysowania->indeksyVertexow[v++]*3]);
+//        }
+//        glEnd();
     
 }
 
-
-****************************/
 void Renderowanie::FunPrzerysuj(spDoNarysowania rys)
 {	
     doNarysowania = rys;

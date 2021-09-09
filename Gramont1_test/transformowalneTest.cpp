@@ -51,5 +51,32 @@ TEST(TransformowalneTest,UstawPozycje_kopiuje)
     ASSERT_EQ(2,model.Pozycja()[1]);
     ASSERT_FLOAT_EQ(3.3,model.Pozycja()[2]);
 }
+TEST(TransformowalneTest,NieMaTransformacji)
+{
+    Transformowalne model;
+    ASSERT_FALSE(model.jestTransformacja);
+}
+TEST(TransformowalneTest,JestTransformacja_pozycja)
+{
+    Transformowalne model;
+    float poz[] = {1,2,3.3};
+    model.UstawPozycje(poz);
+    ASSERT_TRUE(model.jestTransformacja);
+}
+TEST(TransformowalneTest,NieMa_obrot)
+{
+    Transformowalne model;
+    float macierz[] = {1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1};
+    model.MacierzObrotu(macierz);
+    ASSERT_FALSE(model.jestTransformacja);
+}
+TEST(TransformowalneTest,JestTransformacja_obrot)
+{
+    Transformowalne model;
+    float macierz[] = {1,0,0,0.1,0,1,0,0,0,0,1,0,0,0,0,1};
+    model.MacierzObrotu(macierz);
+    ASSERT_TRUE(model.jestTransformacja);
+}
+//jestTransformacja powinna być zmienną ustawianą przy funkcjach UstawPozycje, MacierzObrotu
 
 

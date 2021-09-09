@@ -8,8 +8,7 @@
 using namespace std;
 using namespace Gtk;
 
-using ptr_vfff = void(*)(float,float,float);
-using ptr_vfp = void(*)(const float*);
+
 
 
 class Renderowanie : public ObslugaPolecen, public PoleceniaRenderowania
@@ -26,6 +25,7 @@ public:
     virtual void FunPrzerysuj(spDoNarysowania ) override;
     virtual void ustawDoNarysowania(spDoNarysowania) override;
     virtual void RysujScene();
+//    void RysujScene(spDoNarysowania);
 //    void WywolajPoleceniaZ(spDoNarysowania){};
     
 protected:
@@ -34,10 +34,6 @@ private:
     void PrzypiszFunkcjeGLdoWskaznikow();
     void RejestrujListeGL();
     
-    
-    
-    ptr_vfff p_glTranslatef = nullptr, p_glVertex3f = nullptr;
-    ptr_vfp p_glVertex3fv = nullptr, p_glNormal3fv = nullptr;
     
     GLuint listid;
     float x[3], y[3], z[3];

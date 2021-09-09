@@ -21,6 +21,8 @@ Transformowalne::Transformowalne()
     m_pozycja[0] = 0;
     m_pozycja[1] = 0;
     m_pozycja[2] = 0;
+    
+    jestTransformacja = false;
 }
 
 Transformowalne::~Transformowalne()
@@ -59,6 +61,8 @@ pf4 Transformowalne::ppMacierzObrotu()
 void Transformowalne::MacierzObrotu(float* m)
 {
     memcpy(m_macierzObrotu,m,16*sizeof(float));
+    constexpr float macierzJednostkowa[] = {1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1};
+    for(short i = 0; i < 4 ; i++)for(short j = 0; j < 4 ; j++)jestTransformacja += macierzJednostkowa[i * 4 + j] != m_macierzObrotu[i][j];
 }
 float* Transformowalne::MacierzObrotu()
 {	
@@ -71,4 +75,6 @@ float* Transformowalne::Pozycja()
 void Transformowalne::UstawPozycje(float* poz)
 {
 	for(short i = 0; i < 3; i++) m_pozycja[i] = poz[i];
+    for(short i = 0; i < 3 ; i++)jestTransformacja += m_pozycja[i];
 }
+

@@ -1,13 +1,14 @@
 #include "donarysowania.h"
 #include "../Process/renderowanie.h"
 
-l_PtrMemRend_Geom DoNarysowania::Polecenia()
+l_PolecenieIgeometria DoNarysowania::Polecenia()
 {
     return mojePolecenia;
 }
 void DoNarysowania::WstawPolecenieNaKoncu(PtrMemRend_Geom polecenie)
 {
-    mojePolecenia.push_back(polecenie);
+    PolecenieIgeometria polIGeom = {polecenie,WskaznikNaMnie()};
+    mojePolecenia.push_back(polIGeom);
 }
 void DoNarysowania::NieWidoczny(bool flaga)
 {  
@@ -16,10 +17,10 @@ void DoNarysowania::NieWidoczny(bool flaga)
 void DoNarysowania::PoleceniaWybierzIwstawWdobrejKolejnosci()
 {
 //    mojePolecenia.push_back(&PoleceniaRenderowania::PrzedGeometria);
-    if(Pozycja()[0] || Pozycja()[1] || Pozycja()[2])
-    mojePolecenia.push_back(&PoleceniaRenderowania::PrzesuniecieNaPozycje);
+    if(jestTransformacja)
+    mojePolecenia.push_back({&PoleceniaRenderowania::PrzesuniecieNaPozycje,WskaznikNaMnie()});
     
-    if(!nieWidoczny)mojePolecenia.push_back(&PoleceniaRenderowania::RysujGeometriePowierzchnie);
+    if(!nieWidoczny)mojePolecenia.push_back({&PoleceniaRenderowania::RysujGeometriePowierzchnie,WskaznikNaMnie()});
     
 //    mojePolecenia.push_back(&PoleceniaRenderowania::PoGeometrii);
 //    mojePolecenia.push_back(&T::PrzedGeometria);

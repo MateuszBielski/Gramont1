@@ -7,17 +7,24 @@
 using namespace std;
 
 using PtrMemRend_Geom = void(PoleceniaRenderowania::*)(spGeometriaModelu);
-using l_PtrMemRend_Geom = list<PtrMemRend_Geom>;
+
+struct PolecenieIgeometria
+{
+    PtrMemRend_Geom polecenie;
+    spGeometriaModelu geometria;
+};
+
+using l_PolecenieIgeometria = list<PolecenieIgeometria>;
 
 class DoNarysowania : public GeometriaModelu, public Grupowalne_T<DoNarysowania>
 {
     
-    l_PtrMemRend_Geom mojePolecenia;
+    l_PolecenieIgeometria mojePolecenia;
     bool nieWidoczny = false;
 public:
 //    template<typename T>
     void PoleceniaWybierzIwstawWdobrejKolejnosci();
-    l_PtrMemRend_Geom Polecenia();
+    l_PolecenieIgeometria Polecenia();
     void WstawPolecenieNaKoncu(PtrMemRend_Geom);
     
     void NieWidoczny(bool);
@@ -25,33 +32,5 @@ public:
 
 using spDoNarysowania = shared_ptr<DoNarysowania>;
 using upDoNarysowania = unique_ptr<DoNarysowania>;
-/*
-template<typename T,typename Rend>
-class DoNarysowaniaJakoPolecenia
-{
-    using PtrMemRend_T = void(Rend::*)(T);
-    
-    list<PtrMemRend_T> mojePolecenia;
-public:
-    DoNarysowaniaJakoPolecenia(){};
-    virtual ~DoNarysowaniaJakoPolecenia(){};
-    void WstawPolecenie(PtrMemRend_T polecenie)
-    {
-        mojePolecenia.push_back(polecenie);
-    }
-    void PoleceniaWybierzIwstawWdobrejKolejnosci(T)
-    {
-        mojePolecenia.push_back(&Rend::PrzedGeometria);
-        mojePolecenia.push_back(&Rend::RysujGeometrie);
-        mojePolecenia.push_back(&Rend::PoGeometrii);
-    }
-    list<PtrMemRend_T> Polecenia(){
-        return mojePolecenia;
-    }
 
-        
-};
-*/
-
-//#include "donarysowaniajakopolecenia.cpp"
 #endif // DoNarysowaniaJakoPolecenia_H

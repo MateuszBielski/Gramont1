@@ -60,9 +60,9 @@ template<typename AdrFun, typename Polecenia>
 bool CzyZawiera(AdrFun adr,Polecenia polecenia)
 {
     bool result = false;
-    for(auto& polecenie : polecenia)
+    for(auto& polIgeom : polecenia)
     {
-        if (polecenie == adr)
+        if (polIgeom.polecenie == adr)
         {
             result = true;
             break;
@@ -106,7 +106,7 @@ TEST(DoNarysowania,wKolejnosciWstaw_PrzesuniecieNaPozycje)
 
 
 //PushName
-//PushMatrix
+//PushMatrix - to związane jest z przesunięciem na pozycje i obrotem
 //PrzesuniecieNaPozycje
 //KorektaOsiObrotu
 //ObrocWgPunktu
