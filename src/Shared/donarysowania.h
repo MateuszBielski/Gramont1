@@ -24,7 +24,7 @@ class DoNarysowania : public GeometriaModelu, public Grupowalne_T<DoNarysowania>
 public:
 //    template<typename T>
     void PoleceniaWybierzIwstawWdobrejKolejnosci();
-    l_PolecenieIgeometria Polecenia();
+    virtual l_PolecenieIgeometria Polecenia();
     void WstawPolecenieNaKoncu(PtrMemRend_Geom);
     
     void NieWidoczny(bool);

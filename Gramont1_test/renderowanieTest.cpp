@@ -83,14 +83,25 @@ TEST(RenderowanieTest,RysujSceneZglaszaWyjatekPrzyBrakuDoNarysowania)
         EXPECT_EQ(err.what(),string("RysujScene() Brak doNarysowania"));
     }
 }
-//TEST(Renderowanie,)
-TEST(Renderowanie,WywolujePoKoleiWezlyDoNarysowania)
+TEST(Renderowanie,WywolujePoleceniaZDoNarysowania)
 {
-    upDoNarysowania doNarysowania = make_unique<DoNarysowania>();
+    auto doNarysowania = make_shared<DoNarysowaniaMock>();
     
     Renderowanie rend;
+    rend.ustawDoNarysowania(doNarysowania);
     rend.RysujScene();
-    //
+    ASSERT_TRUE(doNarysowania->polecenieaIsUsed);
+}
+TEST(Renderowanie,NieWywolujePoleceniaZdzieckaDoNarysowania)
+{
+    auto doNarysowania = make_shared<DoNarysowaniaMock>();
+    auto dziecko = make_shared<DoNarysowaniaMock>();
+    doNarysowania->DodajDziecko(dziecko);
+    Renderowanie rend;
+    rend.ustawDoNarysowania(doNarysowania);
+    rend.RysujScene();
+    ASSERT_TRUE(doNarysowania->polecenieaIsUsed);
+    ASSERT_FALSE(dziecko->polecenieaIsUsed);
 }
 TEST(Renderowanie,WywolujeWlasneFunkcje_xx_doNarysowania)
 {

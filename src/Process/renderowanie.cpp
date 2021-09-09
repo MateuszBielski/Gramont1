@@ -51,6 +51,7 @@ void Renderowanie::RysujScene()
     p_glTranslatef(0.0,0.0,-10.0);
     glMultMatrixf(doNarysowania->MacierzObrotu());
     
+    auto polecenia = doNarysowania->Polecenia();
 //    if(!doNarysowania->ileNormalnych)return;
 //    glBegin(GL_TRIANGLE_STRIP);
 //        unsigned short v = 0;
