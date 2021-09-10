@@ -6,31 +6,25 @@ void PustaFunkcja(const char*)
     
 }
 template<class T>
-void PoleceniaRenderowania::WywolajPoleceniaZ(T obiektZwezlami){
-    for(auto& obiektZpoleceniami : obiektZwezlami->StrukturaJakoLista_Wezly())
-    {
-        for(auto& pol : obiektZpoleceniami->Polecenia())
+//void PoleceniaRenderowania::WywolajPoleceniaZ(T obiektZwezlami){
+void PoleceniaRenderowania::WywolajPoleceniaZ(T obiektZpoleceniami){
+     for(auto& pol : obiektZpoleceniami->Polecenia())
         {
             (this->*pol.polecenie)(obiektZpoleceniami);
         }
-    }
 }
 void PoleceniaRenderowania::PrzedGeometria(spGeometriaModelu)
 {
-//    cout<<"PoleceniaRenderowania::PrzedGeometria"<<endl;
     (*ptrFunkcjaMonitorujaca)("PrzedGeometria");
 }
 
 void PoleceniaRenderowania::RysujGeometrie(spGeometriaModelu rys)
 {
-//    cout<<"PoleceniaRenderowania::RysujGeometrie"<<endl;
-//    cout<<"IleVertexow"<<rys->ileVertexow<<endl;
     (*ptrFunkcjaMonitorujaca)("RysujGeometrie");
 }
 
 void PoleceniaRenderowania::PoGeometrii(spGeometriaModelu)
 {
-//    cout<<"PoleceniaRenderowania::PoGeometrii"<<endl;
     (*ptrFunkcjaMonitorujaca)("PoGeometrii");
 }
 void PoleceniaRenderowania::RysujGeometriePowierzchnie(spGeometriaModelu geom)

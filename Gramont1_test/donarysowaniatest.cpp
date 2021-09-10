@@ -88,7 +88,6 @@ TEST(DoNarysowania,wKolejnosciWstaw_RysujGeometriePowierzchnie)
 TEST(DoNarysowania,wKolejnosciWstaw_PrzesuniecieNaPozycje_nieWstawia)
 {
     spDoNarysowania szescian(make_shared<Szescian>());
-    //domyślnie powinien być na 0,0,0
     szescian->PoleceniaWybierzIwstawWdobrejKolejnosci();
     
     ASSERT_FALSE(CzyZawiera(&PoleceniaRenderowania::PrzesuniecieNaPozycje,szescian->Polecenia()));
@@ -103,8 +102,30 @@ TEST(DoNarysowania,wKolejnosciWstaw_PrzesuniecieNaPozycje)
     
     ASSERT_TRUE(CzyZawiera(&PoleceniaRenderowania::PrzesuniecieNaPozycje,szescian->Polecenia()));
 }
-
-
+TEST(DoNarysowania,ListyDzieciSaPuste)
+{
+    spDoNarysowania rys1(make_shared<DoNarysowania>());
+    spDoNarysowania rys2(make_shared<DoNarysowania>());
+    rys1->DodajDziecko(rys2);
+    rys1->PoleceniaWybierzIwstawWdobrejKolejnosci();
+    ASSERT_TRUE(rys2->Polecenia().empty());
+}
+TEST(DoNarysowania,ListaZawieraPoleceniaDzieci)
+{
+    spDoNarysowania rys1(make_shared<DoNarysowania>());
+    spDoNarysowania rys2(make_shared<DoNarysowania>());
+    rys1->NieWidoczny(true);
+    
+    rys1->DodajDziecko(rys2);
+    rys1->PoleceniaWybierzIwstawWdobrejKolejnosci();
+    //powinno być polecenie dziecka
+    ASSERT_TRUE(CzyZawiera(&PoleceniaRenderowania::RysujGeometriePowierzchnie,rys1->Polecenia()));
+}
+TEST(DoNarysowania,PrzyInicjacjiListaJestPusta)
+{
+    auto rys1(make_unique<DoNarysowania>());
+    ASSERT_TRUE(rys1->Polecenia().empty());
+}
 //PushName
 //PushMatrix - to związane jest z przesunięciem na pozycje i obrotem
 //PrzesuniecieNaPozycje

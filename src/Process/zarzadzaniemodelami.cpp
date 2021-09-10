@@ -42,6 +42,7 @@ void ZarzadzanieModelami::DoNarysowania(spDoNarysowania rys)
 }
 void ZarzadzanieModelami::DoNarysowaniaItransformacji(spDoNarysowania r)
 {
+    r->PoleceniaWybierzIwstawWdobrejKolejnosci();
     doNarysowania = r;
     doTrasformacji = r;
 }

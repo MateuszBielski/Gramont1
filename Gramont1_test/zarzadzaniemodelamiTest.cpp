@@ -205,3 +205,10 @@ TEST(ZarzadzanieModelami,PobranieKolejkiRenderowaniaDajeJejDoNarysowania)
     
     ASSERT_TRUE(testRend.CzyMaTenSamDoNarysowania(rend,rys));
 }
+TEST(ZarzadzanieModelami,UstawienieDoNarysowaniaItransfWymuszaGenerowanieListyPolecen)
+{
+    ZarzadzanieModelami zarzadzanie;
+    spDoNarysowania rys(make_shared<DoNarysowania>());
+    zarzadzanie.DoNarysowaniaItransformacji(rys);
+    ASSERT_FALSE(rys->Polecenia().empty());
+}

@@ -21,11 +21,11 @@ void DoNarysowania::PoleceniaWybierzIwstawWdobrejKolejnosci()
     mojePolecenia.push_back({&PoleceniaRenderowania::PrzesuniecieNaPozycje,WskaznikNaMnie()});
     
     if(!nieWidoczny)mojePolecenia.push_back({&PoleceniaRenderowania::RysujGeometriePowierzchnie,WskaznikNaMnie()});
-    
-//    mojePolecenia.push_back(&PoleceniaRenderowania::PoGeometrii);
-//    mojePolecenia.push_back(&T::PrzedGeometria);
-//    mojePolecenia.push_back(&T::RysujGeometrie);
-//    mojePolecenia.push_back(&T::PoGeometrii);
+    for(auto& dziecko : dzieci)
+    {
+        dziecko->PoleceniaWybierzIwstawWdobrejKolejnosci();
+        mojePolecenia.splice(mojePolecenia.end(),dziecko->mojePolecenia);
+    }
 }
 
 

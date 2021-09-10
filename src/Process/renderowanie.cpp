@@ -51,18 +51,8 @@ void Renderowanie::RysujScene()
     p_glTranslatef(0.0,0.0,-10.0);
     glMultMatrixf(doNarysowania->MacierzObrotu());
     
-    auto polecenia = doNarysowania->Polecenia();
-//    if(!doNarysowania->ileNormalnych)return;
-//    glBegin(GL_TRIANGLE_STRIP);
-//        unsigned short v = 0;
-//        for(unsigned short n = 0 ; n < doNarysowania->ileNormalnych ; n++)
-//        {
-//            p_glNormal3fv(&doNarysowania->normalne[n*3]);
-//            for(unsigned short s = 0 ; s < doNarysowania->schematNormalnych[n] ; s++)
-//            p_glVertex3fv(&doNarysowania->wspolrzedneVrtx[doNarysowania->indeksyVertexow[v++]*3]);
-//        }
-//        glEnd();
-    
+//    auto polecenia = doNarysowania->Polecenia();
+    WywolajPoleceniaZ(doNarysowania);
 }
 
 void Renderowanie::FunPrzerysuj(spDoNarysowania rys)
@@ -70,10 +60,6 @@ void Renderowanie::FunPrzerysuj(spDoNarysowania rys)
     doNarysowania = rys;
     if(ekranGL)ekranGL->WykonajWkontekscieGL(&Renderowanie::RysujScene,*this);
 }
-//void Renderowanie::WywolajPoleceniaZ(spDoNarysowania rys)
-//{
-//	
-//}
 void Renderowanie::ustawDoNarysowania(spDoNarysowania rys)
 {
 	doNarysowania = rys;

@@ -50,7 +50,9 @@ TEST(RenderowanieTest,funkcjeGlDlaTrojkata)
     TestRenderKlas renderTest;
     Renderowanie rend;
     renderTest.UstawZastepczeOpenGlDla(rend);
-    rend.ustawDoNarysowania(make_unique<ProstyTrojkat>());
+    auto rys = make_shared<ProstyTrojkat>();
+    rys->PoleceniaWybierzIwstawWdobrejKolejnosci();
+    rend.ustawDoNarysowania(rys);
     rend.RysujScene();
     string expect("n0.0,0.0,1.0,v-1.0,0.0,0.0,v1.0,0.0,0.0,v0.0,1.0,0.0,");
     string result = renderTest.CiagWywolanOpenGl();
@@ -61,7 +63,9 @@ TEST(RenderowanieTest,funkcjeGlDlaSzescianu)
     TestRenderKlas renderTest;
     Renderowanie rend;
     renderTest.UstawZastepczeOpenGlDla(rend);
-    rend.ustawDoNarysowania(make_unique<Szescian>());
+    auto rys = make_shared<Szescian>();
+    rys->PoleceniaWybierzIwstawWdobrejKolejnosci();
+    rend.ustawDoNarysowania(rys);
     rend.RysujScene();
     string expect("n0.0,-1.0,0.0,v0.0,0.0,0.0,v1.0,0.0,0.0,v0.0,0.0,1.0,v1.0,0.0,1.0,");
     expect += "n0.0,0.0,1.0,v0.0,1.0,1.0,v1.0,1.0,1.0,";
@@ -103,15 +107,16 @@ TEST(Renderowanie,NieWywolujePoleceniaZdzieckaDoNarysowania)
     ASSERT_TRUE(doNarysowania->polecenieaIsUsed);
     ASSERT_FALSE(dziecko->polecenieaIsUsed);
 }
-TEST(Renderowanie,WywolujeWlasneFunkcje_xx_doNarysowania)
+TEST(Renderowanie,WywolujeWlasneFunkcje_wstawione_doNarysowania)
 {
-    //obiekt doNarysowania posiada listę funkcji do zrealizowania 
-    //to mogą być funkcje bardziej ogólne, jak : przed,rysGeom,po
-    //lub bardziej specjalizowane:
-    //pushNames, popNames,
-    //pushMatrix, popMatrix,
-    //transformacjePrzedRysowaniem,
-    //kolory
-    //widoczne
-    //lista tych funkcji powinna być dostępna jako wskaźniki w klasie przed renderowaniem, 
+    auto rys = make_shared<DoNarysowania>();
+    rys->WstawPolecenieNaKoncu(&PoleceniaRenderowania::RysujGeometriePowierzchnie);
+    rys->WstawPolecenieNaKoncu(&PoleceniaRenderowania::RysujGeometriePowierzchnie);
+    Renderowanie rend;
+    rend.ustawDoNarysowania(rys);
+    
+    TestRenderKlas trk;
+    trk.UstawMonitorujaceFunkcjeDla(rend);
+    rend.RysujScene();
+    ASSERT_EQ(2,trk.uzyteFunkcje["RysujGeometriePowierzchnie"]);
 }

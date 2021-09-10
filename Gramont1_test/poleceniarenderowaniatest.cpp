@@ -7,20 +7,6 @@
 #include "testrenderklas.h"
 
 
-TEST(PoleceniaRenderowania,Wstawienie3Polecen_sprawdzenieSkladni_TrescDoZmiany)
-{
-    spDoNarysowania trojkat = make_shared<ProstyTrojkat>();
-    trojkat->PoleceniaWybierzIwstawWdobrejKolejnosci();
-    auto polecenia =  trojkat->Polecenia();
-//    
-    ASSERT_EQ(3,polecenia.size());
-//    
-    PoleceniaRenderowania rend;
-    for(auto& polIgeom : polecenia)
-    {
-        (rend.*polIgeom.polecenie)(trojkat);
-    }
-}
 TEST(PoleceniaRenderowania,ustawiaFunkcjeMonitorujaca)
 {
     Renderowanie rend;
@@ -56,6 +42,7 @@ TEST(PoleceniaRenderowania,WywolanieDlaGrupowanych)
     
     rys1->DodajDziecko(rys2);
     rys1->DodajDziecko(rys3);
+    rys1->PoleceniaWybierzIwstawWdobrejKolejnosci();
     
     Renderowanie rend;
     TestRenderKlas trk;
@@ -73,6 +60,7 @@ TEST(PoleceniaRenderowania,WywolanieDlaGrupowanych_DuzaLiczba)
         rys2->WstawPolecenieNaKoncu(&PoleceniaRenderowania::RysujGeometrie);
         rys1->DodajDziecko(rys2);
     }
+    rys1->PoleceniaWybierzIwstawWdobrejKolejnosci();
     Renderowanie rend;
     TestRenderKlas trk;
     trk.UstawMonitorujaceFunkcjeDla(rend);
@@ -84,7 +72,6 @@ TEST(PoleceniaRenderowania,RysujGeometriePowierzchnie_uzywaVertexeInormalne)
     TestRenderKlas renderTest;
     Renderowanie rend;
     renderTest.UstawZastepczeOpenGlDla(rend);
-//    rend.ustawDoNarysowania();
     rend.RysujGeometriePowierzchnie(make_unique<Szescian>());
     string expect("n0.0,-1.0,0.0,v0.0,0.0,0.0,v1.0,0.0,0.0,v0.0,0.0,1.0,v1.0,0.0,1.0,");
     expect += "n0.0,0.0,1.0,v0.0,1.0,1.0,v1.0,1.0,1.0,";
@@ -92,7 +79,6 @@ TEST(PoleceniaRenderowania,RysujGeometriePowierzchnie_uzywaVertexeInormalne)
     expect += "n1.0,0.0,0.0,v1.0,1.0,1.0,v1.0,0.0,1.0,v1.0,1.0,0.0,v1.0,0.0,0.0,";
     expect += "n0.0,0.0,-1.0,v0.0,1.0,0.0,v0.0,0.0,0.0,";
     expect += "n-1.0,0.0,0.0,v0.0,1.0,1.0,v0.0,0.0,1.0,";
-//    string expect();
     string result = renderTest.CiagWywolanOpenGl();
     ASSERT_EQ(expect,result);
 }
