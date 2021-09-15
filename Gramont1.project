@@ -46,6 +46,7 @@
       <File Name="src/Shared/geometriamodelu.cpp"/>
       <File Name="src/Shared/donarysowania.h"/>
       <File Name="src/Shared/donarysowania.cpp"/>
+      <File Name="src/Shared/FunkcjeIstruktury.cpp"/>
     </VirtualDirectory>
     <VirtualDirectory Name="Process">
       <File Name="src/Process/obslugasygnalow.h"/>

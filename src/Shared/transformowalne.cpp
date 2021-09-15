@@ -18,9 +18,9 @@ Transformowalne::Transformowalne()
 	m_macierzObrotu[1][1] = 1.0;
 	m_macierzObrotu[2][2] = 1.0;
 	m_macierzObrotu[3][3] = 1.0;
-    m_pozycja[0] = 0;
-    m_pozycja[1] = 0;
-    m_pozycja[2] = 0;
+    m_przesuniecie[0] = 0;
+    m_przesuniecie[1] = 0;
+    m_przesuniecie[2] = 0;
     
     jestTransformacja = false;
 }
@@ -68,13 +68,16 @@ float* Transformowalne::MacierzObrotu()
 {	
 	return m_macierzObrotu[0];
 }
-float* Transformowalne::Pozycja()
+float* Transformowalne::Przesuniecie()
 {
-	return m_pozycja;
+	return m_przesuniecie;
 }
-void Transformowalne::UstawPozycje(float* poz)
+void Transformowalne::UstawPrzesuniecie(float* poz)
 {
-	for(short i = 0; i < 3; i++) m_pozycja[i] = poz[i];
-    for(short i = 0; i < 3 ; i++)jestTransformacja += m_pozycja[i];
+	for(short i = 0; i < 3; i++) m_przesuniecie[i] = poz[i];
+    for(short i = 0; i < 3 ; i++)jestTransformacja += m_przesuniecie[i];
 }
-
+void Transformowalne::DodajPrzesuniecie(float* przes)
+{
+	for(short i = 0; i < 3; i++) m_przesuniecie[i] += przes[i];
+}

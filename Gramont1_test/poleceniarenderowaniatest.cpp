@@ -5,6 +5,7 @@
 #include "../src/Process/renderowanie.h"
 #include "renderowaniemock.h"//?
 #include "testrenderklas.h"
+#include "donarysowaniamock.h"
 
 
 TEST(PoleceniaRenderowania,ustawiaFunkcjeMonitorujaca)
@@ -81,6 +82,13 @@ TEST(PoleceniaRenderowania,RysujGeometriePowierzchnie_uzywaVertexeInormalne)
     expect += "n-1.0,0.0,0.0,v0.0,1.0,1.0,v0.0,0.0,1.0,";
     string result = renderTest.CiagWywolanOpenGl();
     ASSERT_EQ(expect,result);
+}
+TEST(PoleceniaRenderowania,Przesun_uzywaPrzesun)
+{
+    auto rys = make_shared<DoNarysowaniaMock>();
+    Renderowanie rend;
+    rend.Przesun(rys);
+    ASSERT_TRUE(rys->przesuniecieIsUsed);
 }
 //TEST(PoleceniaRenderowania,RenderowanieWywolujePoleceniaZwiazaneZdoNarysowania)
 //{

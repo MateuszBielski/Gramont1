@@ -18,7 +18,7 @@ void DoNarysowania::PoleceniaWybierzIwstawWdobrejKolejnosci()
 {
 //    mojePolecenia.push_back(&PoleceniaRenderowania::PrzedGeometria);
     if(jestTransformacja)
-    mojePolecenia.push_back({&PoleceniaRenderowania::PrzesuniecieNaPozycje,WskaznikNaMnie()});
+    mojePolecenia.push_back({&PoleceniaRenderowania::Przesun,WskaznikNaMnie()});
     
     if(!nieWidoczny)mojePolecenia.push_back({&PoleceniaRenderowania::RysujGeometriePowierzchnie,WskaznikNaMnie()});
     for(auto& dziecko : dzieci)

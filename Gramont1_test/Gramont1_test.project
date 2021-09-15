@@ -53,6 +53,7 @@
     <File Name="../src/Shared/donarysowaniajakopolecenia.cpp" ExcludeProjConfig="Debug"/>
     <File Name="../src/Shared/geometriamodelu.cpp"/>
     <File Name="../src/Shared/donarysowania.cpp"/>
+    <File Name="../src/Shared/FunkcjeIstruktury.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="helperClass">
     <File Name="../src/Shared/trackball.cpp"/>

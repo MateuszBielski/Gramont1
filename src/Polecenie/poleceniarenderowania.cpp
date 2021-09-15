@@ -41,6 +41,12 @@ void PoleceniaRenderowania::RysujGeometriePowierzchnie(spGeometriaModelu geom)
         }
         glEnd();
 }
+void PoleceniaRenderowania::Przesun(spGeometriaModelu geom)
+{
+	float* p = geom->Przesuniecie();
+    p_glTranslatef(p[0],p[1],p[2]);
+    (*ptrFunkcjaMonitorujaca)("Przesun");
+}
 
 void PoleceniaRenderowania::RysujGeometrieKrawedzie(spGeometriaModelu)
 {
@@ -50,10 +56,6 @@ void PoleceniaRenderowania::RysujGeometrieKrawedzie(spGeometriaModelu)
 void PoleceniaRenderowania::RysujGeometriePunkty(spGeometriaModelu)
 {
     (*ptrFunkcjaMonitorujaca)("RysujGeometriePunkty");
-}
-void PoleceniaRenderowania::PrzesuniecieNaPozycje(spGeometriaModelu)
-{
-	(*ptrFunkcjaMonitorujaca)("PrzesuniecieNaPozycje");
 }
 
 //dla linkera

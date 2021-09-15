@@ -94,7 +94,7 @@ TEST(Renderowanie,WywolujePoleceniaZDoNarysowania)
     Renderowanie rend;
     rend.ustawDoNarysowania(doNarysowania);
     rend.RysujScene();
-    ASSERT_TRUE(doNarysowania->polecenieaIsUsed);
+    ASSERT_TRUE(doNarysowania->poleceniaIsUsed);
 }
 TEST(Renderowanie,NieWywolujePoleceniaZdzieckaDoNarysowania)
 {
@@ -104,8 +104,8 @@ TEST(Renderowanie,NieWywolujePoleceniaZdzieckaDoNarysowania)
     Renderowanie rend;
     rend.ustawDoNarysowania(doNarysowania);
     rend.RysujScene();
-    ASSERT_TRUE(doNarysowania->polecenieaIsUsed);
-    ASSERT_FALSE(dziecko->polecenieaIsUsed);
+    ASSERT_TRUE(doNarysowania->poleceniaIsUsed);
+    ASSERT_FALSE(dziecko->poleceniaIsUsed);
 }
 TEST(Renderowanie,WywolujeWlasneFunkcje_wstawione_doNarysowania)
 {

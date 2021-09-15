@@ -90,17 +90,17 @@ TEST(DoNarysowania,wKolejnosciWstaw_PrzesuniecieNaPozycje_nieWstawia)
     spDoNarysowania szescian(make_shared<Szescian>());
     szescian->PoleceniaWybierzIwstawWdobrejKolejnosci();
     
-    ASSERT_FALSE(CzyZawiera(&PoleceniaRenderowania::PrzesuniecieNaPozycje,szescian->Polecenia()));
+    ASSERT_FALSE(CzyZawiera(&PoleceniaRenderowania::Przesun,szescian->Polecenia()));
 }
 TEST(DoNarysowania,wKolejnosciWstaw_PrzesuniecieNaPozycje)
 {
     spDoNarysowania szescian(make_shared<Szescian>());
     //domyślnie powinien być na 0,0,0
     float poz[] = {1,0,0};
-    szescian->UstawPozycje(poz);
+    szescian->UstawPrzesuniecie(poz);
     szescian->PoleceniaWybierzIwstawWdobrejKolejnosci();
     
-    ASSERT_TRUE(CzyZawiera(&PoleceniaRenderowania::PrzesuniecieNaPozycje,szescian->Polecenia()));
+    ASSERT_TRUE(CzyZawiera(&PoleceniaRenderowania::Przesun,szescian->Polecenia()));
 }
 TEST(DoNarysowania,ListyDzieciSaPuste)
 {

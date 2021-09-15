@@ -12,10 +12,12 @@ public:
     DoNarysowaniaMock() = default;
     DoNarysowaniaMock(int i):id(i){};
     virtual float* MacierzObrotu() override;
+    virtual float* Przesuniecie() override;
     virtual l_PolecenieIgeometria Polecenia() override;
     int id = 0;
     bool macierzObrotuIsUsed = false;
-    bool polecenieaIsUsed = false;
+    bool poleceniaIsUsed = false;
+    bool przesuniecieIsUsed = false;
    
     protected:
 

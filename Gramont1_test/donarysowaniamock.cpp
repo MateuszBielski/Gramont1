@@ -7,7 +7,12 @@ float* DoNarysowaniaMock::MacierzObrotu()
 }
 l_PolecenieIgeometria DoNarysowaniaMock::Polecenia()
 {
-    polecenieaIsUsed = true;
+    poleceniaIsUsed = true;
     l_PolecenieIgeometria pustaLista;
     return pustaLista;
+}
+float* DoNarysowaniaMock::Przesuniecie()
+{
+	przesuniecieIsUsed = true;
+    return Transformowalne::Przesuniecie();
 }

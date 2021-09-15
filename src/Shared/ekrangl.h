@@ -26,12 +26,14 @@ class EkranGL : public  GL::DrawingArea
     template<typename T>
     bool WykonajWkontekscieGL(void (T::*Func)(),T& );
     function<void()> RysujScene;
+    
 	
     GLuint* listid;
 protected:
 
 private:
     bool KonfiguracjaGL();
+    void Proby();
     
     ptrConf glconfig;
     int szerokosc = 1, wysokosc = 1;

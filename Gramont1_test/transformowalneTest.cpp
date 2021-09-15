@@ -2,7 +2,7 @@
 #include <GL/gl.h>
 #include "../src/Shared/transformowalne.h"
 
-TEST(TransformowalneTest,MacierzObrotuZapisOdczyt)
+TEST(Transformowalne,MacierzObrotuZapisOdczyt)
 {
     float macierz[] = {2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2};
     Transformowalne model;
@@ -10,7 +10,7 @@ TEST(TransformowalneTest,MacierzObrotuZapisOdczyt)
     EXPECT_FLOAT_EQ(2,model.MacierzObrotu()[3]);
 }
 
-TEST(TransformowalneTest,Quat)
+TEST(Transformowalne,Quat)
 {
     float quat[] = {2,2,2,2};
     Transformowalne model;
@@ -18,14 +18,14 @@ TEST(TransformowalneTest,Quat)
     EXPECT_FLOAT_EQ(2,model.Quat()[2]);
 }
 
-TEST(TransformowalneTest,QuatDiff)
+TEST(Transformowalne,QuatDiff)
 {
     float quat[] = {2,2,3,2};
     Transformowalne model;
     model.QuatDiff(quat);
     EXPECT_FLOAT_EQ(3,model.QuatDiff()[2]);
 }
-TEST(TransformowalneTest,WartosciStartowe)
+TEST(Transformowalne,WartosciStartowe)
 {
     Transformowalne model;
     EXPECT_FLOAT_EQ(0,model.QuatDiff()[2]);
@@ -35,48 +35,58 @@ TEST(TransformowalneTest,WartosciStartowe)
     EXPECT_FLOAT_EQ(1,model.ppMacierzObrotu()[0][0]);
     EXPECT_FLOAT_EQ(1,model.ppMacierzObrotu()[2][2]);
 }
-TEST(TransformowalneTest,ReferencjaMacierzy)
+TEST(Transformowalne,ReferencjaMacierzy)
 {
     Transformowalne model;
     model.ppMacierzObrotu()[2][1] = 32.1;
     EXPECT_FLOAT_EQ(32.1,model.ppMacierzObrotu()[2][1]);
 }
-TEST(TransformowalneTest,UstawPozycje_kopiuje)
+TEST(Transformowalne,UstawPrzesuniecie_kopiuje)
 {
     float poz[] = {1,2,3.3};
     Transformowalne model;
-    model.UstawPozycje(poz);
+    model.UstawPrzesuniecie(poz);
     poz[1] = 4;
-    ASSERT_EQ(1,model.Pozycja()[0]);
-    ASSERT_EQ(2,model.Pozycja()[1]);
-    ASSERT_FLOAT_EQ(3.3,model.Pozycja()[2]);
+    ASSERT_EQ(1,model.Przesuniecie()[0]);
+    ASSERT_EQ(2,model.Przesuniecie()[1]);
+    ASSERT_FLOAT_EQ(3.3,model.Przesuniecie()[2]);
 }
-TEST(TransformowalneTest,NieMaTransformacji)
+TEST(Transformowalne,NieMaTransformacji)
 {
     Transformowalne model;
     ASSERT_FALSE(model.jestTransformacja);
 }
-TEST(TransformowalneTest,JestTransformacja_pozycja)
+TEST(Transformowalne,JestTransformacja_przesuniecie)
 {
     Transformowalne model;
     float poz[] = {1,2,3.3};
-    model.UstawPozycje(poz);
+    model.UstawPrzesuniecie(poz);
     ASSERT_TRUE(model.jestTransformacja);
 }
-TEST(TransformowalneTest,NieMa_obrot)
+TEST(Transformowalne,NieMa_obrot)
 {
     Transformowalne model;
     float macierz[] = {1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1};
     model.MacierzObrotu(macierz);
     ASSERT_FALSE(model.jestTransformacja);
 }
-TEST(TransformowalneTest,JestTransformacja_obrot)
+TEST(Transformowalne,JestTransformacja_obrot)
 {
     Transformowalne model;
     float macierz[] = {1,0,0,0.1,0,1,0,0,0,0,1,0,0,0,0,1};
     model.MacierzObrotu(macierz);
     ASSERT_TRUE(model.jestTransformacja);
 }
-//jestTransformacja powinna być zmienną ustawianą przy funkcjach UstawPozycje, MacierzObrotu
+TEST(Transformowalne,DodajPrzesuniecie)
+{
+    Transformowalne t;
+    float przes1[] = {2,2,0};
+    float przes2[] = {-1.5,0.2,-0.4};
+    t.UstawPrzesuniecie(przes1);
+    t.DodajPrzesuniecie(przes2);
+    ASSERT_FLOAT_EQ(0.5,t.Przesuniecie()[0]);
+    ASSERT_FLOAT_EQ(2.2,t.Przesuniecie()[1]);
+    ASSERT_FLOAT_EQ(-0.4,t.Przesuniecie()[2]);
+}
 
 

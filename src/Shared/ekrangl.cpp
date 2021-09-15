@@ -1,11 +1,14 @@
 #include "ekrangl.h"
+#include "FunkcjeIstruktury.h"
 
 
 
 EkranGL::EkranGL()
 {
     KonfiguracjaGL();
-    RysujScene = [](){};
+//    RysujScene = [](){};
+    RysujScene = [this](){Proby();};
+    
 }
 
 EkranGL::~EkranGL()
@@ -118,6 +121,32 @@ void EkranGL::UstawienieOswietlenia()
     glLightfv(GL_LIGHT1,GL_POSITION,pozycjaZrodlaSwiatla); 
     glLightfv(GL_LIGHT1,GL_DIFFUSE,kolorZrodla);
     glEnable(GL_LIGHT1);
+}
+void EkranGL::Proby()
+{
+    auto pokaz = [](float * v){
+		g_print("\n ");
+		for(int i = 0; i < 4 ; i++)g_print("  %2.3f",v[i]);
+	};
+    glLoadIdentity();
+    float macierzModelWidok[16];
+//    glTranslatef(0,1,0);
+    glRotatef(44,0,0,1);
+    float punkt[] = {1,1,0,1};
+    float punktTransf[4];
+    glGetFloatv(GL_MODELVIEW_MATRIX,macierzModelWidok);
+//    for(short i = 0 ; i < 4 ; i++)
+//    {
+//        for(short j = 0 ; j < 4 ; j++)
+//        {
+//            cout<<macierzModelWidok[4*j+i]<<" ";
+//        }
+//        cout<<endl;
+//    }
+    
+    IloczynMacierzyIwektora4f(macierzModelWidok,punkt,punktTransf);
+    pokaz(punktTransf);
+    RysujScene = [](){};
 }
 //void EkranGL::PrzypiszRysujScene(function<void()> fun)
 //{
