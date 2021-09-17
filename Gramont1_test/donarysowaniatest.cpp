@@ -2,6 +2,7 @@
 //#include <GL/gl.h>
 #include "../src/Shared/szescian.h"
 #include "../src/Shared/prostytrojkat.h"
+#include "../src/Process/renderowanie.h"
 
 TEST(DoNarysowania,SzescianIndeksyVertexow)
 {
@@ -126,6 +127,38 @@ TEST(DoNarysowania,PrzyInicjacjiListaJestPusta)
     auto rys1(make_unique<DoNarysowania>());
     ASSERT_TRUE(rys1->Polecenia().empty());
 }
+
+TEST(DoNarysowania,Polecenia_WlasciweIteratory)
+{
+    auto rys1(make_shared<DoNarysowania>());
+    rys1->PoleceniaWybierzIwstawWdobrejKolejnosci();
+//    cout<<"TEST Polecenia_WlasciweIteratory size: "<<rys1->Polecenia().size()<<endl;
+    auto iter = rys1->Polecenia().begin();
+    auto& adres = &(iter);
+    auto poczatek = *(iter);
+    auto pocz1 = *(rys1->PoczatekMoichPolecen());
+    auto ile = rys1->Polecenia().size();
+    Renderowanie rend;
+    rend.WywolajPoleceniaZ(rys1);
+    ASSERT_EQ(&poczatek,&pocz1);
+}
+/*
+TEST(DoNarysowania,DodanieDziecka_zmianaRozmiaruListyPolecen)
+{
+    spDoNarysowania rys1(make_shared<DoNarysowania>());
+    spDoNarysowania rys2(make_shared<DoNarysowania>());
+    
+    rys1->DodajDziecko(rys2);
+    rys1->PoleceniaWybierzIwstawWdobrejKolejnosci();
+    auto rozmiarPrzedZmiana = rys1->Polecenia().size();
+    
+    spDoNarysowania rys3(make_shared<DoNarysowania>());
+    rys2->DodajDziecko(rys3);
+//    rys2->PoleceniaWybierzIwstawWdobrejKolejnosci();
+    auto rozmiarPoZmianie = rys1->Polecenia().size();
+    ASSERT_TRUE(rozmiarPrzedZmiana != rozmiarPoZmianie);
+}
+*/
 //PushName
 //PushMatrix - to związane jest z przesunięciem na pozycje i obrotem
 //PrzesuniecieNaPozycje

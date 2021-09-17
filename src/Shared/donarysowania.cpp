@@ -1,7 +1,7 @@
 #include "donarysowania.h"
 #include "../Process/renderowanie.h"
 
-l_PolecenieIgeometria DoNarysowania::Polecenia()
+l_PolecenieIgeometria& DoNarysowania::Polecenia()
 {
     return mojePolecenia;
 }
@@ -17,15 +17,24 @@ void DoNarysowania::NieWidoczny(bool flaga)
 void DoNarysowania::PoleceniaWybierzIwstawWdobrejKolejnosci()
 {
 //    mojePolecenia.push_back(&PoleceniaRenderowania::PrzedGeometria);
+
+//    poczatekMoichPolecen = --mojePolecenia.end();
+    
     if(jestTransformacja)
     mojePolecenia.push_back({&PoleceniaRenderowania::Przesun,WskaznikNaMnie()});
-    
     if(!nieWidoczny)mojePolecenia.push_back({&PoleceniaRenderowania::RysujGeometriePowierzchnie,WskaznikNaMnie()});
     for(auto& dziecko : dzieci)
     {
         dziecko->PoleceniaWybierzIwstawWdobrejKolejnosci();
         mojePolecenia.splice(mojePolecenia.end(),dziecko->mojePolecenia);
     }
+    int size = mojePolecenia.size();
+    poczatekMoichPolecen = mojePolecenia.begin();
+    auto& adres = &poczatekMoichPolecen;
+}
+l_PolecenieIgeometria::iterator DoNarysowania::PoczatekMoichPolecen()
+{
+	return poczatekMoichPolecen;
 }
 
 

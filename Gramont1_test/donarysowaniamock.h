@@ -13,7 +13,7 @@ public:
     DoNarysowaniaMock(int i):id(i){};
     virtual float* MacierzObrotu() override;
     virtual float* Przesuniecie() override;
-    virtual l_PolecenieIgeometria Polecenia() override;
+    virtual l_PolecenieIgeometria& Polecenia() override;
     int id = 0;
     bool macierzObrotuIsUsed = false;
     bool poleceniaIsUsed = false;

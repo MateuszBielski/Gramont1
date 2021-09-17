@@ -5,11 +5,10 @@ float* DoNarysowaniaMock::MacierzObrotu()
 {
 	macierzObrotuIsUsed = true;
 }
-l_PolecenieIgeometria DoNarysowaniaMock::Polecenia()
+l_PolecenieIgeometria& DoNarysowaniaMock::Polecenia()
 {
     poleceniaIsUsed = true;
-    l_PolecenieIgeometria pustaLista;
-    return pustaLista;
+    return DoNarysowania::Polecenia();
 }
 float* DoNarysowaniaMock::Przesuniecie()
 {

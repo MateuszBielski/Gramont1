@@ -20,12 +20,14 @@ class DoNarysowania : public GeometriaModelu, public Grupowalne_T<DoNarysowania>
 {
     
     l_PolecenieIgeometria mojePolecenia;
+    l_PolecenieIgeometria::iterator poczatekMoichPolecen;
     bool nieWidoczny = false;
 public:
 //    template<typename T>
     void PoleceniaWybierzIwstawWdobrejKolejnosci();
-    virtual l_PolecenieIgeometria Polecenia();
+    virtual l_PolecenieIgeometria& Polecenia();
     void WstawPolecenieNaKoncu(PtrMemRend_Geom);
+    l_PolecenieIgeometria::iterator PoczatekMoichPolecen();
     
     void NieWidoczny(bool);
 };
