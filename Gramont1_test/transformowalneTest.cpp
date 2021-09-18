@@ -88,5 +88,59 @@ TEST(Transformowalne,DodajPrzesuniecie)
     ASSERT_FLOAT_EQ(2.2,t.Przesuniecie()[1]);
     ASSERT_FLOAT_EQ(-0.4,t.Przesuniecie()[2]);
 }
-
+TEST(Transformowalne,DodajPrzesuniecie_jestTransformacja)
+{
+    Transformowalne t;
+    float przes1[] = {2,2,0};
+    t.DodajPrzesuniecie(przes1);
+    ASSERT_TRUE(t.jestTransformacja);
+}
+TEST(Transformowalne,DodajPrzesuniecie_nieMaTransformacji)
+{
+    Transformowalne t;
+    float przes1[] = {0,0,0};
+    t.DodajPrzesuniecie(przes1);
+    ASSERT_FALSE(t.jestTransformacja);
+}
+TEST(Transformowalne,PowrotPrzesunieciaNaZero_nieMaTransformacji)
+{
+    Transformowalne t;
+    float przes1[] = {0,2.3,0};
+    float przes2[] = {0,-2.3,0};
+    t.DodajPrzesuniecie(przes1);
+    t.DodajPrzesuniecie(przes2);
+    ASSERT_FALSE(t.jestTransformacja);
+}
+TEST(Transformowalne,UstawPrzesunieciaNaZero_nieMaTransformacji)
+{
+    Transformowalne t;
+    t.jestTransformacja =true;
+    float poz[] = {0,0,0};
+    t.UstawPrzesuniecie(poz);
+    ASSERT_FALSE(t.jestTransformacja);
+}
+TEST(Transformowalne,ObrotJest_PrzesWyzerowane)
+{
+    Transformowalne model;
+    float macierz[] = {1,0,0,0.1,0,1,0,0,0,0,1,0,0,0,0,1};
+    float poz[] = {0,1.2,0};
+    model.UstawPrzesuniecie(poz);
+    model.MacierzObrotu(macierz);
+    float poz2[] = {0,0,0};
+    model.UstawPrzesuniecie(poz2);
+    
+    ASSERT_TRUE(model.jestTransformacja);
+}
+TEST(Transformowalne,PrzesuniecieJest_ObrotWyzerowany)
+{
+    Transformowalne model;
+    float macierz[] = {1,0,0,0.1,0,1,0,0,0,0,1,0,0,0,0,1};
+    float poz[] = {0,1.2,0};
+    model.UstawPrzesuniecie(poz);
+    model.MacierzObrotu(macierz);
+    float macierz2[] = {1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1};
+    model.MacierzObrotu(macierz2);
+    
+    ASSERT_TRUE(model.jestTransformacja);
+}
 

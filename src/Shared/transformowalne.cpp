@@ -62,7 +62,9 @@ void Transformowalne::MacierzObrotu(float* m)
 {
     memcpy(m_macierzObrotu,m,16*sizeof(float));
     constexpr float macierzJednostkowa[] = {1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1};
-    for(short i = 0; i < 4 ; i++)for(short j = 0; j < 4 ; j++)jestTransformacja += macierzJednostkowa[i * 4 + j] != m_macierzObrotu[i][j];
+    jestObrot = false;
+    for(short i = 0; i < 4 ; i++)for(short j = 0; j < 4 ; j++)jestObrot += macierzJednostkowa[i * 4 + j] != m_macierzObrotu[i][j];
+    jestTransformacja = jestObrot || jestPrzesuniecie;
 }
 float* Transformowalne::MacierzObrotu()
 {	
@@ -75,9 +77,14 @@ float* Transformowalne::Przesuniecie()
 void Transformowalne::UstawPrzesuniecie(float* poz)
 {
 	for(short i = 0; i < 3; i++) m_przesuniecie[i] = poz[i];
-    for(short i = 0; i < 3 ; i++)jestTransformacja += m_przesuniecie[i];
+    jestPrzesuniecie = false;
+    for(short i = 0; i < 3 ; i++)jestPrzesuniecie += m_przesuniecie[i];
+    jestTransformacja = jestObrot || jestPrzesuniecie;
 }
 void Transformowalne::DodajPrzesuniecie(float* przes)
 {
-	for(short i = 0; i < 3; i++) m_przesuniecie[i] += przes[i];
+	jestPrzesuniecie = false;
+    for(short i = 0; i < 3; i++) m_przesuniecie[i] += przes[i];
+    for(short i = 0; i < 3 ; i++)jestPrzesuniecie += m_przesuniecie[i];
+    jestTransformacja = jestObrot || jestPrzesuniecie;
 }

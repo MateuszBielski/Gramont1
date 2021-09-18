@@ -128,20 +128,126 @@ TEST(DoNarysowania,PrzyInicjacjiListaJestPusta)
     ASSERT_TRUE(rys1->Polecenia().empty());
 }
 
-TEST(DoNarysowania,Polecenia_WlasciweIteratory)
+TEST(DoNarysowania,PierwszeMojePolecenie_WlasciweIteratory)
 {
     auto rys1(make_shared<DoNarysowania>());
     rys1->PoleceniaWybierzIwstawWdobrejKolejnosci();
-//    cout<<"TEST Polecenia_WlasciweIteratory size: "<<rys1->Polecenia().size()<<endl;
-    auto iter = rys1->Polecenia().begin();
-    auto& adres = &(iter);
-    auto poczatek = *(iter);
-    auto pocz1 = *(rys1->PoczatekMoichPolecen());
-    auto ile = rys1->Polecenia().size();
-    Renderowanie rend;
-    rend.WywolajPoleceniaZ(rys1);
-    ASSERT_EQ(&poczatek,&pocz1);
+    auto adr1 = &(*(rys1->Polecenia().begin()));
+    auto adr2 = &(*(rys1->itPierwszeMojePolecenie()));
+    ASSERT_EQ(adr1,adr2);
 }
+TEST(DoNarysowania,OstatnieMojePolecenie_WlasciweIteratory)
+{
+    auto rys1(make_shared<DoNarysowania>());
+    rys1->PoleceniaWybierzIwstawWdobrejKolejnosci();
+    auto adr1 = &(*(rys1->Polecenia().rbegin()));
+    auto adr2 = &(*(rys1->itOstatnieMojePolecenie()));
+    ASSERT_EQ(adr1,adr2);
+}
+TEST(DoNarysowania,WskaznikiPolecenDzieckaZawierajaJegoPolecenia)
+{
+    auto rys1(make_shared<DoNarysowania>());
+    auto rys2(make_shared<DoNarysowania>());
+    rys1->DodajDziecko(rys2);
+    float przes[] = {1.0,1.3,-7.2};
+    rys2->DodajPrzesuniecie(przes);//wydłuża listę
+    rys1->PoleceniaWybierzIwstawWdobrejKolejnosci();
+    auto it2 = rys2->itPierwszeMojePolecenie();
+    auto koniec2 = ++(rys2->itOstatnieMojePolecenie());
+    auto adr2 = &(*rys2);
+    while(it2 != koniec2)
+    {
+        auto polIgeom = *(it2++);
+        auto adr = &(*(polIgeom.geometria));
+        ASSERT_EQ(adr2,adr);
+    }
+}
+TEST(DoNarysowania,AktualizujListe_NieJestJuzPusta)
+{
+    auto rys1(make_shared<DoNarysowania>());
+    rys1->AktualizujMojePolecenia();
+    ASSERT_FALSE(rys1->Polecenia().empty());
+}
+TEST(DoNarysowania,AktualizujListe_PoZmianieParametrowInnyRozmiar)
+{
+    auto rys1(make_shared<DoNarysowania>());
+    float przes[] = {1.3,0,0};
+    rys1->DodajPrzesuniecie(przes);
+    rys1->PoleceniaWybierzIwstawWdobrejKolejnosci();
+    auto rozmiar1(rys1->Polecenia().size());
+    przes[0] = 0.0;
+    rys1->UstawPrzesuniecie(przes);
+    rys1->AktualizujMojePolecenia();
+    auto rozmiar2(rys1->Polecenia().size());
+    ASSERT_NE(rozmiar1,rozmiar2);
+    
+}
+TEST(DoNarysowania,AktualizujListe_NieWymieniaZawartosciWpozaSwoimZakresem)
+{
+    auto rys1(make_shared<DoNarysowania>());
+    auto rys2(make_shared<DoNarysowania>());
+    rys1->DodajDziecko(rys2);
+    rys1->PoleceniaWybierzIwstawWdobrejKolejnosci();
+    int ileDlaRys1Przed = 0;
+    auto adresGeom1 = &(*rys1);
+    for(auto& polIgeom : rys1->Polecenia()) 
+        if(adresGeom1 == &*polIgeom.geometria)
+            ileDlaRys1Przed++;
+    
+    float przes[] = {1.3,0,0};
+    rys2->DodajPrzesuniecie(przes);
+    rys2->AktualizujMojePolecenia();
+    int ileDlaRys1Po = 0;
+    for(auto& polIgeom : rys1->Polecenia()) 
+        if(adresGeom1 == &*polIgeom.geometria)
+            ileDlaRys1Po++;
+    
+    ASSERT_EQ(ileDlaRys1Przed,ileDlaRys1Po);
+    
+}
+//NieMożnaAktualizować, jeśli moje pierwsze i ostatnie polecenie nie jest znane, użyć dodatkowej flagi
+/*
+TEST(DoNarysowania,DodanieKolejnegoDzieckaAktualizuje)
+{
+    auto rys1(make_shared<DoNarysowania>());
+    auto rys2(make_shared<DoNarysowania>());
+    rys1->DodajDziecko(rys2);
+    rys1->PoleceniaWybierzIwstawWdobrejKolejnosci();
+    
+    auto rys3(make_shared<DoNarysowania>());
+    rys1->DodajDziecko(rys3);
+    
+    auto it3 = rys3->itPierwszeMojePolecenie();
+    auto koniec3 = ++(rys3->itOstatnieMojePolecenie());
+    auto adr3 = &(*rys3);
+    while(it3 != koniec3)
+    {
+        auto polIgeom = *(it3++);
+        auto adr = &(*(polIgeom.geometria));
+        ASSERT_EQ(adr3,adr);
+    }
+}
+TEST(DoNarysowania,DodanieDzieckaGlebiejAktualizuje)
+{
+    auto rys1(make_shared<DoNarysowania>());
+    auto rys2(make_shared<DoNarysowania>());
+    rys1->DodajDziecko(rys2);
+    rys1->PoleceniaWybierzIwstawWdobrejKolejnosci();
+    
+    auto rys3(make_shared<DoNarysowania>());
+    rys2->DodajDziecko(rys3);
+    
+    auto it3 = rys3->itPierwszeMojePolecenie();
+    auto koniec3 = ++(rys3->itOstatnieMojePolecenie());
+    auto adr3 = &(*rys3);
+    while(it3 != koniec3)
+    {
+        auto polIgeom = *(it3++);
+        auto adr = &(*(polIgeom.geometria));
+        ASSERT_EQ(adr3,adr);
+    }
+}
+*/
 /*
 TEST(DoNarysowania,DodanieDziecka_zmianaRozmiaruListyPolecen)
 {

@@ -29,13 +29,23 @@ void DoNarysowania::PoleceniaWybierzIwstawWdobrejKolejnosci()
         mojePolecenia.splice(mojePolecenia.end(),dziecko->mojePolecenia);
     }
     int size = mojePolecenia.size();
-    poczatekMoichPolecen = mojePolecenia.begin();
-    auto& adres = &poczatekMoichPolecen;
+    pierwszeMojePolecenie = mojePolecenia.begin();
+    ostatnieMojePolecenie = --mojePolecenia.end();
 }
-l_PolecenieIgeometria::iterator DoNarysowania::PoczatekMoichPolecen()
+void DoNarysowania::AktualizujMojePolecenia()
 {
-	return poczatekMoichPolecen;
+	mojePolecenia.clear();
+    PoleceniaWybierzIwstawWdobrejKolejnosci();
 }
+l_PolecenieIgeometria::iterator DoNarysowania::itPierwszeMojePolecenie()
+{
+	return pierwszeMojePolecenie;
+}
+l_PolecenieIgeometria::iterator DoNarysowania::itOstatnieMojePolecenie()
+{
+	return ostatnieMojePolecenie;
+}
+
 
 
 

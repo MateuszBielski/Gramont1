@@ -37,6 +37,8 @@ class Transformowalne
 protected:
 
 private:
+    bool jestPrzesuniecie = false;
+    bool jestObrot = false;
         
 };
 using spTransformowalne = shared_ptr<Transformowalne>;
