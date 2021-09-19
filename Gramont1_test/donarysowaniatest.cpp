@@ -182,7 +182,7 @@ TEST(DoNarysowania,AktualizujListe_PoZmianieParametrowInnyRozmiar)
     ASSERT_NE(rozmiar1,rozmiar2);
     
 }
-TEST(DoNarysowania,AktualizujListe_NieWymieniaZawartosciWpozaSwoimZakresem)
+TEST(DoNarysowania,AktualizujListe_NieWymieniaZawartosciPozaSwoimZakresem)
 {
     auto rys1(make_shared<DoNarysowania>());
     auto rys2(make_shared<DoNarysowania>());
@@ -201,11 +201,47 @@ TEST(DoNarysowania,AktualizujListe_NieWymieniaZawartosciWpozaSwoimZakresem)
     for(auto& polIgeom : rys1->Polecenia()) 
         if(adresGeom1 == &*polIgeom.geometria)
             ileDlaRys1Po++;
-    
     ASSERT_EQ(ileDlaRys1Przed,ileDlaRys1Po);
+}
+TEST(DoNarysowania,AktualizujListe_WymieniaZawartoscWswoimZakresie)
+{
+    auto rys1(make_shared<DoNarysowania>());
+    auto rys2(make_shared<DoNarysowania>());
+    rys1->DodajDziecko(rys2);
+    rys1->PoleceniaWybierzIwstawWdobrejKolejnosci();
+    int ileDlaRys2Przed = 0;
+    auto adresGeom2 = &(*rys2);
+    for(auto& polIgeom : rys1->Polecenia()) 
+        if(adresGeom2 == &*polIgeom.geometria)
+            ileDlaRys2Przed++;
     
+    float przes[] = {1.3,0,0};
+    rys2->DodajPrzesuniecie(przes);
+    rys2->AktualizujMojePolecenia();
+    int ileDlaRys2Po = 0;
+    for(auto& polIgeom : rys1->Polecenia()) 
+        if(adresGeom2 == &*polIgeom.geometria)
+            ileDlaRys2Po++;
+    ASSERT_NE(ileDlaRys2Przed,ileDlaRys2Po);
+}
+TEST(DoNarysowania,PoAktualizacjiPoczatkiIkonceZakresuWskazujaNaWlasciweMiejsca)
+{
+    auto rys1(make_shared<DoNarysowania>());
+    auto rys2(make_shared<DoNarysowania>());
+    auto rys3(make_shared<DoNarysowania>());
+    rys1->DodajDziecko(rys2);
+    rys2->DodajDziecko(rys3);
+    rys1->PoleceniaWybierzIwstawWdobrejKolejnosci();
+    rys2->AktualizujMojePolecenia();
+    auto adrGeom1 = &(*rys1);
+    auto adrGeom2 = &(*rys2);
+    auto adrGeom3 = &(*rys3);
+    
+    auto poczatekPolecen2;
+    auto koniecPolecen2;
 }
 //NieMożnaAktualizować, jeśli moje pierwsze i ostatnie polecenie nie jest znane, użyć dodatkowej flagi
+//dwa razy aktualizować, czy nie robią się problemy z listami
 /*
 TEST(DoNarysowania,DodanieKolejnegoDzieckaAktualizuje)
 {

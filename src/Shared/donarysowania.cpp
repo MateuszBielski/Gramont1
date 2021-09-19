@@ -26,7 +26,10 @@ void DoNarysowania::PoleceniaWybierzIwstawWdobrejKolejnosci()
     for(auto& dziecko : dzieci)
     {
         dziecko->PoleceniaWybierzIwstawWdobrejKolejnosci();
+        //zakładam, że iteratory dziecka: mojePierwsze i ostatnie polecenie przeniesione zostaną teraz do 
+        //listy głównej
         mojePolecenia.splice(mojePolecenia.end(),dziecko->mojePolecenia);
+        dziecko->poleceniaListaGlowna = &mojePolecenia;
     }
     int size = mojePolecenia.size();
     pierwszeMojePolecenie = mojePolecenia.begin();
@@ -35,7 +38,19 @@ void DoNarysowania::PoleceniaWybierzIwstawWdobrejKolejnosci()
 void DoNarysowania::AktualizujMojePolecenia()
 {
 	mojePolecenia.clear();
+    auto pierwszeWymienianegoZakresu = pierwszeMojePolecenie;
+    auto ostatnieWymienianegoZakresu = ostatnieMojePolecenie;
     PoleceniaWybierzIwstawWdobrejKolejnosci();
+    auto adrMojePolecenia = &mojePolecenia;
+    int size0 = mojePolecenia.size();
+    if(poleceniaListaGlowna)
+    {
+        int size1 = poleceniaListaGlowna->size();
+        auto przedTymWstawiamyNowaZawartosc = poleceniaListaGlowna->
+        erase(pierwszeWymienianegoZakresu,++ostatnieWymienianegoZakresu);
+        int size2 = poleceniaListaGlowna->size();
+        poleceniaListaGlowna->splice(przedTymWstawiamyNowaZawartosc,mojePolecenia);
+    }
 }
 l_PolecenieIgeometria::iterator DoNarysowania::itPierwszeMojePolecenie()
 {

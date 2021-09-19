@@ -20,6 +20,8 @@ class DoNarysowania : public GeometriaModelu, public Grupowalne_T<DoNarysowania>
 {
     
     l_PolecenieIgeometria mojePolecenia;
+    l_PolecenieIgeometria* poleceniaListaGlowna = nullptr;
+    
     l_PolecenieIgeometria::iterator pierwszeMojePolecenie;
     l_PolecenieIgeometria::iterator ostatnieMojePolecenie;
     
