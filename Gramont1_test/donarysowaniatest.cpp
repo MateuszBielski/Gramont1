@@ -237,8 +237,22 @@ TEST(DoNarysowania,PoAktualizacjiPoczatkiIkonceZakresuWskazujaNaWlasciweMiejsca)
     auto adrGeom2 = &(*rys2);
     auto adrGeom3 = &(*rys3);
     
-    auto poczatekPolecen2;
-    auto koniecPolecen2;
+    auto poczatekPolecen2 = rys2->itPierwszeMojePolecenie();
+    auto koniecPolecen2 = rys2->itOstatnieMojePolecenie();
+    
+    auto adresGeomNaPoczatku2 = &*(*poczatekPolecen2--).geometria;
+    ASSERT_EQ(adresGeomNaPoczatku2,adrGeom2);
+    
+    auto adresGeomPrzedPoczatkiem2 = &*(*poczatekPolecen2).geometria;
+    ASSERT_EQ(adresGeomPrzedPoczatkiem2,adrGeom1);
+    
+    
+    auto adresGeomNaKoncu2 = &*(*koniecPolecen2++).geometria;
+    ASSERT_EQ(adresGeomNaKoncu2,adrGeom2);
+    
+    //to może nie wyjść, bo nie ma narazie poleceń kończących
+    auto adresGeomPoKoncu2 = &*(*koniecPolecen2).geometria;
+    ASSERT_EQ(adresGeomPoKoncu2,adrGeom1);
 }
 //NieMożnaAktualizować, jeśli moje pierwsze i ostatnie polecenie nie jest znane, użyć dodatkowej flagi
 //dwa razy aktualizować, czy nie robią się problemy z listami
