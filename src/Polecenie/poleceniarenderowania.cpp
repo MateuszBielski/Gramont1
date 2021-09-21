@@ -58,5 +58,15 @@ void PoleceniaRenderowania::RysujGeometriePunkty(spGeometriaModelu)
     (*ptrFunkcjaMonitorujaca)("RysujGeometriePunkty");
 }
 
+void PoleceniaRenderowania::PushMatrix(spGeometriaModelu)
+{
+    (*ptrFunkcjaMonitorujaca)("PushMatrix");
+}
+
+void PoleceniaRenderowania::PopMatrix(spGeometriaModelu)
+{
+    (*ptrFunkcjaMonitorujaca)("PopMatrix");
+}
+
 //dla linkera
 template void PoleceniaRenderowania::WywolajPoleceniaZ(shared_ptr<DoNarysowania> );

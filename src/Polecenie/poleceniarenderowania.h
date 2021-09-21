@@ -24,6 +24,8 @@ class PoleceniaRenderowania
     void RysujGeometrieKrawedzie(spGeometriaModelu);
     void RysujGeometriePunkty(spGeometriaModelu);
     void Przesun(spGeometriaModelu);
+    void PushMatrix(spGeometriaModelu);
+    void PopMatrix(spGeometriaModelu);
     
     template<typename T>
     void WywolajPoleceniaZ(T obiektZwezlami);

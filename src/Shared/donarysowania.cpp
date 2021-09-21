@@ -21,7 +21,10 @@ void DoNarysowania::PoleceniaWybierzIwstawWdobrejKolejnosci()
 //    poczatekMoichPolecen = --mojePolecenia.end();
     
     if(jestTransformacja)
-    mojePolecenia.push_back({&PoleceniaRenderowania::Przesun,WskaznikNaMnie()});
+    {
+        mojePolecenia.push_back({&PoleceniaRenderowania::PushMatrix,WskaznikNaMnie()});
+        mojePolecenia.push_back({&PoleceniaRenderowania::Przesun,WskaznikNaMnie()});
+    }
     if(!nieWidoczny)mojePolecenia.push_back({&PoleceniaRenderowania::RysujGeometriePowierzchnie,WskaznikNaMnie()});
     for(auto& dziecko : dzieci)
     {
@@ -31,7 +34,8 @@ void DoNarysowania::PoleceniaWybierzIwstawWdobrejKolejnosci()
         mojePolecenia.splice(mojePolecenia.end(),dziecko->mojePolecenia);
         dziecko->poleceniaListaGlowna = &mojePolecenia;
     }
-    int size = mojePolecenia.size();
+    mojePolecenia.push_back({&PoleceniaRenderowania::PopMatrix,WskaznikNaMnie()});
+    
     pierwszeMojePolecenie = mojePolecenia.begin();
     ostatnieMojePolecenie = --mojePolecenia.end();
 }

@@ -103,6 +103,14 @@ TEST(DoNarysowania,wKolejnosciWstaw_PrzesuniecieNaPozycje)
     
     ASSERT_TRUE(CzyZawiera(&PoleceniaRenderowania::Przesun,szescian->Polecenia()));
 }
+TEST(DoNarysowania,JesliTransformacjaToJestPushIpopMatrix)
+{
+    auto rys(make_shared<DoNarysowania>());
+    rys->jestTransformacja = true;
+    rys->PoleceniaWybierzIwstawWdobrejKolejnosci();
+    ASSERT_TRUE(CzyZawiera(&PoleceniaRenderowania::PushMatrix,rys->Polecenia()));
+    ASSERT_TRUE(CzyZawiera(&PoleceniaRenderowania::PopMatrix,rys->Polecenia()));
+}
 TEST(DoNarysowania,ListyDzieciSaPuste)
 {
     spDoNarysowania rys1(make_shared<DoNarysowania>());
@@ -232,10 +240,21 @@ TEST(DoNarysowania,PoAktualizacjiPoczatkiIkonceZakresuWskazujaNaWlasciweMiejsca)
     rys1->DodajDziecko(rys2);
     rys2->DodajDziecko(rys3);
     rys1->PoleceniaWybierzIwstawWdobrejKolejnosci();
+    for(auto polecenie : rys1->Polecenia())
+    {
+        cout<<&*polecenie.geometria<<endl;
+    }
+    float przes[] = {1.3,0,0};
+    rys2->DodajPrzesuniecie(przes);
     rys2->AktualizujMojePolecenia();
     auto adrGeom1 = &(*rys1);
     auto adrGeom2 = &(*rys2);
     auto adrGeom3 = &(*rys3);
+    
+    for(auto polecenie : rys1->Polecenia())
+    {
+        cout<<&*polecenie.geometria<<endl;
+    }
     
     auto poczatekPolecen2 = rys2->itPierwszeMojePolecenie();
     auto koniecPolecen2 = rys2->itOstatnieMojePolecenie();
@@ -250,10 +269,11 @@ TEST(DoNarysowania,PoAktualizacjiPoczatkiIkonceZakresuWskazujaNaWlasciweMiejsca)
     auto adresGeomNaKoncu2 = &*(*koniecPolecen2++).geometria;
     ASSERT_EQ(adresGeomNaKoncu2,adrGeom2);
     
-    //to może nie wyjść, bo nie ma narazie poleceń kończących
+    
     auto adresGeomPoKoncu2 = &*(*koniecPolecen2).geometria;
     ASSERT_EQ(adresGeomPoKoncu2,adrGeom1);
 }
+
 //NieMożnaAktualizować, jeśli moje pierwsze i ostatnie polecenie nie jest znane, użyć dodatkowej flagi
 //dwa razy aktualizować, czy nie robią się problemy z listami
 /*
@@ -316,8 +336,7 @@ TEST(DoNarysowania,DodanieDziecka_zmianaRozmiaruListyPolecen)
 }
 */
 //PushName
-//PushMatrix - to związane jest z przesunięciem na pozycje i obrotem
-//PrzesuniecieNaPozycje
+
 //KorektaOsiObrotu
 //ObrocWgPunktu
 //LoadName
@@ -326,6 +345,6 @@ TEST(DoNarysowania,DodanieDziecka_zmianaRozmiaruListyPolecen)
 //GeometriaPunkty
 //+NieRysujGeometrii
 //PopName
-//PopMatrix
+
 //mechanizm powiadomiania o wprowadzeniu zmiany, 
 //powiadamianie o zmianie wymusza przebudowanie listy polecen renderowania
