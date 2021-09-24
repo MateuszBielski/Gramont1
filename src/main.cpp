@@ -37,7 +37,13 @@ int main(int argc, char **argv)
     obslugaSygnalow.NadawanieDoZarzadzaniaObiektami(zarzadzanie.getKolejkaPolecen());
     obslugaSygnalow.NadawanieDoRenderowania(renderowanie.getKolejkaPolecen());
     
-    zarzadzanie.DoNarysowaniaItransformacji(make_shared<Szescian>());
+    auto rys = make_shared<DoNarysowania>();
+    auto szescian1 = make_shared<Szescian>();
+    auto szescian2 = make_shared<Szescian>();
+    
+    
+    
+    zarzadzanie.DoNarysowaniaItransformacji(rys);
     zarzadzanie.NadawanieDoRenderowania(renderowanie.getKolejkaPolecen(),PRZEKAZ_DO_NARYSOWANIA);//
     zarzadzanie.WysylaniePrzerysujPoTransformacji();
 //    zarzadzanie.DoNarysowaniaItransformacji(make_shared<DoNarysowania>());

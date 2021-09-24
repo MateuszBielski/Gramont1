@@ -57,6 +57,23 @@ TEST(DoNarysowania,SzescianSchematNormalnych)
     
     for(int i = 0 ; i < szescian->ileNormalnych ; i++)ASSERT_EQ(schemat[i],szescian->schematNormalnych[i]);
 }
+TEST(DoNarysowania,SzescianPrzesunieciePoczatkowe)
+{
+    spDoNarysowania szescian(make_unique<Szescian>());
+    float przes[] = {1.5,0.0,0.0};
+    sescian->PrzesunieciePoczatkowe(przes);
+    float wspolrzedneSpodziewane[] = {  
+                    0,0,1,
+                    1,0,1,
+                    1,0,0,
+                    0,0,0,
+                    0,1,1,
+                    1,1,1,
+                    1,1,0,
+                    0,1,0};
+    for(short i = 0; i < szescian->)
+    szescian->wspolrzedneVrtx[]
+}
 template<typename AdrFun, typename Polecenia>
 bool CzyZawiera(AdrFun adr,Polecenia polecenia)
 {
