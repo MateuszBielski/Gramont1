@@ -68,11 +68,10 @@ void DoNarysowania::PodczasDodajDziecko()
 }
 void DoNarysowania::PodczasOdejmijDziecko()
 {
+    AktualizujMojePolecenia();
 }
 bool DoNarysowania::czyPoleceniaListaGlownaJestTaSama(l_PolecenieIgeometria* wsk)
 {
-//	return false;
-    
     return poleceniaListaGlowna == wsk;
 }
 

@@ -371,48 +371,76 @@ TEST(DoNarysowania,DodanieKolejnegoDzieckaAktualizuje_WglownejLiscieSaPoleceniaD
     }
     ASSERT_TRUE(result2);
 }
-
-//dwa razy aktualizować, czy nie robią się problemy z listami
-/*
-
-TEST(DoNarysowania,DodanieDzieckaGlebiejAktualizuje)
+TEST(DoNarysowania,DodanieGlebiejDzieckaAktualizuje)
 {
     auto rys1(make_shared<DoNarysowania>());
     auto rys2(make_shared<DoNarysowania>());
     rys1->DodajDziecko(rys2);
     rys1->PoleceniaWybierzIwstawWdobrejKolejnosci();
     
+    auto it = rys1->itPierwszeMojePolecenie();
+    auto koniec = ++(rys1->itOstatnieMojePolecenie());
+    
     auto rys3(make_shared<DoNarysowania>());
-    rys2->DodajDziecko(rys3);
-    
-    auto it3 = rys3->itPierwszeMojePolecenie();
-    auto koniec3 = ++(rys3->itOstatnieMojePolecenie());
     auto adr3 = &(*rys3);
-    while(it3 != koniec3)
+    
+    bool result1 = false;
+    bool result2 = false;
+    while(it != koniec)
     {
-        auto polIgeom = *(it3++);
+        auto polIgeom = *(it++);
         auto adr = &(*(polIgeom.geometria));
-        ASSERT_EQ(adr3,adr);
+        if(adr == adr3) result1 = true;
     }
-}
-*/
-/*
-TEST(DoNarysowania,DodanieDziecka_zmianaRozmiaruListyPolecen)
-{
-    spDoNarysowania rys1(make_shared<DoNarysowania>());
-    spDoNarysowania rys2(make_shared<DoNarysowania>());
-    
-    rys1->DodajDziecko(rys2);
-    rys1->PoleceniaWybierzIwstawWdobrejKolejnosci();
-    auto rozmiarPrzedZmiana = rys1->Polecenia().size();
-    
-    spDoNarysowania rys3(make_shared<DoNarysowania>());
+    ASSERT_FALSE(result1);
     rys2->DodajDziecko(rys3);
-//    rys2->PoleceniaWybierzIwstawWdobrejKolejnosci();
-    auto rozmiarPoZmianie = rys1->Polecenia().size();
-    ASSERT_TRUE(rozmiarPrzedZmiana != rozmiarPoZmianie);
+    
+    it = rys1->itPierwszeMojePolecenie();
+    while(it != koniec)
+    {
+        auto polIgeom = *(it++);
+        auto adr = &(*(polIgeom.geometria));
+        if(adr == adr3) result2 = true;
+    }
+    ASSERT_TRUE(result2);
 }
-*/
+TEST(DoNarysowania,OdjecieDzieckaAktualizuje)
+{
+    auto rys1(make_shared<DoNarysowania>());
+    auto rys2(make_shared<DoNarysowania>());
+    auto rys3(make_shared<DoNarysowania>());
+    rys1->DodajDziecko(rys2);
+    rys2->DodajDziecko(rys3);
+    rys1->PoleceniaWybierzIwstawWdobrejKolejnosci();
+    
+    auto it = rys1->itPierwszeMojePolecenie();
+    auto koniec = ++(rys1->itOstatnieMojePolecenie());
+    
+    auto adr3 = &(*rys3);
+    
+    bool result1 = false;
+    bool result2 = false;
+    while(it != koniec)
+    {
+        auto polIgeom = *(it++);
+        auto adr = &(*(polIgeom.geometria));
+        if(adr == adr3) result1 = true;
+    }
+    ASSERT_TRUE(result1);
+    
+    rys2->OdejmijDziecko(rys3);
+    
+    it = rys1->itPierwszeMojePolecenie();
+    while(it != koniec)
+    {
+        auto polIgeom = *(it++);
+        auto adr = &(*(polIgeom.geometria));
+        if(adr == adr3) result2 = true;
+    }
+    ASSERT_FALSE(result2);
+}
+//dwa razy aktualizować, czy nie robią się problemy z listami
+
 //PushName
 
 //KorektaOsiObrotu

@@ -27,6 +27,7 @@ bool Grupowalne_T<T>::OdejmijDziecko(spGrupowalne_T dz)
     {
         dzieci.erase(dz->pozycja);
         dz->rodzic = nullptr;
+        PodczasOdejmijDziecko();
         return true;
     }
     return false;

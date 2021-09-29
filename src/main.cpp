@@ -47,11 +47,10 @@ int main(int argc, char **argv)
     szescian2->DoVertexowDodajWektor(przes2);
     szescian3->DoVertexowDodajWektor(przes3);
     
-    rys->DodajDziecko(szescian1);
-    rys->DodajDziecko(szescian2);
-    rys->DodajDziecko(szescian3);
+    szescian1->DodajDziecko(szescian2);
+    szescian1->DodajDziecko(szescian3);
     
-    zarzadzanie.DoNarysowaniaItransformacji(rys);
+    zarzadzanie.DoNarysowaniaItransformacji(szescian1);
     zarzadzanie.NadawanieDoRenderowania(renderowanie.getKolejkaPolecen(),PRZEKAZ_DO_NARYSOWANIA);//
     zarzadzanie.WysylaniePrzerysujPoTransformacji();
 //    zarzadzanie.DoNarysowaniaItransformacji(make_shared<DoNarysowania>());
