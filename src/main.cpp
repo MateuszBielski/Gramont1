@@ -40,8 +40,16 @@ int main(int argc, char **argv)
     auto rys = make_shared<DoNarysowania>();
     auto szescian1 = make_shared<Szescian>();
     auto szescian2 = make_shared<Szescian>();
+    auto szescian3 = make_shared<Szescian>();
     
+    float przes2[] = {1.1,0.0,0.0};
+    float przes3[] = {-1.3,0.0,0.0};
+    szescian2->DoVertexowDodajWektor(przes2);
+    szescian3->DoVertexowDodajWektor(przes3);
     
+    rys->DodajDziecko(szescian1);
+    rys->DodajDziecko(szescian2);
+    rys->DodajDziecko(szescian3);
     
     zarzadzanie.DoNarysowaniaItransformacji(rys);
     zarzadzanie.NadawanieDoRenderowania(renderowanie.getKolejkaPolecen(),PRZEKAZ_DO_NARYSOWANIA);//

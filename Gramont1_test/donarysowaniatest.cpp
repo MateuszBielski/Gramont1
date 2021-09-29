@@ -11,7 +11,6 @@ TEST(DoNarysowania,SzescianIndeksyVertexow)
     ASSERT_EQ(16,szescian->ileVertexow);
     short narozniki[16] = {3,2,0,1,4,5,7,6,5,1,6,2,7,3,4,0};
     for(short i = 0; i < 16; i++)ASSERT_EQ(narozniki[i],szescian->indeksyVertexow[i]);
-        
 }
 
 void assert_gl_3fv(float * v,float f0,float f1,float f2)
@@ -23,7 +22,6 @@ void assert_gl_3fv(float * v,float f0,float f1,float f2)
 };
 TEST(DoNarysowania,WspolrzedneTrojkata)
 {
-    
     spDoNarysowania trojkat(make_shared<ProstyTrojkat>());
     assert_gl_3fv(&trojkat->wspolrzedneVrtx[trojkat->indeksyVertexow[0]*3],-1,0,0);
     assert_gl_3fv(&trojkat->wspolrzedneVrtx[trojkat->indeksyVertexow[1]*3],1,0,0);
@@ -42,7 +40,6 @@ TEST(DoNarysowania,SzescianNormalne)
     assert_gl_3fv(&szescian->normalne[0*3],0,-1,0);
     assert_gl_3fv(&szescian->normalne[1*3],0,0,1);
     assert_gl_3fv(&szescian->normalne[2*3],0,1,0);
-  
 }
 TEST(DoNarysowania,TrojkatSchematNormalnych)
 {
@@ -61,18 +58,18 @@ TEST(DoNarysowania,SzescianPrzesunieciePoczatkowe)
 {
     spDoNarysowania szescian(make_unique<Szescian>());
     float przes[] = {1.5,0.0,0.0};
-    sescian->PrzesunieciePoczatkowe(przes);
+    szescian->DoVertexowDodajWektor(przes);
     float wspolrzedneSpodziewane[] = {  
-                    0,0,1,
-                    1,0,1,
-                    1,0,0,
-                    0,0,0,
-                    0,1,1,
-                    1,1,1,
-                    1,1,0,
-                    0,1,0};
-    for(short i = 0; i < szescian->)
-    szescian->wspolrzedneVrtx[]
+                    1.5,0,1,
+                    2.5,0,1,
+                    2.5,0,0,
+                    1.5,0,0,
+                    1.5,1,1,
+                    2.5,1,1,
+                    2.5,1,0,
+                    1.5,1,0};
+    for(short i = 0; i < szescian->ileVertexow ; i++)
+        ASSERT_EQ(wspolrzedneSpodziewane[i],szescian->wspolrzedneVrtx[i]);
 }
 template<typename AdrFun, typename Polecenia>
 bool CzyZawiera(AdrFun adr,Polecenia polecenia)
@@ -190,8 +187,21 @@ TEST(DoNarysowania,WskaznikiPolecenDzieckaZawierajaJegoPolecenia)
 TEST(DoNarysowania,AktualizujListe_NieJestJuzPusta)
 {
     auto rys1(make_shared<DoNarysowania>());
+    rys1->PoleceniaWybierzIwstawWdobrejKolejnosci();
     rys1->AktualizujMojePolecenia();
     ASSERT_FALSE(rys1->Polecenia().empty());
+}
+TEST(DoNarysowania,WskaznikListyGlownejDzieci)
+{
+    auto rys1(make_shared<DoNarysowania>());
+    auto rys2(make_shared<DoNarysowania>());
+    auto rys3(make_shared<DoNarysowania>());
+    rys1->DodajDziecko(rys2);
+    rys2->DodajDziecko(rys3);
+    rys1->PoleceniaWybierzIwstawWdobrejKolejnosci();
+    
+    ASSERT_TRUE(rys2->czyPoleceniaListaGlownaJestTaSama(&rys1->Polecenia()));
+    ASSERT_TRUE(rys3->czyPoleceniaListaGlownaJestTaSama(&rys1->Polecenia()));
 }
 TEST(DoNarysowania,AktualizujListe_PoZmianieParametrowInnyRozmiar)
 {
@@ -200,6 +210,7 @@ TEST(DoNarysowania,AktualizujListe_PoZmianieParametrowInnyRozmiar)
     rys1->DodajPrzesuniecie(przes);
     rys1->PoleceniaWybierzIwstawWdobrejKolejnosci();
     auto rozmiar1(rys1->Polecenia().size());
+    auto adresListy = &rys1->Polecenia();//--
     przes[0] = 0.0;
     rys1->UstawPrzesuniecie(przes);
     rys1->AktualizujMojePolecenia();
@@ -257,21 +268,13 @@ TEST(DoNarysowania,PoAktualizacjiPoczatkiIkonceZakresuWskazujaNaWlasciweMiejsca)
     rys1->DodajDziecko(rys2);
     rys2->DodajDziecko(rys3);
     rys1->PoleceniaWybierzIwstawWdobrejKolejnosci();
-    for(auto polecenie : rys1->Polecenia())
-    {
-        cout<<&*polecenie.geometria<<endl;
-    }
+
     float przes[] = {1.3,0,0};
     rys2->DodajPrzesuniecie(przes);
     rys2->AktualizujMojePolecenia();
     auto adrGeom1 = &(*rys1);
     auto adrGeom2 = &(*rys2);
     auto adrGeom3 = &(*rys3);
-    
-    for(auto polecenie : rys1->Polecenia())
-    {
-        cout<<&*polecenie.geometria<<endl;
-    }
     
     auto poczatekPolecen2 = rys2->itPierwszeMojePolecenie();
     auto koniecPolecen2 = rys2->itOstatnieMojePolecenie();
@@ -282,27 +285,48 @@ TEST(DoNarysowania,PoAktualizacjiPoczatkiIkonceZakresuWskazujaNaWlasciweMiejsca)
     auto adresGeomPrzedPoczatkiem2 = &*(*poczatekPolecen2).geometria;
     ASSERT_EQ(adresGeomPrzedPoczatkiem2,adrGeom1);
     
-    
     auto adresGeomNaKoncu2 = &*(*koniecPolecen2++).geometria;
     ASSERT_EQ(adresGeomNaKoncu2,adrGeom2);
-    
     
     auto adresGeomPoKoncu2 = &*(*koniecPolecen2).geometria;
     ASSERT_EQ(adresGeomPoKoncu2,adrGeom1);
 }
-
-//NieMożnaAktualizować, jeśli moje pierwsze i ostatnie polecenie nie jest znane, użyć dodatkowej flagi
-//dwa razy aktualizować, czy nie robią się problemy z listami
-/*
-TEST(DoNarysowania,DodanieKolejnegoDzieckaAktualizuje)
+//NieMożnaAktualizować, jeśli moje pierwsze i ostatnie polecenie nie jest znane, użyć dodatkowej flagi, przyjęto, że to samo zanczenie ma sprawdzenie, czy znana jest główna lista
+TEST(DoNarysowania,NieAktualizujePrzedZaistnieniemPodstawowejListy)
+{
+    auto rys(make_shared<DoNarysowania>());
+    rys->WstawPolecenieNaKoncu(&PoleceniaRenderowania::RysujGeometrie);
+    rys->AktualizujMojePolecenia();
+    ASSERT_TRUE(CzyZawiera(&PoleceniaRenderowania::RysujGeometrie,rys->Polecenia()));
+    ASSERT_EQ(1,rys->Polecenia().size());
+}
+TEST(DoNarysowania,DodanieKolejnegoDzieckaAktualizuje_ZmianaRozmiaru)
 {
     auto rys1(make_shared<DoNarysowania>());
     auto rys2(make_shared<DoNarysowania>());
     rys1->DodajDziecko(rys2);
     rys1->PoleceniaWybierzIwstawWdobrejKolejnosci();
+    int rozmiarPrzed = rys1->Polecenia().size();
     
     auto rys3(make_shared<DoNarysowania>());
     rys1->DodajDziecko(rys3);
+    int rozmiarPo = rys1->Polecenia().size();
+    
+    ASSERT_NE(rozmiarPrzed,rozmiarPo);
+}
+TEST(DoNarysowania,DodanieKolejnegoDzieckaAktualizuje_dostepDoPolecenDodanego)
+{
+    auto rys1(make_shared<DoNarysowania>());
+    auto rys2(make_shared<DoNarysowania>());
+    rys1->DodajDziecko(rys2);
+    rys1->PoleceniaWybierzIwstawWdobrejKolejnosci();
+    int rozmiarPrzed = rys1->Polecenia().size();
+    
+    auto rys3(make_shared<DoNarysowania>());
+    rys1->DodajDziecko(rys3);
+    int rozmiarPo = rys1->Polecenia().size();
+    
+    ASSERT_NE(rozmiarPrzed,rozmiarPo);
     
     auto it3 = rys3->itPierwszeMojePolecenie();
     auto koniec3 = ++(rys3->itOstatnieMojePolecenie());
@@ -314,6 +338,43 @@ TEST(DoNarysowania,DodanieKolejnegoDzieckaAktualizuje)
         ASSERT_EQ(adr3,adr);
     }
 }
+TEST(DoNarysowania,DodanieKolejnegoDzieckaAktualizuje_WglownejLiscieSaPoleceniaDodanego)
+{
+    auto rys1(make_shared<DoNarysowania>());
+    auto rys2(make_shared<DoNarysowania>());
+    rys1->DodajDziecko(rys2);
+    rys1->PoleceniaWybierzIwstawWdobrejKolejnosci();
+    
+    auto it = rys1->itPierwszeMojePolecenie();
+    auto koniec = ++(rys1->itOstatnieMojePolecenie());
+    
+    auto rys3(make_shared<DoNarysowania>());
+    auto adr3 = &(*rys3);
+    
+    bool result1 = false;
+    bool result2 = false;
+    while(it != koniec)
+    {
+        auto polIgeom = *(it++);
+        auto adr = &(*(polIgeom.geometria));
+        if(adr == adr3) result1 = true;
+    }
+    ASSERT_FALSE(result1);
+    rys1->DodajDziecko(rys3);
+    
+    it = rys1->itPierwszeMojePolecenie();
+    while(it != koniec)
+    {
+        auto polIgeom = *(it++);
+        auto adr = &(*(polIgeom.geometria));
+        if(adr == adr3) result2 = true;
+    }
+    ASSERT_TRUE(result2);
+}
+
+//dwa razy aktualizować, czy nie robią się problemy z listami
+/*
+
 TEST(DoNarysowania,DodanieDzieckaGlebiejAktualizuje)
 {
     auto rys1(make_shared<DoNarysowania>());

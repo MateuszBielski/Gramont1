@@ -16,10 +16,7 @@ void DoNarysowania::NieWidoczny(bool flaga)
 }
 void DoNarysowania::PoleceniaWybierzIwstawWdobrejKolejnosci()
 {
-//    mojePolecenia.push_back(&PoleceniaRenderowania::PrzedGeometria);
-
-//    poczatekMoichPolecen = --mojePolecenia.end();
-    
+    if(!poleceniaListaGlowna)poleceniaListaGlowna = &mojePolecenia;
     if(jestTransformacja)
     {
         mojePolecenia.push_back({&PoleceniaRenderowania::PushMatrix,WskaznikNaMnie()});
@@ -28,11 +25,11 @@ void DoNarysowania::PoleceniaWybierzIwstawWdobrejKolejnosci()
     if(!nieWidoczny)mojePolecenia.push_back({&PoleceniaRenderowania::RysujGeometriePowierzchnie,WskaznikNaMnie()});
     for(auto& dziecko : dzieci)
     {
+        dziecko->poleceniaListaGlowna = poleceniaListaGlowna;
         dziecko->PoleceniaWybierzIwstawWdobrejKolejnosci();
         //zakładam, że iteratory dziecka: mojePierwsze i ostatnie polecenie przeniesione zostaną teraz do 
         //listy głównej
         mojePolecenia.splice(mojePolecenia.end(),dziecko->mojePolecenia);
-        dziecko->poleceniaListaGlowna = &mojePolecenia;
     }
     mojePolecenia.push_back({&PoleceniaRenderowania::PopMatrix,WskaznikNaMnie()});
     
@@ -41,18 +38,19 @@ void DoNarysowania::PoleceniaWybierzIwstawWdobrejKolejnosci()
 }
 void DoNarysowania::AktualizujMojePolecenia()
 {
-	mojePolecenia.clear();
+	if(!poleceniaListaGlowna)return;
+    mojePolecenia.clear();
     auto pierwszeWymienianegoZakresu = pierwszeMojePolecenie;
     auto ostatnieWymienianegoZakresu = ostatnieMojePolecenie;
+    
     PoleceniaWybierzIwstawWdobrejKolejnosci();
-    auto adrMojePolecenia = &mojePolecenia;
-    int size0 = mojePolecenia.size();
-    if(poleceniaListaGlowna)
+
+    bool czyMojaListaNieJestGlowna = &mojePolecenia != poleceniaListaGlowna;
+    if(poleceniaListaGlowna && czyMojaListaNieJestGlowna )
     {
-        int size1 = poleceniaListaGlowna->size();
+        auto odleglosc = distance(pierwszeWymienianegoZakresu,ostatnieWymienianegoZakresu);//-
         auto przedTymWstawiamyNowaZawartosc = poleceniaListaGlowna->
         erase(pierwszeWymienianegoZakresu,++ostatnieWymienianegoZakresu);
-        int size2 = poleceniaListaGlowna->size();
         poleceniaListaGlowna->splice(przedTymWstawiamyNowaZawartosc,mojePolecenia);
     }
 }
@@ -63,6 +61,19 @@ l_PolecenieIgeometria::iterator DoNarysowania::itPierwszeMojePolecenie()
 l_PolecenieIgeometria::iterator DoNarysowania::itOstatnieMojePolecenie()
 {
 	return ostatnieMojePolecenie;
+}
+void DoNarysowania::PodczasDodajDziecko()
+{
+    AktualizujMojePolecenia();
+}
+void DoNarysowania::PodczasOdejmijDziecko()
+{
+}
+bool DoNarysowania::czyPoleceniaListaGlownaJestTaSama(l_PolecenieIgeometria* wsk)
+{
+//	return false;
+    
+    return poleceniaListaGlowna == wsk;
 }
 
 

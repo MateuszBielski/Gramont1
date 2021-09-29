@@ -25,6 +25,7 @@ public:
     float * normalne = nullptr;
     unsigned short ileVertexow = 0;
     unsigned short ileNormalnych = 0;
+    void DoVertexowDodajWektor(float *);
 	
 protected:
     

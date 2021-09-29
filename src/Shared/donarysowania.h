@@ -30,11 +30,15 @@ public:
     void PoleceniaWybierzIwstawWdobrejKolejnosci();
     void AktualizujMojePolecenia();
     virtual l_PolecenieIgeometria& Polecenia();
+    bool czyPoleceniaListaGlownaJestTaSama(l_PolecenieIgeometria* );
     void WstawPolecenieNaKoncu(PtrMemRend_Geom);
     l_PolecenieIgeometria::iterator itPierwszeMojePolecenie();
     l_PolecenieIgeometria::iterator itOstatnieMojePolecenie();
     
     void NieWidoczny(bool);
+private:
+    virtual void PodczasDodajDziecko() override;
+    virtual void PodczasOdejmijDziecko() override;
 };
 
 using spDoNarysowania = shared_ptr<DoNarysowania>;

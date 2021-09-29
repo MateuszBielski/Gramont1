@@ -36,6 +36,8 @@ private:
     list<RodzajAkcji> strukturaJakoLista_RodzajAkcji;
     void GenerujStruktureJakoListe_Wezly(list<spGrupowalne_T>& );
     void GenerujStruktureJakoListe_RodzajAkcji(list<RodzajAkcji>&);
+    virtual void PodczasDodajDziecko(){};
+    virtual void PodczasOdejmijDziecko(){};
 };
 
 //na potrzeby testów napisanych przed wyodrębnieniem powyższej klasy szablonowej

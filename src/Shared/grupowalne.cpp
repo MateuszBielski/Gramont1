@@ -18,6 +18,7 @@ void Grupowalne_T<T>::DodajDziecko(spGrupowalne_T dz)
     dz->pozycja = --dzieci.end();
 //    auto wsk = 
     dz->rodzic = static_pointer_cast<T>(shared_from_this());
+    PodczasDodajDziecko();
 }
 template<class T>
 bool Grupowalne_T<T>::OdejmijDziecko(spGrupowalne_T dz)
