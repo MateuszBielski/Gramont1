@@ -6,11 +6,10 @@ void PustaFunkcja(const char*)
     
 }
 template<class T>
-//void PoleceniaRenderowania::WywolajPoleceniaZ(T obiektZwezlami){
 void PoleceniaRenderowania::WywolajPoleceniaZ(T obiektZpoleceniami){
      for(auto& pol : obiektZpoleceniami->Polecenia())
         {
-            (this->*pol.polecenie)(obiektZpoleceniami);
+            (this->*pol.polecenie)(pol.geometria);
         }
 }
 void PoleceniaRenderowania::PrzedGeometria(spGeometriaModelu)
@@ -33,6 +32,7 @@ void PoleceniaRenderowania::RysujGeometriePowierzchnie(spGeometriaModelu geom)
     if(!geom->ileNormalnych)return;
     glBegin(GL_TRIANGLE_STRIP);
         unsigned short v = 0;
+//        cout<<"ile normalnych: "<<geom->ileNormalnych<<endl;-
         for(unsigned short n = 0 ; n < geom->ileNormalnych ; n++)
         {
             p_glNormal3fv(&geom->normalne[n*3]);

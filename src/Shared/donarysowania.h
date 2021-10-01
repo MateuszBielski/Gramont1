@@ -1,6 +1,7 @@
 #ifndef DoNarysowania_H
 #define DoNarysowania_H
 #include <list>
+#include <mutex>
 #include "geometriamodelu.h"
 #include "../Polecenie/poleceniarenderowania.h"
 
@@ -18,6 +19,7 @@ using l_PolecenieIgeometria = list<PolecenieIgeometria>;
 
 class DoNarysowania : public GeometriaModelu, public Grupowalne_T<DoNarysowania>
 {
+    mutable std::mutex mut;
     
     l_PolecenieIgeometria mojePolecenia;
     l_PolecenieIgeometria* poleceniaListaGlowna = nullptr;

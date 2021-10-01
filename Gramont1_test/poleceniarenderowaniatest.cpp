@@ -90,9 +90,23 @@ TEST(PoleceniaRenderowania,Przesun_uzywaPrzesun)
     rend.Przesun(rys);
     ASSERT_TRUE(rys->przesuniecieIsUsed);
 }
-//TEST(PoleceniaRenderowania,RenderowanieWywolujePoleceniaZwiazaneZdoNarysowania)
-//{
-//   
-//}
-//renderowanie dostaje do kolejki polecenie w którym jest obiekt DoNarysowaniaJakoPolecenia, 
-//wykonanie z użyciem funkcji szablonwej, bez pytania o typ 
+TEST(PoleceniaRenderowania,funkcjeGlCzyWywolujeDlaDzieci)
+{
+    TestRenderKlas renderTest;
+    Renderowanie rend;
+    renderTest.UstawZastepczeOpenGlDla(rend);
+    
+    auto rys = make_shared<DoNarysowania>();
+    auto trojkat1 = make_shared<ProstyTrojkat>();
+    auto trojkat2 = make_shared<ProstyTrojkat>();
+    
+    rys->DodajDziecko(trojkat1);
+    rys->DodajDziecko(trojkat2);
+    rys->PoleceniaWybierzIwstawWdobrejKolejnosci();
+    rend.WywolajPoleceniaZ(rys);
+    string expect("n0.0,0.0,1.0,v-1.0,0.0,0.0,v1.0,0.0,0.0,v0.0,1.0,0.0,");
+    //wartości dla drugiego trójkąta
+    expect +="n0.0,0.0,1.0,v-1.0,0.0,0.0,v1.0,0.0,0.0,v0.0,1.0,0.0,";
+    string result = renderTest.CiagWywolanOpenGl();
+    ASSERT_EQ(expect,result);
+}

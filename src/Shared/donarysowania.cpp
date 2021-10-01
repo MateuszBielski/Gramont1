@@ -16,6 +16,8 @@ void DoNarysowania::NieWidoczny(bool flaga)
 }
 void DoNarysowania::PoleceniaWybierzIwstawWdobrejKolejnosci()
 {
+//    cout<<"PoleceniaWybierzIwstawWdobrejKolejnosci "<<this<<endl;
+    lock_guard<mutex> lk(mut);
     if(!poleceniaListaGlowna)poleceniaListaGlowna = &mojePolecenia;
     if(jestTransformacja)
     {
@@ -31,6 +33,7 @@ void DoNarysowania::PoleceniaWybierzIwstawWdobrejKolejnosci()
         //listy głównej
         mojePolecenia.splice(mojePolecenia.end(),dziecko->mojePolecenia);
     }
+    if(jestTransformacja)
     mojePolecenia.push_back({&PoleceniaRenderowania::PopMatrix,WskaznikNaMnie()});
     
     pierwszeMojePolecenie = mojePolecenia.begin();
@@ -48,7 +51,7 @@ void DoNarysowania::AktualizujMojePolecenia()
     bool czyMojaListaNieJestGlowna = &mojePolecenia != poleceniaListaGlowna;
     if(poleceniaListaGlowna && czyMojaListaNieJestGlowna )
     {
-        auto odleglosc = distance(pierwszeWymienianegoZakresu,ostatnieWymienianegoZakresu);//-
+        lock_guard<mutex> lk(mut);
         auto przedTymWstawiamyNowaZawartosc = poleceniaListaGlowna->
         erase(pierwszeWymienianegoZakresu,++ostatnieWymienianegoZakresu);
         poleceniaListaGlowna->splice(przedTymWstawiamyNowaZawartosc,mojePolecenia);

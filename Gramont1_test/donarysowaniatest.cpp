@@ -125,6 +125,14 @@ TEST(DoNarysowania,JesliTransformacjaToJestPushIpopMatrix)
     ASSERT_TRUE(CzyZawiera(&PoleceniaRenderowania::PushMatrix,rys->Polecenia()));
     ASSERT_TRUE(CzyZawiera(&PoleceniaRenderowania::PopMatrix,rys->Polecenia()));
 }
+TEST(DoNarysowania,NieMaPushIpopMatrix)
+{
+    auto rys(make_shared<DoNarysowania>());
+    rys->jestTransformacja = false;
+    rys->PoleceniaWybierzIwstawWdobrejKolejnosci();
+    ASSERT_FALSE(CzyZawiera(&PoleceniaRenderowania::PushMatrix,rys->Polecenia()));
+    ASSERT_FALSE(CzyZawiera(&PoleceniaRenderowania::PopMatrix,rys->Polecenia()));
+}
 TEST(DoNarysowania,ListyDzieciSaPuste)
 {
     spDoNarysowania rys1(make_shared<DoNarysowania>());

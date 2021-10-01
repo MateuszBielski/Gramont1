@@ -6,8 +6,8 @@
 EkranGL::EkranGL()
 {
     KonfiguracjaGL();
-//    RysujScene = [](){};
-    RysujScene = [this](){Proby();};
+    RysujScene = [](){};
+//    RysujScene = [this](){Proby();};
     
 }
 
