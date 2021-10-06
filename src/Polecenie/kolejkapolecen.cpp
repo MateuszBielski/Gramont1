@@ -1,4 +1,5 @@
 #include "kolejkapolecen.h"
+#include "../Process/zarzadzaniemodelami.h"
 
 template<class T>
 size_t KolejkaMiedzyWatkami<T>::size()
@@ -29,3 +30,4 @@ T KolejkaMiedzyWatkami<T>::wait_and_pop()
 }
 
 template class KolejkaMiedzyWatkami<upPolecenie>;
+template class KolejkaMiedzyWatkami<void (ZarzadzanieModelami::*)()>;

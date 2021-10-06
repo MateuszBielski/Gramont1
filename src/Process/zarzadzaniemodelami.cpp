@@ -4,11 +4,12 @@
 #include <functional>
 
 ZarzadzanieModelami::ZarzadzanieModelami()
+:kolejkaPrzetwarzaniaAsynchronicznego(make_shared<KolejkaMiedzyWatkami<PtrMemZarz>>())
 {
 //    Stan = &ZarzadzanieModelami::Nic;
     Stan = &ObslugaPolecen::Nic;
 }
-void ZarzadzanieModelami::DoTransformacji(spTransformowalne tr)
+void ZarzadzanieModelami::DoTransformacji(spDoNarysowania tr)
 {
 	doTrasformacji = tr;
 }
@@ -67,7 +68,7 @@ void ZarzadzanieModelami::PrzetwarzajModele()
 {
 	
 }
-queue<ZarzadzanieModelami::PtrMemZarz>& ZarzadzanieModelami::KolejkaPrzetwarzaniaAsynchronicznego()
+ZarzadzanieModelami::spKolejkaPolecenZarzadzania ZarzadzanieModelami::KolejkaPrzetwarzaniaAsynchronicznego()
 {
 	return kolejkaPrzetwarzaniaAsynchronicznego;
 }

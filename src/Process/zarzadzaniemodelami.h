@@ -9,12 +9,12 @@
 
 #include "../Shared/transformowalne.h"
 #include "../Polecenie/obslugapolecen.h"
+#include "../Polecenie/kolejkapolecen.h"
 
 #define PRZEKAZ_DO_NARYSOWANIA true
 
 
 using namespace std;
-//using namespace Gtk;
 
 
 class ZarzadzanieModelami : public ObslugaPolecen
@@ -26,6 +26,7 @@ class ZarzadzanieModelami : public ObslugaPolecen
     int przerysujPoTyluTransformacjach = 1;
     
     using PtrMemZarz = void(ZarzadzanieModelami::*)();
+    using spKolejkaPolecenZarzadzania = shared_ptr<KolejkaMiedzyWatkami<PtrMemZarz>>;
     
   public:
     ZarzadzanieModelami();
@@ -40,13 +41,14 @@ class ZarzadzanieModelami : public ObslugaPolecen
     void LiczbaTransformacjiDoAkumulowania(int);
     void WysylaniePrzerysujPoTransformacji();
     
-    void DoTransformacji(spTransformowalne );
+    void DoTransformacji(spDoNarysowania );
     void DoNarysowania(spDoNarysowania);
     void DoNarysowaniaItransformacji(spDoNarysowania);
+    void Aktualizuj();
     
     thread AsynchronicznePrzetwarzanieModeliUruchom();
     void AsynchronicznePrzetwarzanieModeliZatrzymaj();
-    queue<PtrMemZarz>& KolejkaPrzetwarzaniaAsynchronicznego();
+    spKolejkaPolecenZarzadzania KolejkaPrzetwarzaniaAsynchronicznego();
     
 protected:
     virtual void WykonajStan() override {(this->*Stan)();};
@@ -55,7 +57,7 @@ private:
     void PrzetwarzajModele();
     thread przetwarzanieModeliWatek;
     
-    queue<PtrMemZarz> kolejkaPrzetwarzaniaAsynchronicznego;
+    spKolejkaPolecenZarzadzania kolejkaPrzetwarzaniaAsynchronicznego;
         
 };
 using spZarzadzanieModelami = shared_ptr<ZarzadzanieModelami>;

@@ -13,7 +13,9 @@ template<typename T>
 class KolejkaMiedzyWatkami
 {
     
-    public:
+public:
+//    KolejkaMiedzyWatkami(){};
+//    virtual ~KolejkaMiedzyWatkami(){};
     void push(T); 
     T wait_and_pop();
     
@@ -21,7 +23,7 @@ class KolejkaMiedzyWatkami
     size_t size();
     bool empty();
     
-    protected:
+protected:
     queue<T> data_queue;
     
     mutable std::mutex mut;

@@ -212,6 +212,7 @@ TEST(ZarzadzanieModelami,UstawienieDoNarysowaniaItransfWymuszaGenerowanieListyPo
     zarzadzanie.DoNarysowaniaItransformacji(rys);
     ASSERT_FALSE(rys->Polecenia().empty());
 }
+
 TEST(ZarzadzanieModelami,UstawienieDoNarysowaniaUmieszczaWkolejceDlaOsobnegoWatku)
 {
     ASSERT_TRUE(false);
@@ -221,16 +222,18 @@ TEST(ZarzadzanieModelami,PustaKolejkaPrzetwarzaniaAsynchronicznego)
 {
     ZarzadzanieModelami zarz;
     auto kolejka = zarz.KolejkaPrzetwarzaniaAsynchronicznego();
-    ASSERT_TRUE(kolejka.empty());
+    ASSERT_TRUE(kolejka->empty());
 }
 TEST(ZarzadzanieModelami,UstawienieDoTransformacjiUmieszczaWkolejceDlaOsobnegoWatku)
 {
     ZarzadzanieModelami zarz;
     zarz.DoNarysowania(make_unique<DoNarysowania>());
     auto kolejka = zarz.KolejkaPrzetwarzaniaAsynchronicznego();
-    ASSERT_TRUE(false);
+    auto polecenie = kolejka->wait_and_pop();
+    ASSERT_EQ(polecenie,&ZarzadzanieModelami::);
     
 }
+
 TEST(ZarzadzanieModelami,AsynchronicznePrzetwarzanieModeliKonczyWatek)
 {
     ZarzadzanieModelami zarz;
@@ -245,6 +248,12 @@ TEST(ZarzadzanieModelami,AsynchronicznePrzetwarzanieModeliKonczyWatek)
 //    t.join();
 //    ASSERT_EQ(1,obslPolecen.licznikRun);
 }
+TEST(ZarzadzanieModelami,AktualizujDoNarysowania)
+{
+    ZarzadzanieModelami zarz;
+    zarz 
+}
+//AktualizujWoddzielnymWatku rzeczywiście aktualizuje
 //UstawienieDoTransformacjiUmieszczaWkolejceAktualizacjeDlaPoprzedniego
 //AktualizacjaWOddzielnymWatkuPracujeNaKopiiListyIpoWykonaniuPodmieniaJą
 //UmieszczenieWkolejceDlaOsobnegoWatkuPowodujeWykonanieTegoPolecenia
