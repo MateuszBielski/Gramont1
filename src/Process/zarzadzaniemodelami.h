@@ -3,7 +3,9 @@
 //#include <gtkmm.h>
 //#include <gtkglmm.h>
 #include <iostream>
+#include <queue>
 #include <memory>
+#include <thread>
 
 #include "../Shared/transformowalne.h"
 #include "../Polecenie/obslugapolecen.h"
@@ -22,6 +24,9 @@ class ZarzadzanieModelami : public ObslugaPolecen
     spKolejkaPolecen kolejkaRenderowania = nullptr;
     int licznikTransformacjiDoPrzerysowania = 0;
     int przerysujPoTyluTransformacjach = 1;
+    
+    using PtrMemZarz = void(ZarzadzanieModelami::*)();
+    
   public:
     ZarzadzanieModelami();
     virtual ~ZarzadzanieModelami(){};
@@ -39,11 +44,18 @@ class ZarzadzanieModelami : public ObslugaPolecen
     void DoNarysowania(spDoNarysowania);
     void DoNarysowaniaItransformacji(spDoNarysowania);
     
+    thread AsynchronicznePrzetwarzanieModeliUruchom();
+    void AsynchronicznePrzetwarzanieModeliZatrzymaj();
+    queue<PtrMemZarz>& KolejkaPrzetwarzaniaAsynchronicznego();
     
 protected:
     virtual void WykonajStan() override {(this->*Stan)();};
 private:
     void (ZarzadzanieModelami::*Stan)();
+    void PrzetwarzajModele();
+    thread przetwarzanieModeliWatek;
+    
+    queue<PtrMemZarz> kolejkaPrzetwarzaniaAsynchronicznego;
         
 };
 using spZarzadzanieModelami = shared_ptr<ZarzadzanieModelami>;

@@ -212,3 +212,40 @@ TEST(ZarzadzanieModelami,UstawienieDoNarysowaniaItransfWymuszaGenerowanieListyPo
     zarzadzanie.DoNarysowaniaItransformacji(rys);
     ASSERT_FALSE(rys->Polecenia().empty());
 }
+TEST(ZarzadzanieModelami,UstawienieDoNarysowaniaUmieszczaWkolejceDlaOsobnegoWatku)
+{
+    ASSERT_TRUE(false);
+    
+}
+TEST(ZarzadzanieModelami,PustaKolejkaPrzetwarzaniaAsynchronicznego)
+{
+    ZarzadzanieModelami zarz;
+    auto kolejka = zarz.KolejkaPrzetwarzaniaAsynchronicznego();
+    ASSERT_TRUE(kolejka.empty());
+}
+TEST(ZarzadzanieModelami,UstawienieDoTransformacjiUmieszczaWkolejceDlaOsobnegoWatku)
+{
+    ZarzadzanieModelami zarz;
+    zarz.DoNarysowania(make_unique<DoNarysowania>());
+    auto kolejka = zarz.KolejkaPrzetwarzaniaAsynchronicznego();
+    ASSERT_TRUE(false);
+    
+}
+TEST(ZarzadzanieModelami,AsynchronicznePrzetwarzanieModeliKonczyWatek)
+{
+    ZarzadzanieModelami zarz;
+    thread przetwarzanie = zarz.AsynchronicznePrzetwarzanieModeliUruchom();
+    
+    zarz.AsynchronicznePrzetwarzanieModeliZatrzymaj();
+    przetwarzanie.join();
+    ASSERT_FALSE(przetwarzanie.joinable());
+//    auto kolejka = obslPolecen.getKolejkaPolecen();
+//    thread t(&ObslugaPolecen::Run,&obslPolecen);
+//    kolejka->push(make_unique<PolecenieKoniec>());
+//    t.join();
+//    ASSERT_EQ(1,obslPolecen.licznikRun);
+}
+//UstawienieDoTransformacjiUmieszczaWkolejceAktualizacjeDlaPoprzedniego
+//AktualizacjaWOddzielnymWatkuPracujeNaKopiiListyIpoWykonaniuPodmieniaJą
+//UmieszczenieWkolejceDlaOsobnegoWatkuPowodujeWykonanieTegoPolecenia
+//ZakończenieOddzielnegoWątku

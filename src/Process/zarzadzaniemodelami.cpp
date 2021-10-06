@@ -54,4 +54,20 @@ void ZarzadzanieModelami::UstawStanNic()
 {
 	Stan = &ObslugaPolecen::Nic;
 }
+thread ZarzadzanieModelami::AsynchronicznePrzetwarzanieModeliUruchom()
+{
+	return move(thread(&ZarzadzanieModelami::PrzetwarzajModele,this));
+}
 
+void ZarzadzanieModelami::AsynchronicznePrzetwarzanieModeliZatrzymaj()
+{
+	
+}
+void ZarzadzanieModelami::PrzetwarzajModele()
+{
+	
+}
+queue<ZarzadzanieModelami::PtrMemZarz>& ZarzadzanieModelami::KolejkaPrzetwarzaniaAsynchronicznego()
+{
+	return kolejkaPrzetwarzaniaAsynchronicznego;
+}
