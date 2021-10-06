@@ -40,7 +40,7 @@ TEST(ObslugaSygnalow,RuchMyszyDajePolecenieZparmetramiRuchu)
     sygnaly.on_motion_notify_event(&e2);
 
     Transformacja transformacja;
-    transformacja = kolejka->wait_and_pop<Transformacja>();
+    transformacja = kolejka->wait_and_pop_T<Transformacja>();
     
     auto ruch = transformacja.Ruch();
     ASSERT_NE(ruch.p1x,ruch.p2x);

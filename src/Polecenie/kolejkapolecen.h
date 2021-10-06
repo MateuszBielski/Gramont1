@@ -8,24 +8,36 @@
 
 
 using namespace std;
-//using namespace Gtk;
-class KolejkaPolecen
+
+template<typename T>
+class KolejkaMiedzyWatkami
 {
-    queue<upPolecenie> data_queue;
+    
+    public:
+    void push(T); 
+    T wait_and_pop();
+    
+      
+    size_t size();
+    bool empty();
+    
+    protected:
+    queue<T> data_queue;
     
     mutable std::mutex mut;
     condition_variable data_cond;
-    
-    public:
-    void push(upPolecenie); 
-    upPolecenie wait_and_pop();
-    template<typename T>
-    T wait_and_pop();
-    size_t size();
-    bool empty();
 };
+
+
+class KolejkaPolecen : public KolejkaMiedzyWatkami<upPolecenie>
+{
+public:
+    template<typename T>
+    T wait_and_pop_T();
+};
+
 template<typename T>
-T KolejkaPolecen::wait_and_pop()
+T KolejkaPolecen::wait_and_pop_T()
 {
     unique_lock<mutex> lk(mut);
     data_cond.wait(lk,[this]{return !data_queue.empty();});
@@ -33,6 +45,7 @@ T KolejkaPolecen::wait_and_pop()
     data_queue.pop();
     return *(static_cast<T*>(polecenie.get()));
 }
+
 using upKolejkaPolecen = unique_ptr<KolejkaPolecen>;
 using spKolejkaPolecen = shared_ptr<KolejkaPolecen>;
 

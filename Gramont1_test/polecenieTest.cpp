@@ -95,7 +95,7 @@ TEST(PolecenieTest,DodanieIzabraniePoleceniaWjednymCzasieKonwersjaTypu)
                             {
                                 pop_ready.set_value();
                                 ready.wait();
-                                return q.wait_and_pop<PoleceniePuste>();
+                                return q.wait_and_pop_T<PoleceniePuste>();
                             }
             );
         push_ready.get_future().wait();
