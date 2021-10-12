@@ -45,7 +45,7 @@ TEST(TransformacjaTest,ObrotWykonaj_PrzekazanyRuchWplywaNaMacierzObrotu)
     
 //    upTransformacja polecenie = make_unique<Obrot>(move(r));
     
-    auto model = make_shared<Transformowalne>();
+    auto model = make_shared<DoNarysowania>();
     ZarzadzanieModelami zarzadzanie;
     zarzadzanie.DoTransformacji(model);
 //    zarzadzanie.DoTransformacji(make_unique<Transformowalne>());

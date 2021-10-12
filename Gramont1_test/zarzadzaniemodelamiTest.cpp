@@ -64,7 +64,8 @@ TEST(ZarzadzanieModelami,PoWykonaniuObrotWstawiaPoleceniePrzerysuj)
     auto kolejkaRenderowanie(make_shared<KolejkaPolecen>());
     zarzadzanie.NadawanieDoRenderowania(kolejkaRenderowanie);
     
-    zarzadzanie.DoTransformacji(make_unique<Transformowalne>());
+//    upDoNarysowania transf = make_unique<DoNarysowania>();
+    zarzadzanie.DoTransformacji(make_unique<DoNarysowania>());
 
     kolejkaZarzadzania->push(make_unique<Obrot>());
     kolejkaZarzadzania->push(make_unique<PolecenieKoniec>());
@@ -229,8 +230,9 @@ TEST(ZarzadzanieModelami,UstawienieDoTransformacjiUmieszczaWkolejceDlaOsobnegoWa
     ZarzadzanieModelami zarz;
     zarz.DoNarysowania(make_unique<DoNarysowania>());
     auto kolejka = zarz.KolejkaPrzetwarzaniaAsynchronicznego();
-    auto polecenie = kolejka->wait_and_pop();
-    ASSERT_EQ(polecenie,&ZarzadzanieModelami::);
+//    auto polecenie = kolejka->wait_and_pop();
+    ASSERT_TRUE(false);
+//    ASSERT_EQ(polecenie,&ZarzadzanieModelami::);
     
 }
 
@@ -251,7 +253,8 @@ TEST(ZarzadzanieModelami,AsynchronicznePrzetwarzanieModeliKonczyWatek)
 TEST(ZarzadzanieModelami,AktualizujDoNarysowania)
 {
     ZarzadzanieModelami zarz;
-    zarz 
+//    zarz 
+     ASSERT_TRUE(false);       
 }
 //AktualizujWoddzielnymWatku rzeczywiście aktualizuje
 //UstawienieDoTransformacjiUmieszczaWkolejceAktualizacjeDlaPoprzedniego

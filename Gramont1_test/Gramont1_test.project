@@ -29,6 +29,7 @@
     <File Name="grupowanietest.cpp"/>
     <File Name="poleceniarenderowaniatest.cpp"/>
     <File Name="TestRenderKlasTest.cpp"/>
+    <File Name="WybieralneTest.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="testedClasses">
     <File Name="../src/Shared/kursor2d.cpp"/>
@@ -54,6 +55,7 @@
     <File Name="../src/Shared/geometriamodelu.cpp"/>
     <File Name="../src/Shared/donarysowania.cpp"/>
     <File Name="../src/Shared/FunkcjeIstruktury.cpp"/>
+    <File Name="../src/Shared/nazwa.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="helperClass">
     <File Name="../src/Shared/trackball.cpp"/>
