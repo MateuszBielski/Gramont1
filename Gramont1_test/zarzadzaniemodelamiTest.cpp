@@ -206,6 +206,37 @@ TEST(ZarzadzanieModelami,PobranieKolejkiRenderowaniaDajeJejDoNarysowania)
     
     ASSERT_TRUE(testRend.CzyMaTenSamDoNarysowania(rend,rys));
 }
+TEST(ZarzadzanieModelami,DodanieModeli)
+{
+    ZarzadzanieModelami zarz;
+    spDoNarysowania rys1 = make_unique<DoNarysowania>();
+    spDoNarysowania rys2 = make_unique<DoNarysowania>();
+    rys1->setNazwa(93);
+    rys2->setNazwa(91);
+    zarz.DodajModel(rys1);
+    zarz.DodajModel(rys2);
+    ASSERT_EQ(2,zarz.LiczbaModeli());
+}
+TEST(ZarzadzanieModelami,WyszukanieModeluPoNazwie)
+{
+    ZarzadzanieModelami zarz;
+    spDoNarysowania rys1 = make_unique<DoNarysowania>();
+    spDoNarysowania rys2 = make_unique<DoNarysowania>();
+    rys1->setNazwa(93);
+    rys2->setNazwa(91);
+    zarz.DodajModel(rys1);
+    zarz.DodajModel(rys2);
+    auto adresRys1 = &*rys2;
+    auto adresWyszukanego = &*(zarz.WyszukajModel(91));
+    ASSERT_EQ(adresRys1,adresWyszukanego);
+}
+TEST(ZarzadzanieModelami,WyszukanieModeluPustyJesliNieMa)
+{   
+    ZarzadzanieModelami zarz;
+    auto result = zarz.WyszukajModel(91);
+    ASSERT_EQ(nullptr,result);
+    ASSERT_EQ(0,zarz.LiczbaModeli());
+}
 TEST(ZarzadzanieModelami,UstawienieDoNarysowaniaItransfWymuszaGenerowanieListyPolecen)
 {
     ZarzadzanieModelami zarzadzanie;

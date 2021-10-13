@@ -447,6 +447,20 @@ TEST(DoNarysowania,OdjecieDzieckaAktualizuje)
     }
     ASSERT_FALSE(result2);
 }
+TEST(DoNarysowania,NadanieNazwyInt)
+{
+    upDoNarysowania rys = make_unique<DoNarysowania>();
+    rys->setNazwa(24);
+    Nazwa n(24);
+    ASSERT_TRUE(n == rys->getNazwa());
+}
+TEST(DoNarysowania,NadanieNazwyStr)
+{
+    upDoNarysowania rys = make_unique<DoNarysowania>();
+    rys->setNazwa("nazwa");
+    Nazwa n("nazwa");
+    ASSERT_TRUE(n == rys->getNazwa());
+}
 //dwa razy aktualizować, czy nie robią się problemy z listami
 
 //PushName

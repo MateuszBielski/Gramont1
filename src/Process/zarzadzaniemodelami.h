@@ -19,14 +19,18 @@ using namespace std;
 
 class ZarzadzanieModelami : public ObslugaPolecen
 {
+    using PtrMemZarz = void(ZarzadzanieModelami::*)();
+    using spKolejkaPolecenZarzadzania = shared_ptr<KolejkaMiedzyWatkami<PtrMemZarz>>;
+    
     spTransformowalne doTrasformacji = nullptr;
     spDoNarysowania doNarysowania = nullptr;
     spKolejkaPolecen kolejkaRenderowania = nullptr;
     int licznikTransformacjiDoPrzerysowania = 0;
     int przerysujPoTyluTransformacjach = 1;
     
-    using PtrMemZarz = void(ZarzadzanieModelami::*)();
-    using spKolejkaPolecenZarzadzania = shared_ptr<KolejkaMiedzyWatkami<PtrMemZarz>>;
+    map<Nazwa,spDoNarysowania> modele;
+    thread przetwarzanieModeliWatek;
+    spKolejkaPolecenZarzadzania kolejkaPrzetwarzaniaAsynchronicznego;
     
   public:
     ZarzadzanieModelami();
@@ -41,6 +45,9 @@ class ZarzadzanieModelami : public ObslugaPolecen
     void LiczbaTransformacjiDoAkumulowania(int);
     void WysylaniePrzerysujPoTransformacji();
     
+    void DodajModel(spDoNarysowania );
+    spDoNarysowania WyszukajModel(Nazwa&& );
+    int LiczbaModeli();
     void DoTransformacji(spDoNarysowania );
     void DoNarysowania(spDoNarysowania);
     void DoNarysowaniaItransformacji(spDoNarysowania);
@@ -55,9 +62,7 @@ protected:
 private:
     void (ZarzadzanieModelami::*Stan)();
     void PrzetwarzajModele();
-    thread przetwarzanieModeliWatek;
     
-    spKolejkaPolecenZarzadzania kolejkaPrzetwarzaniaAsynchronicznego;
         
 };
 using spZarzadzanieModelami = shared_ptr<ZarzadzanieModelami>;

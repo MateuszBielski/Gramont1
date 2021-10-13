@@ -77,7 +77,14 @@ bool DoNarysowania::czyPoleceniaListaGlownaJestTaSama(l_PolecenieIgeometria* wsk
 {
     return poleceniaListaGlowna == wsk;
 }
-
+Nazwa DoNarysowania::getNazwa()
+{
+	return nazwa;
+}
+void DoNarysowania::setNazwa(Nazwa&& n)
+{
+	nazwa = move(n);
+}
 
 
 

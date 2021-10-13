@@ -4,6 +4,7 @@
 #include <mutex>
 #include "geometriamodelu.h"
 #include "../Polecenie/poleceniarenderowania.h"
+#include "nazwa.h"
 
 using namespace std;
 
@@ -20,6 +21,7 @@ using l_PolecenieIgeometria = list<PolecenieIgeometria>;
 class DoNarysowania : public GeometriaModelu, public Grupowalne_T<DoNarysowania>
 {
     mutable std::mutex mut;
+    Nazwa nazwa;
     
     l_PolecenieIgeometria mojePolecenia;
     l_PolecenieIgeometria* poleceniaListaGlowna = nullptr;
@@ -29,6 +31,8 @@ class DoNarysowania : public GeometriaModelu, public Grupowalne_T<DoNarysowania>
     
     bool nieWidoczny = false;
 public:
+    void setNazwa(Nazwa&& );
+    Nazwa getNazwa();
     void PoleceniaWybierzIwstawWdobrejKolejnosci();
     void AktualizujMojePolecenia();
     virtual l_PolecenieIgeometria& Polecenia();

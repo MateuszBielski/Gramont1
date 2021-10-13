@@ -72,3 +72,17 @@ ZarzadzanieModelami::spKolejkaPolecenZarzadzania ZarzadzanieModelami::KolejkaPrz
 {
 	return kolejkaPrzetwarzaniaAsynchronicznego;
 }
+int ZarzadzanieModelami::LiczbaModeli()
+{
+	return modele.size();
+}
+void ZarzadzanieModelami::DodajModel(spDoNarysowania rys)
+{
+    modele[rys->getNazwa()] = rys;
+}
+spDoNarysowania ZarzadzanieModelami::WyszukajModel(Nazwa&& n)
+{
+    auto iter = modele.find(n);
+    if(iter != modele.end())return iter->second;
+    return nullptr;
+}
