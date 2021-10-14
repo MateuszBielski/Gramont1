@@ -245,10 +245,21 @@ TEST(ZarzadzanieModelami,UstawienieDoNarysowaniaItransfWymuszaGenerowanieListyPo
     ASSERT_FALSE(rys->Polecenia().empty());
 }
 
-TEST(ZarzadzanieModelami,UstawienieDoNarysowaniaUmieszczaWkolejceDlaOsobnegoWatku)
+TEST(ZarzadzanieModelami,UstawienieDoNarysowaniaPrzygotowujeListePolecenJesliTrzeba)
 {
-    ASSERT_TRUE(false);
-    
+    ZarzadzanieModelami zarz;
+    zarz.DoNarysowania(make_unique<DoNarysowania>());
+    auto kolejka = zarz.KolejkaPrzetwarzaniaAsynchronicznego();
+    auto polecenie = kolejka->wait_and_pop();
+    ASSERT_EQ(polecenie,&ZarzadzanieModelami::PrzygotujPoleceniaUstawionegoDoNarysowania);
+}
+TEST(ZarzadzanieModelami,PrzygotujPoleceniaDoNarysowania)
+{
+    ZarzadzanieModelami zarz;
+    auto rys = make_shared<DoNarysowaniaMock>();
+    zarz.DoNarysowania(rys);
+    zarz.PrzygotujPoleceniaUstawionegoDoNarysowania();
+    ASSERT_TRUE(rys->poleceniaWybierzIwstawWdobrejKolejnosciIsUsed);       
 }
 TEST(ZarzadzanieModelami,PustaKolejkaPrzetwarzaniaAsynchronicznego)
 {
@@ -256,17 +267,29 @@ TEST(ZarzadzanieModelami,PustaKolejkaPrzetwarzaniaAsynchronicznego)
     auto kolejka = zarz.KolejkaPrzetwarzaniaAsynchronicznego();
     ASSERT_TRUE(kolejka->empty());
 }
+TEST(ZarzadzanieModelami,DoTransformacji_UstawiaFlageJestTransformacja)
+{
+    ZarzadzanieModelami zarz;
+    auto rys = make_shared<DoNarysowania>();
+    zarz.DoTransformacji(rys);
+    ASSERT_TRUE(rys->jestTransformacja);
+}
 TEST(ZarzadzanieModelami,UstawienieDoTransformacjiUmieszczaWkolejceDlaOsobnegoWatku)
 {
     ZarzadzanieModelami zarz;
-    zarz.DoNarysowania(make_unique<DoNarysowania>());
+    zarz.DoTransformacji(make_unique<DoNarysowania>());
     auto kolejka = zarz.KolejkaPrzetwarzaniaAsynchronicznego();
-//    auto polecenie = kolejka->wait_and_pop();
-    ASSERT_TRUE(false);
-//    ASSERT_EQ(polecenie,&ZarzadzanieModelami::);
-    
+    auto polecenie = kolejka->wait_and_pop();
+    ASSERT_EQ(polecenie,&ZarzadzanieModelami::AktualizujPoleceniaUstawionegoDoTransformacji);
 }
-
+TEST(ZarzadzanieModelami,AktualizujDoTransformacji)
+{
+    ZarzadzanieModelami zarz;
+    auto rys = make_shared<DoNarysowaniaMock>();
+    zarz.DoTransformacji(rys);
+    zarz.AktualizujPoleceniaUstawionegoDoTransformacji();
+    ASSERT_TRUE(rys->aktualizujMojePoleceniaIsUsed);       
+}
 TEST(ZarzadzanieModelami,AsynchronicznePrzetwarzanieModeliKonczyWatek)
 {
     ZarzadzanieModelami zarz;
@@ -281,13 +304,11 @@ TEST(ZarzadzanieModelami,AsynchronicznePrzetwarzanieModeliKonczyWatek)
 //    t.join();
 //    ASSERT_EQ(1,obslPolecen.licznikRun);
 }
-TEST(ZarzadzanieModelami,AktualizujDoNarysowania)
-{
-    ZarzadzanieModelami zarz;
-//    zarz 
-     ASSERT_TRUE(false);       
-}
+
+//AktualizujPoleceniaUstawionegoDoTransformacji
+
 //AktualizujWoddzielnymWatku rzeczywiście aktualizuje
+//PrzygotujPoleceniaUstawionegoDoNarysowania
 //UstawienieDoTransformacjiUmieszczaWkolejceAktualizacjeDlaPoprzedniego
 //AktualizacjaWOddzielnymWatkuPracujeNaKopiiListyIpoWykonaniuPodmieniaJą
 //UmieszczenieWkolejceDlaOsobnegoWatkuPowodujeWykonanieTegoPolecenia

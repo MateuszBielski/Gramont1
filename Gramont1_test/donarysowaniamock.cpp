@@ -15,3 +15,12 @@ float* DoNarysowaniaMock::Przesuniecie()
 	przesuniecieIsUsed = true;
     return Transformowalne::Przesuniecie();
 }
+void DoNarysowaniaMock::AktualizujMojePolecenia()
+{
+	aktualizujMojePoleceniaIsUsed = true;
+}
+void DoNarysowaniaMock::PoleceniaWybierzIwstawWdobrejKolejnosci()
+{
+	poleceniaWybierzIwstawWdobrejKolejnosciIsUsed = true;
+}
+

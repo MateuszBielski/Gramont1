@@ -12,6 +12,19 @@ ZarzadzanieModelami::ZarzadzanieModelami()
 void ZarzadzanieModelami::DoTransformacji(spDoNarysowania tr)
 {
 	doTrasformacji = tr;
+    tr->jestTransformacja = true;
+    kolejkaPrzetwarzaniaAsynchronicznego->push(&ZarzadzanieModelami::AktualizujPoleceniaUstawionegoDoTransformacji);
+}
+void ZarzadzanieModelami::DoNarysowania(spDoNarysowania rys)
+{
+	doNarysowania = rys;
+    kolejkaPrzetwarzaniaAsynchronicznego->push(&ZarzadzanieModelami::PrzygotujPoleceniaUstawionegoDoNarysowania);
+}
+void ZarzadzanieModelami::DoNarysowaniaItransformacji(spDoNarysowania r)
+{
+    r->PoleceniaWybierzIwstawWdobrejKolejnosci();
+    doNarysowania = r;
+    doTrasformacji = r;
 }
 int ZarzadzanieModelami::LicznikTransformacjiAkumulowanych()
 {
@@ -37,16 +50,8 @@ void ZarzadzanieModelami::WyslijPoleceniePrzerysuj()
 //    cout<<"\nZarzadzanieModelami::WyslijPoleceniePrzerysuj";
     if(kolejkaRenderowania)kolejkaRenderowania->push(make_unique<Przerysuj>(doNarysowania));
 }
-void ZarzadzanieModelami::DoNarysowania(spDoNarysowania rys)
-{
-	doNarysowania = rys;
-}
-void ZarzadzanieModelami::DoNarysowaniaItransformacji(spDoNarysowania r)
-{
-    r->PoleceniaWybierzIwstawWdobrejKolejnosci();
-    doNarysowania = r;
-    doTrasformacji = r;
-}
+
+
 void ZarzadzanieModelami::WysylaniePrzerysujPoTransformacji()
 {
     Stan = &ZarzadzanieModelami::WyslijPoleceniePrzerysuj;
@@ -85,4 +90,12 @@ spDoNarysowania ZarzadzanieModelami::WyszukajModel(Nazwa&& n)
     auto iter = modele.find(n);
     if(iter != modele.end())return iter->second;
     return nullptr;
+}
+void ZarzadzanieModelami::AktualizujPoleceniaUstawionegoDoTransformacji()
+{
+	doTrasformacji->AktualizujMojePolecenia();
+}
+void ZarzadzanieModelami::PrzygotujPoleceniaUstawionegoDoNarysowania()
+{
+    doNarysowania->PoleceniaWybierzIwstawWdobrejKolejnosci();
 }

@@ -33,8 +33,8 @@ class DoNarysowania : public GeometriaModelu, public Grupowalne_T<DoNarysowania>
 public:
     void setNazwa(Nazwa&& );
     Nazwa getNazwa();
-    void PoleceniaWybierzIwstawWdobrejKolejnosci();
-    void AktualizujMojePolecenia();
+    virtual void PoleceniaWybierzIwstawWdobrejKolejnosci();
+    virtual void AktualizujMojePolecenia();
     virtual l_PolecenieIgeometria& Polecenia();
     bool czyPoleceniaListaGlownaJestTaSama(l_PolecenieIgeometria* );
     void WstawPolecenieNaKoncu(PtrMemRend_Geom);

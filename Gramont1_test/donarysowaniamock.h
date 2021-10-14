@@ -14,10 +14,14 @@ public:
     virtual float* MacierzObrotu() override;
     virtual float* Przesuniecie() override;
     virtual l_PolecenieIgeometria& Polecenia() override;
+    virtual void PoleceniaWybierzIwstawWdobrejKolejnosci() override;
+    virtual void AktualizujMojePolecenia() override;
     int id = 0;
     bool macierzObrotuIsUsed = false;
     bool poleceniaIsUsed = false;
     bool przesuniecieIsUsed = false;
+    bool aktualizujMojePoleceniaIsUsed = false;
+    bool poleceniaWybierzIwstawWdobrejKolejnosciIsUsed = false;
    
     protected:
 
