@@ -304,12 +304,23 @@ TEST(ZarzadzanieModelami,AsynchronicznePrzetwarzanieModeliKonczyWatek)
 //    t.join();
 //    ASSERT_EQ(1,obslPolecen.licznikRun);
 }
-
+//UmieszczenieWkolejceDlaOsobnegoWatkuPowodujeWykonanieTegoPolecenia
+TEST(ZarzadzanieModelami,AsynchronicznePrzetwarzanieUruchamiaPolecenia)
+{
+    ZarzadzanieModelami zarz;
+    auto kolejka = make_shared<KolejkaPolecen>();
+    zarz.NadawanieDoRenderowania(kolejka);
+    thread przetwarzanie = zarz.AsynchronicznePrzetwarzanieModeliUruchom();
+    zarz.KolejkaPrzetwarzaniaAsynchronicznego()->push(&ZarzadzanieModelami::WyslijPoleceniePrzerysuj);
+    zarz.AsynchronicznePrzetwarzanieModeliZatrzymaj();
+    przetwarzanie.join();
+    ASSERT_EQ(1,kolejka->size());
+}
 //AktualizujPoleceniaUstawionegoDoTransformacji
 
 //AktualizujWoddzielnymWatku rzeczywiście aktualizuje
 //PrzygotujPoleceniaUstawionegoDoNarysowania
 //UstawienieDoTransformacjiUmieszczaWkolejceAktualizacjeDlaPoprzedniego
 //AktualizacjaWOddzielnymWatkuPracujeNaKopiiListyIpoWykonaniuPodmieniaJą
-//UmieszczenieWkolejceDlaOsobnegoWatkuPowodujeWykonanieTegoPolecenia
+
 //ZakończenieOddzielnegoWątku

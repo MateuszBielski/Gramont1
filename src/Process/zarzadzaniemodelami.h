@@ -31,6 +31,7 @@ class ZarzadzanieModelami : public ObslugaPolecen
     map<Nazwa,spDoNarysowania> modele;
     thread przetwarzanieModeliWatek;
     spKolejkaPolecenZarzadzania kolejkaPrzetwarzaniaAsynchronicznego;
+    bool przetwarzajModele = false;
     
   public:
     ZarzadzanieModelami();
@@ -63,6 +64,7 @@ protected:
 private:
     void (ZarzadzanieModelami::*Stan)();
     void PrzetwarzajModele();
+    void UstawPrzetwarzajModeleFalse();
     
         
 };

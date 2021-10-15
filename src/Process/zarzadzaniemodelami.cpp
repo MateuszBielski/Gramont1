@@ -62,16 +62,27 @@ void ZarzadzanieModelami::UstawStanNic()
 }
 thread ZarzadzanieModelami::AsynchronicznePrzetwarzanieModeliUruchom()
 {
-	return move(thread(&ZarzadzanieModelami::PrzetwarzajModele,this));
+	przetwarzajModele = true;
+    return move(thread(&ZarzadzanieModelami::PrzetwarzajModele,this));
 }
 
 void ZarzadzanieModelami::AsynchronicznePrzetwarzanieModeliZatrzymaj()
 {
-	
+    kolejkaPrzetwarzaniaAsynchronicznego->push(&ZarzadzanieModelami::UstawPrzetwarzajModeleFalse);
 }
+void ZarzadzanieModelami::UstawPrzetwarzajModeleFalse()
+{
+    przetwarzajModele = false;
+}
+
 void ZarzadzanieModelami::PrzetwarzajModele()
 {
-	
+	PtrMemZarz polecenieZarz;
+    while(przetwarzajModele)
+    {
+        polecenieZarz = kolejkaPrzetwarzaniaAsynchronicznego->wait_and_pop();
+        (this->*polecenieZarz)();
+    }
 }
 ZarzadzanieModelami::spKolejkaPolecenZarzadzania ZarzadzanieModelami::KolejkaPrzetwarzaniaAsynchronicznego()
 {
@@ -99,3 +110,4 @@ void ZarzadzanieModelami::PrzygotujPoleceniaUstawionegoDoNarysowania()
 {
     doNarysowania->PoleceniaWybierzIwstawWdobrejKolejnosci();
 }
+
