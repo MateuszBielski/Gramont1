@@ -11,9 +11,14 @@ ZarzadzanieModelami::ZarzadzanieModelami()
 }
 void ZarzadzanieModelami::DoTransformacji(spDoNarysowania tr)
 {
-	doTrasformacji = tr;
+	doTrasformacjiPoprzedni = doTrasformacji;
+    if(doTrasformacjiPoprzedni)
+    doTrasformacjiPoprzedni->jestTransformacja = false;
+	
+    doTrasformacji = tr;
     tr->jestTransformacja = true;
     kolejkaPrzetwarzaniaAsynchronicznego->push(&ZarzadzanieModelami::AktualizujPoleceniaUstawionegoDoTransformacji);
+    kolejkaPrzetwarzaniaAsynchronicznego->push(&ZarzadzanieModelami::AktualizujPoleceniaUstawionegoDoTransformacjiPoprz);
 }
 void ZarzadzanieModelami::DoNarysowania(spDoNarysowania rys)
 {
@@ -60,6 +65,13 @@ void ZarzadzanieModelami::UstawStanNic()
 {
 	Stan = &ObslugaPolecen::Nic;
 }
+void ZarzadzanieModelami::Run()
+{
+    przetwarzanieModeliWatek = AsynchronicznePrzetwarzanieModeliUruchom();
+    ObslugaPolecen::Run();
+    AsynchronicznePrzetwarzanieModeliZatrzymaj();
+    przetwarzanieModeliWatek.join();
+}
 thread ZarzadzanieModelami::AsynchronicznePrzetwarzanieModeliUruchom()
 {
 	przetwarzajModele = true;
@@ -105,6 +117,11 @@ spDoNarysowania ZarzadzanieModelami::WyszukajModel(Nazwa&& n)
 void ZarzadzanieModelami::AktualizujPoleceniaUstawionegoDoTransformacji()
 {
 	doTrasformacji->AktualizujMojePolecenia();
+}
+void ZarzadzanieModelami::AktualizujPoleceniaUstawionegoDoTransformacjiPoprz()
+{
+	if(doTrasformacjiPoprzedni)
+    doTrasformacjiPoprzedni->AktualizujMojePolecenia();
 }
 void ZarzadzanieModelami::PrzygotujPoleceniaUstawionegoDoNarysowania()
 {

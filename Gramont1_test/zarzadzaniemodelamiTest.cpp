@@ -287,22 +287,9 @@ TEST(ZarzadzanieModelami,AktualizujDoTransformacji)
     ZarzadzanieModelami zarz;
     auto rys = make_shared<DoNarysowaniaMock>();
     zarz.DoTransformacji(rys);
+    //testujemy poniższą funkcję
     zarz.AktualizujPoleceniaUstawionegoDoTransformacji();
     ASSERT_TRUE(rys->aktualizujMojePoleceniaIsUsed);       
-}
-TEST(ZarzadzanieModelami,AsynchronicznePrzetwarzanieModeliKonczyWatek)
-{
-    ZarzadzanieModelami zarz;
-    thread przetwarzanie = zarz.AsynchronicznePrzetwarzanieModeliUruchom();
-    
-    zarz.AsynchronicznePrzetwarzanieModeliZatrzymaj();
-    przetwarzanie.join();
-    ASSERT_FALSE(przetwarzanie.joinable());
-//    auto kolejka = obslPolecen.getKolejkaPolecen();
-//    thread t(&ObslugaPolecen::Run,&obslPolecen);
-//    kolejka->push(make_unique<PolecenieKoniec>());
-//    t.join();
-//    ASSERT_EQ(1,obslPolecen.licznikRun);
 }
 //UmieszczenieWkolejceDlaOsobnegoWatkuPowodujeWykonanieTegoPolecenia
 TEST(ZarzadzanieModelami,AsynchronicznePrzetwarzanieUruchamiaPolecenia)
@@ -316,11 +303,40 @@ TEST(ZarzadzanieModelami,AsynchronicznePrzetwarzanieUruchamiaPolecenia)
     przetwarzanie.join();
     ASSERT_EQ(1,kolejka->size());
 }
-//AktualizujPoleceniaUstawionegoDoTransformacji
-
-//AktualizujWoddzielnymWatku rzeczywiście aktualizuje
-//PrzygotujPoleceniaUstawionegoDoNarysowania
-//UstawienieDoTransformacjiUmieszczaWkolejceAktualizacjeDlaPoprzedniego
-//AktualizacjaWOddzielnymWatkuPracujeNaKopiiListyIpoWykonaniuPodmieniaJą
-
-//ZakończenieOddzielnegoWątku
+TEST(ZarzadzanieModelami,AsynchronicznePrzetwarzanieUruchamiaSiePrzyGlownejPetli)
+{
+    ZarzadzanieModelami zarz;
+    auto kolejkaRend = make_shared<KolejkaPolecen>();
+    zarz.NadawanieDoRenderowania(kolejkaRend);
+    auto kolejkaZarz = zarz.getKolejkaPolecen();
+    zarz.KolejkaPrzetwarzaniaAsynchronicznego()->push(&ZarzadzanieModelami::WyslijPoleceniePrzerysuj);
+    kolejkaZarz->push(make_unique<PolecenieKoniec>());
+    zarz.Run();
+    
+    ASSERT_EQ(1,kolejkaRend->size());
+}
+TEST(ZarzadzanieModelami,AsynchronicznePrzetwarzanieModeliKonczyWatek)
+{
+    ZarzadzanieModelami zarz;
+    thread przetwarzanie = zarz.AsynchronicznePrzetwarzanieModeliUruchom();
+    
+    zarz.AsynchronicznePrzetwarzanieModeliZatrzymaj();
+    przetwarzanie.join();
+    ASSERT_FALSE(przetwarzanie.joinable());
+}
+TEST(ZarzadzanieModelami,DoTransformacjiAktualizujePoprzedniDoTransformacji)
+{
+    ZarzadzanieModelami zarz;
+    auto rys1 = make_shared<DoNarysowaniaMock>();
+    auto rys2 = make_shared<DoNarysowaniaMock>();
+    thread przetwarzanie = zarz.AsynchronicznePrzetwarzanieModeliUruchom();
+    
+    //testujemy poniższą funkcję
+    zarz.DoTransformacji(rys1);
+    
+    rys1->aktualizujMojePoleceniaIsUsed = false;
+    zarz.DoTransformacji(rys2);
+    zarz.AsynchronicznePrzetwarzanieModeliZatrzymaj();
+    przetwarzanie.join();
+    ASSERT_TRUE(rys1->aktualizujMojePoleceniaIsUsed);
+}

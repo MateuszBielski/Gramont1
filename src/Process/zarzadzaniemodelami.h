@@ -23,6 +23,7 @@ class ZarzadzanieModelami : public ObslugaPolecen
     using spKolejkaPolecenZarzadzania = shared_ptr<KolejkaMiedzyWatkami<PtrMemZarz>>;
     
     spDoNarysowania doTrasformacji = nullptr;
+    spDoNarysowania doTrasformacjiPoprzedni = nullptr;
     spDoNarysowania doNarysowania = nullptr;
     spKolejkaPolecen kolejkaRenderowania = nullptr;
     int licznikTransformacjiDoPrzerysowania = 0;
@@ -36,6 +37,7 @@ class ZarzadzanieModelami : public ObslugaPolecen
   public:
     ZarzadzanieModelami();
     virtual ~ZarzadzanieModelami(){};
+    virtual void Run() override;
 	virtual spTransformowalne DoTransformacji() override {return doTrasformacji;};
     virtual void PowiadomionyOzakonczeniuTransformacji() override;
     virtual void WyslijPoleceniePrzerysuj() override ;
@@ -54,6 +56,7 @@ class ZarzadzanieModelami : public ObslugaPolecen
     void DoNarysowaniaItransformacji(spDoNarysowania);
     void PrzygotujPoleceniaUstawionegoDoNarysowania();
     void AktualizujPoleceniaUstawionegoDoTransformacji();
+    void AktualizujPoleceniaUstawionegoDoTransformacjiPoprz();
     
     thread AsynchronicznePrzetwarzanieModeliUruchom();
     void AsynchronicznePrzetwarzanieModeliZatrzymaj();

@@ -37,7 +37,7 @@ public:
     ObslugaPolecen();
     virtual ~ObslugaPolecen(){};
     spKolejkaPolecen getKolejkaPolecen() {return kolejka;};
-    void Run();
+    virtual void Run();
     void StopRun();
     void Nic(){};
 protected:
