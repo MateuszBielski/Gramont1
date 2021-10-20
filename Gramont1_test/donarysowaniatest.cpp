@@ -3,6 +3,7 @@
 #include "../src/Shared/szescian.h"
 #include "../src/Shared/prostytrojkat.h"
 #include "../src/Process/renderowanie.h"
+#include "donarysowaniadostepprv.h"
 
 TEST(DoNarysowania,SzescianIndeksyVertexow)
 {
@@ -461,6 +462,40 @@ TEST(DoNarysowania,NadanieNazwyStr)
     Nazwa n("nazwa");
     ASSERT_TRUE(n == rys->getNazwa());
 }
+TEST(DoNarysowania,NieAktualizujJesliListaGlownaNieOdlaczona)
+{
+//    listaGlownaOdlaczona
+    auto rys = make_shared<DoNarysowania>();
+    rys->PoleceniaWybierzIwstawWdobrejKolejnosci();
+    rys->WstawPolecenieNaKoncu(&PoleceniaRenderowania::RysujGeometrie);
+    
+    DoNarysowaniaDostepPrv dostep(*rys);
+    dostep.ListaGlownaOdlaczona(false);
+    
+    rys->AktualizujMojePolecenia();
+    ASSERT_TRUE(CzyZawiera(&PoleceniaRenderowania::RysujGeometrie,rys->Polecenia()));
+}
+TEST(DoNarysowania,NieKopiujDoTymczasowejJesliNieZakonczonaAktualizacja)
+{
+//    zakonczonaAktualizacja
+}
+TEST(DoNarysowania,NieUdostepniajGlownejJesliNieZakonczonaAktualizacja)
+{
+    
+}
+TEST(DoNarysowania,glownaOdlaczonaUdostepniaTymczasowa)
+{
+//    listaGlownaOdlaczona
+}
+TEST(DoNarysowania,PoAktualizacjiPoleceniaUdostepniajaTymczasowa)
+{
+//    zakonczonaAktualizacja
+}
+TEST(DoNarysowania,NieAktualizujJesliNieSkopiowanaZtymczasowej)
+{
+    
+}
+//AktualizacjaPracujeNaKopiiListyIpoWykonaniuPodmieniaJą
 //dwa razy aktualizować, czy nie robią się problemy z listami
 
 //PushName

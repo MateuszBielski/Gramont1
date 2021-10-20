@@ -71,6 +71,8 @@
     <File Name="donarysowaniamock.cpp"/>
     <File Name="testrenderklas.h"/>
     <File Name="testrenderklas.cpp"/>
+    <File Name="donarysowaniadostepprv.h"/>
+    <File Name="donarysowaniadostepprv.cpp"/>
   </VirtualDirectory>
   <Settings Type="Executable">
     <GlobalSettings>

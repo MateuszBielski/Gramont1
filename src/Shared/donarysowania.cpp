@@ -41,7 +41,7 @@ void DoNarysowania::PoleceniaWybierzIwstawWdobrejKolejnosci()
 }
 void DoNarysowania::AktualizujMojePolecenia()
 {
-	if(!poleceniaListaGlowna)return;
+	if(!poleceniaListaGlowna || !listaGlownaOdlaczona)return;
     mojePolecenia.clear();
     auto pierwszeWymienianegoZakresu = pierwszeMojePolecenie;
     auto ostatnieWymienianegoZakresu = ostatnieMojePolecenie;
@@ -84,6 +84,10 @@ Nazwa DoNarysowania::getNazwa()
 void DoNarysowania::setNazwa(Nazwa&& n)
 {
 	nazwa = move(n);
+}
+unique_lock<mutex> DoNarysowania::getBlokadaMutexu()
+{
+	return unique_lock<mutex>(mut);
 }
 
 

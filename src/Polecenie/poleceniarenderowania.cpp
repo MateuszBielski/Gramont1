@@ -7,7 +7,8 @@ void PustaFunkcja(const char*)
 }
 template<class T>
 void PoleceniaRenderowania::WywolajPoleceniaZ(T obiektZpoleceniami){
-     for(auto& pol : obiektZpoleceniami->Polecenia())
+    auto blokadaMutexu = obiektZpoleceniami->getBlokadaMutexu();
+    for(auto& pol : obiektZpoleceniami->Polecenia())
         {
             (this->*pol.polecenie)(pol.geometria);
         }

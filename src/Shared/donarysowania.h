@@ -20,11 +20,13 @@ using l_PolecenieIgeometria = list<PolecenieIgeometria>;
 
 class DoNarysowania : public GeometriaModelu, public Grupowalne_T<DoNarysowania>
 {
+    friend class DoNarysowaniaDostepPrv;
     mutable std::mutex mut;
     Nazwa nazwa;
     
     l_PolecenieIgeometria mojePolecenia;
     l_PolecenieIgeometria* poleceniaListaGlowna = nullptr;
+    bool listaGlownaOdlaczona = true;
     
     l_PolecenieIgeometria::iterator pierwszeMojePolecenie;
     l_PolecenieIgeometria::iterator ostatnieMojePolecenie;
@@ -40,6 +42,7 @@ public:
     void WstawPolecenieNaKoncu(PtrMemRend_Geom);
     l_PolecenieIgeometria::iterator itPierwszeMojePolecenie();
     l_PolecenieIgeometria::iterator itOstatnieMojePolecenie();
+    unique_lock<mutex> getBlokadaMutexu();
     
     void NieWidoczny(bool);
 private:
