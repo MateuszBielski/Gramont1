@@ -18,3 +18,13 @@ bool DoNarysowaniaDostepPrv::ListaGlownaOdlaczona()
 {
     return rys.listaGlownaOdlaczona;
 }
+
+void DoNarysowaniaDostepPrv::ZakonczonaAktualizacja(bool f)
+{
+    rys.aktualizacjaUkonczona = f;
+}
+
+bool DoNarysowaniaDostepPrv::ZakonczonaAktualizacja()
+{
+    return rys.aktualizacjaUkonczona;
+}

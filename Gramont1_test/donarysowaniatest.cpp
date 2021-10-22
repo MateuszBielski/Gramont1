@@ -475,12 +475,40 @@ TEST(DoNarysowania,NieAktualizujJesliListaGlownaNieOdlaczona)
     rys->AktualizujMojePolecenia();
     ASSERT_TRUE(CzyZawiera(&PoleceniaRenderowania::RysujGeometrie,rys->Polecenia()));
 }
-TEST(DoNarysowania,NieKopiujDoTymczasowejJesliNieZakonczonaAktualizacja)
+TEST(DoNarysowania,NieUkonczonaAktualizacja)
 {
-//    zakonczonaAktualizacja
+    auto rys = make_shared<DoNarysowania>();
+    
+    DoNarysowaniaDostepPrv dostep(*rys);
+    dostep.ZakonczonaAktualizacja(true);
+    dostep.ListaGlownaOdlaczona(false);
+    rys->AktualizujMojePolecenia();
+    ASSERT_FALSE(dostep.ZakonczonaAktualizacja());
 }
-TEST(DoNarysowania,NieUdostepniajGlownejJesliNieZakonczonaAktualizacja)
+TEST(DoNarysowania,PoAktualizujZakonczonaAktualizacja)
 {
+    auto rys = make_shared<DoNarysowania>();
+    rys->PoleceniaWybierzIwstawWdobrejKolejnosci();
+    
+    DoNarysowaniaDostepPrv dostep(*rys);
+    dostep.ListaGlownaOdlaczona(true);
+    rys->AktualizujMojePolecenia();
+    ASSERT_TRUE(dostep.ZakonczonaAktualizacja());
+}
+TEST(DoNarysowania,NieUstawiaListyPoAktualizacjiJesliNieZakonczonaAktualizacja)
+{
+    auto rys = make_shared<DoNarysowania>();
+    DoNarysowaniaDostepPrv dostep(*rys);
+    dostep.ZakonczonaAktualizacja(false);
+    rys->UstawListyPoAktualizacji();
+    ASSERT_FALSE(dostep.ListaGlownaOdlaczona());
+}
+TEST(DoNarysowania,NieKopiujDoTymczasowejJesliNieZakonczonaAktualizacja)
+{   
+    auto rys = make_shared<DoNarysowania>();
+    rys->UstawListyPoAktualizacji();
+    DoNarysowaniaDostepPrv dostep(*rys);
+    dostep.ZakonczonaAktualizacja(false);
     
 }
 TEST(DoNarysowania,glownaOdlaczonaUdostepniaTymczasowa)
@@ -495,6 +523,12 @@ TEST(DoNarysowania,NieAktualizujJesliNieSkopiowanaZtymczasowej)
 {
     
 }
+TEST(DoNarysowania,SkopiowanaTymczasowa)
+{
+    
+}
+
+
 //AktualizacjaPracujeNaKopiiListyIpoWykonaniuPodmieniaJą
 //dwa razy aktualizować, czy nie robią się problemy z listami
 

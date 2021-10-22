@@ -41,7 +41,8 @@ void DoNarysowania::PoleceniaWybierzIwstawWdobrejKolejnosci()
 }
 void DoNarysowania::AktualizujMojePolecenia()
 {
-	if(!poleceniaListaGlowna || !listaGlownaOdlaczona)return;
+	aktualizacjaUkonczona = false;
+    if(!poleceniaListaGlowna || !listaGlownaOdlaczona)return;
     mojePolecenia.clear();
     auto pierwszeWymienianegoZakresu = pierwszeMojePolecenie;
     auto ostatnieWymienianegoZakresu = ostatnieMojePolecenie;
@@ -56,6 +57,11 @@ void DoNarysowania::AktualizujMojePolecenia()
         erase(pierwszeWymienianegoZakresu,++ostatnieWymienianegoZakresu);
         poleceniaListaGlowna->splice(przedTymWstawiamyNowaZawartosc,mojePolecenia);
     }
+    aktualizacjaUkonczona = true;
+}
+void DoNarysowania::UstawListyPoAktualizacji()
+{
+	listaGlownaOdlaczona = false;
 }
 l_PolecenieIgeometria::iterator DoNarysowania::itPierwszeMojePolecenie()
 {
@@ -89,6 +95,7 @@ unique_lock<mutex> DoNarysowania::getBlokadaMutexu()
 {
 	return unique_lock<mutex>(mut);
 }
+
 
 
 

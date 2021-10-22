@@ -13,6 +13,8 @@ public:
     ~DoNarysowaniaDostepPrv();
     void ListaGlownaOdlaczona(bool);
     bool ListaGlownaOdlaczona();
+    void ZakonczonaAktualizacja(bool);
+    bool ZakonczonaAktualizacja();
 
 
         
