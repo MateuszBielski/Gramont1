@@ -3,7 +3,7 @@
 
 l_PolecenieIgeometria& DoNarysowania::Polecenia()
 {
-    return mojePolecenia;
+    return listaGlownaOdlaczona ? mojePoleceniaTymczasowa : mojePolecenia;
 }
 void DoNarysowania::WstawPolecenieNaKoncu(PtrMemRend_Geom polecenie)
 {
@@ -41,7 +41,17 @@ void DoNarysowania::PoleceniaWybierzIwstawWdobrejKolejnosci()
 }
 void DoNarysowania::AktualizujMojePolecenia()
 {
-	aktualizacjaUkonczona = false;
+	UstawListyPrzedAktualizacja();
+    AktualizujMojePoleceniaNaLiscieZabezpieczonej;
+    UstawListyPoAktualizacji();
+}
+void DoNarysowania::UstawListyPrzedAktualizacja()
+{
+	listaGlownaOdlaczona = true;
+}
+void DoNarysowania::AktualizujMojePoleceniaNaLiscieZabezpieczonej
+{
+    aktualizacjaUkonczona = false;
     if(!poleceniaListaGlowna || !listaGlownaOdlaczona)return;
     mojePolecenia.clear();
     auto pierwszeWymienianegoZakresu = pierwszeMojePolecenie;
@@ -61,7 +71,9 @@ void DoNarysowania::AktualizujMojePolecenia()
 }
 void DoNarysowania::UstawListyPoAktualizacji()
 {
-	listaGlownaOdlaczona = false;
+    listaGlownaOdlaczona = false;
+    if(aktualizacjaUkonczona)
+	mojePoleceniaTymczasowa = mojePolecenia;
 }
 l_PolecenieIgeometria::iterator DoNarysowania::itPierwszeMojePolecenie()
 {
@@ -95,6 +107,9 @@ unique_lock<mutex> DoNarysowania::getBlokadaMutexu()
 {
 	return unique_lock<mutex>(mut);
 }
+
+
+
 
 
 

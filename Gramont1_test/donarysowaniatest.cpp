@@ -219,7 +219,6 @@ TEST(DoNarysowania,AktualizujListe_PoZmianieParametrowInnyRozmiar)
     rys1->DodajPrzesuniecie(przes);
     rys1->PoleceniaWybierzIwstawWdobrejKolejnosci();
     auto rozmiar1(rys1->Polecenia().size());
-    auto adresListy = &rys1->Polecenia();//--
     przes[0] = 0.0;
     rys1->UstawPrzesuniecie(przes);
     rys1->AktualizujMojePolecenia();
@@ -472,17 +471,17 @@ TEST(DoNarysowania,NieAktualizujJesliListaGlownaNieOdlaczona)
     DoNarysowaniaDostepPrv dostep(*rys);
     dostep.ListaGlownaOdlaczona(false);
     
-    rys->AktualizujMojePolecenia();
+    rys->AktualizujMojePoleceniaNaLiscieZabezpieczonej;
     ASSERT_TRUE(CzyZawiera(&PoleceniaRenderowania::RysujGeometrie,rys->Polecenia()));
 }
-TEST(DoNarysowania,NieUkonczonaAktualizacja)
+TEST(DoNarysowania,NieUkonczonaAktualizacjaJesliListaGlownaNieOdlaczona)
 {
     auto rys = make_shared<DoNarysowania>();
     
     DoNarysowaniaDostepPrv dostep(*rys);
     dostep.ZakonczonaAktualizacja(true);
     dostep.ListaGlownaOdlaczona(false);
-    rys->AktualizujMojePolecenia();
+    rys->AktualizujMojePoleceniaNaLiscieZabezpieczonej;
     ASSERT_FALSE(dostep.ZakonczonaAktualizacja());
 }
 TEST(DoNarysowania,PoAktualizujZakonczonaAktualizacja)
@@ -492,7 +491,7 @@ TEST(DoNarysowania,PoAktualizujZakonczonaAktualizacja)
     
     DoNarysowaniaDostepPrv dostep(*rys);
     dostep.ListaGlownaOdlaczona(true);
-    rys->AktualizujMojePolecenia();
+    rys->AktualizujMojePoleceniaNaLiscieZabezpieczonej;
     ASSERT_TRUE(dostep.ZakonczonaAktualizacja());
 }
 TEST(DoNarysowania,NieUstawiaListyPoAktualizacjiJesliNieZakonczonaAktualizacja)
@@ -506,18 +505,78 @@ TEST(DoNarysowania,NieUstawiaListyPoAktualizacjiJesliNieZakonczonaAktualizacja)
 TEST(DoNarysowania,NieKopiujDoTymczasowejJesliNieZakonczonaAktualizacja)
 {   
     auto rys = make_shared<DoNarysowania>();
-    rys->UstawListyPoAktualizacji();
+//    spGeometriaModelu geom = rys;
     DoNarysowaniaDostepPrv dostep(*rys);
-    dostep.ZakonczonaAktualizacja(false);
+    dostep.ListaGlownaOdlaczona(true);
+    auto& tymczasowa = rys->Polecenia();
+    dostep.ListaGlownaOdlaczona(false);
+    auto& glowna = rys->Polecenia();
     
+    tymczasowa.clear();
+    glowna.clear();
+    glowna.push_back({&PoleceniaRenderowania::Przesun,rys});
+    glowna.push_back({&PoleceniaRenderowania::Przesun,rys});
+    
+    dostep.ZakonczonaAktualizacja(false);
+    rys->UstawListyPoAktualizacji();
+    ASSERT_EQ(0,tymczasowa.size());
 }
-TEST(DoNarysowania,glownaOdlaczonaUdostepniaTymczasowa)
+TEST(DoNarysowania,KopiujDoTymczasowejJesliZakonczonaAktualizacja)
+{   
+    auto rys = make_shared<DoNarysowania>();
+//    spGeometriaModelu geom = rys;
+    DoNarysowaniaDostepPrv dostep(*rys);
+    dostep.ListaGlownaOdlaczona(true);
+    auto& tymczasowa = rys->Polecenia();
+    dostep.ListaGlownaOdlaczona(false);
+    auto& glowna = rys->Polecenia();
+    
+    tymczasowa.clear();
+    glowna.clear();
+    glowna.push_back({&PoleceniaRenderowania::Przesun,rys});
+    glowna.push_back({&PoleceniaRenderowania::Przesun,rys});
+    
+    dostep.ZakonczonaAktualizacja(true);
+    rys->UstawListyPoAktualizacji();
+    ASSERT_EQ(2,tymczasowa.size());
+}
+TEST(DoNarysowania,UstawListyPrzedAktualizacjaglownaOdlaczona_flaga)
 {
-//    listaGlownaOdlaczona
+    auto rys = make_shared<DoNarysowania>();
+    DoNarysowaniaDostepPrv dostep(*rys);
+    dostep.ListaGlownaOdlaczona(false);
+    
+    rys->UstawListyPrzedAktualizacja();
+    
+    ASSERT_TRUE(dostep.ListaGlownaOdlaczona());
+}
+TEST(DoNarysowania,UstawListyPrzedAktualizacjaAdresyListRozniaSie)
+{
+    auto rys = make_shared<DoNarysowania>();
+    auto adres1 = &(rys->Polecenia());
+    rys->UstawListyPrzedAktualizacja();
+    auto adres2 = &(rys->Polecenia());
+    ASSERT_NE(adres1,adres2);
+}
+TEST(DoNarysowania,PoleceniaZwracajaOdpowiednioJesliListaGlownaOdlaczona)
+{
+    auto rys = make_shared<DoNarysowania>();
+    DoNarysowaniaDostepPrv dostep(*rys);
+    dostep.ListaGlownaOdlaczona(false);
+    auto adres1 = &(rys->Polecenia());
+    dostep.ListaGlownaOdlaczona(true);
+    auto adres2 = &(rys->Polecenia());
+    ASSERT_NE(adres1,adres2);
 }
 TEST(DoNarysowania,PoAktualizacjiPoleceniaUdostepniajaTymczasowa)
 {
-//    zakonczonaAktualizacja
+    auto rys = make_shared<DoNarysowania>();
+    DoNarysowaniaDostepPrv dostep(*rys);
+    dostep.ListaGlownaOdlaczona(true);
+    auto adresTymczasowa = &(rys->Polecenia());
+    rys->AktualizujMojePoleceniaNaLiscieZabezpieczonej;
+    ASSERT_EQ(adresTymczasowa,&(rys->Polecenia()));
+    
 }
 TEST(DoNarysowania,NieAktualizujJesliNieSkopiowanaZtymczasowej)
 {
@@ -527,7 +586,15 @@ TEST(DoNarysowania,SkopiowanaTymczasowa)
 {
     
 }
-
+TEST(DoNarysowania,UstawListyPoAktualizacjiBlokadaMuteksow)
+{
+//    auto rys = make_shared<DoNarysowania>();
+//    
+//    DoNarysowaniaDostepPrv dostep(*rys);
+//    dostep.ListaGlownaOdlaczona(false);
+//    rys->UstawListyPoAktualizacji();
+    ASSERT_TRUE(false);
+}
 
 //AktualizacjaPracujeNaKopiiListyIpoWykonaniuPodmieniaJą
 //dwa razy aktualizować, czy nie robią się problemy z listami

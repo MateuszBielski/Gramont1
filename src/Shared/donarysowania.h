@@ -25,8 +25,9 @@ class DoNarysowania : public GeometriaModelu, public Grupowalne_T<DoNarysowania>
     Nazwa nazwa;
     
     l_PolecenieIgeometria mojePolecenia;
+    l_PolecenieIgeometria mojePoleceniaTymczasowa;
     l_PolecenieIgeometria* poleceniaListaGlowna = nullptr;
-    bool listaGlownaOdlaczona = true;
+    bool listaGlownaOdlaczona = false;
     bool aktualizacjaUkonczona = false;
     
     l_PolecenieIgeometria::iterator pierwszeMojePolecenie;
@@ -39,6 +40,9 @@ public:
     virtual void PoleceniaWybierzIwstawWdobrejKolejnosci();
     virtual void AktualizujMojePolecenia();
     void UstawListyPoAktualizacji();
+    void UstawListyPrzedAktualizacja();
+    void AktualizujMojePoleceniaNaLiscieZabezpieczonej;
+    
     virtual l_PolecenieIgeometria& Polecenia();
     bool czyPoleceniaListaGlownaJestTaSama(l_PolecenieIgeometria* );
     void WstawPolecenieNaKoncu(PtrMemRend_Geom);
