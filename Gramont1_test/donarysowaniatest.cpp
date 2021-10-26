@@ -471,7 +471,7 @@ TEST(DoNarysowania,NieAktualizujJesliListaGlownaNieOdlaczona)
     DoNarysowaniaDostepPrv dostep(*rys);
     dostep.ListaGlownaOdlaczona(false);
     
-    rys->AktualizujMojePoleceniaNaLiscieZabezpieczonej;
+    rys->AktualizujMojePoleceniaNaLiscieZabezpieczonej();
     ASSERT_TRUE(CzyZawiera(&PoleceniaRenderowania::RysujGeometrie,rys->Polecenia()));
 }
 TEST(DoNarysowania,NieUkonczonaAktualizacjaJesliListaGlownaNieOdlaczona)
@@ -481,7 +481,7 @@ TEST(DoNarysowania,NieUkonczonaAktualizacjaJesliListaGlownaNieOdlaczona)
     DoNarysowaniaDostepPrv dostep(*rys);
     dostep.ZakonczonaAktualizacja(true);
     dostep.ListaGlownaOdlaczona(false);
-    rys->AktualizujMojePoleceniaNaLiscieZabezpieczonej;
+    rys->AktualizujMojePoleceniaNaLiscieZabezpieczonej();
     ASSERT_FALSE(dostep.ZakonczonaAktualizacja());
 }
 TEST(DoNarysowania,PoAktualizujZakonczonaAktualizacja)
@@ -491,7 +491,7 @@ TEST(DoNarysowania,PoAktualizujZakonczonaAktualizacja)
     
     DoNarysowaniaDostepPrv dostep(*rys);
     dostep.ListaGlownaOdlaczona(true);
-    rys->AktualizujMojePoleceniaNaLiscieZabezpieczonej;
+    rys->AktualizujMojePoleceniaNaLiscieZabezpieczonej();
     ASSERT_TRUE(dostep.ZakonczonaAktualizacja());
 }
 TEST(DoNarysowania,NieUstawiaListyPoAktualizacjiJesliNieZakonczonaAktualizacja)
@@ -574,18 +574,92 @@ TEST(DoNarysowania,PoAktualizacjiPoleceniaUdostepniajaTymczasowa)
     DoNarysowaniaDostepPrv dostep(*rys);
     dostep.ListaGlownaOdlaczona(true);
     auto adresTymczasowa = &(rys->Polecenia());
-    rys->AktualizujMojePoleceniaNaLiscieZabezpieczonej;
+    rys->AktualizujMojePoleceniaNaLiscieZabezpieczonej();
     ASSERT_EQ(adresTymczasowa,&(rys->Polecenia()));
     
 }
-TEST(DoNarysowania,NieAktualizujJesliNieSkopiowanaZtymczasowej)
+TEST(DoNarysowania,NieUstawiajListPrzedJesliNieSkopiowanaGlowna_flaga)
+{
+    auto rys = make_shared<DoNarysowania>();
+    
+    DoNarysowaniaDostepPrv dostep(*rys);
+    dostep.ListaGlownaSkopiowana(false);
+    rys->UstawListyPrzedAktualizacja();
+    ASSERT_FALSE(dostep.ListaGlownaOdlaczona());
+}
+TEST(DoNarysowania,NieUstawiajListPrzed_adresy)
+{
+    auto rys = make_shared<DoNarysowania>();
+    
+    DoNarysowaniaDostepPrv dostep(*rys);
+    dostep.ListaGlownaSkopiowana(false);
+    auto adres1 = &(rys->Polecenia());
+    rys->UstawListyPrzedAktualizacja();
+    auto adres2 = &(rys->Polecenia());
+    ASSERT_EQ(adres1,adres2);
+}
+TEST(DoNarysowania,DzialajaceAktualizujNieModyfikujeTymczasowej)
+{
+    auto rys = make_shared<DoNarysowania>();
+    rys->PoleceniaWybierzIwstawWdobrejKolejnosci();
+    
+    DoNarysowaniaDostepPrv dostep(*rys);
+    dostep.ListaGlownaOdlaczona(false);
+    auto& glowna = rys->Polecenia();
+    dostep.ListaGlownaOdlaczona(true);
+    auto& tymczasowa = rys->Polecenia();
+    
+    tymczasowa.clear();
+    tymczasowa.push_back({&PoleceniaRenderowania::PushMatrix,rys});
+    tymczasowa.push_back({&PoleceniaRenderowania::Przesun,rys});
+    tymczasowa.push_back({&PoleceniaRenderowania::PopMatrix,rys});
+    
+    glowna.clear();
+    rys->AktualizujMojePoleceniaNaLiscieZabezpieczonej();
+    //upewniamy się że powyższe zrobiło jakąś akcję
+    ASSERT_TRUE(glowna.size() > 0);
+    
+    ASSERT_EQ(3,tymczasowa.size());
+    ASSERT_TRUE(CzyZawiera(&PoleceniaRenderowania::PopMatrix,tymczasowa));
+}
+TEST(DoNarysowania,UstawListyPrzed_UdostepniaTymczasowa)
+{
+    //już jest
+}
+TEST(DoNarysowania,UstawListyPo_ListaGlownaSkopiowana_flaga)
+{
+    auto rys = make_shared<DoNarysowania>();
+    DoNarysowaniaDostepPrv dostep(*rys);
+    dostep.ListaGlownaSkopiowana(false);
+    dostep.ZakonczonaAktualizacja(true);
+    rys->UstawListyPoAktualizacji();
+    
+    ASSERT_TRUE(dostep.ListaGlownaSkopiowana());
+    
+}
+TEST(DoNarysowania,UstawListyPo_ListaGlownaNieSkopiowana_flaga)
+{
+    auto rys = make_shared<DoNarysowania>();
+    DoNarysowaniaDostepPrv dostep(*rys);
+    dostep.ListaGlownaSkopiowana(false);
+    dostep.ZakonczonaAktualizacja(false);
+    rys->UstawListyPoAktualizacji();
+    
+    ASSERT_FALSE(dostep.ListaGlownaSkopiowana());
+}
+TEST(DoNarysowania,UstawListyPrzed_ListaGlownaNieSkopiowana_flaga)
+{
+    auto rys = make_shared<DoNarysowania>();
+    DoNarysowaniaDostepPrv dostep(*rys); 
+    dostep.ListaGlownaSkopiowana(true);
+    rys->UstawListyPrzedAktualizacja();
+    ASSERT_FALSE(dostep.ListaGlownaSkopiowana());
+}
+TEST(DoNarysowania,NieModyfikujeListDlaPrzedAktPo_jesliWstepnyNieSpelniony)
 {
     
 }
-TEST(DoNarysowania,SkopiowanaTymczasowa)
-{
-    
-}
+//pogrupować sprawdzenia dla przed akt po
 TEST(DoNarysowania,UstawListyPoAktualizacjiBlokadaMuteksow)
 {
 //    auto rys = make_shared<DoNarysowania>();

@@ -15,6 +15,9 @@ public:
     bool ListaGlownaOdlaczona();
     void ZakonczonaAktualizacja(bool);
     bool ZakonczonaAktualizacja();
+    void ListaGlownaSkopiowana(bool);
+    bool ListaGlownaSkopiowana();
+    
 
 
         

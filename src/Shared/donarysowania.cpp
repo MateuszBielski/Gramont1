@@ -42,17 +42,24 @@ void DoNarysowania::PoleceniaWybierzIwstawWdobrejKolejnosci()
 void DoNarysowania::AktualizujMojePolecenia()
 {
 	UstawListyPrzedAktualizacja();
-    AktualizujMojePoleceniaNaLiscieZabezpieczonej;
+    AktualizujMojePoleceniaNaLiscieZabezpieczonej();
     UstawListyPoAktualizacji();
 }
 void DoNarysowania::UstawListyPrzedAktualizacja()
 {
-	listaGlownaOdlaczona = true;
+	if(listaGlownaSkopiowana)
+    {
+        listaGlownaOdlaczona = true;
+        listaGlownaSkopiowana = false;
+    }
 }
-void DoNarysowania::AktualizujMojePoleceniaNaLiscieZabezpieczonej
+void DoNarysowania::AktualizujMojePoleceniaNaLiscieZabezpieczonej()
 {
     aktualizacjaUkonczona = false;
-    if(!poleceniaListaGlowna || !listaGlownaOdlaczona)return;
+    if(!poleceniaListaGlowna || !listaGlownaOdlaczona){
+        listaGlownaSkopiowana = true;
+        return;
+    }
     mojePolecenia.clear();
     auto pierwszeWymienianegoZakresu = pierwszeMojePolecenie;
     auto ostatnieWymienianegoZakresu = ostatnieMojePolecenie;
@@ -73,7 +80,10 @@ void DoNarysowania::UstawListyPoAktualizacji()
 {
     listaGlownaOdlaczona = false;
     if(aktualizacjaUkonczona)
-	mojePoleceniaTymczasowa = mojePolecenia;
+    {
+        mojePoleceniaTymczasowa = mojePolecenia;
+        listaGlownaSkopiowana = true;
+    }
 }
 l_PolecenieIgeometria::iterator DoNarysowania::itPierwszeMojePolecenie()
 {

@@ -28,3 +28,13 @@ bool DoNarysowaniaDostepPrv::ZakonczonaAktualizacja()
 {
     return rys.aktualizacjaUkonczona;
 }
+
+void DoNarysowaniaDostepPrv::ListaGlownaSkopiowana(bool f)
+{
+    rys.listaGlownaSkopiowana = f;
+}
+
+bool DoNarysowaniaDostepPrv::ListaGlownaSkopiowana()
+{   
+    return rys.listaGlownaSkopiowana;
+}

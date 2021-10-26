@@ -29,6 +29,7 @@ class DoNarysowania : public GeometriaModelu, public Grupowalne_T<DoNarysowania>
     l_PolecenieIgeometria* poleceniaListaGlowna = nullptr;
     bool listaGlownaOdlaczona = false;
     bool aktualizacjaUkonczona = false;
+    bool listaGlownaSkopiowana = true;
     
     l_PolecenieIgeometria::iterator pierwszeMojePolecenie;
     l_PolecenieIgeometria::iterator ostatnieMojePolecenie;
@@ -41,7 +42,7 @@ public:
     virtual void AktualizujMojePolecenia();
     void UstawListyPoAktualizacji();
     void UstawListyPrzedAktualizacja();
-    void AktualizujMojePoleceniaNaLiscieZabezpieczonej;
+    void AktualizujMojePoleceniaNaLiscieZabezpieczonej();
     
     virtual l_PolecenieIgeometria& Polecenia();
     bool czyPoleceniaListaGlownaJestTaSama(l_PolecenieIgeometria* );
