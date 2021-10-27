@@ -109,3 +109,4 @@ void NormujWektor3fv(float* wektor)
       float wsp=DlugoscWektora3fv(wektor);
       for (int i=0;i<3;i++){wektor[i]/=wsp;}
 }
+

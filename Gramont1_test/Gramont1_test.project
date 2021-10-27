@@ -39,6 +39,7 @@
     <File Name="poleceniarenderowaniatest.cpp"/>
     <File Name="TestRenderKlasTest.cpp"/>
     <File Name="NazwaTest.cpp"/>
+    <File Name="aktualizujlistetest.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="testedClasses">
     <File Name="../src/Shared/kursor2d.cpp"/>

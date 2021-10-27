@@ -20,4 +20,19 @@ void IloczynMacierzy4fIwektora3fzTymczasowym(float * m, float * v);
 float DlugoscWektora3fv(float* wektor);
 void NormujWektor3fv(float* wektor);
 
+template<typename AdrFun, typename Polecenia>
+bool CzyZawiera(AdrFun adr,Polecenia polecenia)
+{
+    bool result = false;
+    for(auto& polIgeom : polecenia)
+    {
+        if (polIgeom.polecenie == adr)
+        {
+            result = true;
+            break;
+        }
+    }
+    return result;
+}
+
 #endif
