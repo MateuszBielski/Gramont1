@@ -5,6 +5,7 @@
 #include "../src/Process/renderowanie.h"
 #include "donarysowaniadostepprv.h"
 
+
 TEST(DoNarysowania,SzescianIndeksyVertexow)
 {
 //    w kolejności dla GL_TRIANGLE_STRIP

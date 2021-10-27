@@ -15,21 +15,30 @@ void PoleceniaRenderowania::WywolajPoleceniaZ(T obiektZpoleceniami){
 }
 void PoleceniaRenderowania::PrzedGeometria(spGeometriaModelu)
 {
+    #if defined TESTOWANIE_F    
     (*ptrFunkcjaMonitorujaca)("PrzedGeometria");
+    #endif
 }
 
 void PoleceniaRenderowania::RysujGeometrie(spGeometriaModelu rys)
 {
+    #if defined TESTOWANIE_F
     (*ptrFunkcjaMonitorujaca)("RysujGeometrie");
+    #endif
 }
 
 void PoleceniaRenderowania::PoGeometrii(spGeometriaModelu)
 {
+    #if defined TESTOWANIE_F
     (*ptrFunkcjaMonitorujaca)("PoGeometrii");
+    #endif
 }
 void PoleceniaRenderowania::RysujGeometriePowierzchnie(spGeometriaModelu geom)
 {
+    #if defined TESTOWANIE_F
     (*ptrFunkcjaMonitorujaca)("RysujGeometriePowierzchnie");
+//    cout<<"RysujGeometriePowierzchnie"<<endl;
+    #endif
     if(!geom->ileNormalnych)return;
     glBegin(GL_TRIANGLE_STRIP);
         unsigned short v = 0;
@@ -46,27 +55,51 @@ void PoleceniaRenderowania::Przesun(spGeometriaModelu geom)
 {
 	float* p = geom->Przesuniecie();
     p_glTranslatef(p[0],p[1],p[2]);
+    #if defined TESTOWANIE_F
     (*ptrFunkcjaMonitorujaca)("Przesun");
+    #endif
 }
 
 void PoleceniaRenderowania::RysujGeometrieKrawedzie(spGeometriaModelu)
 {
+    #if defined TESTOWANIE_F
     (*ptrFunkcjaMonitorujaca)("RysujGeometrieKrawedzie");
+    #endif
 }
 
 void PoleceniaRenderowania::RysujGeometriePunkty(spGeometriaModelu)
 {
+    #if defined TESTOWANIE_F
     (*ptrFunkcjaMonitorujaca)("RysujGeometriePunkty");
+    #endif
 }
 
 void PoleceniaRenderowania::PushMatrix(spGeometriaModelu)
 {
+    #if defined TESTOWANIE_F
     (*ptrFunkcjaMonitorujaca)("PushMatrix");
+    #endif
 }
 
 void PoleceniaRenderowania::PopMatrix(spGeometriaModelu)
 {
+    #if defined TESTOWANIE_F
     (*ptrFunkcjaMonitorujaca)("PopMatrix");
+    #endif
+}
+
+void PoleceniaRenderowania::PushName(spGeometriaModelu)
+{   
+    #if defined TESTOWANIE_F
+    (*ptrFunkcjaMonitorujaca)("PushName");
+    #endif
+}
+
+void PoleceniaRenderowania::PopName(spGeometriaModelu)
+{
+    #if defined TESTOWANIE_F
+    (*ptrFunkcjaMonitorujaca)("PopName");
+    #endif
 }
 
 //dla linkera

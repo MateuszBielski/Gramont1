@@ -35,6 +35,10 @@ void DoNarysowania::PoleceniaWybierzIwstawWdobrejKolejnosci()
     }
     if(jestTransformacja)
     mojePolecenia.push_back({&PoleceniaRenderowania::PopMatrix,WskaznikNaMnie()});
+    #if defined TESTOWANIE_F
+        //musi być jakaś funkcja kończąca poziom stosu
+        mojePolecenia.push_back({&PoleceniaRenderowania::PopName,WskaznikNaMnie()});
+    #endif
     
     pierwszeMojePolecenie = mojePolecenia.begin();
     ostatnieMojePolecenie = --mojePolecenia.end();

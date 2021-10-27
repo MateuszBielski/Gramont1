@@ -11,6 +11,15 @@
   "buildType": "",
   "arguments": [],
   "parentProject": ""
+ }, {
+  "name": "Release",
+  "enabled": false,
+  "buildDirectory": "build",
+  "sourceDirectory": "$(ProjectPath)",
+  "generator": "",
+  "buildType": "",
+  "arguments": [],
+  "parentProject": ""
  }]]]>
     </Plugin>
   </Plugins>
@@ -74,6 +83,8 @@
     <File Name="donarysowaniadostepprv.h"/>
     <File Name="donarysowaniadostepprv.cpp"/>
   </VirtualDirectory>
+  <Dependencies Name="Debug"/>
+  <Dependencies Name="Release"/>
   <Settings Type="Executable">
     <GlobalSettings>
       <Compiler Options="" C_Options="" Assembler="">
@@ -87,6 +98,7 @@
     <Configuration Name="Debug" CompilerType="G++7" DebuggerType="GNU gdb debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
       <Compiler Options="$(shell pkg-config --cflags gtkglextmm-1.2 gtest);-g;-std=c++14;-Wno-deprecated;" C_Options="-g;-O0;-Wall" Assembler="" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" PCHFlags="" PCHFlagsPolicy="0">
         <IncludePath Value="."/>
+        <Preprocessor Value="TESTOWANIE_F"/>
       </Compiler>
       <Linker Options="$(shell pkg-config --libs gtkglextmm-1.2 gtest);-lstdc++fs;" Required="yes"/>
       <ResourceCompiler Options="" Required="no"/>
@@ -162,6 +174,4 @@
       </Completion>
     </Configuration>
   </Settings>
-  <Dependencies Name="Debug"/>
-  <Dependencies Name="Release"/>
 </CodeLite_Project>
