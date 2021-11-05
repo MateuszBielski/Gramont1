@@ -1,6 +1,7 @@
 #ifndef DoNarysowaniaDostepPrv_H
 #define DoNarysowaniaDostepPrv_H
 #include <iostream>
+#include <mutex>
 #include "../src/Shared/donarysowania.h"
 
 using namespace std;
@@ -17,6 +18,7 @@ public:
     bool ZakonczonaAktualizacja();
     void ListaGlownaSkopiowana(bool);
     bool ListaGlownaSkopiowana();
+    mutex& getMutex();
     
 
 

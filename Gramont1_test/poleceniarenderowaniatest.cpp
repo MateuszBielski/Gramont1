@@ -1,4 +1,6 @@
 #include <gtest/gtest.h>
+#include <thread>
+#include <future>
 #include "../src/Shared/grupowalne.h"
 #include "../src/Shared/prostytrojkat.h"
 #include "../src/Shared/szescian.h"
@@ -6,6 +8,7 @@
 #include "renderowaniemock.h"//?
 #include "testrenderklas.h"
 #include "donarysowaniamock.h"
+#include "donarysowaniadostepprv.h"
 
 
 TEST(PoleceniaRenderowania,ustawiaFunkcjeMonitorujaca)
@@ -109,4 +112,28 @@ TEST(PoleceniaRenderowania,funkcjeGlCzyWywolujeDlaDzieci)
     expect +="n0.0,0.0,1.0,v-1.0,0.0,0.0,v1.0,0.0,0.0,v0.0,1.0,0.0,";
     string result = renderTest.CiagWywolanOpenGl();
     ASSERT_EQ(expect,result);
+}
+TEST(PoleceniaRenderowania,WywolajPoleceniaBlokujaMutexDoNarysowania)
+{
+    TestRenderKlas renderTest;
+    Renderowanie rend;
+    
+    promise<void> moznaSkonczyc;
+    future<void> czekajNaWatek = moznaSkonczyc.get_future();
+    renderTest.UstawPrzyszloscDla(&czekajNaWatek,rend);
+
+    auto rys(make_shared<DoNarysowania>());
+    DoNarysowaniaDostepPrv dostep(*rys);
+    
+//    thread oddzielnieUruchom(&PoleceniaRenderowania::WywolajPoleceniaZ,&rend,rys.get());
+    std::async(std::launch::async,
+                         [&]()
+                             {
+                                 rend.WywolajPoleceniaZ(rys);
+                             });
+    unique_lock<mutex> blokada(dostep.getMutex(),std::defer_lock);
+    bool udaloSieZablokowac = blokada.try_lock();
+    moznaSkonczyc.set_value();
+//    oddzielnieUruchom.join();
+    ASSERT_FALSE(udaloSieZablokowac);
 }

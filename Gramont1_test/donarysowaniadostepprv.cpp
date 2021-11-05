@@ -38,3 +38,7 @@ bool DoNarysowaniaDostepPrv::ListaGlownaSkopiowana()
 {   
     return rys.listaGlownaSkopiowana;
 }
+mutex& DoNarysowaniaDostepPrv::getMutex()
+{
+	return rys.mut;
+}

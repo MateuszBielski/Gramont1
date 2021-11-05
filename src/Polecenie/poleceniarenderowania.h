@@ -2,6 +2,7 @@
 #define PoleceniaRenderowania_H
 #include <iostream>
 #include <memory>
+#include <future>
 #include "../Shared/geometriamodelu.h"
 
 using namespace std;
@@ -37,6 +38,8 @@ protected:
     
     ptr_vfff p_glTranslatef = nullptr, p_glVertex3f = nullptr;
     ptr_vfp p_glVertex3fv = nullptr, p_glNormal3fv = nullptr;
+    //dla testow
+    future<void>* fut;
     
 private:
         
