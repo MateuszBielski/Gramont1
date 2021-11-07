@@ -7,9 +7,18 @@ void PustaFunkcja(const char*)
 }
 template<class T>
 void PoleceniaRenderowania::WywolajPoleceniaZ(T obiektZpoleceniami){
-//    auto blokadaMutexu = obiektZpoleceniami->getBlokadaMutexu();
+    auto blokadaMutexu = obiektZpoleceniami->getBlokadaMutexu();
     #if defined TESTOWANIE_F
-    fut->wait(); 
+//    cout<<"przed fut.wait"<<endl;
+    try
+    {
+        prom.set_value();
+        fut.wait(); 
+    }catch(...)
+    {
+        
+    }
+//    cout<<"po fut.wait"<<endl;
     #endif
     for(auto& pol : obiektZpoleceniami->Polecenia())
         {

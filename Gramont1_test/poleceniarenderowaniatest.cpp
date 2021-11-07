@@ -119,21 +119,22 @@ TEST(PoleceniaRenderowania,WywolajPoleceniaBlokujaMutexDoNarysowania)
     Renderowanie rend;
     
     promise<void> moznaSkonczyc;
-    future<void> czekajNaWatek = moznaSkonczyc.get_future();
-    renderTest.UstawPrzyszloscDla(&czekajNaWatek,rend);
+    renderTest.UstawPrzyszloscDla(moznaSkonczyc.get_future(),rend);
+    future<void> wywolajGotowe = renderTest.PrzyszloscZobietnicy(rend);
 
     auto rys(make_shared<DoNarysowania>());
     DoNarysowaniaDostepPrv dostep(*rys);
     
-//    thread oddzielnieUruchom(&PoleceniaRenderowania::WywolajPoleceniaZ,&rend,rys.get());
-    std::async(std::launch::async,
-                         [&]()
-                             {
+    future<void> oddzielnyProces = std::async(std::launch::async,
+                         [&](){
                                  rend.WywolajPoleceniaZ(rys);
                              });
+    //czekam na drugi wątek, który zasygnalizuje, że dotarł do określonego miejsca
+    // w tym wypadku po ustawieniu blokady
+    wywolajGotowe.wait();
     unique_lock<mutex> blokada(dostep.getMutex(),std::defer_lock);
     bool udaloSieZablokowac = blokada.try_lock();
+    //po próbie zablokowania wysyłamy sygnał do drugiego wątku, który teraz czekał, że może iść dalej
     moznaSkonczyc.set_value();
-//    oddzielnieUruchom.join();
     ASSERT_FALSE(udaloSieZablokowac);
 }

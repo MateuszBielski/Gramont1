@@ -25,7 +25,8 @@ public:
     void UstawMonitorujaceFunkcjeDla(Renderowanie&);
     static map<string,unsigned> uzyteFunkcje;
     static list<string> funkcjeWkolejnosci;
-    void UstawPrzyszloscDla(future<void>*, Renderowanie&); 
+    void UstawPrzyszloscDla(future<void>&&, Renderowanie&);
+    future<void> PrzyszloscZobietnicy(Renderowanie&);
 };
 
 #endif // TestRenderKlas_H

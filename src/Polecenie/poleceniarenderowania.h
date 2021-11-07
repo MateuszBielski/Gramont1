@@ -39,7 +39,8 @@ protected:
     ptr_vfff p_glTranslatef = nullptr, p_glVertex3f = nullptr;
     ptr_vfp p_glVertex3fv = nullptr, p_glNormal3fv = nullptr;
     //dla testow
-    future<void>* fut;
+    future<void> fut;
+    promise<void> prom;
     
 private:
         

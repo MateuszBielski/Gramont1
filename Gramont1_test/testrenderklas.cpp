@@ -58,7 +58,11 @@ bool TestRenderKlas::CzyMaTenSamDoNarysowania(Renderowanie& rend, spDoNarysowani
 {
 	return rend.doNarysowania == rys;
 }
-void TestRenderKlas::UstawPrzyszloscDla(future<void> * fu, Renderowanie& r)
+void TestRenderKlas::UstawPrzyszloscDla(future<void>&& fu, Renderowanie& r)
 {
-	r.fut = fu;
+	r.fut = move(fu);
+}
+future<void> TestRenderKlas::PrzyszloscZobietnicy(Renderowanie& r)
+{
+	return move(r.prom.get_future());
 }
