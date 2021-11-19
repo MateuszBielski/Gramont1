@@ -85,6 +85,7 @@ void DoNarysowania::UstawListyPoAktualizacji()
     listaGlownaOdlaczona = false;
     if(aktualizacjaUkonczona)
     {
+        lock_guard<mutex> lk(mutexDlaTymczasowej);
         mojePoleceniaTymczasowa = mojePolecenia;
         listaGlownaSkopiowana = true;
     }
@@ -119,7 +120,7 @@ void DoNarysowania::setNazwa(Nazwa&& n)
 }
 unique_lock<mutex> DoNarysowania::getBlokadaMutexu()
 {
-	return unique_lock<mutex>(mut);
+	return listaGlownaOdlaczona? unique_lock<mutex>(mutexDlaTymczasowej):unique_lock<mutex>(mut);
 }
 
 

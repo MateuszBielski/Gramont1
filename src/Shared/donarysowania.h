@@ -22,6 +22,7 @@ class DoNarysowania : public GeometriaModelu, public Grupowalne_T<DoNarysowania>
 {
     friend class DoNarysowaniaDostepPrv;
     mutable std::mutex mut;
+    mutable std::mutex mutexDlaTymczasowej;
     Nazwa nazwa;
     
     l_PolecenieIgeometria mojePolecenia;

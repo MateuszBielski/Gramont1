@@ -204,6 +204,16 @@ TEST(DoNarysowania,NieModyfikujeListDlaPrzedAktPo_jesliWstepnyNieSpelniony)
     
 }
 //pogrupować sprawdzenia dla przed akt po
+TEST(DoNarysowania,OddzielneMutexyPodczasAktualizacji)
+{
+    auto rys = make_shared<DoNarysowania>();
+    DoNarysowaniaDostepPrv dostep(*rys);
+    dostep.ListaGlownaOdlaczona(true);
+    auto blokadaMutexu = rys->getBlokadaMutexu();
+    unique_lock<mutex> blokada(dostep.getMutex(),std::defer_lock);
+    bool udaloSieZablokowac = blokada.try_lock();
+    ASSERT_TRUE(udaloSieZablokowac);
+}
 TEST(DoNarysowania,UstawListyPoAktualizacjiBlokadaMuteksow)
 {
 //    auto rys = make_shared<DoNarysowania>();
