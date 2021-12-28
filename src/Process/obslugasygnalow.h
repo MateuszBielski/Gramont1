@@ -35,6 +35,7 @@ class ObslugaSygnalow
     bool signal_button_press_event(GdkEventButton* );
     bool on_motion_notify_event(GdkEventMotion* );
     bool on_delete_event(GdkEventAny*);
+    bool on_key_press_event(GdkEventKey* event);
 	
   protected:
     

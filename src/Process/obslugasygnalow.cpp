@@ -20,9 +20,13 @@ void ObslugaSygnalow::WlaczPolaczenia()
 {
     if(ekranGL)
     {
-        ekranGL->set_events(Gdk::BUTTON1_MOTION_MASK|Gdk::BUTTON_PRESS_MASK|Gdk::SCROLL_MASK|Gdk::BUTTON2_MOTION_MASK|Gdk::BUTTON3_MOTION_MASK);//lub add_events
+        ekranGL->set_events(Gdk::BUTTON1_MOTION_MASK|Gdk::BUTTON_PRESS_MASK|Gdk::SCROLL_MASK|Gdk::BUTTON2_MOTION_MASK
+        |Gdk::BUTTON3_MOTION_MASK);//lub add_events
         ekranGL->signal_button_press_event().connect(sigc::mem_fun(*this,&ObslugaSygnalow::signal_button_press_event));
         ekranGL->signal_motion_notify_event().connect(sigc::mem_fun(*this,&ObslugaSygnalow::on_motion_notify_event));
+        
+        ekranGL->get_parent()->get_parent()->set_events(Gdk::KEY_PRESS_MASK);  
+        ekranGL->get_parent()->get_parent()->signal_key_press_event().connect(sigc::mem_fun(*this, &ObslugaSygnalow::on_key_press_event),false);
         auto okno = ekranGL->get_parent()->get_parent();
         okno->signal_delete_event().connect(sigc::mem_fun(*this,&ObslugaSygnalow::on_delete_event));
 //        auto okno = *ekranGL->get_parent());
@@ -65,4 +69,9 @@ bool ObslugaSygnalow::on_delete_event(GdkEventAny* any_event)
     if(nadawanieDoRenderowania)nadawanieDoRenderowania->push(make_unique<PolecenieKoniec>());
     return false;
 }
-
+bool ObslugaSygnalow::on_key_press_event(GdkEventKey* event)
+{
+	if(event->keyval == GDK_KEY_s)
+    cout<<event->keyval<<endl;
+    return false;
+}
