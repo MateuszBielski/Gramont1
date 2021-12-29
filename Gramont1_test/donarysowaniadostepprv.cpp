@@ -40,5 +40,6 @@ bool DoNarysowaniaDostepPrv::ListaGlownaSkopiowana()
 }
 mutex& DoNarysowaniaDostepPrv::getMutex()
 {
-	return rys.mut;
+	return mutDostep;
+//    return rys.mut;
 }

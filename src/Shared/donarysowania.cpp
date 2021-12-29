@@ -18,7 +18,8 @@ void DoNarysowania::PoleceniaWybierzIwstawWdobrejKolejnosci()
 {
 //    cout<<"PoleceniaWybierzIwstawWdobrejKolejnosci "<<this<<endl;
     
-    lock_guard<mutex> lk(mut);
+//    lock_guard<mutex> lk(mut);
+//    mut.lock();
     if(!poleceniaListaGlowna)poleceniaListaGlowna = &mojePolecenia;
     if(jestTransformacja)
     {
@@ -26,21 +27,25 @@ void DoNarysowania::PoleceniaWybierzIwstawWdobrejKolejnosci()
         mojePolecenia.push_back({&PoleceniaRenderowania::Przesun,WskaznikNaMnie()});
     }
     if(!nieWidoczny)mojePolecenia.push_back({&PoleceniaRenderowania::RysujGeometriePowierzchnie,WskaznikNaMnie()});
+//    mut.unlock();
     for(auto& dziecko : dzieci)
     {
         dziecko->poleceniaListaGlowna = poleceniaListaGlowna;
         dziecko->PoleceniaWybierzIwstawWdobrejKolejnosci();
         //zakładam, że iteratory dziecka: mojePierwsze i ostatnie polecenie przeniesione zostaną teraz do 
         //listy głównej
+//        mut.lock();
         mojePolecenia.splice(mojePolecenia.end(),dziecko->mojePolecenia);
+//        mut.unlock();
     }
+//    mut.lock();
     if(jestTransformacja)
     mojePolecenia.push_back({&PoleceniaRenderowania::PopMatrix,WskaznikNaMnie()});
     #if defined TESTOWANIE_F
         //musi być jakaś funkcja kończąca poziom stosu
         mojePolecenia.push_back({&PoleceniaRenderowania::PopName,WskaznikNaMnie()});
     #endif
-    
+//    mut.unlock();
     pierwszeMojePolecenie = mojePolecenia.begin();
     ostatnieMojePolecenie = --mojePolecenia.end();
 }
@@ -74,10 +79,12 @@ void DoNarysowania::AktualizujMojePoleceniaNaLiscieZabezpieczonej()
     bool czyMojaListaNieJestGlowna = &mojePolecenia != poleceniaListaGlowna;
     if(poleceniaListaGlowna && czyMojaListaNieJestGlowna )
     {
-        lock_guard<mutex> lk(mut);
+//        lock_guard<mutex> lk(mut);
+//        mut.lock();
         auto przedTymWstawiamyNowaZawartosc = poleceniaListaGlowna->
         erase(pierwszeWymienianegoZakresu,++ostatnieWymienianegoZakresu);
         poleceniaListaGlowna->splice(przedTymWstawiamyNowaZawartosc,mojePolecenia);
+//        mut.unlock();
     }
     aktualizacjaUkonczona = true;
 }
@@ -85,9 +92,12 @@ void DoNarysowania::UstawListyPoAktualizacji()
 {
     listaGlownaOdlaczona = false;
     if(aktualizacjaUkonczona)
-    {
-        lock_guard<mutex> lk(mutexDlaTymczasowej);
+    {   
+       
+//        lock_guard<mutex> lk(mutexDlaTymczasowej);
+//        bool udaloSieZablokowac = mutexDlaTymczasowej.try_lock();
         mojePoleceniaTymczasowa = mojePolecenia;
+//        if(udaloSieZablokowac)mutexDlaTymczasowej.unlock();
         listaGlownaSkopiowana = true;
     }
 }
@@ -119,11 +129,13 @@ void DoNarysowania::setNazwa(Nazwa&& n)
 {
 	nazwa = move(n);
 }
+/*
 unique_lock<mutex> DoNarysowania::getBlokadaMutexu()
 {
-	return listaGlownaOdlaczona? unique_lock<mutex>(mutexDlaTymczasowej):unique_lock<mutex>(mut);
+//	return listaGlownaOdlaczona? unique_lock<mutex>(mutexDlaTymczasowej):unique_lock<mutex>(mut);
+    return unique_lock<mutex>(mut);
 }
-
+*/
 
 
 

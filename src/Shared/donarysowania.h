@@ -22,7 +22,7 @@ class DoNarysowania : public GeometriaModelu, public Grupowalne_T<DoNarysowania>
 {
     friend class DoNarysowaniaDostepPrv;
     mutable std::mutex mut;
-    mutable std::mutex mutexDlaTymczasowej;
+//    mutable std::mutex mutexDlaTymczasowej;
     Nazwa nazwa;
     
     l_PolecenieIgeometria mojePolecenia;
@@ -50,7 +50,7 @@ public:
     void WstawPolecenieNaKoncu(PtrMemRend_Geom);
     l_PolecenieIgeometria::iterator itPierwszeMojePolecenie();
     l_PolecenieIgeometria::iterator itOstatnieMojePolecenie();
-    unique_lock<mutex> getBlokadaMutexu();
+//    unique_lock<mutex> getBlokadaMutexu();// uzywane tylko w PoleceniaRenderowania::WywolajPoleceniaZ
     
     void NieWidoczny(bool);
 private:

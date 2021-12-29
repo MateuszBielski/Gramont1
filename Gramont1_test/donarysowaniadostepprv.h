@@ -9,6 +9,8 @@ using namespace std;
 class DoNarysowaniaDostepPrv
 {
   DoNarysowania& rys;
+  mutable std::mutex mutDostep;
+  
 public:
     DoNarysowaniaDostepPrv(DoNarysowania& );
     ~DoNarysowaniaDostepPrv();
