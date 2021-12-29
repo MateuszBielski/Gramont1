@@ -78,6 +78,7 @@ TEST(DoNarysowania,SzescianPrzesunieciePoczatkowe)
 
 TEST(DoNarysowania,wKolejnosciWstaw_NieWidoczny)
 {
+//    std::this_thread::sleep_for(2ms);
     spDoNarysowania szescian(make_shared<Szescian>());
     szescian->NieWidoczny(true);
     szescian->PoleceniaWybierzIwstawWdobrejKolejnosci();
@@ -87,12 +88,14 @@ TEST(DoNarysowania,wKolejnosciWstaw_NieWidoczny)
 }
 TEST(DoNarysowania,wKolejnosciWstaw_RysujGeometriePowierzchnie)
 {
+//    std::this_thread::sleep_for(2ms);
     spDoNarysowania szescian(make_shared<Szescian>());
     szescian->PoleceniaWybierzIwstawWdobrejKolejnosci();
     ASSERT_TRUE(CzyZawiera(&PoleceniaRenderowania::RysujGeometriePowierzchnie,szescian->Polecenia()));
 }
 TEST(DoNarysowania,wKolejnosciWstaw_PrzesuniecieNaPozycje_nieWstawia)
 {
+//    std::this_thread::sleep_for(2ms);
     spDoNarysowania szescian(make_shared<Szescian>());
     szescian->PoleceniaWybierzIwstawWdobrejKolejnosci();
     
@@ -100,6 +103,7 @@ TEST(DoNarysowania,wKolejnosciWstaw_PrzesuniecieNaPozycje_nieWstawia)
 }
 TEST(DoNarysowania,wKolejnosciWstaw_PrzesuniecieNaPozycje)
 {
+//    std::this_thread::sleep_for(2ms);
     spDoNarysowania szescian(make_shared<Szescian>());
     //domyślnie powinien być na 0,0,0
     float poz[] = {1,0,0};

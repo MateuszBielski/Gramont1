@@ -17,6 +17,7 @@ void DoNarysowania::NieWidoczny(bool flaga)
 void DoNarysowania::PoleceniaWybierzIwstawWdobrejKolejnosci()
 {
 //    cout<<"PoleceniaWybierzIwstawWdobrejKolejnosci "<<this<<endl;
+    
     lock_guard<mutex> lk(mut);
     if(!poleceniaListaGlowna)poleceniaListaGlowna = &mojePolecenia;
     if(jestTransformacja)

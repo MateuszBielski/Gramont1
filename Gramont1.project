@@ -54,6 +54,8 @@
       <File Name="src/Process/zarzadzaniemodelami.h"/>
       <File Name="src/Process/zarzadzaniemodelami.cpp"/>
       <File Name="src/Polecenie/poleceniarenderowania.h"/>
+      <File Name="src/Process/probneprzelaczenie.h"/>
+      <File Name="src/Process/probneprzelaczenie.cpp"/>
     </VirtualDirectory>
     <File Name="src/main.cpp"/>
     <VirtualDirectory Name="Polecenie">

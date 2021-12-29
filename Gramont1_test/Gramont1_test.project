@@ -66,6 +66,7 @@
     <File Name="../src/Shared/donarysowania.cpp"/>
     <File Name="../src/Shared/FunkcjeIstruktury.cpp"/>
     <File Name="../src/Shared/nazwa.cpp"/>
+    <File Name="../src/Process/probneprzelaczenie.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="helperClass">
     <File Name="../src/Shared/trackball.cpp"/>

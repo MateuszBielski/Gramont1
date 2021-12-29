@@ -49,7 +49,7 @@ class ZarzadzanieModelami : public ObslugaPolecen
     void WysylaniePrzerysujPoTransformacji();
     
     void DodajModel(spDoNarysowania );
-    spDoNarysowania WyszukajModel(Nazwa&& );
+    spDoNarysowania WyszukajModel(Nazwa&& ) const;
     int LiczbaModeli();
     void DoTransformacji(spDoNarysowania );
     void DoNarysowania(spDoNarysowania);

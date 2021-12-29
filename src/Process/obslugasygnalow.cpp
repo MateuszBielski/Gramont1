@@ -1,6 +1,7 @@
 #include "obslugasygnalow.h"
 #include "../Polecenie/transformacja.h"
 #include "../Polecenie/obrot.h"
+#include "probneprzelaczenie.h"
 //#include "../src/Polecenie/transformacja.h"
 
 void ObslugaSygnalow::ObslugujEkran(spEkranGL ekran)
@@ -10,6 +11,10 @@ void ObslugaSygnalow::ObslugujEkran(spEkranGL ekran)
 void ObslugaSygnalow::UstawRenderowanie(spRenderowanie r)
 {
 	renderowanie = r;
+}
+void ObslugaSygnalow::UstawZarzadzanie(ZarzadzanieModelami * const z)
+{
+	zarzadzanie = z;
 }
 /*
 void ObslugaSygnalow::UstawTransformacje(spTransformacjaItfc tr)
@@ -71,7 +76,7 @@ bool ObslugaSygnalow::on_delete_event(GdkEventAny* any_event)
 }
 bool ObslugaSygnalow::on_key_press_event(GdkEventKey* event)
 {
-	if(event->keyval == GDK_KEY_s)
-    cout<<event->keyval<<endl;
+	//ProbnePrzelaczenie przelacz(zarzadzanie,event);
     return false;
 }
+

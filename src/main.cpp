@@ -36,16 +36,26 @@ int main(int argc, char **argv)
     
     obslugaSygnalow.NadawanieDoZarzadzaniaObiektami(zarzadzanie.getKolejkaPolecen());
     obslugaSygnalow.NadawanieDoRenderowania(renderowanie.getKolejkaPolecen());
+    /**od 28 grudnia zmiana konwencji:
+     * moduły Zarządzanie, Renderowanie mają być dostępne dla innych poprzez wskaźniki
+     * a ich wewnętrzna implementacja będzie określała, czy wykonanie danej funkcji odbędzie się w oddzielnym wątku
+     */
+     obslugaSygnalow.UstawZarzadzanie(&zarzadzanie);
     
     auto rys = make_shared<DoNarysowania>();
     auto szescian1 = make_shared<Szescian>();
     auto szescian2 = make_shared<Szescian>();
     auto szescian3 = make_shared<Szescian>();
     
+    szescian1->setNazwa(235);
+    szescian1->setNazwa(236);
+    szescian1->setNazwa(237);
+    
     float przes2[] = {1.1,0.0,-0.2};
     float przes3[] = {-1.3,0.3,0.0};
     szescian2->DoVertexowDodajWektor(przes2);
     szescian3->DoVertexowDodajWektor(przes3);
+    
     
     rys->DodajDziecko(szescian1);
     rys->DodajDziecko(szescian2);

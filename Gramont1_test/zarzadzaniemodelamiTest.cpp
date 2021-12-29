@@ -237,6 +237,19 @@ TEST(ZarzadzanieModelami,WyszukanieModeluPustyJesliNieMa)
     ASSERT_EQ(nullptr,result);
     ASSERT_EQ(0,zarz.LiczbaModeli());
 }
+TEST(ZarzadzanieModelami,WyszukanieWsrodDzieciModeluPoNazwie)
+{
+//    ZarzadzanieModelami zarz;
+//    spDoNarysowania rys1 = make_unique<DoNarysowania>();
+//    spDoNarysowania rys2 = make_unique<DoNarysowania>();
+//    rys1->setNazwa(93);
+//    rys2->setNazwa(91);
+//    zarz.DodajModel(rys1);
+//    rys1->DodajDziecko(rys2);
+//    auto adresRys2 = &*rys2;
+//    auto adresWyszukanego = &*(zarz.WyszukajModel(91));
+//    ASSERT_EQ(adresRys2,adresWyszukanego);
+}
 TEST(ZarzadzanieModelami,UstawienieDoNarysowaniaItransfWymuszaGenerowanieListyPolecen)
 {
     ZarzadzanieModelami zarzadzanie;

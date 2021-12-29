@@ -9,6 +9,7 @@
 //#include "../Shared/transformacjaItfc.h"
 #include "../Polecenie/kolejkapolecen.h"
 #include "renderowanie.h"
+#include "zarzadzaniemodelami.h"
 
 using namespace std;
 using namespace Gtk;
@@ -18,6 +19,7 @@ class ObslugaSygnalow
 {
     spEkranGL ekranGL = nullptr;
     spRenderowanie renderowanie = nullptr;
+    ZarzadzanieModelami * zarzadzanie = nullptr;
     Kursor2D kursor2D;
 //    spTransformacjaItfc transformacja = nullptr;
     spKolejkaPolecen nadawanieDoZarzadzaniaObiektami = nullptr;
@@ -26,6 +28,7 @@ class ObslugaSygnalow
   public:
     void ObslugujEkran(spEkranGL );
     void UstawRenderowanie(spRenderowanie);//?
+    void UstawZarzadzanie(ZarzadzanieModelami * const);
 //    void UstawTransformacje(spTransformacjaItfc );?
     void WlaczPolaczenia();
     void NadawanieDoZarzadzaniaObiektami(spKolejkaPolecen);
@@ -39,7 +42,8 @@ class ObslugaSygnalow
 	
   protected:
     
-  private:
+private:
+  
     
     
     

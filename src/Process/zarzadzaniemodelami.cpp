@@ -74,12 +74,14 @@ void ZarzadzanieModelami::Run()
 }
 thread ZarzadzanieModelami::AsynchronicznePrzetwarzanieModeliUruchom()
 {
-	przetwarzajModele = true;
+//	cout<<"AsynchronicznePrzetwarzanieModeliUruchom"<<endl;
+    przetwarzajModele = true;
     return move(thread(&ZarzadzanieModelami::PrzetwarzajModele,this));
 }
 
 void ZarzadzanieModelami::AsynchronicznePrzetwarzanieModeliZatrzymaj()
 {
+//	cout<<"AsynchronicznePrzetwarzanieModeliZatrzymaj"<<endl;
     kolejkaPrzetwarzaniaAsynchronicznego->push(&ZarzadzanieModelami::UstawPrzetwarzajModeleFalse);
 }
 void ZarzadzanieModelami::UstawPrzetwarzajModeleFalse()
@@ -108,7 +110,7 @@ void ZarzadzanieModelami::DodajModel(spDoNarysowania rys)
 {
     modele[rys->getNazwa()] = rys;
 }
-spDoNarysowania ZarzadzanieModelami::WyszukajModel(Nazwa&& n)
+spDoNarysowania ZarzadzanieModelami::WyszukajModel(Nazwa&& n) const
 {
     auto iter = modele.find(n);
     if(iter != modele.end())return iter->second;
