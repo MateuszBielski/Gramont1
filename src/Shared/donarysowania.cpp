@@ -129,13 +129,13 @@ void DoNarysowania::setNazwa(Nazwa&& n)
 {
 	nazwa = move(n);
 }
-/*
+
 unique_lock<mutex> DoNarysowania::getBlokadaMutexu()
 {
 //	return listaGlownaOdlaczona? unique_lock<mutex>(mutexDlaTymczasowej):unique_lock<mutex>(mut);
     return unique_lock<mutex>(mut);
 }
-*/
+
 
 
 
