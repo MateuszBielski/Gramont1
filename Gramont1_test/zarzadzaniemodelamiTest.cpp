@@ -128,13 +128,13 @@ TEST(ZarzadzanieModelami,StanWysylaniePrzeresujPoTransformacji)
 }
 TEST(ZarzadzanieModelami,WdrugimWatkuOdbieraPoleceniaZobslugiSyganlow)
 {   
-    OknoGtk okno(200,200);
-    spEkranGL ekran = make_shared<EkranGL>();
+//    OknoGtk okno(200,200);
+//    spEkranGL ekran = make_shared<EkranGL>();
     
     ObslugaSygnalow sygnaly;
     ZarzadzanieModelami zarzadzanie;
-    okno.ZamontujEkran(ekran);
-	sygnaly.ObslugujEkran(ekran);
+//    okno.ZamontujEkran(ekran);
+//	sygnaly.ObslugujEkran(ekran);
     auto kolejka = zarzadzanie.getKolejkaPolecen();
     sygnaly.NadawanieDoZarzadzaniaObiektami(kolejka);
     GdkEventButton event1;
@@ -237,18 +237,16 @@ TEST(ZarzadzanieModelami,WyszukanieModeluPustyJesliNieMa)
     ASSERT_EQ(nullptr,result);
     ASSERT_EQ(0,zarz.LiczbaModeli());
 }
-TEST(ZarzadzanieModelami,WyszukanieWsrodDzieciModeluPoNazwie)
+TEST(ZarzadzanieModelami,NieOdnajdujePoNazwieWsrodDzieci)
 {
-//    ZarzadzanieModelami zarz;
-//    spDoNarysowania rys1 = make_unique<DoNarysowania>();
-//    spDoNarysowania rys2 = make_unique<DoNarysowania>();
-//    rys1->setNazwa(93);
-//    rys2->setNazwa(91);
-//    zarz.DodajModel(rys1);
-//    rys1->DodajDziecko(rys2);
-//    auto adresRys2 = &*rys2;
-//    auto adresWyszukanego = &*(zarz.WyszukajModel(91));
-//    ASSERT_EQ(adresRys2,adresWyszukanego);
+    ZarzadzanieModelami zarz;
+    spDoNarysowania rys1 = make_unique<DoNarysowania>();
+    spDoNarysowania rys2 = make_unique<DoNarysowania>();
+    rys1->setNazwa(93);
+    rys2->setNazwa(91);
+    zarz.DodajModel(rys1);
+    rys1->DodajDziecko(rys2);
+    ASSERT_NE(nullptr,zarz.WyszukajModel(91));
 }
 TEST(ZarzadzanieModelami,UstawienieDoNarysowaniaItransfWymuszaGenerowanieListyPolecen)
 {

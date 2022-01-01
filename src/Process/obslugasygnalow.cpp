@@ -46,8 +46,14 @@ bool ObslugaSygnalow::signal_button_press_event(GdkEventButton* e)
     }
     kursor2D.PobierzPierwotnePolozenie(e->x,e->y);
 //    cout<<"\nXXXsignal_button_press_event "<<ekranGL->get_width()<<" "<<ekranGL->get_height();
-
-    kursor2D.PobierzWymiaryEkranu(ekranGL->get_width(),ekranGL->get_height());
+    int w,h;
+    if(ekranGL){
+        w = ekranGL->get_width();
+        h = ekranGL->get_height();
+    }else{
+        w = h = 200;//na potrzeby testów
+    }
+    kursor2D.PobierzWymiaryEkranu(w,h);
 }
 bool ObslugaSygnalow::on_motion_notify_event(GdkEventMotion* e)
 {

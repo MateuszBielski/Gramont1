@@ -26,7 +26,7 @@
   <Description/>
   <Dependencies/>
   <VirtualDirectory Name="src">
-    <File Name="main.cpp" ExcludeProjConfig="Debug"/>
+    <File Name="main.cpp" ExcludeProjConfig=""/>
     <File Name="kursor2dTest.cpp" ExcludeProjConfig=""/>
     <File Name="transformacjaTest.cpp" ExcludeProjConfig=""/>
     <File Name="transformowalneTest.cpp" ExcludeProjConfig=""/>
