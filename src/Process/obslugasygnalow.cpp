@@ -82,7 +82,7 @@ bool ObslugaSygnalow::on_delete_event(GdkEventAny* any_event)
 }
 bool ObslugaSygnalow::on_key_press_event(GdkEventKey* event)
 {
-	//ProbnePrzelaczenie przelacz(zarzadzanie,event);
+	ProbnePrzelaczenie przelacz(zarzadzanie,event);
     return false;
 }
 

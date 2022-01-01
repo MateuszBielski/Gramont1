@@ -12,6 +12,7 @@ ZarzadzanieModelami::ZarzadzanieModelami()
 void ZarzadzanieModelami::DoTransformacji(spDoNarysowania tr)
 {
 	doTrasformacjiPoprzedni = doTrasformacji;
+    if(!tr)return;
     if(doTrasformacjiPoprzedni)
     doTrasformacjiPoprzedni->jestTransformacja = false;
 	

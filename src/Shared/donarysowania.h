@@ -23,7 +23,7 @@ using l_PolecenieIgeometria = list<PolecenieIgeometria>;
 class DoNarysowania : public GeometriaModelu, public Grupowalne_T<DoNarysowania>
 {
     friend class DoNarysowaniaDostepPrv;
-    mutable std::mutex mutexDlaTymczasowej;
+//    mutable std::mutex mutexDlaTymczasowej;
     mutable std::mutex mut;
 //    int zmienna[3];
     Nazwa nazwa;

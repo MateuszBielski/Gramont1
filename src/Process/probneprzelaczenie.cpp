@@ -5,19 +5,22 @@ bool ProbnePrzelaczenie::wybrany = false;
 ProbnePrzelaczenie::ProbnePrzelaczenie(ZarzadzanieModelami * const zarzadzanie, GdkEventKey* event)
 {
     if(event->keyval != GDK_KEY_s)return;
+    spDoNarysowania coWybrano = nullptr;
     if(wybrany)
     {
-        auto rysWybrany = zarzadzanie->WyszukajModel(236);
-        zarzadzanie->DoTransformacji(rysWybrany);
+        coWybrano  = zarzadzanie->WyszukajModel(236);
+//        zarzadzanie->DoTransformacji(rysWybrany);
         cout<<"wybrany"<<endl;
 //        zarzadzanie.
     }
     else
     {
-        auto calosc = zarzadzanie->WyszukajModel(235);
-        zarzadzanie->DoTransformacji(calosc);
+        coWybrano = zarzadzanie->WyszukajModel(234);
         cout<<"całość"<<endl;
     }
         
+    if(!coWybrano)
+        cout<<"zarzadzanie->WyszukajModel zwróciła nullptr"<<endl;
+    zarzadzanie->DoTransformacji(coWybrano);
     wybrany = !wybrany;
 }

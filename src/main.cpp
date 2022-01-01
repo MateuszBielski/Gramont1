@@ -47,9 +47,10 @@ int main(int argc, char **argv)
     auto szescian2 = make_shared<Szescian>();
     auto szescian3 = make_shared<Szescian>();
     
+    rys->setNazwa(234);
     szescian1->setNazwa(235);
-    szescian1->setNazwa(236);
-    szescian1->setNazwa(237);
+    szescian2->setNazwa(236);
+    szescian3->setNazwa(237);
     
     float przes2[] = {1.1,0.0,-0.2};
     float przes3[] = {-1.3,0.3,0.0};
@@ -60,6 +61,11 @@ int main(int argc, char **argv)
     rys->DodajDziecko(szescian1);
     rys->DodajDziecko(szescian2);
     rys->DodajDziecko(szescian3);
+    
+    zarzadzanie.DodajModel(rys);
+    zarzadzanie.DodajModel(szescian1);
+    zarzadzanie.DodajModel(szescian2);
+    zarzadzanie.DodajModel(szescian3);
     
     zarzadzanie.DoNarysowaniaItransformacji(rys);
     zarzadzanie.NadawanieDoRenderowania(renderowanie.getKolejkaPolecen(),PRZEKAZ_DO_NARYSOWANIA);//

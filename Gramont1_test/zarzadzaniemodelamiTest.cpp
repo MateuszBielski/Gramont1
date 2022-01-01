@@ -246,7 +246,7 @@ TEST(ZarzadzanieModelami,NieOdnajdujePoNazwieWsrodDzieci)
     rys2->setNazwa(91);
     zarz.DodajModel(rys1);
     rys1->DodajDziecko(rys2);
-    ASSERT_NE(nullptr,zarz.WyszukajModel(91));
+    ASSERT_EQ(nullptr,zarz.WyszukajModel(91));
 }
 TEST(ZarzadzanieModelami,UstawienieDoNarysowaniaItransfWymuszaGenerowanieListyPolecen)
 {
@@ -292,6 +292,14 @@ TEST(ZarzadzanieModelami,UstawienieDoTransformacjiUmieszczaWkolejceDlaOsobnegoWa
     auto kolejka = zarz.KolejkaPrzetwarzaniaAsynchronicznego();
     auto polecenie = kolejka->wait_and_pop();
     ASSERT_EQ(polecenie,&ZarzadzanieModelami::AktualizujPoleceniaUstawionegoDoTransformacji);
+}
+TEST(ZarzadzanieModelami,UstawieniePustegoDoTransformacjiPozostawiaPoprzedni)
+{
+    ZarzadzanieModelami zarz;
+    auto rys = make_shared<DoNarysowania>();
+    zarz.DoTransformacji(rys);
+    zarz.DoTransformacji(nullptr);
+    ASSERT_EQ(rys.get(),zarz.DoTransformacji().get());
 }
 TEST(ZarzadzanieModelami,AktualizujDoTransformacji)
 {
