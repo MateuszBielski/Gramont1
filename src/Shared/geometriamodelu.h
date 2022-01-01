@@ -5,7 +5,7 @@
 #include <iostream>
 #include <memory>
 #include "transformowalne.h"
-#include "grupowalne.h"
+//#include "grupowalne.h"
 
 
 using namespace std;
@@ -16,7 +16,7 @@ class GeometriaModelu : public Transformowalne
 
 public:
     GeometriaModelu();
-    virtual ~GeometriaModelu();
+//    virtual ~GeometriaModelu();
     
     
     unsigned short* indeksyVertexow = nullptr;

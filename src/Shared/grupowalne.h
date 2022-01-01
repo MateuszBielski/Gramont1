@@ -14,7 +14,7 @@ class Grupowalne_T : public enable_shared_from_this<Grupowalne_T<T>>
     //potrzebne dla shared_from_this w pliku .cpp - bo klasa template
     using enable_shared_from_this<Grupowalne_T<T>>::shared_from_this;
 public:
-    virtual ~Grupowalne_T() = default;
+    virtual ~Grupowalne_T(){};
     int IleDzieci();
     
     using spGrupowalne_T = shared_ptr<T>;

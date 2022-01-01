@@ -73,18 +73,23 @@ TEST(DoNarysowania,SzescianPrzesunieciePoczatkowe)
                     1.5,1,0};
     for(short i = 0; i < szescian->ileVertexow ; i++)
         ASSERT_EQ(wspolrzedneSpodziewane[i],szescian->wspolrzedneVrtx[i]);
+//    std::this_thread::sleep_for(10ms);
 }
 
 
 TEST(DoNarysowania,wKolejnosciWstaw_NieWidoczny)
 {
-//    std::this_thread::sleep_for(2ms);
-    spDoNarysowania szescian(make_shared<Szescian>());
+    auto szescian(make_shared<Szescian>());
+    auto szescian2(make_shared<Szescian>());
+//    auto szescian = make_shared<DoNarysowania>();
+//    auto szescian2 = make_shared<DoNarysowania>();
     szescian->NieWidoczny(true);
     szescian->PoleceniaWybierzIwstawWdobrejKolejnosci();
+    
     ASSERT_FALSE(CzyZawiera(&PoleceniaRenderowania::RysujGeometriePowierzchnie,szescian->Polecenia()));
     ASSERT_FALSE(CzyZawiera(&PoleceniaRenderowania::RysujGeometrieKrawedzie,szescian->Polecenia()));
     ASSERT_FALSE(CzyZawiera(&PoleceniaRenderowania::RysujGeometriePunkty,szescian->Polecenia()));
+    szescian2->PoleceniaWybierzIwstawWdobrejKolejnosci();
 }
 TEST(DoNarysowania,wKolejnosciWstaw_RysujGeometriePowierzchnie)
 {
@@ -455,8 +460,6 @@ TEST(DoNarysowania,NadanieNazwyStr)
     Nazwa n("nazwa");
     ASSERT_TRUE(n == rys->getNazwa());
 }
-
-
 //PushName
 
 //KorektaOsiObrotu

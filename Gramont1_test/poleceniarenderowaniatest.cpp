@@ -60,9 +60,9 @@ TEST(PoleceniaRenderowania,WywolanieDlaGrupowanych_DuzaLiczba)
     rys1->WstawPolecenieNaKoncu(&PoleceniaRenderowania::RysujGeometrie);
     for(int i = 0; i < 2000 ;i++)
     {
-        spDoNarysowania rys2 = make_shared<DoNarysowania>();
-        rys2->WstawPolecenieNaKoncu(&PoleceniaRenderowania::RysujGeometrie);
-        rys1->DodajDziecko(rys2);
+        spDoNarysowania rys3 = make_shared<DoNarysowania>();
+        rys3->WstawPolecenieNaKoncu(&PoleceniaRenderowania::RysujGeometrie);
+        rys1->DodajDziecko(rys3);
     }
     rys1->PoleceniaWybierzIwstawWdobrejKolejnosci();
     Renderowanie rend;

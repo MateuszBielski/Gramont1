@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include "testrenderklas.h"
+//#include "testrenderklas.h"
 #include "../src/Shared/nazwa.h"
 
 TEST(Nazwa,NazwyNieRowne)

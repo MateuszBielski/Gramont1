@@ -1,10 +1,12 @@
 #ifndef DoNarysowania_H
 #define DoNarysowania_H
 #include <list>
-#include <mutex>
+
 #include "geometriamodelu.h"
 #include "../Polecenie/poleceniarenderowania.h"
 #include "nazwa.h"
+#include "grupowalne.h"
+#include <mutex>
 
 using namespace std;
 
@@ -21,8 +23,9 @@ using l_PolecenieIgeometria = list<PolecenieIgeometria>;
 class DoNarysowania : public GeometriaModelu, public Grupowalne_T<DoNarysowania>
 {
     friend class DoNarysowaniaDostepPrv;
-    mutable std::mutex mut;
     mutable std::mutex mutexDlaTymczasowej;
+    mutable std::mutex mut;
+//    int zmienna[3];
     Nazwa nazwa;
     
     l_PolecenieIgeometria mojePolecenia;
@@ -37,6 +40,8 @@ class DoNarysowania : public GeometriaModelu, public Grupowalne_T<DoNarysowania>
     
     bool nieWidoczny = false;
 public:
+    DoNarysowania(){};
+    virtual ~DoNarysowania();
     void setNazwa(Nazwa&& );
     Nazwa getNazwa();
     virtual void PoleceniaWybierzIwstawWdobrejKolejnosci();

@@ -10,9 +10,9 @@ ProstyTrojkat::ProstyTrojkat():m_indeksyVertexow{0,1,2},m_wspolrzedneVrtx{-1,0,0
     normalne = &m_normalne[0];
     schematNormalnych = &m_schematNormalnych[0];
 }
-
+/*
 ProstyTrojkat::~ProstyTrojkat()
 {
 
 }
-
+*/

@@ -26,20 +26,20 @@
   <Description/>
   <Dependencies/>
   <VirtualDirectory Name="src">
-    <File Name="main.cpp" ExcludeProjConfig=""/>
-    <File Name="kursor2dTest.cpp"/>
-    <File Name="transformacjaTest.cpp"/>
-    <File Name="transformowalneTest.cpp"/>
-    <File Name="polecenieTest.cpp"/>
-    <File Name="obslugaSygnalowTest.cpp"/>
-    <File Name="zarzadzaniemodelamiTest.cpp"/>
-    <File Name="renderowanieTest.cpp"/>
-    <File Name="donarysowaniatest.cpp"/>
-    <File Name="grupowanietest.cpp"/>
-    <File Name="poleceniarenderowaniatest.cpp"/>
-    <File Name="TestRenderKlasTest.cpp"/>
-    <File Name="NazwaTest.cpp"/>
-    <File Name="aktualizujlistetest.cpp"/>
+    <File Name="main.cpp" ExcludeProjConfig="Debug"/>
+    <File Name="kursor2dTest.cpp" ExcludeProjConfig=""/>
+    <File Name="transformacjaTest.cpp" ExcludeProjConfig=""/>
+    <File Name="transformowalneTest.cpp" ExcludeProjConfig=""/>
+    <File Name="polecenieTest.cpp" ExcludeProjConfig=""/>
+    <File Name="obslugaSygnalowTest.cpp" ExcludeProjConfig=""/>
+    <File Name="zarzadzaniemodelamiTest.cpp" ExcludeProjConfig=""/>
+    <File Name="renderowanieTest.cpp" ExcludeProjConfig=""/>
+    <File Name="donarysowaniatest.cpp" ExcludeProjConfig=""/>
+    <File Name="grupowanietest.cpp" ExcludeProjConfig=""/>
+    <File Name="poleceniarenderowaniatest.cpp" ExcludeProjConfig=""/>
+    <File Name="TestRenderKlasTest.cpp" ExcludeProjConfig=""/>
+    <File Name="NazwaTest.cpp" ExcludeProjConfig="Debug"/>
+    <File Name="aktualizujlistetest.cpp" ExcludeProjConfig=""/>
   </VirtualDirectory>
   <VirtualDirectory Name="testedClasses">
     <File Name="../src/Shared/kursor2d.cpp"/>

@@ -4,11 +4,12 @@ GeometriaModelu::GeometriaModelu()
 {
 
 }
-
+/*
 GeometriaModelu::~GeometriaModelu()
 {
 
 }
+ * */
 void GeometriaModelu::DoVertexowDodajWektor(float* wektor)
 {
 	for (short i = 0 ; i < ileVertexow ; i++)

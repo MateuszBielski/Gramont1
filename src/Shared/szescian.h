@@ -11,7 +11,7 @@ class Szescian : public DoNarysowania
 {
 public:
     Szescian();
-    virtual ~Szescian();
+//    virtual ~Szescian();
 	
 protected:
 

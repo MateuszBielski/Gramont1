@@ -9,7 +9,7 @@ class ProstyTrojkat : public DoNarysowania
 {
   public:
     ProstyTrojkat();
-    virtual ~ProstyTrojkat();
+//    virtual ~ProstyTrojkat();
 	
 protected:
 
