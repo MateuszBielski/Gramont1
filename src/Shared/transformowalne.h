@@ -32,7 +32,7 @@ class Transformowalne
     virtual float* Przesuniecie();
     void UstawPrzesuniecie(float* );
     void DodajPrzesuniecie(float* );
-    bool jestTransformacja ;
+    bool przeznaczonyDoTransformacji ;
 	
 protected:
     bool jestPrzesuniecie = false;

@@ -49,7 +49,7 @@ void Renderowanie::RysujScene()
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glLoadIdentity(); 
     p_glTranslatef(0.0,0.0,-10.0);
-    glMultMatrixf(doNarysowania->MacierzObrotu());
+//    glMultMatrixf(doNarysowania->MacierzObrotu());
     
 //    auto polecenia = doNarysowania->Polecenia();
     WywolajPoleceniaZ(doNarysowania);

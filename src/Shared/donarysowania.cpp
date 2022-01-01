@@ -21,12 +21,12 @@ void DoNarysowania::PoleceniaWybierzIwstawWdobrejKolejnosci()
 //    lock_guard<mutex> lk(mut);
 //    mut.lock();
     if(!poleceniaListaGlowna)poleceniaListaGlowna = &mojePolecenia;
-    if(jestTransformacja)
+    if(przeznaczonyDoTransformacji)
     {
         mojePolecenia.push_back({&PoleceniaRenderowania::PushMatrix,WskaznikNaMnie()});
         mojePolecenia.push_back({&PoleceniaRenderowania::Przesun,WskaznikNaMnie()});
     }
-    if(jestObrot)mojePolecenia.push_back({&PoleceniaRenderowania::MultMatrix,WskaznikNaMnie()});
+    if(jestObrot || przeznaczonyDoTransformacji)mojePolecenia.push_back({&PoleceniaRenderowania::MultMatrix,WskaznikNaMnie()});
     if(!nieWidoczny)mojePolecenia.push_back({&PoleceniaRenderowania::RysujGeometriePowierzchnie,WskaznikNaMnie()});
 //    mut.unlock();
     for(auto& dziecko : dzieci)
@@ -40,7 +40,7 @@ void DoNarysowania::PoleceniaWybierzIwstawWdobrejKolejnosci()
 //        mut.unlock();
     }
 //    mut.lock();
-    if(jestTransformacja)
+    if(przeznaczonyDoTransformacji)
     mojePolecenia.push_back({&PoleceniaRenderowania::PopMatrix,WskaznikNaMnie()});
     #if defined TESTOWANIE_F
         //musi być jakaś funkcja kończąca poziom stosu

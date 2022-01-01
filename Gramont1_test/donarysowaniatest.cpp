@@ -121,7 +121,7 @@ TEST(DoNarysowania,wKolejnosciWstaw_PrzesuniecieNaPozycje)
 TEST(DoNarysowania,JesliTransformacjaToJestPushIpopMatrix)
 {
     auto rys(make_shared<DoNarysowania>());
-    rys->jestTransformacja = true;
+    rys->przeznaczonyDoTransformacji = true;
     rys->PoleceniaWybierzIwstawWdobrejKolejnosci();
     ASSERT_TRUE(CzyZawiera(&PoleceniaRenderowania::PushMatrix,rys->Polecenia()));
     ASSERT_TRUE(CzyZawiera(&PoleceniaRenderowania::PopMatrix,rys->Polecenia()));
@@ -129,7 +129,7 @@ TEST(DoNarysowania,JesliTransformacjaToJestPushIpopMatrix)
 TEST(DoNarysowania,NieMaPushIpopMatrix)
 {
     auto rys(make_shared<DoNarysowania>());
-    rys->jestTransformacja = false;
+    rys->przeznaczonyDoTransformacji = false;
     rys->PoleceniaWybierzIwstawWdobrejKolejnosci();
     ASSERT_FALSE(CzyZawiera(&PoleceniaRenderowania::PushMatrix,rys->Polecenia()));
     ASSERT_FALSE(CzyZawiera(&PoleceniaRenderowania::PopMatrix,rys->Polecenia()));
@@ -472,6 +472,14 @@ TEST(DoNarysowania,JestObrot_DajeMultMatrix)
 {
     auto rys = make_shared<DoNarysowaniaMock>();
     rys->JestObrot(true);
+    rys->PoleceniaWybierzIwstawWdobrejKolejnosci();
+    ASSERT_TRUE(CzyZawiera(&PoleceniaRenderowania::MultMatrix,rys->Polecenia()));
+}
+TEST(DoNarysowania,PrzeznaczonyDoTransformacjiNieMaObrotu_DajeMultMatrix)
+{
+    auto rys = make_shared<DoNarysowaniaMock>();
+    rys->JestObrot(false);
+    rys->przeznaczonyDoTransformacji = true;
     rys->PoleceniaWybierzIwstawWdobrejKolejnosci();
     ASSERT_TRUE(CzyZawiera(&PoleceniaRenderowania::MultMatrix,rys->Polecenia()));
 }

@@ -14,6 +14,8 @@ TEST(RenderowanieTest,FunRysujSceneUzywaMacierzObrotu)
     Renderowanie rend;
     
     auto rys(make_shared<DoNarysowaniaMock>());
+    rys->przeznaczonyDoTransformacji = true;
+    rys->PoleceniaWybierzIwstawWdobrejKolejnosci();
     rend.ustawDoNarysowania(rys);
     rend.RysujScene();
     ASSERT_TRUE(rys->macierzObrotuIsUsed);

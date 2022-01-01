@@ -255,7 +255,13 @@ TEST(ZarzadzanieModelami,UstawienieDoNarysowaniaItransfWymuszaGenerowanieListyPo
     zarzadzanie.DoNarysowaniaItransformacji(rys);
     ASSERT_FALSE(rys->Polecenia().empty());
 }
-
+TEST(ZarzadzanieModelami,UstawienieDoNarysowaniaItransfUstawiaPrzeznaczonyDoTransormacji)
+{
+    ZarzadzanieModelami zarzadzanie;
+    spDoNarysowania rys(make_shared<DoNarysowania>());
+    zarzadzanie.DoNarysowaniaItransformacji(rys);
+    ASSERT_TRUE(rys->przeznaczonyDoTransformacji);
+}
 TEST(ZarzadzanieModelami,UstawienieDoNarysowaniaPrzygotowujeListePolecenJesliTrzeba)
 {
     ZarzadzanieModelami zarz;
@@ -283,7 +289,7 @@ TEST(ZarzadzanieModelami,DoTransformacji_UstawiaFlageJestTransformacja)
     ZarzadzanieModelami zarz;
     auto rys = make_shared<DoNarysowania>();
     zarz.DoTransformacji(rys);
-    ASSERT_TRUE(rys->jestTransformacja);
+    ASSERT_TRUE(rys->przeznaczonyDoTransformacji);
 }
 TEST(ZarzadzanieModelami,UstawienieDoTransformacjiUmieszczaWkolejceDlaOsobnegoWatku)
 {

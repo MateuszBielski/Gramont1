@@ -14,10 +14,10 @@ void ZarzadzanieModelami::DoTransformacji(spDoNarysowania tr)
 	doTrasformacjiPoprzedni = doTrasformacji;
     if(!tr)return;
     if(doTrasformacjiPoprzedni)
-    doTrasformacjiPoprzedni->jestTransformacja = false;
+    doTrasformacjiPoprzedni->przeznaczonyDoTransformacji = false;
 	
     doTrasformacji = tr;
-    tr->jestTransformacja = true;
+    tr->przeznaczonyDoTransformacji = true;
     kolejkaPrzetwarzaniaAsynchronicznego->push(&ZarzadzanieModelami::AktualizujPoleceniaUstawionegoDoTransformacji);
     kolejkaPrzetwarzaniaAsynchronicznego->push(&ZarzadzanieModelami::AktualizujPoleceniaUstawionegoDoTransformacjiPoprz);
 }
@@ -28,6 +28,7 @@ void ZarzadzanieModelami::DoNarysowania(spDoNarysowania rys)
 }
 void ZarzadzanieModelami::DoNarysowaniaItransformacji(spDoNarysowania r)
 {
+    r->przeznaczonyDoTransformacji = true;
     r->PoleceniaWybierzIwstawWdobrejKolejnosci();
     doNarysowania = r;
     doTrasformacji = r;
