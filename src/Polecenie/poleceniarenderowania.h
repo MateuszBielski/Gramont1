@@ -29,6 +29,7 @@ class PoleceniaRenderowania
     void PopMatrix(spGeometriaModelu);
     void PushName(spGeometriaModelu);
     void PopName(spGeometriaModelu);
+    void MultMatrix(spGeometriaModelu);
     
     template<typename T>
     void WywolajPoleceniaZ(T obiektZwezlami);

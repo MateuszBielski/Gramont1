@@ -5,6 +5,7 @@
 #include "../src/Shared/FunkcjeIstruktury.h"
 #include "../src/Process/renderowanie.h"
 #include "donarysowaniadostepprv.h"
+#include "donarysowaniamock.h"
 
 
 TEST(DoNarysowania,SzescianIndeksyVertexow)
@@ -459,6 +460,20 @@ TEST(DoNarysowania,NadanieNazwyStr)
     rys->setNazwa("nazwa");
     Nazwa n("nazwa");
     ASSERT_TRUE(n == rys->getNazwa());
+}
+TEST(DoNarysowania,NieMaObrotu_NieDajeMultMatrix)
+{
+    auto rys = make_shared<DoNarysowaniaMock>();
+    rys->JestObrot(false);
+    rys->PoleceniaWybierzIwstawWdobrejKolejnosci();
+    ASSERT_FALSE(CzyZawiera(&PoleceniaRenderowania::MultMatrix,rys->Polecenia()));
+}
+TEST(DoNarysowania,JestObrot_DajeMultMatrix)
+{
+    auto rys = make_shared<DoNarysowaniaMock>();
+    rys->JestObrot(true);
+    rys->PoleceniaWybierzIwstawWdobrejKolejnosci();
+    ASSERT_TRUE(CzyZawiera(&PoleceniaRenderowania::MultMatrix,rys->Polecenia()));
 }
 //PushName
 

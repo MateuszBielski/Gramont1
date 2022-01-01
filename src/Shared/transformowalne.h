@@ -35,10 +35,10 @@ class Transformowalne
     bool jestTransformacja ;
 	
 protected:
-
-private:
     bool jestPrzesuniecie = false;
     bool jestObrot = false;
+private:
+    
         
 };
 using spTransformowalne = shared_ptr<Transformowalne>;

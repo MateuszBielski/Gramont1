@@ -26,6 +26,7 @@ void DoNarysowania::PoleceniaWybierzIwstawWdobrejKolejnosci()
         mojePolecenia.push_back({&PoleceniaRenderowania::PushMatrix,WskaznikNaMnie()});
         mojePolecenia.push_back({&PoleceniaRenderowania::Przesun,WskaznikNaMnie()});
     }
+    if(jestObrot)mojePolecenia.push_back({&PoleceniaRenderowania::MultMatrix,WskaznikNaMnie()});
     if(!nieWidoczny)mojePolecenia.push_back({&PoleceniaRenderowania::RysujGeometriePowierzchnie,WskaznikNaMnie()});
 //    mut.unlock();
     for(auto& dziecko : dzieci)

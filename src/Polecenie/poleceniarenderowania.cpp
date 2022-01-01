@@ -113,6 +113,13 @@ void PoleceniaRenderowania::PopName(spGeometriaModelu)
     (*ptrFunkcjaMonitorujaca)("PopName");
     #endif
 }
+void PoleceniaRenderowania::MultMatrix(spGeometriaModelu geom)
+{
+	glMultMatrixf(geom->MacierzObrotu());
+    #if defined TESTOWANIE_F
+    (*ptrFunkcjaMonitorujaca)("MultMatrix");
+    #endif
+}
 
 //dla linkera
 template void PoleceniaRenderowania::WywolajPoleceniaZ(shared_ptr<DoNarysowania> );

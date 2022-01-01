@@ -143,4 +143,3 @@ TEST(Transformowalne,PrzesuniecieJest_ObrotWyzerowany)
     
     ASSERT_TRUE(model.jestTransformacja);
 }
-

@@ -21,6 +21,17 @@ void DoNarysowaniaMock::AktualizujMojePolecenia()
 }
 void DoNarysowaniaMock::PoleceniaWybierzIwstawWdobrejKolejnosci()
 {
-	poleceniaWybierzIwstawWdobrejKolejnosciIsUsed = true;
+	DoNarysowania::PoleceniaWybierzIwstawWdobrejKolejnosci();
+    poleceniaWybierzIwstawWdobrejKolejnosciIsUsed = true;
 }
 
+void DoNarysowaniaMock::JestObrot(bool b)
+{
+    jestObrot = b;
+}
+
+
+void DoNarysowaniaMock::JestPrzesuniecie(bool b)
+{
+    jestPrzesuniecie = b;
+}
