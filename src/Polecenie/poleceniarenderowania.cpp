@@ -88,6 +88,7 @@ void PoleceniaRenderowania::RysujGeometriePunkty(spGeometriaModelu)
 
 void PoleceniaRenderowania::PushMatrix(spGeometriaModelu)
 {
+    glPushMatrix();
     #if defined TESTOWANIE_F
     (*ptrFunkcjaMonitorujaca)("PushMatrix");
     #endif
@@ -95,6 +96,7 @@ void PoleceniaRenderowania::PushMatrix(spGeometriaModelu)
 
 void PoleceniaRenderowania::PopMatrix(spGeometriaModelu)
 {
+    glPopMatrix();
     #if defined TESTOWANIE_F
     (*ptrFunkcjaMonitorujaca)("PopMatrix");
     #endif

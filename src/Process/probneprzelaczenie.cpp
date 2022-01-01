@@ -8,7 +8,7 @@ ProbnePrzelaczenie::ProbnePrzelaczenie(ZarzadzanieModelami * const zarzadzanie, 
     spDoNarysowania coWybrano = nullptr;
     if(wybrany)
     {
-        coWybrano  = zarzadzanie->WyszukajModel(236);
+        coWybrano  = zarzadzanie->WyszukajModel(235);
 //        zarzadzanie->DoTransformacji(rysWybrany);
         cout<<"wybrany"<<endl;
 //        zarzadzanie.
