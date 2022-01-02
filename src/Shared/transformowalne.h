@@ -21,15 +21,15 @@ class Transformowalne
     public:
     Transformowalne();
     virtual ~Transformowalne();
-    float* QuatDiff();
+    const float* QuatDiff();
     void QuatDiff(float* );
-    float* Quat();
+    const float* Quat();
     void    Quat(float* );
     virtual const float* MacierzObrotu();
 //    pf4 ppMacierzObrotu();// zamiast tego używać virtual const float* MacierzObrotu()
     
     void MacierzObrotu(float*);
-    virtual float* Przesuniecie();
+    virtual const float* Przesuniecie();
     void UstawPrzesuniecie(float* );
     void DodajPrzesuniecie(float* );
     bool przeznaczonyDoTransformacji ;

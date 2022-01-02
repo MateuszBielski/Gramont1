@@ -12,7 +12,7 @@ public:
     DoNarysowaniaMock() = default;
     DoNarysowaniaMock(int i):id(i){};
     virtual const float* MacierzObrotu() override;
-    virtual float* Przesuniecie() override;
+    virtual const float* Przesuniecie() override;
     virtual l_PolecenieIgeometria& Polecenia() override;
     virtual void PoleceniaWybierzIwstawWdobrejKolejnosci() override;
     virtual void AktualizujMojePolecenia() override;

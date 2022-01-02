@@ -10,7 +10,7 @@ l_PolecenieIgeometria& DoNarysowaniaMock::Polecenia()
     poleceniaIsUsed = true;
     return DoNarysowania::Polecenia();
 }
-float* DoNarysowaniaMock::Przesuniecie()
+const float* DoNarysowaniaMock::Przesuniecie()
 {
 	przesuniecieIsUsed = true;
     return Transformowalne::Przesuniecie();

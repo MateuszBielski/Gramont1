@@ -65,7 +65,7 @@ void PoleceniaRenderowania::RysujGeometriePowierzchnie(spGeometriaModelu geom)
 }
 void PoleceniaRenderowania::Przesun(spGeometriaModelu geom)
 {
-	float* p = geom->Przesuniecie();
+	const float* p = geom->Przesuniecie();
     p_glTranslatef(p[0],p[1],p[2]);
     #if defined TESTOWANIE_F
     (*ptrFunkcjaMonitorujaca)("Przesun");

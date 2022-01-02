@@ -30,7 +30,7 @@ Transformowalne::~Transformowalne()
 
 }
 
-float* Transformowalne::QuatDiff()
+const float* Transformowalne::QuatDiff()
 {
     return m_quatDiff;
 }
@@ -39,7 +39,7 @@ void Transformowalne::QuatDiff(float* q)
     memcpy(m_quatDiff,q,4*sizeof(float));
 }
 
-float* Transformowalne::Quat()
+const float* Transformowalne::Quat()
 {
     return m_quat;
 }
@@ -66,7 +66,7 @@ const float* Transformowalne::MacierzObrotu()
 {	
 	return m_macierzObrotu[0];
 }
-float* Transformowalne::Przesuniecie()
+const float* Transformowalne::Przesuniecie()
 {
 	return m_przesuniecie;
 }
