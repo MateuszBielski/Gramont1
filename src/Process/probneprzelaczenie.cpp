@@ -2,9 +2,9 @@
 
 bool ProbnePrzelaczenie::wybrany = false;
 
-ProbnePrzelaczenie::ProbnePrzelaczenie(ZarzadzanieModelami * const zarzadzanie, GdkEventKey* event)
+ProbnePrzelaczenie::ProbnePrzelaczenie(ZarzadzanieModelami * const zarzadzanie)
 {
-    if(event->keyval != GDK_KEY_s)return;
+    
     spDoNarysowania coWybrano = nullptr;
     if(wybrany)
     {

@@ -50,9 +50,10 @@
       <File Name="src/Process/watki.cpp"/>
       <File Name="src/Process/zarzadzaniemodelami.h"/>
       <File Name="src/Process/zarzadzaniemodelami.cpp"/>
-      <File Name="src/Polecenie/poleceniarenderowania.h"/>
       <File Name="src/Process/probneprzelaczenie.h"/>
       <File Name="src/Process/probneprzelaczenie.cpp"/>
+      <File Name="src/Process/obliczeniadlamodeli.h"/>
+      <File Name="src/Process/obliczeniadlamodeli.cpp"/>
     </VirtualDirectory>
     <File Name="src/main.cpp"/>
     <VirtualDirectory Name="Polecenie">
@@ -79,6 +80,9 @@
       <File Name="src/Shared/kursor2d.h"/>
       <File Name="src/Shared/oknogtk.cpp"/>
       <File Name="src/Shared/oknogtk.h"/>
+    </VirtualDirectory>
+    <VirtualDirectory Name="Pomocnicze">
+      <File Name="src/Pomocnicze/wypisywaniewartosci.cpp"/>
     </VirtualDirectory>
   </VirtualDirectory>
   <VirtualDirectory Name="lib">

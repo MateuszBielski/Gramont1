@@ -2,6 +2,7 @@
 #include "../Polecenie/transformacja.h"
 #include "../Polecenie/obrot.h"
 #include "probneprzelaczenie.h"
+#include "../Pomocnicze/wypisywaniewartosci.h"
 //#include "../src/Polecenie/transformacja.h"
 
 void ObslugaSygnalow::ObslugujEkran(spEkranGL ekran)
@@ -82,7 +83,13 @@ bool ObslugaSygnalow::on_delete_event(GdkEventAny* any_event)
 }
 bool ObslugaSygnalow::on_key_press_event(GdkEventKey* event)
 {
-	ProbnePrzelaczenie przelacz(zarzadzanie,event);
+	if(event->keyval == GDK_KEY_s)
+        ProbnePrzelaczenie przelacz(zarzadzanie);
+    if(event->keyval == GDK_KEY_m)
+    {
+        WypisywanieWartosci wypisywanie;
+        wypisywanie.MacierzObrotuDoTransformacji(zarzadzanie);
+    }
     return false;
 }
 

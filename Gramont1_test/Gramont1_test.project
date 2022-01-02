@@ -40,6 +40,7 @@
     <File Name="TestRenderKlasTest.cpp" ExcludeProjConfig=""/>
     <File Name="NazwaTest.cpp" ExcludeProjConfig="Debug"/>
     <File Name="aktualizujlistetest.cpp" ExcludeProjConfig=""/>
+    <File Name="ObliczeniaDlaModeliTest.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="testedClasses">
     <File Name="../src/Shared/kursor2d.cpp"/>
@@ -66,6 +67,8 @@
     <File Name="../src/Shared/FunkcjeIstruktury.cpp"/>
     <File Name="../src/Shared/nazwa.cpp"/>
     <File Name="../src/Process/probneprzelaczenie.cpp"/>
+    <File Name="../src/Process/obliczeniadlamodeli.cpp"/>
+    <File Name="../src/Pomocnicze/wypisywaniewartosci.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="helperClass">
     <File Name="../src/Shared/trackball.cpp"/>

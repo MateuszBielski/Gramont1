@@ -11,7 +11,7 @@
 class ProbnePrzelaczenie 
 {
 public:
-   ProbnePrzelaczenie(ZarzadzanieModelami * const , GdkEventKey*);
+   ProbnePrzelaczenie(ZarzadzanieModelami * const);
 static bool wybrany;
 
 private:
