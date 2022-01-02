@@ -3,7 +3,7 @@
 #include "../src/Shared/szescian.h"
 #include "../src/Shared/prostytrojkat.h"
 #include "../src/Process/renderowanie.h"
-#include "../src/Shared/FunkcjeIstruktury.h"
+#include "../src/Pomocnicze/FunkcjeIstruktury.h"
 #include "donarysowaniadostepprv.h"
 
 TEST(AktualizujListe,UstawListyPrzedAktualizacjaglownaOdlaczona_flaga)

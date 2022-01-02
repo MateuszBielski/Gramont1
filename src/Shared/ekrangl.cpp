@@ -1,5 +1,5 @@
 #include "ekrangl.h"
-#include "FunkcjeIstruktury.h"
+#include "../Pomocnicze/FunkcjeIstruktury.h"
 
 
 

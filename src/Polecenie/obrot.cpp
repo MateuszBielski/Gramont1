@@ -32,7 +32,7 @@ void Obrot::WykonajW(ObslugaPolecen& obs)
     
     float macierz[4][4];
     Trackball::build_rotmatrix(macierz,quatNew);
-    transformowalne->Quat(quat);
+    transformowalne->Quat(quatNew);
     transformowalne->MacierzObrotu(macierz[0]);
     obs.PowiadomionyOzakonczeniuTransformacji();
 //    obs.WyslijPoleceniePrzerysuj();

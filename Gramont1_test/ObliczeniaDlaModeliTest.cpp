@@ -9,7 +9,9 @@ TEST(Obliczenia,UtrwalTransformacje_MacierzObrotuZmieniaWartosciWertexow)
                     dest[i] = src[i];
                     };
     spDoNarysowania troj= make_shared<ProstyTrojkat>();
-    float m[16];//dopisać generowane wartości
+    float m[] = {0.7544, -0.3364, 0.5637, 0.0000, 0.1320, 0.9189, 0.3717, 0.0000, -0.6430, -0.2061, 0.7376, 0.0000, 0.0000, 0.0000, 0.0000, 1.0000};
+    //powyżej prawidłowege wartości przykładowego obrotu generowane funkcją 
+    //WypisywanieWartosci::MacierzObrotuDoTransformacji(ZarzadzanieModelami* zarzadzanie)
     troj->MacierzObrotu(m);
     ObliczeniaDlaModeli obl;
     

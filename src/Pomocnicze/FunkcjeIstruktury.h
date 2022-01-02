@@ -2,6 +2,9 @@
 #define FUNKCJEISTRUKTURY_H
 #include <GL/glu.h>
 #include <gtkglmm.h>
+#include <string>
+
+using namespace std;
 
 #if defined(WIN32) || defined(_WIN32) || defined(__WIN32) && !defined(__CYGWIN__)
 #else
@@ -11,6 +14,7 @@ struct POINT{
 };
 #endif
 void WyswietlWartosciMacierzy4x4(float * macierz16);
+string ToString(float v,short pr);
 void TransformujPikselDoPrzestrzeniSceny(int x, int y,float glebokosc,float*  pozycjaPunktu3D);
 void TransformujPikselDoPrzestrzeniSceny(int x, int y,float*  pozycjaPunktu3D);
 void Quat_to_Phi_a(float * quat,float* phi,float* a);

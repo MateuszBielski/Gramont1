@@ -37,7 +37,6 @@
       <File Name="src/Shared/geometriamodelu.cpp"/>
       <File Name="src/Shared/donarysowania.h"/>
       <File Name="src/Shared/donarysowania.cpp"/>
-      <File Name="src/Shared/FunkcjeIstruktury.cpp"/>
       <File Name="src/Shared/nazwa.h"/>
       <File Name="src/Shared/nazwa.cpp"/>
     </VirtualDirectory>
@@ -83,6 +82,7 @@
     </VirtualDirectory>
     <VirtualDirectory Name="Pomocnicze">
       <File Name="src/Pomocnicze/wypisywaniewartosci.cpp"/>
+      <File Name="src/Pomocnicze/FunkcjeIstruktury.cpp"/>
     </VirtualDirectory>
   </VirtualDirectory>
   <VirtualDirectory Name="lib">

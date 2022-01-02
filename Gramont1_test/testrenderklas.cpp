@@ -1,14 +1,5 @@
 #include "testrenderklas.h"
-#include <sstream>
-#include <iomanip>//set precision
-
-
-string ToString(float v,short pr)
-{
-    stringstream stream; 
-    stream << fixed << setprecision(pr) << v;
-    return stream.str();
-}
+#include "../src/Pomocnicze/FunkcjeIstruktury.h"
 
 
 void test_glVertex3fv(const float* v)

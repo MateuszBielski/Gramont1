@@ -2,7 +2,7 @@
 //#include <GL/gl.h>
 #include "../src/Shared/szescian.h"
 #include "../src/Shared/prostytrojkat.h"
-#include "../src/Shared/FunkcjeIstruktury.h"
+#include "../src/Pomocnicze/FunkcjeIstruktury.h"
 #include "../src/Process/renderowanie.h"
 #include "donarysowaniadostepprv.h"
 #include "donarysowaniamock.h"

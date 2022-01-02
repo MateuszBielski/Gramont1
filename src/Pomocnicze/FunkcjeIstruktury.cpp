@@ -1,4 +1,6 @@
 #include "FunkcjeIstruktury.h"
+#include <sstream>
+#include <iomanip>//set precision
 
 void WyswietlWartosciMacierzy4x4(float * macierz16){
    float m[4][4];
@@ -10,6 +12,14 @@ void WyswietlWartosciMacierzy4x4(float * macierz16){
         g_print("  %2.5f",m[j][i]);
    } 
 }
+
+string ToString(float v,short pr)
+{
+    stringstream stream; 
+    stream << fixed << setprecision(pr) << v;
+    return stream.str();
+}
+
 
 void TransformujPikselDoPrzestrzeniSceny(int x, int y,float glebokosc,float*  pozycjaPunktu3D)
 {
