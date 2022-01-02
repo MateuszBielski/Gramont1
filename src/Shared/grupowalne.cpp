@@ -98,31 +98,3 @@ void Grupowalne_T<T>::GenerujStruktureJakoListe_RodzajAkcji(list<RodzajAkcji>& c
 //na potrzeby linkera
 template class Grupowalne_T<Grupowalne>;
 template class Grupowalne_T<DoNarysowania>;
-/*
-void Grupowalne::GenerujStruktureJakoListe(listaWpisySpGrupowalne& calaLista)
-{
-   
-    WpisStrukturyJakoListy<spGrupowalne> wpis{RodzajAkcji::wejscie,shared_from_this()};
-    calaLista.emplace_back(wpis);
-    pozycjaWliscie = --calaLista.end();
-    if(!IleDzieci())
-    {
-        (*pozycjaWliscie).akcjaPo = RodzajAkcji::powrot;
-        return;
-    }
-    alistaWpisySpGrupowalneuto iter = dzieci.begin();
-    auto aktualny = iter;
-//    auto 
-    for(auto& dziecko :  dzieci)
-    {   
-        aktualny = iter++;
-        dziecko->GenerujStruktureJakoListe(calaLista);
-        auto aktuPozycjaWliscie = (*aktualny)->pozycjaWliscie;
-        (*aktuPozycjaWliscie).akcjaPo = RodzajAkcji::obok;
-//        calaLista.emplace_back(WpisStrukturyJakoListy<spGrupowalne>{RodzajAkcji::powrot,nullptr});
-    }
-    //czyli ostatni
-    auto aktuPozycjaWliscie = (*aktualny)->pozycjaWliscie;
-    (*aktuPozycjaWliscie).akcjaPo = RodzajAkcji::powrot;
-}
-*/

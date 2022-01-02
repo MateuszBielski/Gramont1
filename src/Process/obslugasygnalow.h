@@ -6,7 +6,6 @@
 #include <memory>
 #include "../Shared/ekrangl.h"
 #include "../Shared/kursor2d.h"
-//#include "../Shared/transformacjaItfc.h"
 #include "../Polecenie/kolejkapolecen.h"
 #include "renderowanie.h"
 #include "zarzadzaniemodelami.h"
@@ -21,7 +20,6 @@ class ObslugaSygnalow
     spRenderowanie renderowanie = nullptr;
     ZarzadzanieModelami * zarzadzanie = nullptr;
     Kursor2D kursor2D;
-//    spTransformacjaItfc transformacja = nullptr;
     spKolejkaPolecen nadawanieDoZarzadzaniaObiektami = nullptr;
     spKolejkaPolecen nadawanieDoRenderowania = nullptr;
   
@@ -29,7 +27,6 @@ class ObslugaSygnalow
     void ObslugujEkran(spEkranGL );
     void UstawRenderowanie(spRenderowanie);//?
     void UstawZarzadzanie(ZarzadzanieModelami * const);
-//    void UstawTransformacje(spTransformacjaItfc );?
     void WlaczPolaczenia();
     void NadawanieDoZarzadzaniaObiektami(spKolejkaPolecen);
     void NadawanieDoRenderowania(spKolejkaPolecen);

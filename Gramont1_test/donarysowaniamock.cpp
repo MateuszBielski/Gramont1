@@ -1,7 +1,7 @@
 #include "donarysowaniamock.h"
 
 
-float* DoNarysowaniaMock::MacierzObrotu()
+const float* DoNarysowaniaMock::MacierzObrotu()
 {
 	macierzObrotuIsUsed = true;
 }

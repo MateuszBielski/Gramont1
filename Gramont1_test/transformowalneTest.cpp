@@ -143,3 +143,9 @@ TEST(Transformowalne,PrzesuniecieJest_ObrotWyzerowany)
     
     ASSERT_TRUE(model.przeznaczonyDoTransformacji);
 }
+TEST(Transformowalne,NieModyfikowacMacierzyObrotuPrzezWskaznik)
+{
+    Transformowalne model;
+    const float * m = model.MacierzObrotu();
+//    m[7] = 12.3;
+}

@@ -23,8 +23,6 @@
     <VirtualDirectory Name="Shared">
       <File Name="src/Shared/trackball.cpp"/>
       <File Name="src/Shared/trackball.h"/>
-      <File Name="src/Shared/transformacjaItfc.cpp"/>
-      <File Name="src/Shared/transformacjaItfc.h"/>
       <File Name="src/Shared/ruchnaeranie.cpp"/>
       <File Name="src/Shared/ruchnaekranie.h"/>
       <File Name="src/Shared/transformowalne.h"/>
@@ -35,7 +33,6 @@
       <File Name="src/Shared/prostytrojkat.cpp"/>
       <File Name="src/Shared/grupowalne.h"/>
       <File Name="src/Shared/grupowalne.cpp"/>
-      <File Name="src/Shared/wpisstrukturyjakolisty.h"/>
       <File Name="src/Shared/geometriamodelu.h"/>
       <File Name="src/Shared/geometriamodelu.cpp"/>
       <File Name="src/Shared/donarysowania.h"/>

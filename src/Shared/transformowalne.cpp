@@ -66,7 +66,7 @@ void Transformowalne::MacierzObrotu(float* m)
     for(short i = 0; i < 4 ; i++)for(short j = 0; j < 4 ; j++)jestObrot += macierzJednostkowa[i * 4 + j] != m_macierzObrotu[i][j];
     przeznaczonyDoTransformacji = jestObrot || jestPrzesuniecie;
 }
-float* Transformowalne::MacierzObrotu()
+const float* Transformowalne::MacierzObrotu()
 {	
 	return m_macierzObrotu[0];
 }

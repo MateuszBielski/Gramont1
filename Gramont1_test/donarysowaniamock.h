@@ -11,7 +11,7 @@ class DoNarysowaniaMock : public DoNarysowania
 public:
     DoNarysowaniaMock() = default;
     DoNarysowaniaMock(int i):id(i){};
-    virtual float* MacierzObrotu() override;
+    virtual const float* MacierzObrotu() override;
     virtual float* Przesuniecie() override;
     virtual l_PolecenieIgeometria& Polecenia() override;
     virtual void PoleceniaWybierzIwstawWdobrejKolejnosci() override;
