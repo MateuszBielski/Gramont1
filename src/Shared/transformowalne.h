@@ -26,7 +26,7 @@ class Transformowalne
     float* Quat();
     void    Quat(float* );
     virtual const float* MacierzObrotu();
-    pf4 ppMacierzObrotu();
+//    pf4 ppMacierzObrotu();// zamiast tego używać virtual const float* MacierzObrotu()
     
     void MacierzObrotu(float*);
     virtual float* Przesuniecie();

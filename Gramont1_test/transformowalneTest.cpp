@@ -32,14 +32,20 @@ TEST(Transformowalne,WartosciStartowe)
     EXPECT_FLOAT_EQ(1,model.QuatDiff()[3]);
     EXPECT_FLOAT_EQ(0,model.Quat()[0]);
     EXPECT_FLOAT_EQ(1,model.Quat()[3]);
-    EXPECT_FLOAT_EQ(1,model.ppMacierzObrotu()[0][0]);
-    EXPECT_FLOAT_EQ(1,model.ppMacierzObrotu()[2][2]);
+//    EXPECT_FLOAT_EQ(1,model.ppMacierzObrotu()[0][0]);
+    EXPECT_FLOAT_EQ(1,model.MacierzObrotu()[0]);
+//    EXPECT_FLOAT_EQ(1,model.ppMacierzObrotu()[2][2]);
+    EXPECT_FLOAT_EQ(1,model.MacierzObrotu()[10]);
 }
-TEST(Transformowalne,ReferencjaMacierzy)
+TEST(Transformowalne,ZapisOdczytMacierzy)
 {
     Transformowalne model;
-    model.ppMacierzObrotu()[2][1] = 32.1;
-    EXPECT_FLOAT_EQ(32.1,model.ppMacierzObrotu()[2][1]);
+//    model.ppMacierzObrotu()[2][1] = 32.1;
+    float macierz[16];
+    macierz[9] = 32.1;
+    model.MacierzObrotu(macierz);
+//    EXPECT_FLOAT_EQ(32.1,model.ppMacierzObrotu()[2][1]);
+    EXPECT_FLOAT_EQ(32.1,model.MacierzObrotu()[9]);
 }
 TEST(Transformowalne,UstawPrzesuniecie_kopiuje)
 {

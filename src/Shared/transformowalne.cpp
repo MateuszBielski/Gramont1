@@ -48,16 +48,12 @@ void Transformowalne::Quat(float* q)
 {
     memcpy(m_quat,q,4*sizeof(float));
 }
-
+/*
 pf4 Transformowalne::ppMacierzObrotu()
 {
     return m_macierzObrotu;
-/*    float macierz[4][4];
-    float* adr1 = macierz[0];
-    float** adr2 = &adr1;
-    return adr2;*/
 }
-
+*/
 void Transformowalne::MacierzObrotu(float* m)
 {
     memcpy(m_macierzObrotu,m,16*sizeof(float));

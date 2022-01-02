@@ -21,8 +21,9 @@ void Obrot::WykonajW(ObslugaPolecen& obs)
 //    cout<<"\nXXXXXXXXXXXQuat\n";
 //    for(short i = 0 ; i < 4 ; i++)cout<<transformowalne->Quat()[i]<<" ";
     
-//    float macierz[4][4];
-    Trackball::build_rotmatrix(transformowalne->ppMacierzObrotu(), transformowalne->Quat());
+    float macierz[4][4];
+    Trackball::build_rotmatrix(macierz, transformowalne->Quat());
+    transformowalne->MacierzObrotu(macierz[0]);
     obs.PowiadomionyOzakonczeniuTransformacji();
 //    obs.WyslijPoleceniePrzerysuj();
 }

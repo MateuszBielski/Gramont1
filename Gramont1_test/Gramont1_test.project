@@ -43,7 +43,6 @@
   </VirtualDirectory>
   <VirtualDirectory Name="testedClasses">
     <File Name="../src/Shared/kursor2d.cpp"/>
-    <File Name="../src/Shared/transformacjaItfc.cpp"/>
     <File Name="../src/Shared/transformowalne.cpp"/>
     <File Name="../src/Process/obslugasygnalow.cpp"/>
     <File Name="../src/Process/renderowanie.cpp"/>
