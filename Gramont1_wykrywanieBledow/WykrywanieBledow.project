@@ -1,18 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<CodeLite_Project Name="Gramont1_test" InternalType="Console">
+<CodeLite_Project Name="Gramont1_wykrywanieBledow" InternalType="Console">
   <Plugins>
     <Plugin Name="CMakePlugin">
       <![CDATA[[{
   "name": "Debug",
-  "enabled": false,
-  "buildDirectory": "build",
-  "sourceDirectory": "$(ProjectPath)",
-  "generator": "",
-  "buildType": "",
-  "arguments": [],
-  "parentProject": ""
- }, {
-  "name": "Release",
   "enabled": false,
   "buildDirectory": "build",
   "sourceDirectory": "$(ProjectPath)",
@@ -26,66 +17,12 @@
   <Description/>
   <Dependencies/>
   <VirtualDirectory Name="src">
-    <File Name="main.cpp" ExcludeProjConfig=""/>
-    <File Name="kursor2dTest.cpp" ExcludeProjConfig=""/>
-    <File Name="transformacjaTest.cpp" ExcludeProjConfig=""/>
-    <File Name="transformowalneTest.cpp" ExcludeProjConfig=""/>
-    <File Name="polecenieTest.cpp" ExcludeProjConfig=""/>
-    <File Name="obslugaSygnalowTest.cpp" ExcludeProjConfig=""/>
-    <File Name="zarzadzaniemodelamiTest.cpp" ExcludeProjConfig=""/>
-    <File Name="renderowanieTest.cpp" ExcludeProjConfig=""/>
-    <File Name="donarysowaniatest.cpp" ExcludeProjConfig=""/>
-    <File Name="grupowanietest.cpp" ExcludeProjConfig=""/>
-    <File Name="poleceniarenderowaniatest.cpp" ExcludeProjConfig=""/>
-    <File Name="TestRenderKlasTest.cpp" ExcludeProjConfig=""/>
-    <File Name="NazwaTest.cpp" ExcludeProjConfig=""/>
-    <File Name="aktualizujlistetest.cpp" ExcludeProjConfig=""/>
-    <File Name="ObliczeniaDlaModeliTest.cpp"/>
-  </VirtualDirectory>
-  <VirtualDirectory Name="testedClasses">
-    <File Name="../src/Shared/kursor2d.cpp"/>
-    <File Name="../src/Shared/transformowalne.cpp"/>
-    <File Name="../src/Process/obslugasygnalow.cpp"/>
-    <File Name="../src/Process/renderowanie.cpp"/>
-    <File Name="../src/Polecenie/kolejkapolecen.cpp"/>
-    <File Name="../src/Polecenie/transformacja.cpp"/>
-    <File Name="../src/Polecenie/obrot.cpp"/>
-    <File Name="../src/Process/zarzadzaniemodelami.cpp"/>
-    <File Name="../src/Shared/ekrangl.cpp"/>
-    <File Name="../src/Polecenie/obslugapolecen.cpp"/>
-    <File Name="../src/Polecenie/polecenie.cpp"/>
-    <File Name="../src/Polecenie/przerysuj.cpp"/>
-    <File Name="../src/Shared/oknogtk.cpp"/>
-    <File Name="../src/Shared/szescian.cpp"/>
-    <File Name="../src/Shared/prostytrojkat.cpp"/>
-    <File Name="../src/Polecenie/ustawdonarysowania.cpp"/>
-    <File Name="../src/Shared/grupowalne.cpp"/>
-    <File Name="../src/Polecenie/poleceniarenderowania.cpp"/>
-    <File Name="../src/Shared/donarysowaniajakopolecenia.cpp" ExcludeProjConfig="Debug"/>
-    <File Name="../src/Shared/geometriamodelu.cpp"/>
+    <File Name="main.cpp"/>
     <File Name="../src/Shared/donarysowania.cpp"/>
-    <File Name="../src/Shared/nazwa.cpp"/>
-    <File Name="../src/Process/probneprzelaczenie.cpp"/>
-    <File Name="../src/Process/obliczeniadlamodeli.cpp"/>
-    <File Name="../src/Pomocnicze/wypisywaniewartosci.cpp"/>
-    <File Name="../src/Pomocnicze/FunkcjeIstruktury.cpp"/>
-  </VirtualDirectory>
-  <VirtualDirectory Name="helperClass">
-    <File Name="../src/Shared/trackball.cpp"/>
-    <File Name="zarzadzaniemodelamimock.h"/>
-    <File Name="zarzadzaniemodelamimock.cpp"/>
-    <File Name="ekranglmock.h"/>
-    <File Name="ekranglmock.cpp"/>
-    <File Name="obslugapolecenmock.h"/>
-    <File Name="obslugapolecenmock.cpp"/>
-    <File Name="renderowaniemock.h"/>
-    <File Name="renderowaniemock.cpp"/>
-    <File Name="donarysowaniamock.h"/>
-    <File Name="donarysowaniamock.cpp"/>
-    <File Name="testrenderklas.h"/>
-    <File Name="testrenderklas.cpp"/>
-    <File Name="donarysowaniadostepprv.h"/>
-    <File Name="donarysowaniadostepprv.cpp"/>
+    <File Name="../src/Shared/geometriamodelu.cpp"/>
+    <File Name="../src/Shared/grupowalne.cpp"/>
+    <File Name="../src/Shared/transformowalne.cpp"/>
+    <File Name="../src/Polecenie/poleceniarenderowania.cpp"/>
   </VirtualDirectory>
   <Settings Type="Executable">
     <GlobalSettings>
@@ -98,17 +35,16 @@
       <ResourceCompiler Options=""/>
     </GlobalSettings>
     <Configuration Name="Debug" CompilerType="G++7" DebuggerType="GNU gdb debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
-      <Compiler Options="$(shell pkg-config --cflags gtkglextmm-1.2 gtest);-g;-std=c++14;-Wno-deprecated;" C_Options="-g;-O0;-Wall" Assembler="" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" PCHFlags="" PCHFlagsPolicy="0">
+      <Compiler Options="$(shell pkg-config --cflags gtkglextmm-1.2);-g;-Og;-std=c++14;-Wno-deprecated;-g" C_Options="-g;-O0;-Wall" Assembler="" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" PCHFlags="" PCHFlagsPolicy="0">
         <IncludePath Value="."/>
-        <Preprocessor Value="TESTOWANIE_F"/>
       </Compiler>
-      <Linker Options="$(shell pkg-config --libs gtkglextmm-1.2 gtest);-lstdc++fs;" Required="yes"/>
+      <Linker Options="$(shell pkg-config --libs gtkglextmm-1.2);-lpthread;" Required="yes"/>
       <ResourceCompiler Options="" Required="no"/>
       <General OutputFile="$(IntermediateDirectory)/$(ProjectName)" IntermediateDirectory="./Debug" Command="./$(ProjectName)" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(IntermediateDirectory)" PauseExecWhenProcTerminates="yes" IsGUIProgram="no" IsEnabled="yes"/>
       <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;">
         <![CDATA[]]>
       </Environment>
-      <Debugger IsRemote="no" RemoteHostName="" RemoteHostPort="" DebuggerPath="" IsExtended="yes">
+      <Debugger IsRemote="no" RemoteHostName="" RemoteHostPort="" DebuggerPath="" IsExtended="no">
         <DebuggerSearchPaths/>
         <PostConnectCommands/>
         <StartupCommands/>
@@ -147,7 +83,7 @@
       <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;">
         <![CDATA[]]>
       </Environment>
-      <Debugger IsRemote="no" RemoteHostName="" RemoteHostPort="" DebuggerPath="" IsExtended="yes">
+      <Debugger IsRemote="no" RemoteHostName="" RemoteHostPort="" DebuggerPath="" IsExtended="no">
         <DebuggerSearchPaths/>
         <PostConnectCommands/>
         <StartupCommands/>
@@ -176,6 +112,4 @@
       </Completion>
     </Configuration>
   </Settings>
-  <Dependencies Name="Debug"/>
-  <Dependencies Name="Release"/>
 </CodeLite_Project>
