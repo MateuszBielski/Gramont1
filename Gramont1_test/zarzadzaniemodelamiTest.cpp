@@ -86,7 +86,7 @@ TEST(ZarzadzanieModelami,PoleceniePrzerysujZawierajaceRysowalne)
 {
     ZarzadzanieModelami zarzadzanie;
     spDoNarysowania rys(make_shared<DoNarysowaniaMock>(12));
-    zarzadzanie.DoNarysowania(rys);
+    zarzadzanie.fDoNarysowania(rys);
     
     
     RenderowanieMock renderowanie;
@@ -100,6 +100,7 @@ TEST(ZarzadzanieModelami,PoleceniePrzerysujZawierajaceRysowalne)
     
     ASSERT_EQ(12,res1->id);
 }
+
 TEST(ZarzadzanieModelami,PolecenieKoniecWylaczaWysylaniePrzerysujPoTransformacji)
 {
     ZarzadzanieModelami zarzadzanie;
@@ -194,7 +195,7 @@ TEST(ZarzadzanieModelami,PobranieKolejkiRenderowaniaDajeJejDoNarysowania)
 {
     ZarzadzanieModelami zarzadzanie;
     spDoNarysowania rys(make_shared<DoNarysowania>());
-    zarzadzanie.DoNarysowania(rys);
+    zarzadzanie.DoNarysowaniaItransformacji(rys);
     
     Renderowanie rend;
     auto kolejka = rend.getKolejkaPolecen();
@@ -203,8 +204,10 @@ TEST(ZarzadzanieModelami,PobranieKolejkiRenderowaniaDajeJejDoNarysowania)
     rend.Run();
     
     TestRenderKlas testRend;
-    
-    ASSERT_TRUE(testRend.CzyMaTenSamDoNarysowania(rend,rys));
+    //wcześniej doNarysowania miał wskazywać na ten sam obiekt
+    //teraz ma wskazywać na kopię
+    ASSERT_TRUE(testRend.UstawioneDoNarysowania(rend));
+    ASSERT_FALSE(testRend.CzyMaTenSamDoNarysowania(rend,rys));
 }
 TEST(ZarzadzanieModelami,DodanieModeli)
 {
@@ -272,7 +275,7 @@ TEST(ZarzadzanieModelami,UstawienieDoNarysowaniaItransfUstawiaPrzeznaczonyDoTran
 TEST(ZarzadzanieModelami,UstawienieDoNarysowaniaPrzygotowujeListePolecenJesliTrzeba)
 {
     ZarzadzanieModelami zarz;
-    zarz.DoNarysowania(make_unique<DoNarysowania>());
+    zarz.fDoNarysowania(make_unique<DoNarysowania>());
     auto kolejka = zarz.KolejkaPrzetwarzaniaAsynchronicznego();
     auto polecenie = kolejka->wait_and_pop();
     ASSERT_EQ(polecenie,&ZarzadzanieModelami::PrzygotujPoleceniaUstawionegoDoNarysowania);
@@ -281,7 +284,7 @@ TEST(ZarzadzanieModelami,PrzygotujPoleceniaDoNarysowania)
 {
     ZarzadzanieModelami zarz;
     auto rys = make_shared<DoNarysowaniaMock>();
-    zarz.DoNarysowania(rys);
+    zarz.fDoNarysowania(rys);
     zarz.PrzygotujPoleceniaUstawionegoDoNarysowania();
     ASSERT_TRUE(rys->poleceniaWybierzIwstawWdobrejKolejnosciIsUsed);       
 }

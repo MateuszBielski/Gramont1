@@ -21,7 +21,7 @@ void ZarzadzanieModelami::DoTransformacji(spDoNarysowania tr)
     kolejkaPrzetwarzaniaAsynchronicznego->push(&ZarzadzanieModelami::AktualizujPoleceniaUstawionegoDoTransformacji);
     kolejkaPrzetwarzaniaAsynchronicznego->push(&ZarzadzanieModelami::AktualizujPoleceniaUstawionegoDoTransformacjiPoprz);
 }
-void ZarzadzanieModelami::DoNarysowania(spDoNarysowania rys)
+void ZarzadzanieModelami::fDoNarysowania(spDoNarysowania rys)
 {
 	doNarysowania = rys;
     kolejkaPrzetwarzaniaAsynchronicznego->push(&ZarzadzanieModelami::PrzygotujPoleceniaUstawionegoDoNarysowania);
@@ -30,7 +30,7 @@ void ZarzadzanieModelami::DoNarysowaniaItransformacji(spDoNarysowania r)
 {
     r->przeznaczonyDoTransformacji = true;
     r->PoleceniaWybierzIwstawWdobrejKolejnosci();
-    doNarysowania = r;
+    doNarysowania = make_shared<DoNarysowania>(*r);
     doTrasformacji = r;
 }
 int ZarzadzanieModelami::LicznikTransformacjiAkumulowanych()

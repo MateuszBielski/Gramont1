@@ -136,6 +136,17 @@ unique_lock<mutex> DoNarysowania::getBlokadaMutexu()
 	return listaGlownaOdlaczona? unique_lock<mutex>(mutexDlaTymczasowej):unique_lock<mutex>(mut);
 //    return unique_lock<mutex>(mut);
 }
+DoNarysowania& DoNarysowania::operator=(const DoNarysowania& other)
+{
+    if (this == &other)return *this;
+    return *this;
+}
+DoNarysowania::DoNarysowania(const DoNarysowania& other)
+{
+    if (this == &other)return;
+    mojePolecenia = other.mojePolecenia;
+    id = ++liczbaKonstruktorow;
+}
 int DoNarysowania::liczbaKonstruktorow = 0;
 int DoNarysowania::liczbaDestruktorow = 0;
 int DoNarysowania::ostatnioZniszczony = 0;
@@ -162,19 +173,19 @@ DoNarysowania::~DoNarysowania()
     if(obiektZniszczony.at(id))
     {
         //próba powtórnego zniszczenia
-        int i = 1;
+        int i = id;
         i++;
     }
     if((id - ostatnioZniszczony) > 1)
     {
         //tzn poprzedni id nie został zniszczony
-        int i = 1;
+        int i = id - ostatnioZniszczony;
         i++;
     }
     if(id < ostatnioZniszczony)
     {
         //niszczy w odwrotnej kolejności
-        int i = 1;
+        int i = ostatnioZniszczony;
         i++;
     }
     obiektZniszczony.at(id) = true;

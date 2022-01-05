@@ -21,6 +21,7 @@ public:
     TestRenderKlas();
     string CiagWywolanOpenGl();
     bool UstawZastepczeOpenGlDla(Renderowanie&);
+    bool UstawioneDoNarysowania(Renderowanie&);
     bool CzyMaTenSamDoNarysowania(Renderowanie&, spDoNarysowania);
     void UstawMonitorujaceFunkcjeDla(Renderowanie&);
     static map<string,unsigned> uzyteFunkcje;

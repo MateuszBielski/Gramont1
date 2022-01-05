@@ -57,3 +57,7 @@ future<void> TestRenderKlas::PrzyszloscZobietnicy(Renderowanie& r)
 {
 	return move(r.prom.get_future());
 }
+bool TestRenderKlas::UstawioneDoNarysowania(Renderowanie& r)
+{
+	return r.doNarysowania != nullptr;
+}

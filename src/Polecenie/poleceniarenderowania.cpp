@@ -125,3 +125,4 @@ void PoleceniaRenderowania::MultMatrix(spGeometriaModelu geom)
 
 //dla linkera
 template void PoleceniaRenderowania::WywolajPoleceniaZ(shared_ptr<DoNarysowania> );
+template void PoleceniaRenderowania::WywolajPoleceniaZ(unique_ptr<DoNarysowania> );

@@ -52,7 +52,7 @@ class ZarzadzanieModelami : public ObslugaPolecen
     spDoNarysowania WyszukajModel(Nazwa&& ) const;
     int LiczbaModeli();
     void DoTransformacji(spDoNarysowania );
-    void DoNarysowania(spDoNarysowania);
+    void fDoNarysowania(spDoNarysowania);
     void DoNarysowaniaItransformacji(spDoNarysowania);
     void PrzygotujPoleceniaUstawionegoDoNarysowania();
     void AktualizujPoleceniaUstawionegoDoTransformacji();

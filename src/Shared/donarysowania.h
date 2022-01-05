@@ -42,6 +42,8 @@ class DoNarysowania : public GeometriaModelu, public Grupowalne_T<DoNarysowania>
 public:
     DoNarysowania();
     ~DoNarysowania();
+    DoNarysowania(const DoNarysowania&);
+    DoNarysowania& operator = (const DoNarysowania&);
     void setNazwa(Nazwa&& );
     Nazwa getNazwa();
     virtual void PoleceniaWybierzIwstawWdobrejKolejnosci();
