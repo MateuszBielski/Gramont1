@@ -1,7 +1,8 @@
 #include "renderowanie.h"
 #include <stdexcept>
 
-Renderowanie::Renderowanie():doNarysowania(make_shared<DoNarysowania>()),x{-1.0,0.0,0.0},y{0.5,0.0,0.0},z{0.0,1.0,0.0}
+Renderowanie::Renderowanie()
+//:doNarysowania(make_shared<DoNarysowania>()),x{-1.0,0.0,0.0},y{0.5,0.0,0.0},z{0.0,1.0,0.0}
 {
     PrzypiszFunkcjeGLdoWskaznikow();
 }

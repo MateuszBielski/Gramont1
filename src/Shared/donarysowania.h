@@ -40,8 +40,8 @@ class DoNarysowania : public GeometriaModelu, public Grupowalne_T<DoNarysowania>
     
     bool nieWidoczny = false;
 public:
-    DoNarysowania(){};
-    virtual ~DoNarysowania();
+    DoNarysowania();
+    ~DoNarysowania();
     void setNazwa(Nazwa&& );
     Nazwa getNazwa();
     virtual void PoleceniaWybierzIwstawWdobrejKolejnosci();
@@ -61,6 +61,11 @@ public:
 private:
     virtual void PodczasDodajDziecko() override;
     virtual void PodczasOdejmijDziecko() override;
+    int id = 0;
+    static int liczbaKonstruktorow;
+    static int liczbaDestruktorow;
+    static int ostatnioZniszczony;
+    static vector<bool> obiektZniszczony;
 };
 
 using spDoNarysowania = shared_ptr<DoNarysowania>;

@@ -6,14 +6,12 @@ int main(int argc, char **argv)
 {
 	
     printf("sizeof(DoNarysowania) %d\n",sizeof(DoNarysowania));
-    auto rys(DoNarysowania::Create());
-    auto pRys = rys->WskaznikNaMnie();
-    printf("auto rys(DoNarysowania::Create()) sizeof *rys %d\n",sizeof *rys);
+    auto rys(make_shared<DoNarysowania>());
+    printf("auto urys(make_unique<DoNarysowania>()) sizeof *urys %d\n",sizeof *rys);
     printf("rys.use_count() %d\n",rys.use_count());
-    printf("pRys.use_count() %d\n",pRys.use_count());
     
-    auto trojkat(ProstyTrojkat::Create());
-    printf("ile vertexow %d\n",trojkat->ileVertexow);
+//    auto trojkat(ProstyTrojkat::Create());
+//    printf("ile vertexow %d\n",trojkat->ileVertexow);
     
     /*
     shared_ptr<Transformowalne> trans(make_shared<DoNarysowania>());

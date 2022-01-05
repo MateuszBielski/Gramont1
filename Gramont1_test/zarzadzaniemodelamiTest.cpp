@@ -257,10 +257,17 @@ TEST(ZarzadzanieModelami,UstawienieDoNarysowaniaItransfWymuszaGenerowanieListyPo
 }
 TEST(ZarzadzanieModelami,UstawienieDoNarysowaniaItransfUstawiaPrzeznaczonyDoTransormacji)
 {
-    ZarzadzanieModelami zarzadzanie;
-    spDoNarysowania rys(make_shared<DoNarysowania>());
-    zarzadzanie.DoNarysowaniaItransformacji(rys);
-    ASSERT_TRUE(rys->przeznaczonyDoTransformacji);
+    auto fun = [](){
+        
+        ZarzadzanieModelami zarzadzanie;
+        spDoNarysowania rys(make_shared<DoNarysowania>());
+        zarzadzanie.DoNarysowaniaItransformacji(rys);
+        ASSERT_TRUE(rys->przeznaczonyDoTransformacji);
+    };
+    int i = 0;
+    i = i+2;
+    fun();
+    i++;
 }
 TEST(ZarzadzanieModelami,UstawienieDoNarysowaniaPrzygotowujeListePolecenJesliTrzeba)
 {
