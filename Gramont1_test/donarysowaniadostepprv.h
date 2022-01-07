@@ -20,6 +20,8 @@ public:
     bool ZakonczonaAktualizacja();
     void ListaGlownaSkopiowana(bool);
     bool ListaGlownaSkopiowana();
+    bool PoleceniaAktywnePuste();
+    bool PoleceniaPuste();
     mutex& getMutex();
     
 

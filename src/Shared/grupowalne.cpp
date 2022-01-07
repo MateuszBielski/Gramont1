@@ -68,6 +68,12 @@ shared_ptr<T> Grupowalne_T<T>::WskaznikNaMnie()
     return static_pointer_cast<T>(shared_from_this());
 }
 template<class T>
+weak_ptr<T> Grupowalne_T<T>::WskaznikNaMnieSlaby()
+{
+    
+    return weak_ptr<T>(static_pointer_cast<T>(shared_from_this()));
+}
+template<class T>
 void Grupowalne_T<T>::GenerujStruktureJakoListe_Wezly(list<spGrupowalne_T>& calaLista)
 {
     calaLista.push_back(static_pointer_cast<T>(shared_from_this()));

@@ -20,7 +20,7 @@
   <Description/>
   <Dependencies/>
   <VirtualDirectory Name="src">
-    <VirtualDirectory Name="Shared">
+    <VirtualDirectory Name="Modele">
       <File Name="src/Shared/trackball.cpp"/>
       <File Name="src/Shared/trackball.h"/>
       <File Name="src/Shared/ruchnaeranie.cpp"/>

@@ -69,7 +69,9 @@ TEST(PoleceniaRenderowania,WywolanieDlaGrupowanych_DuzaLiczba)
     TestRenderKlas trk;
     trk.UstawMonitorujaceFunkcjeDla(rend);
 //    rend.WywolajPoleceniaZ(rys1); 
-    rend.WywolajPoleceniaZ(make_unique<DoNarysowania>(*rys1)); 
+    auto rys2(make_shared<DoNarysowania>());
+    rys1->PrzekazPoleceniaIaktywujDla(rys2);
+    rend.WywolajPoleceniaZ(rys2); 
     ASSERT_EQ(2001,trk.uzyteFunkcje["RysujGeometrie"]);
 }
 TEST(PoleceniaRenderowania,RysujGeometriePowierzchnie_uzywaVertexeInormalne)

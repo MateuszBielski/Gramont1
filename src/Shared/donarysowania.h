@@ -9,7 +9,7 @@
 #include <mutex>
 
 using namespace std;
-
+/*
 using PtrMemRend_Geom = void(PoleceniaRenderowania::*)(spGeometriaModelu);
 
 struct PolecenieIgeometria
@@ -17,8 +17,19 @@ struct PolecenieIgeometria
     PtrMemRend_Geom polecenie;
     spGeometriaModelu geometria;
 };
+*/
+using PtrMemRend_Geom = void(PoleceniaRenderowania::*)(spGeometriaModelu);
 
-using l_PolecenieIgeometria = list<PolecenieIgeometria>;
+template<typename T_ptr_geom>
+struct PolecenieIgeometria
+{
+    PtrMemRend_Geom polecenie;
+    T_ptr_geom geometria;//przy tworzeniu ma być weak_ptr a później aktywacja
+};
+using PolecenieIgeometriaSlabe = PolecenieIgeometria<weak_ptr<GeometriaModelu>>;
+using PolecenieIgeometriaAktywne = PolecenieIgeometria<spGeometriaModelu>;
+using l_PolecenieIgeometria = list<PolecenieIgeometriaSlabe>;
+using l_PolecenieIgeometriaAktywna = list<PolecenieIgeometriaAktywne>;
 
 class DoNarysowania : public GeometriaModelu, public Grupowalne_T<DoNarysowania>
 {
@@ -28,6 +39,7 @@ class DoNarysowania : public GeometriaModelu, public Grupowalne_T<DoNarysowania>
 //    int zmienna[3];
     Nazwa nazwa;
     
+    l_PolecenieIgeometriaAktywna mojePoleceniaAktywne;
     l_PolecenieIgeometria mojePolecenia;
     l_PolecenieIgeometria mojePoleceniaTymczasowa;
     l_PolecenieIgeometria* poleceniaListaGlowna = nullptr;
@@ -53,6 +65,8 @@ public:
     void AktualizujMojePoleceniaNaLiscieZabezpieczonej();
     
     virtual l_PolecenieIgeometria& Polecenia();
+    virtual l_PolecenieIgeometriaAktywna& PoleceniaAktywne();
+    virtual void PrzekazPoleceniaIaktywujDla(shared_ptr<DoNarysowania> rysDest);
     bool czyPoleceniaListaGlownaJestTaSama(l_PolecenieIgeometria* );
     void WstawPolecenieNaKoncu(PtrMemRend_Geom);
     l_PolecenieIgeometria::iterator itPierwszeMojePolecenie();

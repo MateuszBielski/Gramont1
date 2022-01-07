@@ -18,6 +18,7 @@ public:
     virtual void AktualizujMojePolecenia() override;
     void JestObrot(bool b);
     void JestPrzesuniecie(bool b);
+    
     int id = 0;
     bool macierzObrotuIsUsed = false;
     bool poleceniaIsUsed = false;

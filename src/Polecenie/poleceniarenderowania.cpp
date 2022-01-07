@@ -20,7 +20,7 @@ void PoleceniaRenderowania::WywolajPoleceniaZ(T obiektZpoleceniami){
     }
 //    cout<<"po fut.wait"<<endl;
     #endif
-    for(auto& pol : obiektZpoleceniami->Polecenia())
+    for(auto& pol : obiektZpoleceniami->PoleceniaAktywne())
         {
             (this->*pol.polecenie)(pol.geometria);
         }

@@ -43,3 +43,11 @@ mutex& DoNarysowaniaDostepPrv::getMutex()
 //	return mutDostep;
     return rys.mut;
 }
+bool DoNarysowaniaDostepPrv::PoleceniaAktywnePuste()
+{
+	return rys.mojePoleceniaAktywne.empty();
+}
+bool DoNarysowaniaDostepPrv::PoleceniaPuste()
+{
+	return rys.mojePolecenia.empty();
+}

@@ -189,7 +189,8 @@ TEST(DoNarysowania,WskaznikiPolecenDzieckaZawierajaJegoPolecenia)
     while(it2 != koniec2)
     {
         auto polIgeom = *(it2++);
-        auto adr = &(*(polIgeom.geometria));
+//        auto adr = &(*(polIgeom.geometria));gdy nie używano słabego
+        auto adr = &(*(polIgeom.geometria.lock()));
         ASSERT_EQ(adr2,adr);
     }
 }
@@ -235,7 +236,7 @@ TEST(DoNarysowania,AktualizujListe_NieWymieniaZawartosciPozaSwoimZakresem)
     int ileDlaRys1Przed = 0;
     auto adresGeom1 = &(*rys1);
     for(auto& polIgeom : rys1->Polecenia()) 
-        if(adresGeom1 == &*polIgeom.geometria)
+        if(adresGeom1 == &*polIgeom.geometria.lock())
             ileDlaRys1Przed++;
     
     float przes[] = {1.3,0,0};
@@ -243,7 +244,7 @@ TEST(DoNarysowania,AktualizujListe_NieWymieniaZawartosciPozaSwoimZakresem)
     rys2->AktualizujMojePolecenia();
     int ileDlaRys1Po = 0;
     for(auto& polIgeom : rys1->Polecenia()) 
-        if(adresGeom1 == &*polIgeom.geometria)
+        if(adresGeom1 == &*polIgeom.geometria.lock())
             ileDlaRys1Po++;
     ASSERT_EQ(ileDlaRys1Przed,ileDlaRys1Po);
 }
@@ -256,7 +257,7 @@ TEST(DoNarysowania,AktualizujListe_WymieniaZawartoscWswoimZakresie)
     int ileDlaRys2Przed = 0;
     auto adresGeom2 = &(*rys2);
     for(auto& polIgeom : rys1->Polecenia()) 
-        if(adresGeom2 == &*polIgeom.geometria)
+        if(adresGeom2 == &*polIgeom.geometria.lock())
             ileDlaRys2Przed++;
     
     float przes[] = {1.3,0,0};
@@ -264,7 +265,7 @@ TEST(DoNarysowania,AktualizujListe_WymieniaZawartoscWswoimZakresie)
     rys2->AktualizujMojePolecenia();
     int ileDlaRys2Po = 0;
     for(auto& polIgeom : rys1->Polecenia()) 
-        if(adresGeom2 == &*polIgeom.geometria)
+        if(adresGeom2 == &*polIgeom.geometria.lock())
             ileDlaRys2Po++;
     ASSERT_NE(ileDlaRys2Przed,ileDlaRys2Po);
 }
@@ -287,16 +288,16 @@ TEST(DoNarysowania,PoAktualizacjiPoczatkiIkonceZakresuWskazujaNaWlasciweMiejsca)
     auto poczatekPolecen2 = rys2->itPierwszeMojePolecenie();
     auto koniecPolecen2 = rys2->itOstatnieMojePolecenie();
     
-    auto adresGeomNaPoczatku2 = &*(*poczatekPolecen2--).geometria;
+    auto adresGeomNaPoczatku2 = &*(*poczatekPolecen2--).geometria.lock();
     ASSERT_EQ(adresGeomNaPoczatku2,adrGeom2);
     
-    auto adresGeomPrzedPoczatkiem2 = &*(*poczatekPolecen2).geometria;
+    auto adresGeomPrzedPoczatkiem2 = &*(*poczatekPolecen2).geometria.lock();
     ASSERT_EQ(adresGeomPrzedPoczatkiem2,adrGeom1);
     
-    auto adresGeomNaKoncu2 = &*(*koniecPolecen2++).geometria;
+    auto adresGeomNaKoncu2 = &*(*koniecPolecen2++).geometria.lock();
     ASSERT_EQ(adresGeomNaKoncu2,adrGeom2);
     
-    auto adresGeomPoKoncu2 = &*(*koniecPolecen2).geometria;
+    auto adresGeomPoKoncu2 = &*(*koniecPolecen2).geometria.lock();
     ASSERT_EQ(adresGeomPoKoncu2,adrGeom1);
 }
 //NieMożnaAktualizować, jeśli moje pierwsze i ostatnie polecenie nie jest znane, użyć dodatkowej flagi, przyjęto, że to samo zanczenie ma sprawdzenie, czy znana jest główna lista
@@ -342,7 +343,7 @@ TEST(DoNarysowania,DodanieKolejnegoDzieckaAktualizuje_dostepDoPolecenDodanego)
     while(it3 != koniec3)
     {
         auto polIgeom = *(it3++);
-        auto adr = &(*(polIgeom.geometria));
+        auto adr = &(*(polIgeom.geometria.lock()));
         ASSERT_EQ(adr3,adr);
     }
 }
@@ -364,7 +365,7 @@ TEST(DoNarysowania,DodanieKolejnegoDzieckaAktualizuje_WglownejLiscieSaPoleceniaD
     while(it != koniec)
     {
         auto polIgeom = *(it++);
-        auto adr = &(*(polIgeom.geometria));
+        auto adr = &(*(polIgeom.geometria.lock()));
         if(adr == adr3) result1 = true;
     }
     ASSERT_FALSE(result1);
@@ -374,7 +375,7 @@ TEST(DoNarysowania,DodanieKolejnegoDzieckaAktualizuje_WglownejLiscieSaPoleceniaD
     while(it != koniec)
     {
         auto polIgeom = *(it++);
-        auto adr = &(*(polIgeom.geometria));
+        auto adr = &(*(polIgeom.geometria.lock()));
         if(adr == adr3) result2 = true;
     }
     ASSERT_TRUE(result2);
@@ -397,7 +398,7 @@ TEST(DoNarysowania,DodanieGlebiejDzieckaAktualizuje)
     while(it != koniec)
     {
         auto polIgeom = *(it++);
-        auto adr = &(*(polIgeom.geometria));
+        auto adr = &(*(polIgeom.geometria.lock()));
         if(adr == adr3) result1 = true;
     }
     ASSERT_FALSE(result1);
@@ -407,7 +408,7 @@ TEST(DoNarysowania,DodanieGlebiejDzieckaAktualizuje)
     while(it != koniec)
     {
         auto polIgeom = *(it++);
-        auto adr = &(*(polIgeom.geometria));
+        auto adr = &(*(polIgeom.geometria.lock()));
         if(adr == adr3) result2 = true;
     }
     ASSERT_TRUE(result2);
@@ -431,7 +432,7 @@ TEST(DoNarysowania,OdjecieDzieckaAktualizuje)
     while(it != koniec)
     {
         auto polIgeom = *(it++);
-        auto adr = &(*(polIgeom.geometria));
+        auto adr = &(*(polIgeom.geometria.lock()));
         if(adr == adr3) result1 = true;
     }
     ASSERT_TRUE(result1);
@@ -442,7 +443,7 @@ TEST(DoNarysowania,OdjecieDzieckaAktualizuje)
     while(it != koniec)
     {
         auto polIgeom = *(it++);
-        auto adr = &(*(polIgeom.geometria));
+        auto adr = &(*(polIgeom.geometria.lock()));
         if(adr == adr3) result2 = true;
     }
     ASSERT_FALSE(result2);
@@ -482,6 +483,28 @@ TEST(DoNarysowania,PrzeznaczonyDoTransformacjiNieMaObrotu_DajeMultMatrix)
     rys->przeznaczonyDoTransformacji = true;
     rys->PoleceniaWybierzIwstawWdobrejKolejnosci();
     ASSERT_TRUE(CzyZawiera(&PoleceniaRenderowania::MultMatrix,rys->Polecenia()));
+}
+TEST(DoNarysowania,PrzekazPolecenia_ZrodloPuste)
+{
+    auto rys1(make_shared<DoNarysowania>());
+    auto rys2(make_shared<DoNarysowania>());
+    DoNarysowaniaDostepPrv dost1(*rys1);
+    DoNarysowaniaDostepPrv dost2(*rys2);
+    ASSERT_TRUE(dost2.PoleceniaAktywnePuste());
+    rys1->PoleceniaWybierzIwstawWdobrejKolejnosci();
+    rys1->PrzekazPoleceniaIaktywujDla(rys2);
+    ASSERT_TRUE(dost1.PoleceniaPuste());
+}
+TEST(DoNarysowania,PrzekazPolecenia_CelNiePusty)
+{
+    auto rys1(make_shared<DoNarysowania>());
+    auto rys2(make_shared<DoNarysowania>());
+    DoNarysowaniaDostepPrv dost1(*rys1);
+    DoNarysowaniaDostepPrv dost2(*rys2);
+    ASSERT_TRUE(dost2.PoleceniaAktywnePuste());
+    rys1->PoleceniaWybierzIwstawWdobrejKolejnosci();
+    rys1->PrzekazPoleceniaIaktywujDla(rys2);
+    ASSERT_FALSE(dost2.PoleceniaAktywnePuste());
 }
 //PushName
 

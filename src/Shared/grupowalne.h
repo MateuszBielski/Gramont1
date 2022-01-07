@@ -30,6 +30,7 @@ protected:
     typename list<shared_ptr<T>>::iterator pozycja;
     typename list<shared_ptr<T>>::iterator pozycjaWliscie;
     shared_ptr<T> WskaznikNaMnie();
+    weak_ptr<T> WskaznikNaMnieSlaby();
 private:
     spGrupowalne_T rodzic = nullptr;
     list<spGrupowalne_T> strukturaJakoLista_Wezly;

@@ -5,10 +5,24 @@ l_PolecenieIgeometria& DoNarysowania::Polecenia()
 {
     return listaGlownaOdlaczona ? mojePoleceniaTymczasowa : mojePolecenia;
 }
+l_PolecenieIgeometriaAktywna& DoNarysowania::PoleceniaAktywne()
+{
+    return mojePoleceniaAktywne;
+}
+void DoNarysowania::PrzekazPoleceniaIaktywujDla(shared_ptr<DoNarysowania> rysDest)
+{
+    rysDest->mojePoleceniaAktywne.clear();
+    for(auto &pol : mojePolecenia)
+    {
+        rysDest->mojePoleceniaAktywne.push_back(
+        {pol.polecenie,pol.geometria.lock()});
+    }
+    mojePolecenia.clear();
+}
 void DoNarysowania::WstawPolecenieNaKoncu(PtrMemRend_Geom polecenie)
 {
-    PolecenieIgeometria polIGeom = {polecenie,WskaznikNaMnie()};
-    mojePolecenia.push_back(polIGeom);
+//    PolecenieIgeometria polIGeom = {polecenie,WskaznikNaMnie()};
+    mojePolecenia.push_back({polecenie,WskaznikNaMnie()});
 }
 void DoNarysowania::NieWidoczny(bool flaga)
 {  
