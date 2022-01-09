@@ -22,7 +22,7 @@ void DoNarysowania::PrzekazPoleceniaIaktywujDla(shared_ptr<DoNarysowania> rysDes
 void DoNarysowania::WstawPolecenieNaKoncu(PtrMemRend_Geom polecenie)
 {
 //    PolecenieIgeometria polIGeom = {polecenie,WskaznikNaMnie()};
-    mojePolecenia.push_back({polecenie,WskaznikNaMnie()});
+    mojePolecenia.push_back({polecenie,WskaznikNaMnieSlaby()});
 }
 void DoNarysowania::NieWidoczny(bool flaga)
 {  
@@ -37,11 +37,11 @@ void DoNarysowania::PoleceniaWybierzIwstawWdobrejKolejnosci()
     if(!poleceniaListaGlowna)poleceniaListaGlowna = &mojePolecenia;
     if(przeznaczonyDoTransformacji)
     {
-        mojePolecenia.push_back({&PoleceniaRenderowania::PushMatrix,WskaznikNaMnie()});
-        mojePolecenia.push_back({&PoleceniaRenderowania::Przesun,WskaznikNaMnie()});
+        mojePolecenia.push_back({&PoleceniaRenderowania::PushMatrix,WskaznikNaMnieSlaby()});
+        mojePolecenia.push_back({&PoleceniaRenderowania::Przesun,WskaznikNaMnieSlaby()});
     }
-    if(jestObrot || przeznaczonyDoTransformacji)mojePolecenia.push_back({&PoleceniaRenderowania::MultMatrix,WskaznikNaMnie()});
-    if(!nieWidoczny)mojePolecenia.push_back({&PoleceniaRenderowania::RysujGeometriePowierzchnie,WskaznikNaMnie()});
+    if(jestObrot || przeznaczonyDoTransformacji)mojePolecenia.push_back({&PoleceniaRenderowania::MultMatrix,WskaznikNaMnieSlaby()});
+    if(!nieWidoczny)mojePolecenia.push_back({&PoleceniaRenderowania::RysujGeometriePowierzchnie,WskaznikNaMnieSlaby()});
 //    mut.unlock();
     for(auto& dziecko : dzieci)
     {
@@ -55,10 +55,10 @@ void DoNarysowania::PoleceniaWybierzIwstawWdobrejKolejnosci()
     }
 //    mut.lock();
     if(przeznaczonyDoTransformacji)
-    mojePolecenia.push_back({&PoleceniaRenderowania::PopMatrix,WskaznikNaMnie()});
+    mojePolecenia.push_back({&PoleceniaRenderowania::PopMatrix,WskaznikNaMnieSlaby()});
     #if defined TESTOWANIE_F
         //musi być jakaś funkcja kończąca poziom stosu
-        mojePolecenia.push_back({&PoleceniaRenderowania::PopName,WskaznikNaMnie()});
+        mojePolecenia.push_back({&PoleceniaRenderowania::PopName,WskaznikNaMnieSlaby()});
     #endif
 //    mut.unlock();
     pierwszeMojePolecenie = mojePolecenia.begin();
@@ -102,6 +102,7 @@ void DoNarysowania::AktualizujMojePoleceniaNaLiscieZabezpieczonej()
 //        mut.unlock();
     }
     aktualizacjaUkonczona = true;
+    int s = (*poleceniaListaGlowna).size();
 }
 void DoNarysowania::UstawListyPoAktualizacji()
 {
@@ -204,6 +205,8 @@ DoNarysowania::~DoNarysowania()
     }
     obiektZniszczony.at(id) = true;
     ostatnioZniszczony = id;
+    int s = mojePolecenia.size();
+    int r = 5;
 //	mut.lock();
 //    
 //    mutexDlaTymczasowej.lock();

@@ -25,6 +25,10 @@ struct PolecenieIgeometria
 {
     PtrMemRend_Geom polecenie;
     T_ptr_geom geometria;//przy tworzeniu ma być weak_ptr a później aktywacja
+    ~PolecenieIgeometria()
+    {
+        int i = 1;
+    };
 };
 using PolecenieIgeometriaSlabe = PolecenieIgeometria<weak_ptr<GeometriaModelu>>;
 using PolecenieIgeometriaAktywne = PolecenieIgeometria<spGeometriaModelu>;

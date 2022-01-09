@@ -6,9 +6,7 @@ int main(int argc, char **argv)
 {
 	
     printf("sizeof(DoNarysowania) %d\n",sizeof(DoNarysowania));
-    auto rys(make_shared<DoNarysowania>());
-    printf("auto urys(make_unique<DoNarysowania>()) sizeof *urys %d\n",sizeof *rys);
-    printf("rys.use_count() %d\n",rys.use_count());
+    auto rys1(make_shared<DoNarysowania>());
     
 //    auto trojkat(ProstyTrojkat::Create());
 //    printf("ile vertexow %d\n",trojkat->ileVertexow);

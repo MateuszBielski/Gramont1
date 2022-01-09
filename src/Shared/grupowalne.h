@@ -14,14 +14,14 @@ class Grupowalne_T : public enable_shared_from_this<Grupowalne_T<T>>
     //potrzebne dla shared_from_this w pliku .cpp - bo klasa template
     using enable_shared_from_this<Grupowalne_T<T>>::shared_from_this;
 public:
-    virtual ~Grupowalne_T(){};
+    virtual ~Grupowalne_T();
     int IleDzieci();
     
     using spGrupowalne_T = shared_ptr<T>;
     void DodajDziecko(spGrupowalne_T );
     bool OdejmijDziecko(spGrupowalne_T);
     bool CzyJestMoimDzieckiem(spGrupowalne_T);
-    spGrupowalne_T Rodzic();
+    weak_ptr<T> Rodzic();
     size_t StrukturaJakoLista_Wezly_dlugosc();
     const list<spGrupowalne_T>& StrukturaJakoLista_Wezly();
     const list<RodzajAkcji>& StrukturaJakoLista_RodzajAkcji();
@@ -32,7 +32,8 @@ protected:
     shared_ptr<T> WskaznikNaMnie();
     weak_ptr<T> WskaznikNaMnieSlaby();
 private:
-    spGrupowalne_T rodzic = nullptr;
+//    weak_ptr<T> rodzic;//powodowoło błąd podwójnego zwalniania pamięci
+    Grupowalne_T<T>* rodzic = nullptr;
     list<spGrupowalne_T> strukturaJakoLista_Wezly;
     list<RodzajAkcji> strukturaJakoLista_RodzajAkcji;
     void GenerujStruktureJakoListe_Wezly(list<spGrupowalne_T>& );

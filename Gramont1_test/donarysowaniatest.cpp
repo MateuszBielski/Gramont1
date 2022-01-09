@@ -277,11 +277,20 @@ TEST(DoNarysowania,PoAktualizacjiPoczatkiIkonceZakresuWskazujaNaWlasciweMiejsca)
     rys1->DodajDziecko(rys2);
     rys2->DodajDziecko(rys3);
     rys1->PoleceniaWybierzIwstawWdobrejKolejnosci();
+    
+    /***/
+    int a1 = rys1.use_count();
+    int a2 = rys2.use_count();
+//    int b = rys1.weak_count();
+    /***/
 
     float przes[] = {1.3,0,0};
     rys2->DodajPrzesuniecie(przes);
     rys2->AktualizujMojePolecenia();
-//    auto adrGeom1 = &(*rys1);
+    int b1 = rys1.use_count();//**
+    int b2 = rys2.use_count();//**
+    
+    auto adrGeom1 = &(*rys1);
 //    auto adrGeom2 = &(*rys2);
 //    auto adrGeom3 = &(*rys3);
 //    
