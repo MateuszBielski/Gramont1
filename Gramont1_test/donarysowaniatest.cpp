@@ -281,24 +281,24 @@ TEST(DoNarysowania,PoAktualizacjiPoczatkiIkonceZakresuWskazujaNaWlasciweMiejsca)
     float przes[] = {1.3,0,0};
     rys2->DodajPrzesuniecie(przes);
     rys2->AktualizujMojePolecenia();
-    auto adrGeom1 = &(*rys1);
-    auto adrGeom2 = &(*rys2);
-    auto adrGeom3 = &(*rys3);
-    
-    auto poczatekPolecen2 = rys2->itPierwszeMojePolecenie();
-    auto koniecPolecen2 = rys2->itOstatnieMojePolecenie();
-    
-    auto adresGeomNaPoczatku2 = &*(*poczatekPolecen2--).geometria.lock();
-    ASSERT_EQ(adresGeomNaPoczatku2,adrGeom2);
-    
-    auto adresGeomPrzedPoczatkiem2 = &*(*poczatekPolecen2).geometria.lock();
-    ASSERT_EQ(adresGeomPrzedPoczatkiem2,adrGeom1);
-    
-    auto adresGeomNaKoncu2 = &*(*koniecPolecen2++).geometria.lock();
-    ASSERT_EQ(adresGeomNaKoncu2,adrGeom2);
-    
-    auto adresGeomPoKoncu2 = &*(*koniecPolecen2).geometria.lock();
-    ASSERT_EQ(adresGeomPoKoncu2,adrGeom1);
+//    auto adrGeom1 = &(*rys1);
+//    auto adrGeom2 = &(*rys2);
+//    auto adrGeom3 = &(*rys3);
+//    
+//    auto poczatekPolecen2 = rys2->itPierwszeMojePolecenie();
+//    auto koniecPolecen2 = rys2->itOstatnieMojePolecenie();
+//    
+//    auto adresGeomNaPoczatku2 = &*(*poczatekPolecen2--).geometria.lock();
+//    ASSERT_EQ(adresGeomNaPoczatku2,adrGeom2);
+//    
+//    auto adresGeomPrzedPoczatkiem2 = &*(*poczatekPolecen2).geometria.lock();
+//    ASSERT_EQ(adresGeomPrzedPoczatkiem2,adrGeom1);
+//    
+//    auto adresGeomNaKoncu2 = &*(*koniecPolecen2++).geometria.lock();
+//    ASSERT_EQ(adresGeomNaKoncu2,adrGeom2);
+//    
+//    auto adresGeomPoKoncu2 = &*(*koniecPolecen2).geometria.lock();
+//    ASSERT_EQ(adresGeomPoKoncu2,adrGeom1);
 }
 //NieMożnaAktualizować, jeśli moje pierwsze i ostatnie polecenie nie jest znane, użyć dodatkowej flagi, przyjęto, że to samo zanczenie ma sprawdzenie, czy znana jest główna lista
 TEST(DoNarysowania,NieAktualizujePrzedZaistnieniemPodstawowejListy)
@@ -505,6 +505,27 @@ TEST(DoNarysowania,PrzekazPolecenia_CelNiePusty)
     rys1->PoleceniaWybierzIwstawWdobrejKolejnosci();
     rys1->PrzekazPoleceniaIaktywujDla(rys2);
     ASSERT_FALSE(dost2.PoleceniaAktywnePuste());
+}
+TEST(DoNarysowania,WstawPolecenia_IloscOdwolan)
+{
+    auto rys1(make_shared<DoNarysowania>());
+    rys1->WstawPolecenieNaKoncu(&PoleceniaRenderowania::RysujGeometrie);
+    ASSERT_EQ(1,rys1.use_count());//wstawione polecenie ma słaby wskaźnik
+    auto rys2(make_shared<DoNarysowania>());
+    rys1->PrzekazPoleceniaIaktywujDla(rys2);
+    ASSERT_EQ(2,rys1.use_count());//jedno w tym zakresie a drugie w liście poleceń przekazanych do rys 2
+}
+TEST(DoNarysowania,Dzieci_IloscOdwolan)
+{
+    auto rys1(make_shared<DoNarysowania>());
+    auto rys2(make_shared<DoNarysowania>());
+    rys1->WstawPolecenieNaKoncu(&PoleceniaRenderowania::RysujGeometrie);
+    rys2->WstawPolecenieNaKoncu(&PoleceniaRenderowania::RysujGeometrie);
+    rys1->DodajDziecko(rys2);
+    ASSERT_EQ(2,rys2.use_count());//wstawione polecenie ma słaby wskaźnik
+    auto rys3(make_shared<DoNarysowania>());
+    rys1->PrzekazPoleceniaIaktywujDla(rys3);
+    ASSERT_EQ(3,rys1.use_count());
 }
 //PushName
 

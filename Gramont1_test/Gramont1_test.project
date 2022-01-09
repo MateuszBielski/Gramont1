@@ -26,21 +26,21 @@
   <Description/>
   <Dependencies/>
   <VirtualDirectory Name="src">
-    <File Name="main.cpp" ExcludeProjConfig=""/>
-    <File Name="kursor2dTest.cpp" ExcludeProjConfig=""/>
-    <File Name="transformacjaTest.cpp" ExcludeProjConfig=""/>
-    <File Name="transformowalneTest.cpp" ExcludeProjConfig=""/>
-    <File Name="polecenieTest.cpp" ExcludeProjConfig=""/>
-    <File Name="obslugaSygnalowTest.cpp" ExcludeProjConfig=""/>
-    <File Name="zarzadzaniemodelamiTest.cpp" ExcludeProjConfig=""/>
-    <File Name="renderowanieTest.cpp" ExcludeProjConfig=""/>
+    <File Name="main.cpp" ExcludeProjConfig="Debug"/>
+    <File Name="kursor2dTest.cpp" ExcludeProjConfig="Debug"/>
+    <File Name="transformacjaTest.cpp" ExcludeProjConfig="Debug"/>
+    <File Name="transformowalneTest.cpp" ExcludeProjConfig="Debug"/>
+    <File Name="polecenieTest.cpp" ExcludeProjConfig="Debug"/>
+    <File Name="obslugaSygnalowTest.cpp" ExcludeProjConfig="Debug"/>
+    <File Name="zarzadzaniemodelamiTest.cpp" ExcludeProjConfig="Debug"/>
+    <File Name="renderowanieTest.cpp" ExcludeProjConfig="Debug"/>
     <File Name="donarysowaniatest.cpp" ExcludeProjConfig=""/>
-    <File Name="grupowanietest.cpp" ExcludeProjConfig=""/>
-    <File Name="poleceniarenderowaniatest.cpp" ExcludeProjConfig=""/>
-    <File Name="TestRenderKlasTest.cpp" ExcludeProjConfig=""/>
-    <File Name="NazwaTest.cpp" ExcludeProjConfig=""/>
-    <File Name="aktualizujlistetest.cpp" ExcludeProjConfig=""/>
-    <File Name="ObliczeniaDlaModeliTest.cpp"/>
+    <File Name="grupowanietest.cpp" ExcludeProjConfig="Debug"/>
+    <File Name="poleceniarenderowaniatest.cpp" ExcludeProjConfig="Debug"/>
+    <File Name="TestRenderKlasTest.cpp" ExcludeProjConfig="Debug"/>
+    <File Name="NazwaTest.cpp" ExcludeProjConfig="Debug"/>
+    <File Name="aktualizujlistetest.cpp" ExcludeProjConfig="Debug"/>
+    <File Name="ObliczeniaDlaModeliTest.cpp" ExcludeProjConfig="Debug"/>
   </VirtualDirectory>
   <VirtualDirectory Name="testedClasses">
     <File Name="../src/Shared/kursor2d.cpp"/>
