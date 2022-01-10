@@ -12,14 +12,13 @@ template<class T>
 void Grupowalne_T<T>::DodajDziecko(spGrupowalne_T dz)
 {
     if(dz.get() == this)return;
-//    auto poprzedniRodzic = dz->rodzic;
-//    if(poprzedniRodzic)poprzedniRodzic->OdejmijDziecko(dz);
+    auto poprzedniRodzic = dz->rodzic;
+    if(!poprzedniRodzic.expired())
+        poprzedniRodzic.lock()->OdejmijDziecko(dz);
     
     dzieci.push_back(dz);
     dz->pozycja = --dzieci.end();
-//    dz->rodzic = static_pointer_cast<T>(shared_from_this());
-//    dz->rodzic = weak_ptr<T>(static_pointer_cast<T>(shared_from_this()));;
-//    dz->rodzic = this;
+    dz->rodzic = static_pointer_cast<T>(shared_from_this());
     PodczasDodajDziecko();
 }
 template<class T>
@@ -28,8 +27,7 @@ bool Grupowalne_T<T>::OdejmijDziecko(spGrupowalne_T dz)
     if(CzyJestMoimDzieckiem(dz))
     {
         dzieci.erase(dz->pozycja);
-//        dz->rodzic = nullptr;
-//        dz->rodzic.reset();
+        dz->rodzic.reset();
         PodczasOdejmijDziecko();
         return true;
     }
@@ -49,8 +47,7 @@ bool Grupowalne_T<T>::CzyJestMoimDzieckiem(spGrupowalne_T doSprawdzenia)
 template<class T>
 weak_ptr<T> Grupowalne_T<T>::Rodzic()
 {
-//    return rodzic->WskaznikNaMnieSlaby();
-    return weak_ptr<T>();
+    return rodzic;
 }
 template<class T>
 size_t Grupowalne_T<T>::StrukturaJakoLista_Wezly_dlugosc()
@@ -107,7 +104,7 @@ void Grupowalne_T<T>::GenerujStruktureJakoListe_RodzajAkcji(list<RodzajAkcji>& c
 template<class T>
 Grupowalne_T<T>::~Grupowalne_T()
 {
-    int g = 1;
+//    int g = 1;
 }
 
 //na potrzeby linkera

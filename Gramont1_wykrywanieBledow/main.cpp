@@ -4,21 +4,24 @@
 
 int main(int argc, char **argv)
 {
-	
-    printf("sizeof(DoNarysowania) %d\n",sizeof(DoNarysowania));
-    auto rys1(make_shared<DoNarysowania>());
+	auto rys1(make_shared<DoNarysowania>());
+    auto rys2(make_shared<DoNarysowania>());
+    auto rys3(make_shared<DoNarysowania>());
+    rys1->DodajDziecko(rys2);
+    rys2->DodajDziecko(rys3);
+    rys1->PoleceniaWybierzIwstawWdobrejKolejnosci();
     
-//    auto trojkat(ProstyTrojkat::Create());
-//    printf("ile vertexow %d\n",trojkat->ileVertexow);
+    /***/
+    int a1 = rys1.use_count();
+    int a2 = rys2.use_count();
+//    int b = rys1.weak_count();
+    /***/
+
+    float przes[] = {1.3,0,0};
+    rys2->DodajPrzesuniecie(przes);
+    rys2->AktualizujMojePolecenia();
+    int b1 = rys1.use_count();//**
+    int b2 = rys2.use_count();//**
     
-    /*
-    shared_ptr<Transformowalne> trans(make_shared<DoNarysowania>());
-    printf("shared_ptr<Transformowalne> trans(make_shared<DoNarysowania>()) sizeof *trans %d\n",sizeof *trans);
-    shared_ptr<Transformowalne> trans2 = make_shared<DoNarysowania>();
-    printf("shared_ptr<Transformowalne> trans2 = make_shared<DoNarysowania>() sizeof *trans2 %d\n",sizeof *trans2);
-    shared_ptr<Transformowalne> trans3 = rys;
-    printf("shared_ptr<Transformowalne> trans3 = rys sizeof *trans3 %d\n",sizeof *trans3);
-    printf("sizeof(Transformowalne) %d\n",sizeof(Transformowalne));
-     * */
-	return 0;
+    auto adrGeom1 = &(*rys1);
 }

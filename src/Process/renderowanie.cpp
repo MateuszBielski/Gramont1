@@ -63,5 +63,6 @@ void Renderowanie::FunPrzerysuj(spDoNarysowania rys)
 }
 void Renderowanie::ustawDoNarysowania(spDoNarysowania rys)
 {
-	doNarysowania = rys;
+	
+    doNarysowania = rys;
 }

@@ -14,6 +14,7 @@ public:
     virtual const float* MacierzObrotu() override;
     virtual const float* Przesuniecie() override;
     virtual l_PolecenieIgeometria& Polecenia() override;
+    virtual l_PolecenieIgeometriaAktywna& PoleceniaAktywne() override;
     virtual void PoleceniaWybierzIwstawWdobrejKolejnosci() override;
     virtual void AktualizujMojePolecenia() override;
     void JestObrot(bool b);
@@ -22,6 +23,7 @@ public:
     int id = 0;
     bool macierzObrotuIsUsed = false;
     bool poleceniaIsUsed = false;
+    bool poleceniaAktywneIsUsed = false;
     bool przesuniecieIsUsed = false;
     bool aktualizujMojePoleceniaIsUsed = false;
     bool poleceniaWybierzIwstawWdobrejKolejnosciIsUsed = false;

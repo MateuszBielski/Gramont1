@@ -9,19 +9,21 @@
 #include "ekranglmock.h"
 #include "testrenderklas.h"
 
-TEST(RenderowanieTest,FunRysujSceneUzywaMacierzObrotu)
+TEST(Renderowanie,FunRysujSceneUzywaMacierzObrotu)
 {
     Renderowanie rend;
     
     auto rys(make_shared<DoNarysowaniaMock>());
     rys->przeznaczonyDoTransformacji = true;
     rys->PoleceniaWybierzIwstawWdobrejKolejnosci();
-    rend.ustawDoNarysowania(rys);
+    auto rysAktywny(make_shared<DoNarysowania>());
+    rys->PrzekazPoleceniaIaktywujDla(rysAktywny);
+    rend.ustawDoNarysowania(rysAktywny);
     rend.RysujScene();
     ASSERT_TRUE(rys->macierzObrotuIsUsed);
 }
 
-TEST(RenderowanieTest,ZamkniecieOknaKonczyPetleIwatek)
+TEST(Renderowanie,ZamkniecieOknaKonczyPetleIwatek)
 {
     Renderowanie rend;
     thread t_renderowanie(&Renderowanie::Run,&rend);
@@ -47,27 +49,31 @@ TEST(TestRenderKlasTest,UstawZastepczeFunkcje)
     Renderowanie rend;
     ASSERT_TRUE(renderTest.UstawZastepczeOpenGlDla(rend));
 }
-TEST(RenderowanieTest,funkcjeGlDlaTrojkata)
+TEST(Renderowanie,funkcjeGlDlaTrojkata)
 {
     TestRenderKlas renderTest;
     Renderowanie rend;
     renderTest.UstawZastepczeOpenGlDla(rend);
     auto rys = make_shared<ProstyTrojkat>();
     rys->PoleceniaWybierzIwstawWdobrejKolejnosci();
-    rend.ustawDoNarysowania(rys);
+    auto rysAktywny(make_shared<DoNarysowania>());
+    rys->PrzekazPoleceniaIaktywujDla(rysAktywny);
+    rend.ustawDoNarysowania(rysAktywny);
     rend.RysujScene();
     string expect("n0.0,0.0,1.0,v-1.0,0.0,0.0,v1.0,0.0,0.0,v0.0,1.0,0.0,");
     string result = renderTest.CiagWywolanOpenGl();
     ASSERT_EQ(expect,result);
 }
-TEST(RenderowanieTest,funkcjeGlDlaSzescianu)
+TEST(Renderowanie,funkcjeGlDlaSzescianu)
 {
     TestRenderKlas renderTest;
     Renderowanie rend;
     renderTest.UstawZastepczeOpenGlDla(rend);
     auto rys = make_shared<Szescian>();
     rys->PoleceniaWybierzIwstawWdobrejKolejnosci();
-    rend.ustawDoNarysowania(rys);
+    auto rysAktywny(make_shared<DoNarysowania>());
+    rys->PrzekazPoleceniaIaktywujDla(rysAktywny);
+    rend.ustawDoNarysowania(rysAktywny);
     rend.RysujScene();
     string expect("n0.0,-1.0,0.0,v0.0,0.0,0.0,v1.0,0.0,0.0,v0.0,0.0,1.0,v1.0,0.0,1.0,");
     expect += "n0.0,0.0,1.0,v0.0,1.0,1.0,v1.0,1.0,1.0,";
@@ -79,7 +85,7 @@ TEST(RenderowanieTest,funkcjeGlDlaSzescianu)
     string result = renderTest.CiagWywolanOpenGl();
     ASSERT_EQ(expect,result);
 }
-TEST(RenderowanieTest,RysujSceneZglaszaWyjatekPrzyBrakuDoNarysowania)
+TEST(Renderowanie,RysujSceneZglaszaWyjatekPrzyBrakuDoNarysowania)
 {
     Renderowanie rend;
     rend.ustawDoNarysowania(nullptr);
@@ -96,17 +102,19 @@ TEST(Renderowanie,WywolujePoleceniaZDoNarysowania)
     Renderowanie rend;
     rend.ustawDoNarysowania(doNarysowania);
     rend.RysujScene();
-    ASSERT_TRUE(doNarysowania->poleceniaIsUsed);
+    ASSERT_TRUE(doNarysowania->poleceniaAktywneIsUsed);
 }
-TEST(Renderowanie,NieWywolujePoleceniaZdzieckaDoNarysowania)
+TEST(Renderowanie,NieWywolujePoleceniaZdzieckaOrazZDoNarysowania)
 {
     auto doNarysowania = make_shared<DoNarysowaniaMock>();
     auto dziecko = make_shared<DoNarysowaniaMock>();
     doNarysowania->DodajDziecko(dziecko);
     Renderowanie rend;
-    rend.ustawDoNarysowania(doNarysowania);
+    auto rysAktywny(make_shared<DoNarysowania>());
+    doNarysowania->PrzekazPoleceniaIaktywujDla(rysAktywny);
+    rend.ustawDoNarysowania(rysAktywny);
     rend.RysujScene();
-    ASSERT_TRUE(doNarysowania->poleceniaIsUsed);
+    ASSERT_FALSE(doNarysowania->poleceniaIsUsed);
     ASSERT_FALSE(dziecko->poleceniaIsUsed);
 }
 TEST(Renderowanie,WywolujeWlasneFunkcje_wstawione_doNarysowania)
@@ -115,7 +123,9 @@ TEST(Renderowanie,WywolujeWlasneFunkcje_wstawione_doNarysowania)
     rys->WstawPolecenieNaKoncu(&PoleceniaRenderowania::RysujGeometriePowierzchnie);
     rys->WstawPolecenieNaKoncu(&PoleceniaRenderowania::RysujGeometriePowierzchnie);
     Renderowanie rend;
-    rend.ustawDoNarysowania(rys);
+    auto rysAktywny(make_shared<DoNarysowania>());
+    rys->PrzekazPoleceniaIaktywujDla(rysAktywny);
+    rend.ustawDoNarysowania(rysAktywny);
     
     TestRenderKlas trk;
     trk.UstawMonitorujaceFunkcjeDla(rend);

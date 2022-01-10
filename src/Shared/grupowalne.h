@@ -32,8 +32,8 @@ protected:
     shared_ptr<T> WskaznikNaMnie();
     weak_ptr<T> WskaznikNaMnieSlaby();
 private:
-//    weak_ptr<T> rodzic;//powodowoło błąd podwójnego zwalniania pamięci
-    Grupowalne_T<T>* rodzic = nullptr;
+    weak_ptr<T> rodzic;//powodowoło błąd podwójnego zwalniania pamięci
+//    Grupowalne_T<T>* rodzic = nullptr;
     list<spGrupowalne_T> strukturaJakoLista_Wezly;
     list<RodzajAkcji> strukturaJakoLista_RodzajAkcji;
     void GenerujStruktureJakoListe_Wezly(list<spGrupowalne_T>& );

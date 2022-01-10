@@ -291,23 +291,23 @@ TEST(DoNarysowania,PoAktualizacjiPoczatkiIkonceZakresuWskazujaNaWlasciweMiejsca)
     int b2 = rys2.use_count();//**
     
     auto adrGeom1 = &(*rys1);
-//    auto adrGeom2 = &(*rys2);
-//    auto adrGeom3 = &(*rys3);
-//    
-//    auto poczatekPolecen2 = rys2->itPierwszeMojePolecenie();
-//    auto koniecPolecen2 = rys2->itOstatnieMojePolecenie();
-//    
-//    auto adresGeomNaPoczatku2 = &*(*poczatekPolecen2--).geometria.lock();
-//    ASSERT_EQ(adresGeomNaPoczatku2,adrGeom2);
-//    
-//    auto adresGeomPrzedPoczatkiem2 = &*(*poczatekPolecen2).geometria.lock();
-//    ASSERT_EQ(adresGeomPrzedPoczatkiem2,adrGeom1);
-//    
-//    auto adresGeomNaKoncu2 = &*(*koniecPolecen2++).geometria.lock();
-//    ASSERT_EQ(adresGeomNaKoncu2,adrGeom2);
-//    
-//    auto adresGeomPoKoncu2 = &*(*koniecPolecen2).geometria.lock();
-//    ASSERT_EQ(adresGeomPoKoncu2,adrGeom1);
+    auto adrGeom2 = &(*rys2);
+    auto adrGeom3 = &(*rys3);
+    
+    auto poczatekPolecen2 = rys2->itPierwszeMojePolecenie();
+    auto koniecPolecen2 = rys2->itOstatnieMojePolecenie();
+    
+    auto adresGeomNaPoczatku2 = &*(*poczatekPolecen2--).geometria.lock();
+    ASSERT_EQ(adresGeomNaPoczatku2,adrGeom2);
+    
+    auto adresGeomPrzedPoczatkiem2 = &*(*poczatekPolecen2).geometria.lock();
+    ASSERT_EQ(adresGeomPrzedPoczatkiem2,adrGeom1);
+    
+    auto adresGeomNaKoncu2 = &*(*koniecPolecen2++).geometria.lock();
+    ASSERT_EQ(adresGeomNaKoncu2,adrGeom2);
+    
+    auto adresGeomPoKoncu2 = &*(*koniecPolecen2).geometria.lock();
+    ASSERT_EQ(adresGeomPoKoncu2,adrGeom1);
 }
 //NieMożnaAktualizować, jeśli moje pierwsze i ostatnie polecenie nie jest znane, użyć dodatkowej flagi, przyjęto, że to samo zanczenie ma sprawdzenie, czy znana jest główna lista
 TEST(DoNarysowania,NieAktualizujePrzedZaistnieniemPodstawowejListy)
@@ -524,17 +524,19 @@ TEST(DoNarysowania,WstawPolecenia_IloscOdwolan)
     rys1->PrzekazPoleceniaIaktywujDla(rys2);
     ASSERT_EQ(2,rys1.use_count());//jedno w tym zakresie a drugie w liście poleceń przekazanych do rys 2
 }
-TEST(DoNarysowania,Dzieci_IloscOdwolan)
+TEST(DoNarysowania,Dzieci_IloscOdwolanPoAktywacji)
 {
     auto rys1(make_shared<DoNarysowania>());
     auto rys2(make_shared<DoNarysowania>());
     rys1->WstawPolecenieNaKoncu(&PoleceniaRenderowania::RysujGeometrie);
     rys2->WstawPolecenieNaKoncu(&PoleceniaRenderowania::RysujGeometrie);
     rys1->DodajDziecko(rys2);
-    ASSERT_EQ(2,rys2.use_count());//wstawione polecenie ma słaby wskaźnik
+    ASSERT_EQ(2,rys2.use_count());//wstawione polecenie ma słaby wskaźnik, ale drugie odwołanie jest w rys1 jako dziecko
     auto rys3(make_shared<DoNarysowania>());
+    ASSERT_EQ(1,rys1.use_count());
     rys1->PrzekazPoleceniaIaktywujDla(rys3);
-    ASSERT_EQ(3,rys1.use_count());
+    ASSERT_EQ(2,rys1.use_count());
+    
 }
 //PushName
 

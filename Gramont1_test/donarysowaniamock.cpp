@@ -10,6 +10,11 @@ l_PolecenieIgeometria& DoNarysowaniaMock::Polecenia()
     poleceniaIsUsed = true;
     return DoNarysowania::Polecenia();
 }
+l_PolecenieIgeometriaAktywna& DoNarysowaniaMock::PoleceniaAktywne()
+{
+	poleceniaAktywneIsUsed = true;
+    return DoNarysowania::PoleceniaAktywne();
+}
 const float* DoNarysowaniaMock::Przesuniecie()
 {
 	przesuniecieIsUsed = true;
@@ -35,3 +40,4 @@ void DoNarysowaniaMock::JestPrzesuniecie(bool b)
 {
     jestPrzesuniecie = b;
 }
+

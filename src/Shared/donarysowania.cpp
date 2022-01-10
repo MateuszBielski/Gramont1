@@ -18,6 +18,14 @@ void DoNarysowania::PrzekazPoleceniaIaktywujDla(shared_ptr<DoNarysowania> rysDes
         {pol.polecenie,pol.geometria.lock()});
     }
     mojePolecenia.clear();
+    /**/
+    for(auto &pol : rysDest->mojePoleceniaAktywne)
+    {
+        auto geom = pol.geometria;
+        int i = 1;
+//        auto adres = pol.geometria
+    }
+    /**/
 }
 void DoNarysowania::WstawPolecenieNaKoncu(PtrMemRend_Geom polecenie)
 {
@@ -205,8 +213,8 @@ DoNarysowania::~DoNarysowania()
     }
     obiektZniszczony.at(id) = true;
     ostatnioZniszczony = id;
-    int s = mojePolecenia.size();
-    int r = 5;
+//    int s = mojePolecenia.size();
+//    int r = 5;
 //	mut.lock();
 //    
 //    mutexDlaTymczasowej.lock();

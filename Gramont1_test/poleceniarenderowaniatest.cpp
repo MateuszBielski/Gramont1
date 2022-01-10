@@ -32,7 +32,9 @@ TEST(PoleceniaRenderowania,RenderowaniePotrafiWywolacPoleceniaZlisty)
     Renderowanie rend;
     TestRenderKlas trk;
     trk.UstawMonitorujaceFunkcjeDla(rend);
-    rend.WywolajPoleceniaZ(rys); 
+    auto rysAktywny(make_shared<DoNarysowania>());
+    rys->PrzekazPoleceniaIaktywujDla(rysAktywny);
+    rend.WywolajPoleceniaZ(rysAktywny); 
     ASSERT_EQ(1,trk.uzyteFunkcje["RysujGeometrie"]);
 }
 TEST(PoleceniaRenderowania,WywolanieDlaGrupowanych)
@@ -51,7 +53,9 @@ TEST(PoleceniaRenderowania,WywolanieDlaGrupowanych)
     Renderowanie rend;
     TestRenderKlas trk;
     trk.UstawMonitorujaceFunkcjeDla(rend);
-    rend.WywolajPoleceniaZ(rys1); 
+    auto rysAktywny(make_shared<DoNarysowania>());
+    rys1->PrzekazPoleceniaIaktywujDla(rysAktywny);
+    rend.WywolajPoleceniaZ(rysAktywny); 
     ASSERT_EQ(3,trk.uzyteFunkcje["RysujGeometrie"]);
 }
 TEST(PoleceniaRenderowania,WywolanieDlaGrupowanych_DuzaLiczba)
@@ -109,7 +113,9 @@ TEST(PoleceniaRenderowania,funkcjeGlCzyWywolujeDlaDzieci)
     rys->DodajDziecko(trojkat1);
     rys->DodajDziecko(trojkat2);
     rys->PoleceniaWybierzIwstawWdobrejKolejnosci();
-    rend.WywolajPoleceniaZ(rys);
+    auto rys2(make_shared<DoNarysowania>());
+    rys->PrzekazPoleceniaIaktywujDla(rys2);
+    rend.WywolajPoleceniaZ(rys2);
     string expect("n0.0,0.0,1.0,v-1.0,0.0,0.0,v1.0,0.0,0.0,v0.0,1.0,0.0,");
     //wartości dla drugiego trójkąta
     expect +="n0.0,0.0,1.0,v-1.0,0.0,0.0,v1.0,0.0,0.0,v0.0,1.0,0.0,";

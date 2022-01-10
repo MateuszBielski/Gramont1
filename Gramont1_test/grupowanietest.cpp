@@ -65,7 +65,7 @@ TEST(Grupowalne,PoOdjeciuNieMaRodzica)
     spGrupowalne g2(make_shared<Grupowalne>());
     g1->DodajDziecko(g2);
     g1->OdejmijDziecko(g2);
-    ASSERT_EQ(nullptr,g2->Rodzic());
+    ASSERT_EQ(nullptr,g2->Rodzic().lock());
 }
 TEST(Grupowalne,DoKogoNaleze_PoDodaniu)
 {
@@ -73,8 +73,9 @@ TEST(Grupowalne,DoKogoNaleze_PoDodaniu)
     spGrupowalne w2(make_shared<Grupowalne>());
     
     w1->DodajDziecko(w2);
-    
-    ASSERT_TRUE(w1.get() == w2->Rodzic().get());
+    auto adr1 = w1.get();
+    auto adr2 = w2->Rodzic().lock().get();
+    ASSERT_TRUE(adr1 == adr2);
 }
 TEST(Grupowalne,PrzeniesienieDoInnegoWezla)
 {
@@ -85,7 +86,7 @@ TEST(Grupowalne,PrzeniesienieDoInnegoWezla)
     w1->DodajDziecko(w3);
     w2->DodajDziecko(w3);
     ASSERT_EQ(0,w1->IleDzieci());
-    ASSERT_TRUE(w2.get() == w3->Rodzic().get());
+    ASSERT_TRUE(w2.get() == w3->Rodzic().lock().get());
 }
 TEST (Grupowalne,StrukturaJakoLista_liczbaObiektow)
 {
