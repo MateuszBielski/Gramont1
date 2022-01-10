@@ -61,3 +61,7 @@ bool TestRenderKlas::UstawioneDoNarysowania(Renderowanie& r)
 {
 	return r.doNarysowania != nullptr;
 }
+bool TestRenderKlas::DoNarysowaniaPosiadaPoleceniaAktywne(Renderowanie& r)
+{
+    return !r.doNarysowania->PoleceniaAktywne().empty();
+}

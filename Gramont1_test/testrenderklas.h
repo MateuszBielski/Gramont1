@@ -23,6 +23,7 @@ public:
     bool UstawZastepczeOpenGlDla(Renderowanie&);
     bool UstawioneDoNarysowania(Renderowanie&);
     bool CzyMaTenSamDoNarysowania(Renderowanie&, spDoNarysowania);
+    bool DoNarysowaniaPosiadaPoleceniaAktywne(Renderowanie&);
     void UstawMonitorujaceFunkcjeDla(Renderowanie&);
     static map<string,unsigned> uzyteFunkcje;
     static list<string> funkcjeWkolejnosci;

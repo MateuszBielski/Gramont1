@@ -209,6 +209,21 @@ TEST(ZarzadzanieModelami,PobranieKolejkiRenderowaniaDajeJejDoNarysowania)
     ASSERT_TRUE(testRend.UstawioneDoNarysowania(rend));
     ASSERT_FALSE(testRend.CzyMaTenSamDoNarysowania(rend,rys));
 }
+TEST(ZarzadzanieModelami,DoNarysowaniaItransformacjiWysylaRysAktywnePolecenia)
+{
+    ZarzadzanieModelami zarzadzanie;
+    spDoNarysowania rys(make_shared<DoNarysowania>());
+    zarzadzanie.DoNarysowaniaItransformacji(rys);
+    
+    Renderowanie rend;
+    auto kolejka = rend.getKolejkaPolecen();
+    zarzadzanie.NadawanieDoRenderowania(kolejka,PRZEKAZ_DO_NARYSOWANIA);
+    kolejka->push(make_unique<PolecenieKoniec>());
+    rend.Run();
+    
+    TestRenderKlas testRend;
+    ASSERT_TRUE(testRend.DoNarysowaniaPosiadaPoleceniaAktywne(rend));
+}
 TEST(ZarzadzanieModelami,DodanieModeli)
 {
     ZarzadzanieModelami zarz;
@@ -260,17 +275,10 @@ TEST(ZarzadzanieModelami,UstawienieDoNarysowaniaItransfWymuszaGenerowanieListyPo
 }
 TEST(ZarzadzanieModelami,UstawienieDoNarysowaniaItransfUstawiaPrzeznaczonyDoTransormacji)
 {
-    auto fun = [](){
-        
-        ZarzadzanieModelami zarzadzanie;
-        spDoNarysowania rys(make_shared<DoNarysowania>());
-        zarzadzanie.DoNarysowaniaItransformacji(rys);
-        ASSERT_TRUE(rys->przeznaczonyDoTransformacji);
-    };
-    int i = 0;
-    i = i+2;
-    fun();
-    i++;
+    ZarzadzanieModelami zarzadzanie;
+    spDoNarysowania rys(make_shared<DoNarysowania>());
+    zarzadzanie.DoNarysowaniaItransformacji(rys);
+    ASSERT_TRUE(rys->przeznaczonyDoTransformacji);
 }
 TEST(ZarzadzanieModelami,UstawienieDoNarysowaniaPrzygotowujeListePolecenJesliTrzeba)
 {

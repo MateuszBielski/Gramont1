@@ -31,6 +31,7 @@ void ZarzadzanieModelami::DoNarysowaniaItransformacji(spDoNarysowania r)
     r->przeznaczonyDoTransformacji = true;
     r->PoleceniaWybierzIwstawWdobrejKolejnosci();
     doNarysowania = make_shared<DoNarysowania>(*r);
+    r->PrzekazPoleceniaIaktywujDla(doNarysowania);
     doTrasformacji = r;
 }
 int ZarzadzanieModelami::LicznikTransformacjiAkumulowanych()
