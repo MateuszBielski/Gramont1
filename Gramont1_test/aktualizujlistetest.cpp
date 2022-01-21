@@ -201,7 +201,7 @@ TEST(AktualizujListe,UstawListyPo_ListaGlownaNieSkopiowana_flaga)
 /*******razem***/
 TEST(AktualizujListe,NieModyfikujeListDlaPrzedAktPo_jesliWstepnyNieSpelniony)
 {
-    
+     ASSERT_TRUE(false);
 }
 //pogrupować sprawdzenia dla przed akt po
 TEST(AktualizujListe,OddzielneMutexyPodczasAktualizacji)
@@ -223,6 +223,26 @@ TEST(AktualizujListe,UstawListyPoAktualizacjiBlokadaMuteksow)
 //    rys->UstawListyPoAktualizacji();
     ASSERT_TRUE(false);
 }
-
+TEST(AktualizujListe,AktualizacjaListyDzieckaNieModyfikujeListyAktywnejWdonarysowania)
+{
+    auto rys1(make_shared<DoNarysowania>());
+    auto rys2(make_shared<DoNarysowania>());
+    rys1->DodajDziecko(rys2);
+    float poz[] = {1,0,0};
+    rys2->UstawPrzesuniecie(poz);
+    rys1->PoleceniaWybierzIwstawWdobrejKolejnosci();
+    ASSERT_EQ(8,rys1->Polecenia().size());//-
+    ASSERT_EQ(0,rys1->PoleceniaAktywne().size());//-
+    
+    auto rys3(make_shared<DoNarysowania>());
+    rys1->PrzekazPoleceniaIaktywujDla(rys3);
+    
+//    rys2->NieWidoczny(true);
+    rys2->AktualizujMojePolecenia();
+    
+    ASSERT_EQ(0,rys1->Polecenia().size());//-
+    ASSERT_EQ(0,rys2->Polecenia().size());//-
+    ASSERT_EQ(8,rys3->PoleceniaAktywne().size());//-
+}
 //AktualizacjaPracujeNaKopiiListyIpoWykonaniuPodmieniaJą
 //dwa razy aktualizować, czy nie robią się problemy z listami
