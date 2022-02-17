@@ -63,6 +63,7 @@ public:
     void setNazwa(Nazwa&& );
     Nazwa getNazwa();
     virtual void PoleceniaWybierzIwstawWdobrejKolejnosci();
+    virtual void ListePolecenResetuj();
     virtual void AktualizujMojePolecenia();
     void UstawListyPoAktualizacji();
     void UstawListyPrzedAktualizacja();

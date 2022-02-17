@@ -64,6 +64,13 @@ void DoNarysowania::PoleceniaWybierzIwstawWdobrejKolejnosci()
     pierwszeMojePolecenie = mojePolecenia.begin();
     ostatnieMojePolecenie = --mojePolecenia.end();
 }
+void DoNarysowania::ListePolecenResetuj()
+{
+    l_PolecenieIgeometria::iterator pusty;
+    pierwszeMojePolecenie = pusty;
+    ostatnieMojePolecenie = pusty;
+    poleceniaListaGlowna = nullptr;
+}
 void DoNarysowania::AktualizujMojePolecenia()
 {
 	UstawListyPrzedAktualizacja();

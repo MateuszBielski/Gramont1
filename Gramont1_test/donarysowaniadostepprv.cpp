@@ -51,3 +51,7 @@ bool DoNarysowaniaDostepPrv::PoleceniaPuste()
 {
 	return rys.mojePolecenia.empty();
 }
+bool DoNarysowaniaDostepPrv::ListaGlownaUstawiona()
+{	
+	return rys.poleceniaListaGlowna;
+}

@@ -538,6 +538,19 @@ TEST(DoNarysowania,Dzieci_IloscOdwolanPoAktywacji)
     ASSERT_EQ(2,rys1.use_count());
     
 }
+TEST(DoNarysowania,PoAktywacjiPolecenUdzieciListaGlownaJestNull)
+{
+    auto rys1(make_shared<DoNarysowania>());
+    auto rys2(make_shared<DoNarysowania>());
+    rys1->DodajDziecko(rys2);
+    float poz[] = {1,0,0};
+    rys2->UstawPrzesuniecie(poz);
+    rys1->PoleceniaWybierzIwstawWdobrejKolejnosci();
+    
+    auto rys3(make_shared<DoNarysowania>());
+    rys1->PrzekazPoleceniaIaktywujDla(rys3);
+    
+}
 //PushName
 
 //KorektaOsiObrotu

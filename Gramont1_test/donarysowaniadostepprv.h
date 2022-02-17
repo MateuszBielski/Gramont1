@@ -22,6 +22,7 @@ public:
     bool ListaGlownaSkopiowana();
     bool PoleceniaAktywnePuste();
     bool PoleceniaPuste();
+    bool ListaGlownaUstawiona();
     mutex& getMutex();
     
 

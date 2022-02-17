@@ -223,6 +223,38 @@ TEST(AktualizujListe,UstawListyPoAktualizacjiBlokadaMuteksow)
 //    rys->UstawListyPoAktualizacji();
     ASSERT_TRUE(false);
 }
+//AktualizacjaPracujeNaKopiiListyIpoWykonaniuPodmieniaJą
+//dwa razy aktualizować, czy nie robią się problemy z listami
+TEST(AktualizujListe,ResetListy_zerowanieMoichPoczatkaIkonca)
+{
+    l_PolecenieIgeometria::iterator iteratorPusty;
+    auto rys(make_shared<DoNarysowania>());
+    rys->PoleceniaWybierzIwstawWdobrejKolejnosci();
+    ASSERT_NE(iteratorPusty,rys->itPierwszeMojePolecenie());
+    ASSERT_NE(iteratorPusty,rys->itOstatnieMojePolecenie());
+    rys->ListePolecenResetuj();
+    ASSERT_EQ(iteratorPusty,rys->itPierwszeMojePolecenie());
+    ASSERT_EQ(iteratorPusty,rys->itOstatnieMojePolecenie());
+    
+}
+TEST(AktualizujListe,ResetListy_ListaGlownaZero)
+{
+    auto rys(make_shared<DoNarysowania>());
+    rys->PoleceniaWybierzIwstawWdobrejKolejnosci();
+    DoNarysowaniaDostepPrv dostepDoNarys(*rys);
+    ASSERT_TRUE(dostepDoNarys.ListaGlownaUstawiona());
+    rys->ListePolecenResetuj();
+    ASSERT_FALSE(dostepDoNarys.ListaGlownaUstawiona());
+}
+TEST(AktualizujListe,PrzekazPoleceniaIaktywujDlaWywolujeResetListy
+{
+    
+}
+//zerowanie wskaźników przy resecie sprawdzić również dla dzieci
+//zakładam, że przekazanie poleceń nie musi automatycznie wywolać przeliczenia
+//okaże się to po włączeniu wszystkich testów
+    
+/*
 TEST(AktualizujListe,AktualizacjaListyDzieckaNieModyfikujeListyAktywnejWdonarysowania)
 {
     auto rys1(make_shared<DoNarysowania>());
@@ -244,5 +276,4 @@ TEST(AktualizujListe,AktualizacjaListyDzieckaNieModyfikujeListyAktywnejWdonaryso
     ASSERT_EQ(0,rys2->Polecenia().size());//-
     ASSERT_EQ(8,rys3->PoleceniaAktywne().size());//-
 }
-//AktualizacjaPracujeNaKopiiListyIpoWykonaniuPodmieniaJą
-//dwa razy aktualizować, czy nie robią się problemy z listami
+ * */
