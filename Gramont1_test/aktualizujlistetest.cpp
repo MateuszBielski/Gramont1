@@ -5,6 +5,7 @@
 #include "../src/Process/renderowanie.h"
 #include "../src/Pomocnicze/FunkcjeIstruktury.h"
 #include "donarysowaniadostepprv.h"
+#include "donarysowaniamock.h"
 
 TEST(AktualizujListe,UstawListyPrzedAktualizacjaglownaOdlaczona_flaga)
 {
@@ -225,36 +226,6 @@ TEST(AktualizujListe,UstawListyPoAktualizacjiBlokadaMuteksow)
 }
 //AktualizacjaPracujeNaKopiiListyIpoWykonaniuPodmieniaJą
 //dwa razy aktualizować, czy nie robią się problemy z listami
-TEST(AktualizujListe,ResetListy_zerowanieMoichPoczatkaIkonca)
-{
-    l_PolecenieIgeometria::iterator iteratorPusty;
-    auto rys(make_shared<DoNarysowania>());
-    rys->PoleceniaWybierzIwstawWdobrejKolejnosci();
-    ASSERT_NE(iteratorPusty,rys->itPierwszeMojePolecenie());
-    ASSERT_NE(iteratorPusty,rys->itOstatnieMojePolecenie());
-    rys->ListePolecenResetuj();
-    ASSERT_EQ(iteratorPusty,rys->itPierwszeMojePolecenie());
-    ASSERT_EQ(iteratorPusty,rys->itOstatnieMojePolecenie());
-    
-}
-TEST(AktualizujListe,ResetListy_ListaGlownaZero)
-{
-    auto rys(make_shared<DoNarysowania>());
-    rys->PoleceniaWybierzIwstawWdobrejKolejnosci();
-    DoNarysowaniaDostepPrv dostepDoNarys(*rys);
-    ASSERT_TRUE(dostepDoNarys.ListaGlownaUstawiona());
-    rys->ListePolecenResetuj();
-    ASSERT_FALSE(dostepDoNarys.ListaGlownaUstawiona());
-}
-TEST(AktualizujListe,PrzekazPoleceniaIaktywujDlaWywolujeResetListy
-{
-    
-}
-//zerowanie wskaźników przy resecie sprawdzić również dla dzieci
-//zakładam, że przekazanie poleceń nie musi automatycznie wywolać przeliczenia
-//okaże się to po włączeniu wszystkich testów
-    
-/*
 TEST(AktualizujListe,AktualizacjaListyDzieckaNieModyfikujeListyAktywnejWdonarysowania)
 {
     auto rys1(make_shared<DoNarysowania>());
@@ -263,17 +234,19 @@ TEST(AktualizujListe,AktualizacjaListyDzieckaNieModyfikujeListyAktywnejWdonaryso
     float poz[] = {1,0,0};
     rys2->UstawPrzesuniecie(poz);
     rys1->PoleceniaWybierzIwstawWdobrejKolejnosci();
-    ASSERT_EQ(8,rys1->Polecenia().size());//-
-    ASSERT_EQ(0,rys1->PoleceniaAktywne().size());//-
     
     auto rys3(make_shared<DoNarysowania>());
     rys1->PrzekazPoleceniaIaktywujDla(rys3);
+    int ilePolecenAktywnych = rys3->PoleceniaAktywne().size();
     
-//    rys2->NieWidoczny(true);
+    rys2->NieWidoczny(true);
     rys2->AktualizujMojePolecenia();
     
-    ASSERT_EQ(0,rys1->Polecenia().size());//-
-    ASSERT_EQ(0,rys2->Polecenia().size());//-
-    ASSERT_EQ(8,rys3->PoleceniaAktywne().size());//-
+    ASSERT_EQ(ilePolecenAktywnych,rys3->PoleceniaAktywne().size());//-
 }
- * */
+TEST(AktualizujListe,AktualizacjaListyDzieckaNieRobiJesliGlownaPoResecie)
+{
+    //nie wiem, czy potrzebne
+    ASSERT_TRUE(false);
+}
+

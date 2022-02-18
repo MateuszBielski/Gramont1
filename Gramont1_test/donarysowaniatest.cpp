@@ -551,8 +551,51 @@ TEST(DoNarysowania,PoAktywacjiPolecenUdzieciListaGlownaJestNull)
     rys1->PrzekazPoleceniaIaktywujDla(rys3);
     
 }
-//PushName
+TEST(AktualizujListe,ResetListy_zerowanieMoichPoczatkaIkonca)
+{
+    l_PolecenieIgeometria::iterator iteratorPusty;
+    auto rys(make_shared<DoNarysowania>());
+    rys->PoleceniaWybierzIwstawWdobrejKolejnosci();
+    ASSERT_NE(iteratorPusty,rys->itPierwszeMojePolecenie());
+    ASSERT_NE(iteratorPusty,rys->itOstatnieMojePolecenie());
+    rys->ListePolecenResetuj();
+    ASSERT_EQ(iteratorPusty,rys->itPierwszeMojePolecenie());
+    ASSERT_EQ(iteratorPusty,rys->itOstatnieMojePolecenie());
+    
+}
+TEST(AktualizujListe,ResetListy_ListaGlownaZero)
+{
+    auto rys(make_shared<DoNarysowania>());
+    rys->PoleceniaWybierzIwstawWdobrejKolejnosci();
+    DoNarysowaniaDostepPrv dostepDoNarys(*rys);
+    ASSERT_TRUE(dostepDoNarys.ListaGlownaUstawiona());
+    rys->ListePolecenResetuj();
+    ASSERT_FALSE(dostepDoNarys.ListaGlownaUstawiona());
+}
+TEST(AktualizujListe,ResetListy_wywolujeTezDlaDzieci)
+{
+    auto rys1(make_shared<DoNarysowania>());
+    auto rys2(make_shared<DoNarysowaniaMock>());
+    rys1->DodajDziecko(rys2);
+    float poz[] = {1,0,0};
+    rys2->UstawPrzesuniecie(poz);
+    rys1->PoleceniaWybierzIwstawWdobrejKolejnosci();
+    rys1->ListePolecenResetuj();
+    ASSERT_TRUE(rys2->listePolecenResetujIsUsed);
+}
+TEST(AktualizujListe,PrzekazPoleceniaIaktywujDlaWywolujeResetListy)
+{
+    auto rys1(make_shared<DoNarysowaniaMock>());
+    rys1->PoleceniaWybierzIwstawWdobrejKolejnosci();
+    
+    auto rys3(make_shared<DoNarysowania>());
+    rys1->PrzekazPoleceniaIaktywujDla(rys3);
+    ASSERT_TRUE(rys1->listePolecenResetujIsUsed);
+}
+//zakładam, że przekazanie poleceń nie musi automatycznie wywolać przeliczenia
+//okaże się to po włączeniu wszystkich testów
 
+//PushName
 //KorektaOsiObrotu
 //ObrocWgPunktu
 //LoadName

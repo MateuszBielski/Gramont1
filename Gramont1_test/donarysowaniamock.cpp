@@ -40,4 +40,8 @@ void DoNarysowaniaMock::JestPrzesuniecie(bool b)
 {
     jestPrzesuniecie = b;
 }
-
+void DoNarysowaniaMock::ListePolecenResetuj()
+{
+	DoNarysowania::ListePolecenResetuj();
+    listePolecenResetujIsUsed = true;
+}

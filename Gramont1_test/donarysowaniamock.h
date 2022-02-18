@@ -16,6 +16,7 @@ public:
     virtual l_PolecenieIgeometria& Polecenia() override;
     virtual l_PolecenieIgeometriaAktywna& PoleceniaAktywne() override;
     virtual void PoleceniaWybierzIwstawWdobrejKolejnosci() override;
+    virtual void ListePolecenResetuj() override;
     virtual void AktualizujMojePolecenia() override;
     void JestObrot(bool b);
     void JestPrzesuniecie(bool b);
@@ -27,7 +28,7 @@ public:
     bool przesuniecieIsUsed = false;
     bool aktualizujMojePoleceniaIsUsed = false;
     bool poleceniaWybierzIwstawWdobrejKolejnosciIsUsed = false;
-   
+    bool listePolecenResetujIsUsed = false;
     protected:
 
     private:
