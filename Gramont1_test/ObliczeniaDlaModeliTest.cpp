@@ -12,7 +12,7 @@ TEST(Obliczenia,UtrwalTransformacje_MacierzObrotuZmieniaWartosciWertexow)
     float m[] = {0.7544, -0.3364, 0.5637, 0.0000, 0.1320, 0.9189, 0.3717, 0.0000, -0.6430, -0.2061, 0.7376, 0.0000, 0.0000, 0.0000, 0.0000, 1.0000};
     //powyżej prawidłowege wartości przykładowego obrotu generowane funkcją 
     //WypisywanieWartosci::MacierzObrotuDoTransformacji(ZarzadzanieModelami* zarzadzanie)
-    troj->MacierzObrotu(m);
+//    troj->MacierzObrotu(m);
     ObliczeniaDlaModeli obl;
     
     float vrtx0[9], vrtx1[9];
